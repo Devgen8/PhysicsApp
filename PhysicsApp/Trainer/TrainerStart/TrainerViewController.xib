@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BlackDiamond.ttf">
+            <string>BlackDiamond</string>
+        </array>
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+        <array key="Montserrat-MediumItalic.ttf">
+            <string>Montserrat-MediumItalic</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainerViewController" customModule="PhysicsApp" customModuleProvider="target">
+            <connections>
+                <outlet property="loadingAnimationView" destination="8Ve-lf-hZU" id="vHg-fY-Hgw"/>
+                <outlet property="notSolvedButton" destination="lTS-oq-R7L" id="8JP-8c-07J"/>
+                <outlet property="sortTypeSegmentedControl" destination="kkb-4d-wf3" id="IkM-1C-1pD"/>
+                <outlet property="themesTableView" destination="dJ3-xI-jIk" id="GiY-dH-dki"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тренажер" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLi-Ru-Gha">
+                    <rect key="frame" x="145.5" y="114" width="123.5" height="85.5"/>
+                    <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="45"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dJ3-xI-jIk">
+                    <rect key="frame" x="0.0" y="235.5" width="414" height="490.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTS-oq-R7L">
+                    <rect key="frame" x="30" y="746" width="354" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="jyp-8Q-Hht"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
+                    <state key="normal" title="Нерешенные задачи ">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="unsolvedTasksTapped:" destination="-1" eventType="touchUpInside" id="QVi-ds-eqF"/>
+                    </connections>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qIP-Cc-SB0">
+                    <rect key="frame" x="89" y="807" width="236" height="50"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Montazhnaya_oblast_98_4x" translatesAutoresizingMaskIntoConstraints="NO" id="4lp-Ib-nx4">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="4lp-Ib-nx4" secondAttribute="height" multiplier="1:1" id="Cki-bd-6c7"/>
+                                <constraint firstAttribute="height" constant="50" id="VLS-vl-oN1"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="онлайн-школа webium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5T-BI-QVL">
+                            <rect key="frame" x="50" y="15.5" width="186" height="19"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="19" id="fzX-Hu-UrP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-MediumItalic" family="Montserrat" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kkb-4d-wf3">
+                    <rect key="frame" x="20" y="199.5" width="374" height="32"/>
+                    <segments>
+                        <segment title="По заданиям"/>
+                        <segment title="По темам"/>
+                        <segment title="Пробники"/>
+                    </segments>
+                    <connections>
+                        <action selector="sortTypeChanged:" destination="-1" eventType="valueChanged" id="u3n-oQ-hvj"/>
+                    </connections>
+                </segmentedControl>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ve-lf-hZU" customClass="AnimationView" customModule="Lottie">
+                    <rect key="frame" x="147" y="388" width="120" height="120"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="Orz-n8-2LT"/>
+                        <constraint firstAttribute="width" constant="120" id="TpJ-EU-nmX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="kkb-4d-wf3" firstAttribute="top" secondItem="bLi-Ru-Gha" secondAttribute="bottom" id="2hY-zj-DzZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kkb-4d-wf3" secondAttribute="trailing" constant="20" id="4QC-dv-QvF"/>
+                <constraint firstItem="qIP-Cc-SB0" firstAttribute="top" secondItem="lTS-oq-R7L" secondAttribute="bottom" constant="1" id="4mV-Bf-M7B"/>
+                <constraint firstItem="kkb-4d-wf3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="6te-ms-vig"/>
+                <constraint firstItem="8Ve-lf-hZU" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Cjp-Kg-Nbk"/>
+                <constraint firstItem="qIP-Cc-SB0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="E1c-iQ-wcr"/>
+                <constraint firstItem="dJ3-xI-jIk" firstAttribute="top" secondItem="kkb-4d-wf3" secondAttribute="bottom" constant="5" id="U0A-mx-6kO"/>
+                <constraint firstItem="bLi-Ru-Gha" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="XOo-LA-Pow"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qIP-Cc-SB0" secondAttribute="bottom" constant="5" id="aKN-QF-POs"/>
+                <constraint firstItem="lTS-oq-R7L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="gdH-O9-QxA"/>
+                <constraint firstItem="dJ3-xI-jIk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kog-hm-zUU"/>
+                <constraint firstItem="8Ve-lf-hZU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oLe-O5-lcu"/>
+                <constraint firstItem="lTS-oq-R7L" firstAttribute="top" secondItem="dJ3-xI-jIk" secondAttribute="bottom" constant="20" id="qjs-h6-UY9"/>
+                <constraint firstItem="bLi-Ru-Gha" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="70" id="t5X-XC-Z0z"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lTS-oq-R7L" secondAttribute="trailing" constant="30" id="w03-X9-pwy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dJ3-xI-jIk" secondAttribute="trailing" id="xiF-NK-MB6"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="-49.275362318840585" y="119.86607142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Montazhnaya_oblast_98_4x" width="801" height="801"/>
+    </resources>
+</document>

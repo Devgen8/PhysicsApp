@@ -1,0 +1,69 @@
+//
+//  MyAnswersViewController.swift
+//  PhysicsApp
+//
+//  Created by Evgeny Kamaev on 16.04.2020.
+//  Copyright © 2020 Devgen. All rights reserved.
+//
+
+import UIKit
+
+class MyAnswersViewController: UIViewController {
+
+    @IBOutlet weak var answersTableView: UITableView!
+    
+    var tasksAnswers = [String:String]()
+    var delegate: TestViewController?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        answersTableView.dataSource = self
+        answersTableView.delegate = self
+        
+        designScreenElements()
+    }
+    
+    func designScreenElements() {
+        DesignService.setGradient(for: view)
+    }
+}
+
+extension MyAnswersViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.changeForTask(indexPath.row)
+        dismiss(animated: false)
+    }
+}
+
+extension MyAnswersViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tasksAnswers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        let decorativeView = UIView()
+        decorativeView.backgroundColor = .white
+        cell.contentView.addSubview(decorativeView)
+        decorativeView.translatesAutoresizingMaskIntoConstraints = false
+        decorativeView.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 5).isActive = true
+        decorativeView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 5).isActive = true
+        decorativeView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -5).isActive = true
+        decorativeView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -5).isActive = true
+        decorativeView.layer.cornerRadius = 30
+        cell.textLabel?.font = UIFont(name: "Montserrat", size: 20)
+        if let answer = tasksAnswers["Задание №\(indexPath.row + 1)"], answer != "" {
+            cell.textLabel?.text = "Задание №\(indexPath.row + 1) Ваш ответ: \(answer)"
+        } else {
+            cell.textLabel?.text = "Задание №\(indexPath.row + 1) Нет ответа"
+        }
+        
+        return cell
+    }
+}

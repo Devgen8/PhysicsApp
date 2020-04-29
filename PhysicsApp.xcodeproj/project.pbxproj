@@ -1,0 +1,1289 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		244ABA33242A933B00066CB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA32242A933B00066CB3 /* AppDelegate.swift */; };
+		244ABA35242A933B00066CB3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA34242A933B00066CB3 /* SceneDelegate.swift */; };
+		244ABA3C242A934000066CB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA3B242A934000066CB3 /* Assets.xcassets */; };
+		244ABA3F242A934000066CB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA3D242A934000066CB3 /* LaunchScreen.storyboard */; };
+		244ABA47242A93DE00066CB3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA46242A93DE00066CB3 /* GoogleService-Info.plist */; };
+		244ABA4D242A9A6E00066CB3 /* MainAdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA4A242A9A6E00066CB3 /* MainAdminViewModel.swift */; };
+		244ABA4E242A9A6E00066CB3 /* MainAdminViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA4B242A9A6E00066CB3 /* MainAdminViewController.xib */; };
+		244ABA4F242A9A6E00066CB3 /* MainAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA4C242A9A6E00066CB3 /* MainAdminViewController.swift */; };
+		244ABA51242A9ABB00066CB3 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA50242A9ABB00066CB3 /* Animations.swift */; };
+		244ABA63242A9AC900066CB3 /* BattleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA54242A9AC900066CB3 /* BattleModel.swift */; };
+		244ABA64242A9AC900066CB3 /* BattleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA55242A9AC900066CB3 /* BattleViewController.xib */; };
+		244ABA65242A9AC900066CB3 /* BattleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA56242A9AC900066CB3 /* BattleViewController.swift */; };
+		244ABA66242A9AC900066CB3 /* BattleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA57242A9AC900066CB3 /* BattleViewModel.swift */; };
+		244ABA67242A9AC900066CB3 /* GamesNumberAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA59242A9AC900066CB3 /* GamesNumberAlertViewController.xib */; };
+		244ABA68242A9AC900066CB3 /* GamesNumberAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA5A242A9AC900066CB3 /* GamesNumberAlertViewController.swift */; };
+		244ABA69242A9AC900066CB3 /* BattleFinalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA5C242A9AC900066CB3 /* BattleFinalViewController.swift */; };
+		244ABA6A242A9AC900066CB3 /* BattleFinalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA5D242A9AC900066CB3 /* BattleFinalViewModel.swift */; };
+		244ABA6B242A9AC900066CB3 /* BattleFinalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA5E242A9AC900066CB3 /* BattleFinalViewController.xib */; };
+		244ABA6C242A9AC900066CB3 /* AnswerChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA60242A9AC900066CB3 /* AnswerChooserViewController.swift */; };
+		244ABA6D242A9AC900066CB3 /* AnswerChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA61242A9AC900066CB3 /* AnswerChooserViewController.xib */; };
+		244ABA6E242A9AC900066CB3 /* AnswerChooserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA62242A9AC900066CB3 /* AnswerChooserViewModel.swift */; };
+		244ABA74242A9AD700066CB3 /* ThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA70242A9AD700066CB3 /* ThemeTableViewCell.swift */; };
+		244ABA75242A9AD700066CB3 /* ThemeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA71242A9AD700066CB3 /* ThemeTableViewCell.xib */; };
+		244ABA76242A9AD700066CB3 /* AwardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA72242A9AD700066CB3 /* AwardCollectionViewCell.swift */; };
+		244ABA77242A9AD700066CB3 /* AwardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA73242A9AD700066CB3 /* AwardCollectionViewCell.xib */; };
+		244ABA79242A9ADF00066CB3 /* CustomProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA78242A9ADF00066CB3 /* CustomProtocols.swift */; };
+		244ABA7B242A9AE500066CB3 /* DesignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA7A242A9AE500066CB3 /* DesignService.swift */; };
+		244ABA7D242A9AEA00066CB3 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABA7C242A9AEA00066CB3 /* FirebaseService.swift */; };
+		244ABAA5242A9AF400066CB3 /* Montserrat-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA7F242A9AF300066CB3 /* Montserrat-MediumItalic.otf */; };
+		244ABAA6242A9AF400066CB3 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA80242A9AF300066CB3 /* Montserrat-Bold.otf */; };
+		244ABAA7242A9AF400066CB3 /* Montserrat-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA81242A9AF300066CB3 /* Montserrat-BlackItalic.otf */; };
+		244ABAA8242A9AF400066CB3 /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA82242A9AF300066CB3 /* Montserrat-LightItalic.ttf */; };
+		244ABAA9242A9AF400066CB3 /* BlackDiamond.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA83242A9AF300066CB3 /* BlackDiamond.ttf */; };
+		244ABAAA242A9AF400066CB3 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA84242A9AF300066CB3 /* Montserrat-Medium.ttf */; };
+		244ABAAB242A9AF400066CB3 /* Montserrat-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA85242A9AF300066CB3 /* Montserrat-BoldItalic.otf */; };
+		244ABAAC242A9AF400066CB3 /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA86242A9AF300066CB3 /* Montserrat-Light.otf */; };
+		244ABAAD242A9AF400066CB3 /* Montserrat-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA87242A9AF300066CB3 /* Montserrat-ThinItalic.otf */; };
+		244ABAAE242A9AF400066CB3 /* Montserrat-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA88242A9AF300066CB3 /* Montserrat-Thin.otf */; };
+		244ABAAF242A9AF400066CB3 /* Montserrat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA89242A9AF300066CB3 /* Montserrat-ExtraLight.otf */; };
+		244ABAB0242A9AF400066CB3 /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA8A242A9AF300066CB3 /* Montserrat-BoldItalic.ttf */; };
+		244ABAB1242A9AF400066CB3 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA8B242A9AF300066CB3 /* Montserrat-Light.ttf */; };
+		244ABAB2242A9AF400066CB3 /* Montserrat-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA8C242A9AF300066CB3 /* Montserrat-ThinItalic.ttf */; };
+		244ABAB3242A9AF400066CB3 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA8D242A9AF300066CB3 /* Montserrat-ExtraLight.ttf */; };
+		244ABAB4242A9AF400066CB3 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA8E242A9AF300066CB3 /* Montserrat-Thin.ttf */; };
+		244ABAB5242A9AF400066CB3 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA8F242A9AF300066CB3 /* Montserrat-Bold.ttf */; };
+		244ABAB6242A9AF400066CB3 /* Montserrat-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA90242A9AF300066CB3 /* Montserrat-MediumItalic.ttf */; };
+		244ABAB7242A9AF400066CB3 /* Montserrat-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA91242A9AF300066CB3 /* Montserrat-BlackItalic.ttf */; };
+		244ABAB8242A9AF400066CB3 /* Montserrat-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA92242A9AF300066CB3 /* Montserrat-LightItalic.otf */; };
+		244ABAB9242A9AF400066CB3 /* Montserrat-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA93242A9AF300066CB3 /* Montserrat-Medium.otf */; };
+		244ABABA242A9AF400066CB3 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA94242A9AF300066CB3 /* Montserrat-SemiBold.ttf */; };
+		244ABABB242A9AF400066CB3 /* Montserrat-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA95242A9AF300066CB3 /* Montserrat-SemiBoldItalic.otf */; };
+		244ABABC242A9AF400066CB3 /* Montserrat-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA96242A9AF300066CB3 /* Montserrat-ExtraBoldItalic.otf */; };
+		244ABABD242A9AF400066CB3 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA97242A9AF300066CB3 /* Montserrat-ExtraLightItalic.ttf */; };
+		244ABABE242A9AF400066CB3 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA98242A9AF300066CB3 /* Montserrat-ExtraBold.ttf */; };
+		244ABABF242A9AF400066CB3 /* Montserrat-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA99242A9AF300066CB3 /* Montserrat-Italic.otf */; };
+		244ABAC0242A9AF400066CB3 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA9A242A9AF300066CB3 /* OFL.txt */; };
+		244ABAC1242A9AF400066CB3 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA9B242A9AF300066CB3 /* Montserrat-Regular.otf */; };
+		244ABAC2242A9AF400066CB3 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA9C242A9AF300066CB3 /* Montserrat-Black.ttf */; };
+		244ABAC3242A9AF400066CB3 /* Montserrat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA9D242A9AF300066CB3 /* Montserrat-ExtraBold.otf */; };
+		244ABAC4242A9AF400066CB3 /* Montserrat-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA9E242A9AF300066CB3 /* Montserrat-ExtraLightItalic.otf */; };
+		244ABAC5242A9AF400066CB3 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABA9F242A9AF300066CB3 /* Montserrat-Regular.ttf */; };
+		244ABAC6242A9AF400066CB3 /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAA0242A9AF300066CB3 /* Montserrat-Italic.ttf */; };
+		244ABAC7242A9AF400066CB3 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAA1242A9AF300066CB3 /* Montserrat-Black.otf */; };
+		244ABAC8242A9AF400066CB3 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAA2242A9AF300066CB3 /* Montserrat-SemiBoldItalic.ttf */; };
+		244ABAC9242A9AF400066CB3 /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAA3242A9AF300066CB3 /* Montserrat-ExtraBoldItalic.ttf */; };
+		244ABACA242A9AF400066CB3 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAA4242A9AF300066CB3 /* Montserrat-SemiBold.otf */; };
+		244ABAFD242A9B1700066CB3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABACC242A9B1400066CB3 /* ProfileViewController.swift */; };
+		244ABAFE242A9B1700066CB3 /* TrainerAdminViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABACD242A9B1400066CB3 /* TrainerAdminViewController.xib */; };
+		244ABAFF242A9B1700066CB3 /* TrainerAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABACE242A9B1500066CB3 /* TrainerAdminViewController.swift */; };
+		244ABB00242A9B1700066CB3 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABACF242A9B1500066CB3 /* UIViewExtension.swift */; };
+		244ABB01242A9B1700066CB3 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAD1242A9B1500066CB3 /* ProfileViewController.xib */; };
+		244ABB02242A9B1700066CB3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAD2242A9B1500066CB3 /* ProfileViewModel.swift */; };
+		244ABB03242A9B1700066CB3 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAD3242A9B1500066CB3 /* ProfileModel.swift */; };
+		244ABB05242A9B1700066CB3 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAD6242A9B1500066CB3 /* WelcomeViewController.swift */; };
+		244ABB06242A9B1700066CB3 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAD7242A9B1500066CB3 /* WelcomeViewController.xib */; };
+		244ABB07242A9B1700066CB3 /* UnsolvedThemesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAD9242A9B1600066CB3 /* UnsolvedThemesViewController.xib */; };
+		244ABB09242A9B1700066CB3 /* UnsolvedThemesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABADB242A9B1600066CB3 /* UnsolvedThemesViewModel.swift */; };
+		244ABB0A242A9B1700066CB3 /* TrainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABADD242A9B1600066CB3 /* TrainerViewModel.swift */; };
+		244ABB0B242A9B1700066CB3 /* TrainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABADE242A9B1600066CB3 /* TrainerViewController.xib */; };
+		244ABB0C242A9B1700066CB3 /* TrainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABADF242A9B1600066CB3 /* TrainerViewController.swift */; };
+		244ABB0D242A9B1700066CB3 /* TrainerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAE0242A9B1600066CB3 /* TrainerModel.swift */; };
+		244ABB0E242A9B1700066CB3 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAE2242A9B1600066CB3 /* ImagePreviewViewController.swift */; };
+		244ABB0F242A9B1700066CB3 /* ImagePreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAE3242A9B1600066CB3 /* ImagePreviewViewController.xib */; };
+		244ABB10242A9B1700066CB3 /* FormSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAE4242A9B1600066CB3 /* FormSheetViewController.swift */; };
+		244ABB11242A9B1700066CB3 /* TasksListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAE6242A9B1600066CB3 /* TasksListViewModel.swift */; };
+		244ABB12242A9B1700066CB3 /* TasksListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAE7242A9B1600066CB3 /* TasksListViewController.swift */; };
+		244ABB13242A9B1700066CB3 /* TasksListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAE8242A9B1600066CB3 /* TasksListViewController.xib */; };
+		244ABB14242A9B1700066CB3 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAEA242A9B1600066CB3 /* TaskModel.swift */; };
+		244ABB15242A9B1700066CB3 /* TaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAEB242A9B1600066CB3 /* TaskViewController.xib */; };
+		244ABB16242A9B1700066CB3 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAEC242A9B1600066CB3 /* TaskViewController.swift */; };
+		244ABB17242A9B1700066CB3 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAED242A9B1600066CB3 /* TaskViewModel.swift */; };
+		244ABB18242A9B1700066CB3 /* FormSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAEE242A9B1600066CB3 /* FormSheetViewController.xib */; };
+		244ABB19242A9B1700066CB3 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAEF242A9B1600066CB3 /* ImageScrollView.swift */; };
+		244ABB1A242A9B1700066CB3 /* UnsolvedThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF0242A9B1600066CB3 /* UnsolvedThemesViewController.swift */; };
+		244ABB1B242A9B1700066CB3 /* TabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAF2242A9B1600066CB3 /* TabBarViewController.xib */; };
+		244ABB1C242A9B1700066CB3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF3242A9B1600066CB3 /* TabBarViewController.swift */; };
+		244ABB1D242A9B1700066CB3 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAF5242A9B1600066CB3 /* SignInViewController.xib */; };
+		244ABB1E242A9B1700066CB3 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF6242A9B1600066CB3 /* SignInViewModel.swift */; };
+		244ABB1F242A9B1700066CB3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF7242A9B1600066CB3 /* SignInViewController.swift */; };
+		244ABB20242A9B1700066CB3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF9242A9B1600066CB3 /* SignUpViewController.swift */; };
+		244ABB21242A9B1700066CB3 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAFA242A9B1600066CB3 /* SignUpViewModel.swift */; };
+		244ABB22242A9B1700066CB3 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAFB242A9B1600066CB3 /* SignUpViewController.xib */; };
+		244ABB23242A9B1700066CB3 /* TrainerAdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAFC242A9B1700066CB3 /* TrainerAdminViewModel.swift */; };
+		244ABB4D242C96E800066CB3 /* AwardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB4B242C96E800066CB3 /* AwardsViewController.swift */; };
+		244ABB4E242C96E800066CB3 /* AwardsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB4C242C96E800066CB3 /* AwardsViewController.xib */; };
+		244ABB50242C970600066CB3 /* AwardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB4F242C970500066CB3 /* AwardsViewModel.swift */; };
+		244ABB53242CED4000066CB3 /* AwardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB51242CED4000066CB3 /* AwardDetailViewController.swift */; };
+		244ABB54242CED4000066CB3 /* AwardDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB52242CED4000066CB3 /* AwardDetailViewController.xib */; };
+		244ABB56242CF2A500066CB3 /* AwardDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB55242CF2A500066CB3 /* AwardDetailViewModel.swift */; };
+		244ABB58242CF34B00066CB3 /* AwardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB57242CF34B00066CB3 /* AwardsModel.swift */; };
+		244ABB5C242E249100066CB3 /* 7893-confetti-cannons.json in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB5B242E249100066CB3 /* 7893-confetti-cannons.json */; };
+		244ABB5E242E2A1700066CB3 /* 1708-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB5D242E2A1500066CB3 /* 1708-success.json */; };
+		244ABB61242E432600066CB3 /* AwardCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB5F242E432500066CB3 /* AwardCompletedViewController.swift */; };
+		244ABB62242E432600066CB3 /* AwardCompletedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB60242E432600066CB3 /* AwardCompletedViewController.xib */; };
+		244ABB64242E436500066CB3 /* AwardCompletedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB63242E436400066CB3 /* AwardCompletedViewModel.swift */; };
+		244ABB6924325C0C00066CB3 /* UserStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB6724325C0C00066CB3 /* UserStatsViewController.swift */; };
+		244ABB6A24325C0D00066CB3 /* UserStatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB6824325C0C00066CB3 /* UserStatsViewController.xib */; };
+		244ABB6D24325FCB00066CB3 /* UserStatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB6B24325FCB00066CB3 /* UserStatsTableViewCell.swift */; };
+		244ABB7024361F8800066CB3 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB6F24361F8700066CB3 /* ProgressBarView.swift */; };
+		244ABB722437605B00066CB3 /* UserStatsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB712437605B00066CB3 /* UserStatsTableViewCell.xib */; };
+		244ABB7424377D6F00066CB3 /* UserStatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB7324377D6E00066CB3 /* UserStatsViewModel.swift */; };
+		244ABB792438D3E800066CB3 /* AdminStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB772438D3E800066CB3 /* AdminStatsViewController.swift */; };
+		244ABB7A2438D3E900066CB3 /* AdminStatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB782438D3E800066CB3 /* AdminStatsViewController.xib */; };
+		244ABB7D2438D61D00066CB3 /* AdminStatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB7B2438D61C00066CB3 /* AdminStatsTableViewCell.swift */; };
+		244ABB7E2438D61D00066CB3 /* AdminStatsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB7C2438D61C00066CB3 /* AdminStatsTableViewCell.xib */; };
+		244ABB802438E29000066CB3 /* AdminStatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB7F2438E29000066CB3 /* AdminStatsViewModel.swift */; };
+		244ABB83243A382300066CB3 /* MixesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB81243A382200066CB3 /* MixesViewController.swift */; };
+		244ABB84243A382400066CB3 /* MixesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB82243A382200066CB3 /* MixesViewController.xib */; };
+		244ABB86243A439A00066CB3 /* MixesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB85243A439900066CB3 /* MixesViewModel.swift */; };
+		4802C2E4243E436D0017B75B /* MixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802C2E2243E436D0017B75B /* MixViewController.swift */; };
+		4802C2E5243E436D0017B75B /* MixViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4802C2E3243E436D0017B75B /* MixViewController.xib */; };
+		4802C2E7243EEA8D0017B75B /* 17694-cube-grid.json in Resources */ = {isa = PBXBuildFile; fileRef = 4802C2E6243EEA8C0017B75B /* 17694-cube-grid.json */; };
+		4802C2E9243EF1330017B75B /* DayMixViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802C2E8243EF1330017B75B /* DayMixViewModel.swift */; };
+		4802C2EB243FB0F30017B75B /* DayMixModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802C2EA243FB0F30017B75B /* DayMixModel.swift */; };
+		48271785243E0B2A003C6CF1 /* UserStatsCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */; };
+		4842930E24470B5400BE8CB6 /* ThemesTrainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842930D24470B5400BE8CB6 /* ThemesTrainerViewModel.swift */; };
+		484293122447647500BE8CB6 /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293112447647500BE8CB6 /* TaskListModel.swift */; };
+		484293142448461100BE8CB6 /* TestTrainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293132448461100BE8CB6 /* TestTrainerViewModel.swift */; };
+		48429318244855DD00BE8CB6 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429316244855DD00BE8CB6 /* TestViewController.swift */; };
+		48429319244855DD00BE8CB6 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48429317244855DD00BE8CB6 /* TestViewController.xib */; };
+		4842931B2448732B00BE8CB6 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842931A2448732B00BE8CB6 /* TestViewModel.swift */; };
+		4842931E2448C4BA00BE8CB6 /* MyAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842931C2448C4BA00BE8CB6 /* MyAnswersViewController.swift */; };
+		4842931F2448C4BA00BE8CB6 /* MyAnswersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4842931D2448C4BA00BE8CB6 /* MyAnswersViewController.xib */; };
+		48429324244C185700BE8CB6 /* TestResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429322244C185700BE8CB6 /* TestResultsViewController.swift */; };
+		48429325244C185700BE8CB6 /* TestResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48429323244C185700BE8CB6 /* TestResultsViewController.xib */; };
+		48429327244C189000BE8CB6 /* TestResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429326244C189000BE8CB6 /* TestResultsViewModel.swift */; };
+		4842932A244C211F00BE8CB6 /* TestResultStatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429328244C211F00BE8CB6 /* TestResultStatsTableViewCell.swift */; };
+		4842932B244C211F00BE8CB6 /* TestResultStatsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48429329244C211F00BE8CB6 /* TestResultStatsTableViewCell.xib */; };
+		4842932E244C24CD00BE8CB6 /* TestResultTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842932C244C24CD00BE8CB6 /* TestResultTaskTableViewCell.swift */; };
+		4842932F244C24CD00BE8CB6 /* TestResultTaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4842932D244C24CD00BE8CB6 /* TestResultTaskTableViewCell.xib */; };
+		48429384245420C500BE8CB6 /* Trainer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429380245420C500BE8CB6 /* Trainer+CoreDataClass.swift */; };
+		48429385245420C500BE8CB6 /* Trainer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429381245420C500BE8CB6 /* Trainer+CoreDataProperties.swift */; };
+		48429386245420C500BE8CB6 /* Test+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429382245420C500BE8CB6 /* Test+CoreDataClass.swift */; };
+		48429387245420C500BE8CB6 /* Test+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429383245420C500BE8CB6 /* Test+CoreDataProperties.swift */; };
+		4842938E245829F200BE8CB6 /* PhysicsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4842938C245829F200BE8CB6 /* PhysicsApp.xcdatamodeld */; };
+		48429395245835B300BE8CB6 /* EgeTask+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429393245835B300BE8CB6 /* EgeTask+CoreDataClass.swift */; };
+		48429396245835B300BE8CB6 /* EgeTask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429394245835B300BE8CB6 /* EgeTask+CoreDataProperties.swift */; };
+		484293992458363B00BE8CB6 /* EgeTheme+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293972458363B00BE8CB6 /* EgeTheme+CoreDataClass.swift */; };
+		4842939A2458363B00BE8CB6 /* EgeTheme+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293982458363B00BE8CB6 /* EgeTheme+CoreDataProperties.swift */; };
+		4842939D2458835100BE8CB6 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842939B2458835100BE8CB6 /* User+CoreDataClass.swift */; };
+		4842939E2458835100BE8CB6 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842939C2458835100BE8CB6 /* User+CoreDataProperties.swift */; };
+		484293A124588FEF00BE8CB6 /* TaskData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842939F24588FEF00BE8CB6 /* TaskData+CoreDataClass.swift */; };
+		484293A224588FEF00BE8CB6 /* TaskData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293A024588FEF00BE8CB6 /* TaskData+CoreDataProperties.swift */; };
+		486362162441E7AB004924FD /* ProgressStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486362152441E7AB004924FD /* ProgressStatsView.swift */; };
+		6910FC61EACA1D262F52A3D2 /* Pods_PhysicsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		244ABA2F242A933B00066CB3 /* PhysicsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhysicsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		244ABA32242A933B00066CB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		244ABA34242A933B00066CB3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		244ABA3B242A934000066CB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		244ABA3E242A934000066CB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		244ABA40242A934000066CB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		244ABA46242A93DE00066CB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		244ABA4A242A9A6E00066CB3 /* MainAdminViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAdminViewModel.swift; sourceTree = "<group>"; };
+		244ABA4B242A9A6E00066CB3 /* MainAdminViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainAdminViewController.xib; sourceTree = "<group>"; };
+		244ABA4C242A9A6E00066CB3 /* MainAdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAdminViewController.swift; sourceTree = "<group>"; };
+		244ABA50242A9ABB00066CB3 /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		244ABA54242A9AC900066CB3 /* BattleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleModel.swift; sourceTree = "<group>"; };
+		244ABA55242A9AC900066CB3 /* BattleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BattleViewController.xib; sourceTree = "<group>"; };
+		244ABA56242A9AC900066CB3 /* BattleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleViewController.swift; sourceTree = "<group>"; };
+		244ABA57242A9AC900066CB3 /* BattleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleViewModel.swift; sourceTree = "<group>"; };
+		244ABA59242A9AC900066CB3 /* GamesNumberAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesNumberAlertViewController.xib; sourceTree = "<group>"; };
+		244ABA5A242A9AC900066CB3 /* GamesNumberAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesNumberAlertViewController.swift; sourceTree = "<group>"; };
+		244ABA5C242A9AC900066CB3 /* BattleFinalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleFinalViewController.swift; sourceTree = "<group>"; };
+		244ABA5D242A9AC900066CB3 /* BattleFinalViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleFinalViewModel.swift; sourceTree = "<group>"; };
+		244ABA5E242A9AC900066CB3 /* BattleFinalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BattleFinalViewController.xib; sourceTree = "<group>"; };
+		244ABA60242A9AC900066CB3 /* AnswerChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerChooserViewController.swift; sourceTree = "<group>"; };
+		244ABA61242A9AC900066CB3 /* AnswerChooserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnswerChooserViewController.xib; sourceTree = "<group>"; };
+		244ABA62242A9AC900066CB3 /* AnswerChooserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerChooserViewModel.swift; sourceTree = "<group>"; };
+		244ABA70242A9AD700066CB3 /* ThemeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeTableViewCell.swift; sourceTree = "<group>"; };
+		244ABA71242A9AD700066CB3 /* ThemeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThemeTableViewCell.xib; sourceTree = "<group>"; };
+		244ABA72242A9AD700066CB3 /* AwardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardCollectionViewCell.swift; sourceTree = "<group>"; };
+		244ABA73242A9AD700066CB3 /* AwardCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AwardCollectionViewCell.xib; sourceTree = "<group>"; };
+		244ABA78242A9ADF00066CB3 /* CustomProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomProtocols.swift; sourceTree = "<group>"; };
+		244ABA7A242A9AE500066CB3 /* DesignService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignService.swift; sourceTree = "<group>"; };
+		244ABA7C242A9AEA00066CB3 /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		244ABA7F242A9AF300066CB3 /* Montserrat-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-MediumItalic.otf"; sourceTree = "<group>"; };
+		244ABA80242A9AF300066CB3 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		244ABA81242A9AF300066CB3 /* Montserrat-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BlackItalic.otf"; sourceTree = "<group>"; };
+		244ABA82242A9AF300066CB3 /* Montserrat-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
+		244ABA83242A9AF300066CB3 /* BlackDiamond.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BlackDiamond.ttf; sourceTree = "<group>"; };
+		244ABA84242A9AF300066CB3 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		244ABA85242A9AF300066CB3 /* Montserrat-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.otf"; sourceTree = "<group>"; };
+		244ABA86242A9AF300066CB3 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
+		244ABA87242A9AF300066CB3 /* Montserrat-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ThinItalic.otf"; sourceTree = "<group>"; };
+		244ABA88242A9AF300066CB3 /* Montserrat-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.otf"; sourceTree = "<group>"; };
+		244ABA89242A9AF300066CB3 /* Montserrat-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.otf"; sourceTree = "<group>"; };
+		244ABA8A242A9AF300066CB3 /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
+		244ABA8B242A9AF300066CB3 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		244ABA8C242A9AF300066CB3 /* Montserrat-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ThinItalic.ttf"; sourceTree = "<group>"; };
+		244ABA8D242A9AF300066CB3 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
+		244ABA8E242A9AF300066CB3 /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.ttf"; sourceTree = "<group>"; };
+		244ABA8F242A9AF300066CB3 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		244ABA90242A9AF300066CB3 /* Montserrat-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-MediumItalic.ttf"; sourceTree = "<group>"; };
+		244ABA91242A9AF300066CB3 /* Montserrat-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BlackItalic.ttf"; sourceTree = "<group>"; };
+		244ABA92242A9AF300066CB3 /* Montserrat-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-LightItalic.otf"; sourceTree = "<group>"; };
+		244ABA93242A9AF300066CB3 /* Montserrat-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.otf"; sourceTree = "<group>"; };
+		244ABA94242A9AF300066CB3 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		244ABA95242A9AF300066CB3 /* Montserrat-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		244ABA96242A9AF300066CB3 /* Montserrat-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
+		244ABA97242A9AF300066CB3 /* Montserrat-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		244ABA98242A9AF300066CB3 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
+		244ABA99242A9AF300066CB3 /* Montserrat-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.otf"; sourceTree = "<group>"; };
+		244ABA9A242A9AF300066CB3 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		244ABA9B242A9AF300066CB3 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
+		244ABA9C242A9AF300066CB3 /* Montserrat-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.ttf"; sourceTree = "<group>"; };
+		244ABA9D242A9AF300066CB3 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
+		244ABA9E242A9AF300066CB3 /* Montserrat-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLightItalic.otf"; sourceTree = "<group>"; };
+		244ABA9F242A9AF300066CB3 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		244ABAA0242A9AF300066CB3 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
+		244ABAA1242A9AF300066CB3 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
+		244ABAA2242A9AF300066CB3 /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		244ABAA3242A9AF300066CB3 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		244ABAA4242A9AF300066CB3 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
+		244ABACC242A9B1400066CB3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = "../New Group/ProfileViewController.swift"; sourceTree = "<group>"; };
+		244ABACD242A9B1400066CB3 /* TrainerAdminViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainerAdminViewController.xib; sourceTree = "<group>"; };
+		244ABACE242A9B1500066CB3 /* TrainerAdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerAdminViewController.swift; sourceTree = "<group>"; };
+		244ABACF242A9B1500066CB3 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		244ABAD1242A9B1500066CB3 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		244ABAD2242A9B1500066CB3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		244ABAD3242A9B1500066CB3 /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		244ABAD6242A9B1500066CB3 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		244ABAD7242A9B1500066CB3 /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		244ABAD9242A9B1600066CB3 /* UnsolvedThemesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnsolvedThemesViewController.xib; sourceTree = "<group>"; };
+		244ABADB242A9B1600066CB3 /* UnsolvedThemesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsolvedThemesViewModel.swift; sourceTree = "<group>"; };
+		244ABADD242A9B1600066CB3 /* TrainerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerViewModel.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		244ABADE242A9B1600066CB3 /* TrainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainerViewController.xib; sourceTree = "<group>"; };
+		244ABADF242A9B1600066CB3 /* TrainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerViewController.swift; sourceTree = "<group>"; };
+		244ABAE0242A9B1600066CB3 /* TrainerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerModel.swift; sourceTree = "<group>"; };
+		244ABAE2242A9B1600066CB3 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
+		244ABAE3242A9B1600066CB3 /* ImagePreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePreviewViewController.xib; sourceTree = "<group>"; };
+		244ABAE4242A9B1600066CB3 /* FormSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSheetViewController.swift; sourceTree = "<group>"; };
+		244ABAE6242A9B1600066CB3 /* TasksListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksListViewModel.swift; sourceTree = "<group>"; };
+		244ABAE7242A9B1600066CB3 /* TasksListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksListViewController.swift; sourceTree = "<group>"; };
+		244ABAE8242A9B1600066CB3 /* TasksListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TasksListViewController.xib; sourceTree = "<group>"; };
+		244ABAEA242A9B1600066CB3 /* TaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		244ABAEB242A9B1600066CB3 /* TaskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskViewController.xib; sourceTree = "<group>"; };
+		244ABAEC242A9B1600066CB3 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		244ABAED242A9B1600066CB3 /* TaskViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		244ABAEE242A9B1600066CB3 /* FormSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormSheetViewController.xib; sourceTree = "<group>"; };
+		244ABAEF242A9B1600066CB3 /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
+		244ABAF0242A9B1600066CB3 /* UnsolvedThemesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsolvedThemesViewController.swift; sourceTree = "<group>"; };
+		244ABAF2242A9B1600066CB3 /* TabBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarViewController.xib; sourceTree = "<group>"; };
+		244ABAF3242A9B1600066CB3 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		244ABAF5242A9B1600066CB3 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
+		244ABAF6242A9B1600066CB3 /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		244ABAF7242A9B1600066CB3 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		244ABAF9242A9B1600066CB3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		244ABAFA242A9B1600066CB3 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		244ABAFB242A9B1600066CB3 /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		244ABAFC242A9B1700066CB3 /* TrainerAdminViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerAdminViewModel.swift; sourceTree = "<group>"; };
+		244ABB4B242C96E800066CB3 /* AwardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsViewController.swift; sourceTree = "<group>"; };
+		244ABB4C242C96E800066CB3 /* AwardsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AwardsViewController.xib; sourceTree = "<group>"; };
+		244ABB4F242C970500066CB3 /* AwardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsViewModel.swift; sourceTree = "<group>"; };
+		244ABB51242CED4000066CB3 /* AwardDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardDetailViewController.swift; sourceTree = "<group>"; };
+		244ABB52242CED4000066CB3 /* AwardDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AwardDetailViewController.xib; sourceTree = "<group>"; };
+		244ABB55242CF2A500066CB3 /* AwardDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardDetailViewModel.swift; sourceTree = "<group>"; };
+		244ABB57242CF34B00066CB3 /* AwardsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsModel.swift; sourceTree = "<group>"; };
+		244ABB5B242E249100066CB3 /* 7893-confetti-cannons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "7893-confetti-cannons.json"; sourceTree = "<group>"; };
+		244ABB5D242E2A1500066CB3 /* 1708-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "1708-success.json"; sourceTree = "<group>"; };
+		244ABB5F242E432500066CB3 /* AwardCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardCompletedViewController.swift; sourceTree = "<group>"; };
+		244ABB60242E432600066CB3 /* AwardCompletedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AwardCompletedViewController.xib; sourceTree = "<group>"; };
+		244ABB63242E436400066CB3 /* AwardCompletedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardCompletedViewModel.swift; sourceTree = "<group>"; };
+		244ABB6724325C0C00066CB3 /* UserStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsViewController.swift; sourceTree = "<group>"; };
+		244ABB6824325C0C00066CB3 /* UserStatsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserStatsViewController.xib; sourceTree = "<group>"; };
+		244ABB6B24325FCB00066CB3 /* UserStatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsTableViewCell.swift; sourceTree = "<group>"; };
+		244ABB6F24361F8700066CB3 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		244ABB712437605B00066CB3 /* UserStatsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserStatsTableViewCell.xib; sourceTree = "<group>"; };
+		244ABB7324377D6E00066CB3 /* UserStatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsViewModel.swift; sourceTree = "<group>"; };
+		244ABB772438D3E800066CB3 /* AdminStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminStatsViewController.swift; sourceTree = "<group>"; };
+		244ABB782438D3E800066CB3 /* AdminStatsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminStatsViewController.xib; sourceTree = "<group>"; };
+		244ABB7B2438D61C00066CB3 /* AdminStatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminStatsTableViewCell.swift; sourceTree = "<group>"; };
+		244ABB7C2438D61C00066CB3 /* AdminStatsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminStatsTableViewCell.xib; sourceTree = "<group>"; };
+		244ABB7F2438E29000066CB3 /* AdminStatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminStatsViewModel.swift; sourceTree = "<group>"; };
+		244ABB81243A382200066CB3 /* MixesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixesViewController.swift; sourceTree = "<group>"; };
+		244ABB82243A382200066CB3 /* MixesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MixesViewController.xib; sourceTree = "<group>"; };
+		244ABB85243A439900066CB3 /* MixesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixesViewModel.swift; sourceTree = "<group>"; };
+		2B6A0BDE016FA962DD8EBA1A /* Pods-PhysicsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhysicsApp.release.xcconfig"; path = "Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp.release.xcconfig"; sourceTree = "<group>"; };
+		4802C2E2243E436D0017B75B /* MixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixViewController.swift; sourceTree = "<group>"; };
+		4802C2E3243E436D0017B75B /* MixViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MixViewController.xib; sourceTree = "<group>"; };
+		4802C2E6243EEA8C0017B75B /* 17694-cube-grid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "17694-cube-grid.json"; sourceTree = "<group>"; };
+		4802C2E8243EF1330017B75B /* DayMixViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayMixViewModel.swift; sourceTree = "<group>"; };
+		4802C2EA243FB0F30017B75B /* DayMixModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayMixModel.swift; sourceTree = "<group>"; };
+		48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsCounter.swift; sourceTree = "<group>"; };
+		4842930D24470B5400BE8CB6 /* ThemesTrainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesTrainerViewModel.swift; sourceTree = "<group>"; };
+		484293112447647500BE8CB6 /* TaskListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModel.swift; sourceTree = "<group>"; };
+		484293132448461100BE8CB6 /* TestTrainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTrainerViewModel.swift; sourceTree = "<group>"; };
+		48429316244855DD00BE8CB6 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		48429317244855DD00BE8CB6 /* TestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		4842931A2448732B00BE8CB6 /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
+		4842931C2448C4BA00BE8CB6 /* MyAnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnswersViewController.swift; sourceTree = "<group>"; };
+		4842931D2448C4BA00BE8CB6 /* MyAnswersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersViewController.xib; sourceTree = "<group>"; };
+		48429322244C185700BE8CB6 /* TestResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsViewController.swift; sourceTree = "<group>"; };
+		48429323244C185700BE8CB6 /* TestResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestResultsViewController.xib; sourceTree = "<group>"; };
+		48429326244C189000BE8CB6 /* TestResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsViewModel.swift; sourceTree = "<group>"; };
+		48429328244C211F00BE8CB6 /* TestResultStatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultStatsTableViewCell.swift; sourceTree = "<group>"; };
+		48429329244C211F00BE8CB6 /* TestResultStatsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestResultStatsTableViewCell.xib; sourceTree = "<group>"; };
+		4842932C244C24CD00BE8CB6 /* TestResultTaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultTaskTableViewCell.swift; sourceTree = "<group>"; };
+		4842932D244C24CD00BE8CB6 /* TestResultTaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestResultTaskTableViewCell.xib; sourceTree = "<group>"; };
+		48429380245420C500BE8CB6 /* Trainer+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trainer+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		48429381245420C500BE8CB6 /* Trainer+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trainer+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		48429382245420C500BE8CB6 /* Test+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		48429383245420C500BE8CB6 /* Test+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		4842938D245829F200BE8CB6 /* PhysicsApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhysicsApp.xcdatamodel; sourceTree = "<group>"; };
+		48429393245835B300BE8CB6 /* EgeTask+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EgeTask+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		48429394245835B300BE8CB6 /* EgeTask+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EgeTask+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		484293972458363B00BE8CB6 /* EgeTheme+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EgeTheme+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		484293982458363B00BE8CB6 /* EgeTheme+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EgeTheme+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		4842939B2458835100BE8CB6 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		4842939C2458835100BE8CB6 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		4842939F24588FEF00BE8CB6 /* TaskData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskData+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		484293A024588FEF00BE8CB6 /* TaskData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskData+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		486362152441E7AB004924FD /* ProgressStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStatsView.swift; sourceTree = "<group>"; };
+		5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhysicsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B327A80248CB58F8603354D5 /* Pods-PhysicsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhysicsApp.debug.xcconfig"; path = "Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		244ABA2C242A933B00066CB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6910FC61EACA1D262F52A3D2 /* Pods_PhysicsApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		244ABA26242A933B00066CB3 = {
+			isa = PBXGroup;
+			children = (
+				244ABA31242A933B00066CB3 /* PhysicsApp */,
+				244ABA30242A933B00066CB3 /* Products */,
+				C45A5A78C5B824455C8DA084 /* Pods */,
+				FECBA3C55C07D521FA39D2E2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		244ABA30242A933B00066CB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA2F242A933B00066CB3 /* PhysicsApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		244ABA31242A933B00066CB3 /* PhysicsApp */ = {
+			isa = PBXGroup;
+			children = (
+				4842936B2451B10600BE8CB6 /* Core Data */,
+				244ABA32242A933B00066CB3 /* AppDelegate.swift */,
+				244ABA50242A9ABB00066CB3 /* Animations.swift */,
+				244ABB5B242E249100066CB3 /* 7893-confetti-cannons.json */,
+				244ABB5D242E2A1500066CB3 /* 1708-success.json */,
+				4802C2E6243EEA8C0017B75B /* 17694-cube-grid.json */,
+				244ABA78242A9ADF00066CB3 /* CustomProtocols.swift */,
+				244ABA7A242A9AE500066CB3 /* DesignService.swift */,
+				244ABACF242A9B1500066CB3 /* UIViewExtension.swift */,
+				244ABA7C242A9AEA00066CB3 /* FirebaseService.swift */,
+				244ABA34242A933B00066CB3 /* SceneDelegate.swift */,
+				244ABB5F242E432500066CB3 /* AwardCompletedViewController.swift */,
+				244ABB63242E436400066CB3 /* AwardCompletedViewModel.swift */,
+				244ABB60242E432600066CB3 /* AwardCompletedViewController.xib */,
+				244ABA46242A93DE00066CB3 /* GoogleService-Info.plist */,
+				244ABB6F24361F8700066CB3 /* ProgressBarView.swift */,
+				48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */,
+				48271783243E0AEF003C6CF1 /* Mixes */,
+				244ABAD0242A9B1500066CB3 /* Profile */,
+				244ABAF4242A9B1600066CB3 /* SignInScreen */,
+				244ABAF8242A9B1600066CB3 /* SignUpScreen */,
+				244ABAF1242A9B1600066CB3 /* TabBarController */,
+				244ABAD8242A9B1600066CB3 /* Trainer */,
+				244ABAD5242A9B1500066CB3 /* WelcomeScreen */,
+				244ABA7E242A9AF200066CB3 /* Fonts */,
+				244ABA48242A9A6E00066CB3 /* Admin */,
+				244ABA52242A9AC900066CB3 /* Battle */,
+				244ABA6F242A9AD700066CB3 /* Cells */,
+				244ABA3B242A934000066CB3 /* Assets.xcassets */,
+				244ABA3D242A934000066CB3 /* LaunchScreen.storyboard */,
+				4842938C245829F200BE8CB6 /* PhysicsApp.xcdatamodeld */,
+				244ABA40242A934000066CB3 /* Info.plist */,
+			);
+			path = PhysicsApp;
+			sourceTree = "<group>";
+		};
+		244ABA48242A9A6E00066CB3 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA49242A9A6E00066CB3 /* MainAdmin */,
+				4842935424519F5A00BE8CB6 /* TrainerAdmin */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+		244ABA49242A9A6E00066CB3 /* MainAdmin */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA4A242A9A6E00066CB3 /* MainAdminViewModel.swift */,
+				244ABA4B242A9A6E00066CB3 /* MainAdminViewController.xib */,
+				244ABA4C242A9A6E00066CB3 /* MainAdminViewController.swift */,
+				244ABB772438D3E800066CB3 /* AdminStatsViewController.swift */,
+				244ABB7F2438E29000066CB3 /* AdminStatsViewModel.swift */,
+				244ABB782438D3E800066CB3 /* AdminStatsViewController.xib */,
+			);
+			path = MainAdmin;
+			sourceTree = "<group>";
+		};
+		244ABA52242A9AC900066CB3 /* Battle */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA53242A9AC900066CB3 /* BattleStart */,
+				244ABA58242A9AC900066CB3 /* GamesNumberAlert */,
+				244ABA5B242A9AC900066CB3 /* BattleFinal */,
+				244ABA5F242A9AC900066CB3 /* AnswerChooser */,
+			);
+			name = Battle;
+			path = PhysicsApp/Battle;
+			sourceTree = SOURCE_ROOT;
+		};
+		244ABA53242A9AC900066CB3 /* BattleStart */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA54242A9AC900066CB3 /* BattleModel.swift */,
+				244ABA55242A9AC900066CB3 /* BattleViewController.xib */,
+				244ABA56242A9AC900066CB3 /* BattleViewController.swift */,
+				244ABA57242A9AC900066CB3 /* BattleViewModel.swift */,
+			);
+			path = BattleStart;
+			sourceTree = "<group>";
+		};
+		244ABA58242A9AC900066CB3 /* GamesNumberAlert */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA59242A9AC900066CB3 /* GamesNumberAlertViewController.xib */,
+				244ABA5A242A9AC900066CB3 /* GamesNumberAlertViewController.swift */,
+			);
+			path = GamesNumberAlert;
+			sourceTree = "<group>";
+		};
+		244ABA5B242A9AC900066CB3 /* BattleFinal */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA5C242A9AC900066CB3 /* BattleFinalViewController.swift */,
+				244ABA5D242A9AC900066CB3 /* BattleFinalViewModel.swift */,
+				244ABA5E242A9AC900066CB3 /* BattleFinalViewController.xib */,
+			);
+			path = BattleFinal;
+			sourceTree = "<group>";
+		};
+		244ABA5F242A9AC900066CB3 /* AnswerChooser */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA60242A9AC900066CB3 /* AnswerChooserViewController.swift */,
+				244ABA61242A9AC900066CB3 /* AnswerChooserViewController.xib */,
+				244ABA62242A9AC900066CB3 /* AnswerChooserViewModel.swift */,
+			);
+			path = AnswerChooser;
+			sourceTree = "<group>";
+		};
+		244ABA6F242A9AD700066CB3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA70242A9AD700066CB3 /* ThemeTableViewCell.swift */,
+				244ABA71242A9AD700066CB3 /* ThemeTableViewCell.xib */,
+				244ABA72242A9AD700066CB3 /* AwardCollectionViewCell.swift */,
+				244ABA73242A9AD700066CB3 /* AwardCollectionViewCell.xib */,
+				244ABB6B24325FCB00066CB3 /* UserStatsTableViewCell.swift */,
+				244ABB712437605B00066CB3 /* UserStatsTableViewCell.xib */,
+				244ABB7B2438D61C00066CB3 /* AdminStatsTableViewCell.swift */,
+				244ABB7C2438D61C00066CB3 /* AdminStatsTableViewCell.xib */,
+				48429328244C211F00BE8CB6 /* TestResultStatsTableViewCell.swift */,
+				48429329244C211F00BE8CB6 /* TestResultStatsTableViewCell.xib */,
+				4842932C244C24CD00BE8CB6 /* TestResultTaskTableViewCell.swift */,
+				4842932D244C24CD00BE8CB6 /* TestResultTaskTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		244ABA7E242A9AF200066CB3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA7F242A9AF300066CB3 /* Montserrat-MediumItalic.otf */,
+				244ABA80242A9AF300066CB3 /* Montserrat-Bold.otf */,
+				244ABA81242A9AF300066CB3 /* Montserrat-BlackItalic.otf */,
+				244ABA82242A9AF300066CB3 /* Montserrat-LightItalic.ttf */,
+				244ABA83242A9AF300066CB3 /* BlackDiamond.ttf */,
+				244ABA84242A9AF300066CB3 /* Montserrat-Medium.ttf */,
+				244ABA85242A9AF300066CB3 /* Montserrat-BoldItalic.otf */,
+				244ABA86242A9AF300066CB3 /* Montserrat-Light.otf */,
+				244ABA87242A9AF300066CB3 /* Montserrat-ThinItalic.otf */,
+				244ABA88242A9AF300066CB3 /* Montserrat-Thin.otf */,
+				244ABA89242A9AF300066CB3 /* Montserrat-ExtraLight.otf */,
+				244ABA8A242A9AF300066CB3 /* Montserrat-BoldItalic.ttf */,
+				244ABA8B242A9AF300066CB3 /* Montserrat-Light.ttf */,
+				244ABA8C242A9AF300066CB3 /* Montserrat-ThinItalic.ttf */,
+				244ABA8D242A9AF300066CB3 /* Montserrat-ExtraLight.ttf */,
+				244ABA8E242A9AF300066CB3 /* Montserrat-Thin.ttf */,
+				244ABA8F242A9AF300066CB3 /* Montserrat-Bold.ttf */,
+				244ABA90242A9AF300066CB3 /* Montserrat-MediumItalic.ttf */,
+				244ABA91242A9AF300066CB3 /* Montserrat-BlackItalic.ttf */,
+				244ABA92242A9AF300066CB3 /* Montserrat-LightItalic.otf */,
+				244ABA93242A9AF300066CB3 /* Montserrat-Medium.otf */,
+				244ABA94242A9AF300066CB3 /* Montserrat-SemiBold.ttf */,
+				244ABA95242A9AF300066CB3 /* Montserrat-SemiBoldItalic.otf */,
+				244ABA96242A9AF300066CB3 /* Montserrat-ExtraBoldItalic.otf */,
+				244ABA97242A9AF300066CB3 /* Montserrat-ExtraLightItalic.ttf */,
+				244ABA98242A9AF300066CB3 /* Montserrat-ExtraBold.ttf */,
+				244ABA99242A9AF300066CB3 /* Montserrat-Italic.otf */,
+				244ABA9A242A9AF300066CB3 /* OFL.txt */,
+				244ABA9B242A9AF300066CB3 /* Montserrat-Regular.otf */,
+				244ABA9C242A9AF300066CB3 /* Montserrat-Black.ttf */,
+				244ABA9D242A9AF300066CB3 /* Montserrat-ExtraBold.otf */,
+				244ABA9E242A9AF300066CB3 /* Montserrat-ExtraLightItalic.otf */,
+				244ABA9F242A9AF300066CB3 /* Montserrat-Regular.ttf */,
+				244ABAA0242A9AF300066CB3 /* Montserrat-Italic.ttf */,
+				244ABAA1242A9AF300066CB3 /* Montserrat-Black.otf */,
+				244ABAA2242A9AF300066CB3 /* Montserrat-SemiBoldItalic.ttf */,
+				244ABAA3242A9AF300066CB3 /* Montserrat-ExtraBoldItalic.ttf */,
+				244ABAA4242A9AF300066CB3 /* Montserrat-SemiBold.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		244ABAD0242A9B1500066CB3 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAD1242A9B1500066CB3 /* ProfileViewController.xib */,
+				244ABACC242A9B1400066CB3 /* ProfileViewController.swift */,
+				244ABAD2242A9B1500066CB3 /* ProfileViewModel.swift */,
+				244ABAD3242A9B1500066CB3 /* ProfileModel.swift */,
+				244ABB51242CED4000066CB3 /* AwardDetailViewController.swift */,
+				244ABB55242CF2A500066CB3 /* AwardDetailViewModel.swift */,
+				244ABB52242CED4000066CB3 /* AwardDetailViewController.xib */,
+				244ABB4B242C96E800066CB3 /* AwardsViewController.swift */,
+				244ABB4F242C970500066CB3 /* AwardsViewModel.swift */,
+				244ABB57242CF34B00066CB3 /* AwardsModel.swift */,
+				244ABB4C242C96E800066CB3 /* AwardsViewController.xib */,
+				244ABB6724325C0C00066CB3 /* UserStatsViewController.swift */,
+				244ABB7324377D6E00066CB3 /* UserStatsViewModel.swift */,
+				244ABB6824325C0C00066CB3 /* UserStatsViewController.xib */,
+				486362152441E7AB004924FD /* ProgressStatsView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		244ABAD5242A9B1500066CB3 /* WelcomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAD6242A9B1500066CB3 /* WelcomeViewController.swift */,
+				244ABAD7242A9B1500066CB3 /* WelcomeViewController.xib */,
+			);
+			path = WelcomeScreen;
+			sourceTree = "<group>";
+		};
+		244ABAD8242A9B1600066CB3 /* Trainer */ = {
+			isa = PBXGroup;
+			children = (
+				244ABADC242A9B1600066CB3 /* TrainerStart */,
+				48429320244C180F00BE8CB6 /* Test */,
+				48429321244C182100BE8CB6 /* MyAnswers */,
+				4842935324519F1900BE8CB6 /* TestResults */,
+				484293102447623100BE8CB6 /* UnsolvedTasks */,
+				244ABAE5242A9B1600066CB3 /* TasksList */,
+				244ABAE9242A9B1600066CB3 /* Task */,
+				244ABAE1242A9B1600066CB3 /* ImagePreview */,
+				4842930F2447621200BE8CB6 /* FormSheet */,
+			);
+			path = Trainer;
+			sourceTree = "<group>";
+		};
+		244ABADC242A9B1600066CB3 /* TrainerStart */ = {
+			isa = PBXGroup;
+			children = (
+				244ABADF242A9B1600066CB3 /* TrainerViewController.swift */,
+				484293152448559C00BE8CB6 /* TrainerStartViewModels */,
+				244ABAE0242A9B1600066CB3 /* TrainerModel.swift */,
+				244ABADE242A9B1600066CB3 /* TrainerViewController.xib */,
+			);
+			path = TrainerStart;
+			sourceTree = "<group>";
+		};
+		244ABAE1242A9B1600066CB3 /* ImagePreview */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAE2242A9B1600066CB3 /* ImagePreviewViewController.swift */,
+				244ABAEF242A9B1600066CB3 /* ImageScrollView.swift */,
+				244ABAE3242A9B1600066CB3 /* ImagePreviewViewController.xib */,
+			);
+			path = ImagePreview;
+			sourceTree = "<group>";
+		};
+		244ABAE5242A9B1600066CB3 /* TasksList */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAE7242A9B1600066CB3 /* TasksListViewController.swift */,
+				244ABAE6242A9B1600066CB3 /* TasksListViewModel.swift */,
+				484293112447647500BE8CB6 /* TaskListModel.swift */,
+				244ABAE8242A9B1600066CB3 /* TasksListViewController.xib */,
+			);
+			path = TasksList;
+			sourceTree = "<group>";
+		};
+		244ABAE9242A9B1600066CB3 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAEC242A9B1600066CB3 /* TaskViewController.swift */,
+				244ABAED242A9B1600066CB3 /* TaskViewModel.swift */,
+				244ABAEA242A9B1600066CB3 /* TaskModel.swift */,
+				244ABAEB242A9B1600066CB3 /* TaskViewController.xib */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		244ABAF1242A9B1600066CB3 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAF2242A9B1600066CB3 /* TabBarViewController.xib */,
+				244ABAF3242A9B1600066CB3 /* TabBarViewController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		244ABAF4242A9B1600066CB3 /* SignInScreen */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAF5242A9B1600066CB3 /* SignInViewController.xib */,
+				244ABAF6242A9B1600066CB3 /* SignInViewModel.swift */,
+				244ABAF7242A9B1600066CB3 /* SignInViewController.swift */,
+			);
+			path = SignInScreen;
+			sourceTree = "<group>";
+		};
+		244ABAF8242A9B1600066CB3 /* SignUpScreen */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAF9242A9B1600066CB3 /* SignUpViewController.swift */,
+				244ABAFA242A9B1600066CB3 /* SignUpViewModel.swift */,
+				244ABAFB242A9B1600066CB3 /* SignUpViewController.xib */,
+			);
+			path = SignUpScreen;
+			sourceTree = "<group>";
+		};
+		4802C2E1243E43340017B75B /* MixesStart */ = {
+			isa = PBXGroup;
+			children = (
+				244ABB81243A382200066CB3 /* MixesViewController.swift */,
+				244ABB85243A439900066CB3 /* MixesViewModel.swift */,
+				244ABB82243A382200066CB3 /* MixesViewController.xib */,
+				4802C2E2243E436D0017B75B /* MixViewController.swift */,
+				4802C2E8243EF1330017B75B /* DayMixViewModel.swift */,
+				4802C2EA243FB0F30017B75B /* DayMixModel.swift */,
+				4802C2E3243E436D0017B75B /* MixViewController.xib */,
+			);
+			path = MixesStart;
+			sourceTree = "<group>";
+		};
+		48271783243E0AEF003C6CF1 /* Mixes */ = {
+			isa = PBXGroup;
+			children = (
+				4802C2E1243E43340017B75B /* MixesStart */,
+			);
+			path = Mixes;
+			sourceTree = "<group>";
+		};
+		4842930F2447621200BE8CB6 /* FormSheet */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAE4242A9B1600066CB3 /* FormSheetViewController.swift */,
+				244ABAEE242A9B1600066CB3 /* FormSheetViewController.xib */,
+			);
+			path = FormSheet;
+			sourceTree = "<group>";
+		};
+		484293102447623100BE8CB6 /* UnsolvedTasks */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAF0242A9B1600066CB3 /* UnsolvedThemesViewController.swift */,
+				244ABADB242A9B1600066CB3 /* UnsolvedThemesViewModel.swift */,
+				244ABAD9242A9B1600066CB3 /* UnsolvedThemesViewController.xib */,
+			);
+			path = UnsolvedTasks;
+			sourceTree = "<group>";
+		};
+		484293152448559C00BE8CB6 /* TrainerStartViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				244ABADD242A9B1600066CB3 /* TrainerViewModel.swift */,
+				4842930D24470B5400BE8CB6 /* ThemesTrainerViewModel.swift */,
+				484293132448461100BE8CB6 /* TestTrainerViewModel.swift */,
+			);
+			path = TrainerStartViewModels;
+			sourceTree = "<group>";
+		};
+		48429320244C180F00BE8CB6 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				48429316244855DD00BE8CB6 /* TestViewController.swift */,
+				4842931A2448732B00BE8CB6 /* TestViewModel.swift */,
+				48429317244855DD00BE8CB6 /* TestViewController.xib */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		48429321244C182100BE8CB6 /* MyAnswers */ = {
+			isa = PBXGroup;
+			children = (
+				4842931C2448C4BA00BE8CB6 /* MyAnswersViewController.swift */,
+				4842931D2448C4BA00BE8CB6 /* MyAnswersViewController.xib */,
+			);
+			path = MyAnswers;
+			sourceTree = "<group>";
+		};
+		4842935324519F1900BE8CB6 /* TestResults */ = {
+			isa = PBXGroup;
+			children = (
+				48429322244C185700BE8CB6 /* TestResultsViewController.swift */,
+				48429326244C189000BE8CB6 /* TestResultsViewModel.swift */,
+				48429323244C185700BE8CB6 /* TestResultsViewController.xib */,
+			);
+			path = TestResults;
+			sourceTree = "<group>";
+		};
+		4842935424519F5A00BE8CB6 /* TrainerAdmin */ = {
+			isa = PBXGroup;
+			children = (
+				244ABACE242A9B1500066CB3 /* TrainerAdminViewController.swift */,
+				244ABACD242A9B1400066CB3 /* TrainerAdminViewController.xib */,
+				244ABAFC242A9B1700066CB3 /* TrainerAdminViewModel.swift */,
+			);
+			path = TrainerAdmin;
+			sourceTree = "<group>";
+		};
+		4842936B2451B10600BE8CB6 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				4842939F24588FEF00BE8CB6 /* TaskData+CoreDataClass.swift */,
+				484293A024588FEF00BE8CB6 /* TaskData+CoreDataProperties.swift */,
+				4842939B2458835100BE8CB6 /* User+CoreDataClass.swift */,
+				4842939C2458835100BE8CB6 /* User+CoreDataProperties.swift */,
+				484293972458363B00BE8CB6 /* EgeTheme+CoreDataClass.swift */,
+				484293982458363B00BE8CB6 /* EgeTheme+CoreDataProperties.swift */,
+				48429393245835B300BE8CB6 /* EgeTask+CoreDataClass.swift */,
+				48429394245835B300BE8CB6 /* EgeTask+CoreDataProperties.swift */,
+				48429380245420C500BE8CB6 /* Trainer+CoreDataClass.swift */,
+				48429381245420C500BE8CB6 /* Trainer+CoreDataProperties.swift */,
+				48429382245420C500BE8CB6 /* Test+CoreDataClass.swift */,
+				48429383245420C500BE8CB6 /* Test+CoreDataProperties.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		C45A5A78C5B824455C8DA084 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B327A80248CB58F8603354D5 /* Pods-PhysicsApp.debug.xcconfig */,
+				2B6A0BDE016FA962DD8EBA1A /* Pods-PhysicsApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FECBA3C55C07D521FA39D2E2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		244ABA2E242A933B00066CB3 /* PhysicsApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 244ABA43242A934000066CB3 /* Build configuration list for PBXNativeTarget "PhysicsApp" */;
+			buildPhases = (
+				016C63345F5859EE81CDE648 /* [CP] Check Pods Manifest.lock */,
+				244ABA2B242A933B00066CB3 /* Sources */,
+				244ABA2C242A933B00066CB3 /* Frameworks */,
+				244ABA2D242A933B00066CB3 /* Resources */,
+				DB498352F4753DBBBA44D48B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PhysicsApp;
+			productName = PhysicsApp;
+			productReference = 244ABA2F242A933B00066CB3 /* PhysicsApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		244ABA27242A933B00066CB3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = Devgen;
+				TargetAttributes = {
+					244ABA2E242A933B00066CB3 = {
+						CreatedOnToolsVersion = 11.3;
+					};
+				};
+			};
+			buildConfigurationList = 244ABA2A242A933B00066CB3 /* Build configuration list for PBXProject "PhysicsApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 244ABA26242A933B00066CB3;
+			productRefGroup = 244ABA30242A933B00066CB3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				244ABA2E242A933B00066CB3 /* PhysicsApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		244ABA2D242A933B00066CB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				244ABA6B242A9AC900066CB3 /* BattleFinalViewController.xib in Resources */,
+				244ABAC3242A9AF400066CB3 /* Montserrat-ExtraBold.otf in Resources */,
+				244ABB06242A9B1700066CB3 /* WelcomeViewController.xib in Resources */,
+				244ABAC4242A9AF400066CB3 /* Montserrat-ExtraLightItalic.otf in Resources */,
+				244ABB1B242A9B1700066CB3 /* TabBarViewController.xib in Resources */,
+				244ABAC2242A9AF400066CB3 /* Montserrat-Black.ttf in Resources */,
+				244ABA64242A9AC900066CB3 /* BattleViewController.xib in Resources */,
+				244ABB6A24325C0D00066CB3 /* UserStatsViewController.xib in Resources */,
+				4842932B244C211F00BE8CB6 /* TestResultStatsTableViewCell.xib in Resources */,
+				244ABAB6242A9AF400066CB3 /* Montserrat-MediumItalic.ttf in Resources */,
+				244ABB84243A382400066CB3 /* MixesViewController.xib in Resources */,
+				244ABAB2242A9AF400066CB3 /* Montserrat-ThinItalic.ttf in Resources */,
+				244ABABC242A9AF400066CB3 /* Montserrat-ExtraBoldItalic.otf in Resources */,
+				244ABB22242A9B1700066CB3 /* SignUpViewController.xib in Resources */,
+				244ABB15242A9B1700066CB3 /* TaskViewController.xib in Resources */,
+				244ABAC1242A9AF400066CB3 /* Montserrat-Regular.otf in Resources */,
+				4842932F244C24CD00BE8CB6 /* TestResultTaskTableViewCell.xib in Resources */,
+				244ABACA242A9AF400066CB3 /* Montserrat-SemiBold.otf in Resources */,
+				244ABA77242A9AD700066CB3 /* AwardCollectionViewCell.xib in Resources */,
+				244ABAB7242A9AF400066CB3 /* Montserrat-BlackItalic.ttf in Resources */,
+				244ABB62242E432600066CB3 /* AwardCompletedViewController.xib in Resources */,
+				244ABB4E242C96E800066CB3 /* AwardsViewController.xib in Resources */,
+				244ABB7E2438D61D00066CB3 /* AdminStatsTableViewCell.xib in Resources */,
+				244ABA6D242A9AC900066CB3 /* AnswerChooserViewController.xib in Resources */,
+				4802C2E7243EEA8D0017B75B /* 17694-cube-grid.json in Resources */,
+				244ABAB0242A9AF400066CB3 /* Montserrat-BoldItalic.ttf in Resources */,
+				244ABAC9242A9AF400066CB3 /* Montserrat-ExtraBoldItalic.ttf in Resources */,
+				244ABAC5242A9AF400066CB3 /* Montserrat-Regular.ttf in Resources */,
+				4842931F2448C4BA00BE8CB6 /* MyAnswersViewController.xib in Resources */,
+				244ABA4E242A9A6E00066CB3 /* MainAdminViewController.xib in Resources */,
+				244ABB18242A9B1700066CB3 /* FormSheetViewController.xib in Resources */,
+				244ABAAE242A9AF400066CB3 /* Montserrat-Thin.otf in Resources */,
+				244ABAA7242A9AF400066CB3 /* Montserrat-BlackItalic.otf in Resources */,
+				244ABB54242CED4000066CB3 /* AwardDetailViewController.xib in Resources */,
+				244ABA75242A9AD700066CB3 /* ThemeTableViewCell.xib in Resources */,
+				244ABA67242A9AC900066CB3 /* GamesNumberAlertViewController.xib in Resources */,
+				244ABAFE242A9B1700066CB3 /* TrainerAdminViewController.xib in Resources */,
+				244ABAB8242A9AF400066CB3 /* Montserrat-LightItalic.otf in Resources */,
+				244ABAC8242A9AF400066CB3 /* Montserrat-SemiBoldItalic.ttf in Resources */,
+				244ABB722437605B00066CB3 /* UserStatsTableViewCell.xib in Resources */,
+				244ABAB1242A9AF400066CB3 /* Montserrat-Light.ttf in Resources */,
+				244ABAA9242A9AF400066CB3 /* BlackDiamond.ttf in Resources */,
+				244ABB5C242E249100066CB3 /* 7893-confetti-cannons.json in Resources */,
+				244ABAA8242A9AF400066CB3 /* Montserrat-LightItalic.ttf in Resources */,
+				244ABAB4242A9AF400066CB3 /* Montserrat-Thin.ttf in Resources */,
+				244ABB0F242A9B1700066CB3 /* ImagePreviewViewController.xib in Resources */,
+				244ABA47242A93DE00066CB3 /* GoogleService-Info.plist in Resources */,
+				244ABAAB242A9AF400066CB3 /* Montserrat-BoldItalic.otf in Resources */,
+				244ABAAF242A9AF400066CB3 /* Montserrat-ExtraLight.otf in Resources */,
+				244ABB07242A9B1700066CB3 /* UnsolvedThemesViewController.xib in Resources */,
+				244ABA3F242A934000066CB3 /* LaunchScreen.storyboard in Resources */,
+				244ABAA5242A9AF400066CB3 /* Montserrat-MediumItalic.otf in Resources */,
+				48429319244855DD00BE8CB6 /* TestViewController.xib in Resources */,
+				244ABB13242A9B1700066CB3 /* TasksListViewController.xib in Resources */,
+				244ABAB3242A9AF400066CB3 /* Montserrat-ExtraLight.ttf in Resources */,
+				244ABABE242A9AF400066CB3 /* Montserrat-ExtraBold.ttf in Resources */,
+				244ABAC7242A9AF400066CB3 /* Montserrat-Black.otf in Resources */,
+				244ABB5E242E2A1700066CB3 /* 1708-success.json in Resources */,
+				48429325244C185700BE8CB6 /* TestResultsViewController.xib in Resources */,
+				244ABABB242A9AF400066CB3 /* Montserrat-SemiBoldItalic.otf in Resources */,
+				244ABB7A2438D3E900066CB3 /* AdminStatsViewController.xib in Resources */,
+				244ABA3C242A934000066CB3 /* Assets.xcassets in Resources */,
+				4802C2E5243E436D0017B75B /* MixViewController.xib in Resources */,
+				244ABB0B242A9B1700066CB3 /* TrainerViewController.xib in Resources */,
+				244ABB01242A9B1700066CB3 /* ProfileViewController.xib in Resources */,
+				244ABAC0242A9AF400066CB3 /* OFL.txt in Resources */,
+				244ABABD242A9AF400066CB3 /* Montserrat-ExtraLightItalic.ttf in Resources */,
+				244ABAC6242A9AF400066CB3 /* Montserrat-Italic.ttf in Resources */,
+				244ABAAD242A9AF400066CB3 /* Montserrat-ThinItalic.otf in Resources */,
+				244ABAB5242A9AF400066CB3 /* Montserrat-Bold.ttf in Resources */,
+				244ABAAA242A9AF400066CB3 /* Montserrat-Medium.ttf in Resources */,
+				244ABABF242A9AF400066CB3 /* Montserrat-Italic.otf in Resources */,
+				244ABAA6242A9AF400066CB3 /* Montserrat-Bold.otf in Resources */,
+				244ABAAC242A9AF400066CB3 /* Montserrat-Light.otf in Resources */,
+				244ABABA242A9AF400066CB3 /* Montserrat-SemiBold.ttf in Resources */,
+				244ABAB9242A9AF400066CB3 /* Montserrat-Medium.otf in Resources */,
+				244ABB1D242A9B1700066CB3 /* SignInViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		016C63345F5859EE81CDE648 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhysicsApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB498352F4753DBBBA44D48B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		244ABA2B242A933B00066CB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4842931B2448732B00BE8CB6 /* TestViewModel.swift in Sources */,
+				244ABB16242A9B1700066CB3 /* TaskViewController.swift in Sources */,
+				4842931E2448C4BA00BE8CB6 /* MyAnswersViewController.swift in Sources */,
+				244ABA7D242A9AEA00066CB3 /* FirebaseService.swift in Sources */,
+				48429318244855DD00BE8CB6 /* TestViewController.swift in Sources */,
+				4802C2E9243EF1330017B75B /* DayMixViewModel.swift in Sources */,
+				244ABB0C242A9B1700066CB3 /* TrainerViewController.swift in Sources */,
+				244ABB64242E436500066CB3 /* AwardCompletedViewModel.swift in Sources */,
+				244ABB7D2438D61D00066CB3 /* AdminStatsTableViewCell.swift in Sources */,
+				4842932E244C24CD00BE8CB6 /* TestResultTaskTableViewCell.swift in Sources */,
+				244ABA65242A9AC900066CB3 /* BattleViewController.swift in Sources */,
+				244ABB00242A9B1700066CB3 /* UIViewExtension.swift in Sources */,
+				244ABB11242A9B1700066CB3 /* TasksListViewModel.swift in Sources */,
+				4842938E245829F200BE8CB6 /* PhysicsApp.xcdatamodeld in Sources */,
+				244ABAFD242A9B1700066CB3 /* ProfileViewController.swift in Sources */,
+				48429386245420C500BE8CB6 /* Test+CoreDataClass.swift in Sources */,
+				4842939A2458363B00BE8CB6 /* EgeTheme+CoreDataProperties.swift in Sources */,
+				244ABB1E242A9B1700066CB3 /* SignInViewModel.swift in Sources */,
+				244ABB61242E432600066CB3 /* AwardCompletedViewController.swift in Sources */,
+				484293992458363B00BE8CB6 /* EgeTheme+CoreDataClass.swift in Sources */,
+				484293122447647500BE8CB6 /* TaskListModel.swift in Sources */,
+				244ABB0D242A9B1700066CB3 /* TrainerModel.swift in Sources */,
+				486362162441E7AB004924FD /* ProgressStatsView.swift in Sources */,
+				244ABB1A242A9B1700066CB3 /* UnsolvedThemesViewController.swift in Sources */,
+				244ABA79242A9ADF00066CB3 /* CustomProtocols.swift in Sources */,
+				244ABB17242A9B1700066CB3 /* TaskViewModel.swift in Sources */,
+				244ABA6E242A9AC900066CB3 /* AnswerChooserViewModel.swift in Sources */,
+				244ABA74242A9AD700066CB3 /* ThemeTableViewCell.swift in Sources */,
+				244ABB792438D3E800066CB3 /* AdminStatsViewController.swift in Sources */,
+				244ABA66242A9AC900066CB3 /* BattleViewModel.swift in Sources */,
+				244ABB19242A9B1700066CB3 /* ImageScrollView.swift in Sources */,
+				244ABB58242CF34B00066CB3 /* AwardsModel.swift in Sources */,
+				48429396245835B300BE8CB6 /* EgeTask+CoreDataProperties.swift in Sources */,
+				244ABA4D242A9A6E00066CB3 /* MainAdminViewModel.swift in Sources */,
+				244ABAFF242A9B1700066CB3 /* TrainerAdminViewController.swift in Sources */,
+				244ABA68242A9AC900066CB3 /* GamesNumberAlertViewController.swift in Sources */,
+				244ABB53242CED4000066CB3 /* AwardDetailViewController.swift in Sources */,
+				4802C2E4243E436D0017B75B /* MixViewController.swift in Sources */,
+				484293A124588FEF00BE8CB6 /* TaskData+CoreDataClass.swift in Sources */,
+				244ABB21242A9B1700066CB3 /* SignUpViewModel.swift in Sources */,
+				244ABB6924325C0C00066CB3 /* UserStatsViewController.swift in Sources */,
+				244ABB802438E29000066CB3 /* AdminStatsViewModel.swift in Sources */,
+				48271785243E0B2A003C6CF1 /* UserStatsCounter.swift in Sources */,
+				244ABB20242A9B1700066CB3 /* SignUpViewController.swift in Sources */,
+				244ABB23242A9B1700066CB3 /* TrainerAdminViewModel.swift in Sources */,
+				484293A224588FEF00BE8CB6 /* TaskData+CoreDataProperties.swift in Sources */,
+				244ABA51242A9ABB00066CB3 /* Animations.swift in Sources */,
+				244ABB1F242A9B1700066CB3 /* SignInViewController.swift in Sources */,
+				244ABB10242A9B1700066CB3 /* FormSheetViewController.swift in Sources */,
+				244ABA63242A9AC900066CB3 /* BattleModel.swift in Sources */,
+				244ABA69242A9AC900066CB3 /* BattleFinalViewController.swift in Sources */,
+				244ABB83243A382300066CB3 /* MixesViewController.swift in Sources */,
+				4842932A244C211F00BE8CB6 /* TestResultStatsTableViewCell.swift in Sources */,
+				244ABB86243A439A00066CB3 /* MixesViewModel.swift in Sources */,
+				4802C2EB243FB0F30017B75B /* DayMixModel.swift in Sources */,
+				48429387245420C500BE8CB6 /* Test+CoreDataProperties.swift in Sources */,
+				244ABB03242A9B1700066CB3 /* ProfileModel.swift in Sources */,
+				244ABB09242A9B1700066CB3 /* UnsolvedThemesViewModel.swift in Sources */,
+				244ABB02242A9B1700066CB3 /* ProfileViewModel.swift in Sources */,
+				244ABA7B242A9AE500066CB3 /* DesignService.swift in Sources */,
+				244ABB7024361F8800066CB3 /* ProgressBarView.swift in Sources */,
+				48429384245420C500BE8CB6 /* Trainer+CoreDataClass.swift in Sources */,
+				244ABB05242A9B1700066CB3 /* WelcomeViewController.swift in Sources */,
+				244ABB0A242A9B1700066CB3 /* TrainerViewModel.swift in Sources */,
+				244ABB56242CF2A500066CB3 /* AwardDetailViewModel.swift in Sources */,
+				244ABB1C242A9B1700066CB3 /* TabBarViewController.swift in Sources */,
+				244ABA33242A933B00066CB3 /* AppDelegate.swift in Sources */,
+				244ABA4F242A9A6E00066CB3 /* MainAdminViewController.swift in Sources */,
+				4842939D2458835100BE8CB6 /* User+CoreDataClass.swift in Sources */,
+				244ABA6C242A9AC900066CB3 /* AnswerChooserViewController.swift in Sources */,
+				244ABB14242A9B1700066CB3 /* TaskModel.swift in Sources */,
+				48429327244C189000BE8CB6 /* TestResultsViewModel.swift in Sources */,
+				244ABA35242A933B00066CB3 /* SceneDelegate.swift in Sources */,
+				484293142448461100BE8CB6 /* TestTrainerViewModel.swift in Sources */,
+				244ABB6D24325FCB00066CB3 /* UserStatsTableViewCell.swift in Sources */,
+				244ABB7424377D6F00066CB3 /* UserStatsViewModel.swift in Sources */,
+				48429395245835B300BE8CB6 /* EgeTask+CoreDataClass.swift in Sources */,
+				244ABA76242A9AD700066CB3 /* AwardCollectionViewCell.swift in Sources */,
+				48429385245420C500BE8CB6 /* Trainer+CoreDataProperties.swift in Sources */,
+				4842930E24470B5400BE8CB6 /* ThemesTrainerViewModel.swift in Sources */,
+				4842939E2458835100BE8CB6 /* User+CoreDataProperties.swift in Sources */,
+				48429324244C185700BE8CB6 /* TestResultsViewController.swift in Sources */,
+				244ABB12242A9B1700066CB3 /* TasksListViewController.swift in Sources */,
+				244ABB0E242A9B1700066CB3 /* ImagePreviewViewController.swift in Sources */,
+				244ABA6A242A9AC900066CB3 /* BattleFinalViewModel.swift in Sources */,
+				244ABB50242C970600066CB3 /* AwardsViewModel.swift in Sources */,
+				244ABB4D242C96E800066CB3 /* AwardsViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		244ABA3D242A934000066CB3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				244ABA3E242A934000066CB3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		244ABA41242A934000066CB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		244ABA42242A934000066CB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		244ABA44242A934000066CB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B327A80248CB58F8603354D5 /* Pods-PhysicsApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 6ZH644H3JU;
+				INFOPLIST_FILE = PhysicsApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRESERVE_DEAD_CODE_INITS_AND_TERMS = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devgen.PhysicsApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		244ABA45242A934000066CB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B6A0BDE016FA962DD8EBA1A /* Pods-PhysicsApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 6ZH644H3JU;
+				INFOPLIST_FILE = PhysicsApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRESERVE_DEAD_CODE_INITS_AND_TERMS = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devgen.PhysicsApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		244ABA2A242A933B00066CB3 /* Build configuration list for PBXProject "PhysicsApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				244ABA41242A934000066CB3 /* Debug */,
+				244ABA42242A934000066CB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		244ABA43242A934000066CB3 /* Build configuration list for PBXNativeTarget "PhysicsApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				244ABA44242A934000066CB3 /* Debug */,
+				244ABA45242A934000066CB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4842938C245829F200BE8CB6 /* PhysicsApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4842938D245829F200BE8CB6 /* PhysicsApp.xcdatamodel */,
+			);
+			currentVersion = 4842938D245829F200BE8CB6 /* PhysicsApp.xcdatamodel */;
+			path = PhysicsApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 244ABA27242A933B00066CB3 /* Project object */;
+}

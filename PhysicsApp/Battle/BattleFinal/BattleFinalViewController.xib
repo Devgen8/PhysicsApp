@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BlackDiamond.ttf">
+            <string>BlackDiamond</string>
+        </array>
+        <array key="Montserrat-Black.ttf">
+            <string>Montserrat-Black</string>
+        </array>
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+        <array key="Montserrat-MediumItalic.otf">
+            <string>Montserrat-MediumItalic</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BattleFinalViewController" customModule="TrainingApp" customModuleProvider="target">
+            <connections>
+                <outlet property="finishButton" destination="n3I-Go-Wgy" id="epj-z1-gzb"/>
+                <outlet property="gamesNumberLabel" destination="6hm-Cg-19t" id="pHb-Fp-LKK"/>
+                <outlet property="opponentsNameLabel" destination="tmq-Sw-smp" id="YKm-J1-OTd"/>
+                <outlet property="resultLabel" destination="EkR-uz-U1F" id="Mwp-JW-D4T"/>
+                <outlet property="scoreLabel" destination="MuB-O3-AqC" id="rfc-kw-uYf"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="userAnswersImages" destination="X78-OP-suk" collectionClass="NSMutableArray" id="c94-Fg-b7O"/>
+                <outletCollection property="userAnswersImages" destination="HTy-qQ-qUw" collectionClass="NSMutableArray" id="D6o-C0-jX8"/>
+                <outletCollection property="userAnswersImages" destination="ulZ-kS-Fdb" collectionClass="NSMutableArray" id="1lD-bU-cZS"/>
+                <outletCollection property="userAnswersImages" destination="4Gb-ZZ-Lya" collectionClass="NSMutableArray" id="BfX-dG-z2D"/>
+                <outletCollection property="userAnswersImages" destination="KvR-1q-W20" collectionClass="NSMutableArray" id="Fx4-Uc-7Qb"/>
+                <outletCollection property="opponentsAnswersImages" destination="dsb-cH-F8A" collectionClass="NSMutableArray" id="xUD-i1-yvj"/>
+                <outletCollection property="opponentsAnswersImages" destination="xUt-mG-Dzz" collectionClass="NSMutableArray" id="6HH-gM-wab"/>
+                <outletCollection property="opponentsAnswersImages" destination="UWq-kj-O7t" collectionClass="NSMutableArray" id="dk2-yC-YUL"/>
+                <outletCollection property="opponentsAnswersImages" destination="pEU-H5-FI1" collectionClass="NSMutableArray" id="4By-60-PdA"/>
+                <outletCollection property="opponentsAnswersImages" destination="6nK-HR-gHu" collectionClass="NSMutableArray" id="F1H-il-6U0"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Битва" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epy-ju-7d0">
+                    <rect key="frame" x="15" y="114" width="384" height="85.5"/>
+                    <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="45"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oo2-du-UfJ">
+                    <rect key="frame" x="20" y="199.5" width="150" height="77.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0u-ld-yd2">
+                            <rect key="frame" x="62.5" y="0.0" width="25" height="47.5"/>
+                            <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="25"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxn-QY-f9q">
+                            <rect key="frame" x="0.0" y="47.5" width="150" height="30"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="X78-OP-suk">
+                                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="X78-OP-suk" secondAttribute="height" multiplier="1:1" id="SuL-tE-aKM"/>
+                                        <constraint firstAttribute="width" constant="30" id="rcv-mW-rIp"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="HTy-qQ-qUw">
+                                    <rect key="frame" x="30" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="HTy-qQ-qUw" secondAttribute="height" multiplier="1:1" id="QyG-Nj-LfE"/>
+                                        <constraint firstAttribute="width" constant="30" id="yHN-Tj-0Jq"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="ulZ-kS-Fdb">
+                                    <rect key="frame" x="60" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="G0B-3d-k8h"/>
+                                        <constraint firstAttribute="width" secondItem="ulZ-kS-Fdb" secondAttribute="height" multiplier="1:1" id="UAa-xz-8tV"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="4Gb-ZZ-Lya">
+                                    <rect key="frame" x="90" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="nyC-SQ-6g8"/>
+                                        <constraint firstAttribute="width" secondItem="4Gb-ZZ-Lya" secondAttribute="height" multiplier="1:1" id="xQs-Hb-N2i"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="KvR-1q-W20">
+                                    <rect key="frame" x="120" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="PVu-LT-CCX"/>
+                                        <constraint firstAttribute="width" secondItem="KvR-1q-W20" secondAttribute="height" multiplier="1:1" id="ram-i0-m5e"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0ei-qv-nzn">
+                    <rect key="frame" x="244" y="199.5" width="150" height="77.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmq-Sw-smp">
+                            <rect key="frame" x="36.5" y="0.0" width="77.5" height="47.5"/>
+                            <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="25"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C2V-82-SiU">
+                            <rect key="frame" x="0.0" y="47.5" width="150" height="30"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="dsb-cH-F8A">
+                                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="dsb-cH-F8A" secondAttribute="height" multiplier="1:1" id="c50-O1-fXB"/>
+                                        <constraint firstAttribute="width" constant="30" id="pKx-B8-kX0"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="xUt-mG-Dzz">
+                                    <rect key="frame" x="30" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="xUt-mG-Dzz" secondAttribute="height" multiplier="1:1" id="FXM-0t-jMV"/>
+                                        <constraint firstAttribute="width" constant="30" id="XkU-4Z-ziy"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="UWq-kj-O7t">
+                                    <rect key="frame" x="60" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="jr8-CT-kvY"/>
+                                        <constraint firstAttribute="width" secondItem="UWq-kj-O7t" secondAttribute="height" multiplier="1:1" id="wDF-OI-GOs"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="pEU-H5-FI1">
+                                    <rect key="frame" x="90" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="pEU-H5-FI1" secondAttribute="height" multiplier="1:1" id="cmq-z2-TI9"/>
+                                        <constraint firstAttribute="width" constant="30" id="qX8-ul-trF"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="6nK-HR-gHu">
+                                    <rect key="frame" x="120" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="6nK-HR-gHu" secondAttribute="height" multiplier="1:1" id="Qd5-Se-SV5"/>
+                                        <constraint firstAttribute="width" constant="30" id="ngP-6s-naq"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Игра окончена!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMZ-xB-3Pr">
+                    <rect key="frame" x="77" y="337" width="260" height="37"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Black" family="Montserrat" pointSize="30"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4:2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MuB-O3-AqC">
+                    <rect key="frame" x="182.5" y="379" width="49.5" height="37"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Black" family="Montserrat" pointSize="30"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Победа +10 баллов" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EkR-uz-U1F">
+                    <rect key="frame" x="97" y="436" width="220" height="73.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="220" id="D9M-gs-Dj3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Montserrat-Black" family="Montserrat" pointSize="30"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Jxr-pX-NyG">
+                    <rect key="frame" x="88" y="549.5" width="238.5" height="22"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Осталось" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GD-AX-Eg5">
+                            <rect key="frame" x="0.0" y="0.0" width="89" height="22"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hm-Cg-19t">
+                            <rect key="frame" x="93" y="0.0" width="11.5" height="22"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Black" family="Montserrat" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="игры сегодня" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXw-m1-vN9">
+                            <rect key="frame" x="108.5" y="0.0" width="130" height="22"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ugd-y0-qAG">
+                    <rect key="frame" x="89" y="826" width="236" height="50"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Montazhnaya_oblast_98_4x" translatesAutoresizingMaskIntoConstraints="NO" id="gJs-Or-gXh">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="gJs-Or-gXh" secondAttribute="height" multiplier="1:1" id="iZ7-UW-Zyf"/>
+                                <constraint firstAttribute="height" constant="50" id="zfO-Kq-scb"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="онлайн-школа webium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56w-V4-MQZ">
+                            <rect key="frame" x="50" y="15.5" width="186" height="19"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="19" id="Dh7-dG-fyB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-MediumItalic" family="Montserrat" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3I-Go-Wgy">
+                    <rect key="frame" x="107" y="761" width="200" height="60"/>
+                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="Nzt-cL-0QU"/>
+                        <constraint firstAttribute="height" constant="60" id="cdd-uy-lwu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
+                    <state key="normal" title="Завершить">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="finishTapped:" destination="-1" eventType="touchUpInside" id="f84-BM-ohO"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="oo2-du-UfJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="13a-NI-o5V"/>
+                <constraint firstItem="0ei-qv-nzn" firstAttribute="top" secondItem="epy-ju-7d0" secondAttribute="bottom" id="2wP-kV-hpT"/>
+                <constraint firstItem="MuB-O3-AqC" firstAttribute="top" secondItem="jMZ-xB-3Pr" secondAttribute="bottom" constant="5" id="39Z-zZ-kEZ"/>
+                <constraint firstAttribute="bottom" secondItem="Ugd-y0-qAG" secondAttribute="bottom" constant="20" id="6yp-LT-uTV"/>
+                <constraint firstItem="0ei-qv-nzn" firstAttribute="top" secondItem="epy-ju-7d0" secondAttribute="bottom" id="Foo-07-yML"/>
+                <constraint firstItem="EkR-uz-U1F" firstAttribute="top" secondItem="MuB-O3-AqC" secondAttribute="bottom" constant="20" id="FqV-tu-lRA"/>
+                <constraint firstItem="Ugd-y0-qAG" firstAttribute="top" secondItem="n3I-Go-Wgy" secondAttribute="bottom" constant="5" id="HH2-4l-zBf"/>
+                <constraint firstItem="epy-ju-7d0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="70" id="JBh-N6-zGu"/>
+                <constraint firstItem="Ugd-y0-qAG" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="KHe-wY-eRp"/>
+                <constraint firstItem="MuB-O3-AqC" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Lsz-0E-Njx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0ei-qv-nzn" secondAttribute="trailing" constant="20" id="N8E-wb-BxH"/>
+                <constraint firstItem="Jxr-pX-NyG" firstAttribute="top" secondItem="EkR-uz-U1F" secondAttribute="bottom" constant="40" id="Nqm-6D-Hh7"/>
+                <constraint firstItem="jMZ-xB-3Pr" firstAttribute="top" secondItem="oo2-du-UfJ" secondAttribute="bottom" constant="60" id="PIf-27-Fom"/>
+                <constraint firstItem="Jxr-pX-NyG" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="TAJ-wK-EbM"/>
+                <constraint firstItem="EkR-uz-U1F" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="V13-z9-wQo"/>
+                <constraint firstItem="jMZ-xB-3Pr" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="a4G-mT-THX"/>
+                <constraint firstItem="n3I-Go-Wgy" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="giF-nO-fmd"/>
+                <constraint firstItem="oo2-du-UfJ" firstAttribute="top" secondItem="epy-ju-7d0" secondAttribute="bottom" id="rwU-KS-zB2"/>
+                <constraint firstItem="oo2-du-UfJ" firstAttribute="top" secondItem="epy-ju-7d0" secondAttribute="bottom" id="tmC-VT-gxI"/>
+                <constraint firstItem="0ei-qv-nzn" firstAttribute="top" secondItem="epy-ju-7d0" secondAttribute="bottom" id="v9m-xj-Tm4"/>
+                <constraint firstItem="epy-ju-7d0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="wG4-eI-JzX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="epy-ju-7d0" secondAttribute="trailing" constant="15" id="wQk-y0-Hb8"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Montazhnaya_oblast_98_4x" width="801" height="801"/>
+        <image name="checked" width="512" height="512"/>
+    </resources>
+</document>

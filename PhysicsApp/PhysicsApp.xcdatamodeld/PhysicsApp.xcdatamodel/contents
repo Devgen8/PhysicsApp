@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="EgeTask" representedClassName="EgeTask" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="numberOfTasks" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="themeNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="themes" optional="YES" attributeType="Transformable"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TaskData" inverseName="egeTask" inverseEntity="TaskData"/>
+        <relationship name="trainer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trainer" inverseName="egeTasks" inverseEntity="Trainer"/>
+    </entity>
+    <entity name="EgeTheme" representedClassName="EgeTheme" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TaskData" inverseName="egeTheme" inverseEntity="TaskData"/>
+        <relationship name="trainer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trainer" inverseName="egeThemes" inverseEntity="Trainer"/>
+    </entity>
+    <entity name="TaskData" representedClassName="TaskData" syncable="YES">
+        <attribute name="alternativeAnswer" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="serialNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="stringAnswer" optional="YES" attributeType="String"/>
+        <attribute name="wrightAnswer" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="egeTask" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EgeTask" inverseName="tasks" inverseEntity="EgeTask"/>
+        <relationship name="egeTheme" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EgeTheme" inverseName="tasks" inverseEntity="EgeTheme"/>
+    </entity>
+    <entity name="Test" representedClassName="Test" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="numberOfWrightAnswers" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="testObject" optional="YES" attributeType="Transformable"/>
+        <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="trainer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trainer" inverseName="tests" inverseEntity="Trainer"/>
+    </entity>
+    <entity name="Trainer" representedClassName="Trainer" syncable="YES">
+        <attribute name="themeTasksSafe" optional="YES" attributeType="Transformable"/>
+        <relationship name="egeTasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EgeTask" inverseName="trainer" inverseEntity="EgeTask"/>
+        <relationship name="egeThemes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EgeTheme" inverseName="trainer" inverseEntity="EgeTheme"/>
+        <relationship name="tests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Test" inverseName="trainer" inverseEntity="Test"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="solvedTasks" optional="YES" attributeType="Transformable"/>
+        <attribute name="unsolvedTasks" optional="YES" attributeType="Transformable"/>
+        <relationship name="tasksForSolving" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskData"/>
+    </entity>
+    <elements>
+        <element name="EgeTask" positionX="114.46875" positionY="187.4609375" width="128" height="133"/>
+        <element name="EgeTheme" positionX="-175.60546875" positionY="-37" width="128" height="88"/>
+        <element name="TaskData" positionX="251.0625" positionY="-93.5703125" width="128" height="163"/>
+        <element name="Test" positionX="-171.0546875" positionY="-170.69140625" width="128" height="118"/>
+        <element name="Trainer" positionX="-564.09765625" positionY="59.58984375" width="128" height="103"/>
+        <element name="User" positionX="25.2890625" positionY="-270.0625" width="128" height="88"/>
+    </elements>
+</model>

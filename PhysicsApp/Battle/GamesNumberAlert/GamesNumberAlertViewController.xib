@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GamesNumberAlertViewController" customModule="TrainingApp" customModuleProvider="target">
+            <connections>
+                <outlet property="alertView" destination="W7b-5U-HZ0" id="HND-El-5Sf"/>
+                <outlet property="okButton" destination="BGw-L5-lct" id="MTW-Du-AzC"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7b-5U-HZ0">
+                    <rect key="frame" x="67" y="353" width="280" height="200"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="На сегодня Ваши попытки закончились. Будем ждать Вас завтра!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGy-Zw-Q6H">
+                            <rect key="frame" x="5" y="15" width="270" height="73.5"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BGw-L5-lct">
+                            <rect key="frame" x="30" y="130" width="220" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="mLb-fR-lWd"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
+                            <state key="normal" title="Хорошо">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="okTapped:" destination="-1" eventType="touchUpInside" id="9VA-lM-9XM"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="vGy-Zw-Q6H" firstAttribute="top" secondItem="W7b-5U-HZ0" secondAttribute="top" constant="15" id="8XS-Kr-obu"/>
+                        <constraint firstAttribute="trailing" secondItem="BGw-L5-lct" secondAttribute="trailing" constant="30" id="Apm-JP-044"/>
+                        <constraint firstAttribute="width" constant="280" id="JZt-by-7AR"/>
+                        <constraint firstAttribute="height" constant="200" id="VIB-ki-uzw"/>
+                        <constraint firstAttribute="bottom" secondItem="BGw-L5-lct" secondAttribute="bottom" constant="10" id="a0o-ou-5ia"/>
+                        <constraint firstItem="vGy-Zw-Q6H" firstAttribute="leading" secondItem="W7b-5U-HZ0" secondAttribute="leading" constant="5" id="cyO-GE-FVc"/>
+                        <constraint firstItem="BGw-L5-lct" firstAttribute="leading" secondItem="W7b-5U-HZ0" secondAttribute="leading" constant="30" id="l12-mo-Ano"/>
+                        <constraint firstAttribute="trailing" secondItem="vGy-Zw-Q6H" secondAttribute="trailing" constant="5" id="tsP-ue-IkN"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="W7b-5U-HZ0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Z09-SG-uaB"/>
+                <constraint firstItem="W7b-5U-HZ0" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="iaD-yS-gc3"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
+        </view>
+    </objects>
+</document>

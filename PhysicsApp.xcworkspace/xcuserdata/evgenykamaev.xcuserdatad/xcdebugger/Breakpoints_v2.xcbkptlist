@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "BC08C2BD-8ACE-4CE5-8EB4-AE7407FBAD38"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6BBB93FB-A492-4F3F-9E67-D6DFBD40E518"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "saveTasksToCoreData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6BBB93FB-A492-4F3F-9E67-D6DFBD40E518 - 949ed3a98d53a6f5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhysicsApp.TestViewModel.saveTasksToCoreData() -&gt; ()"
+                  moduleName = "PhysicsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgenykamaev/Desktop/App%2014-07-09-804/PhysicsApp/Trainer/Test/TestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "843">
+               </Location>
+               <Location
+                  uuid = "6BBB93FB-A492-4F3F-9E67-D6DFBD40E518 - 949ed3a98d53a6f5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhysicsApp.TestViewModel.saveTasksToCoreData() -&gt; ()"
+                  moduleName = "PhysicsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgenykamaev/Desktop/App%2014-07-09-804/PhysicsApp/Trainer/Test/TestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "3695">
+               </Location>
+               <Location
+                  uuid = "6BBB93FB-A492-4F3F-9E67-D6DFBD40E518 - adf49f3c32d55140"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Any) -&gt; Swift.Bool in PhysicsApp.TestViewModel.saveTasksToCoreData() -&gt; ()"
+                  moduleName = "PhysicsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgenykamaev/Desktop/App%2014-07-09-804/PhysicsApp/Trainer/Test/TestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "87">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C6FE9438-7DC6-4029-A51C-15FBAC6153F5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "saveTasksToCoreData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C6FE9438-7DC6-4029-A51C-15FBAC6153F5 - 949ed3a98d53a6f5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhysicsApp.TestViewModel.saveTasksToCoreData() -&gt; ()"
+                  moduleName = "PhysicsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgenykamaev/Desktop/App%2014-07-09-804/PhysicsApp/Trainer/Test/TestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "1930">
+               </Location>
+               <Location
+                  uuid = "C6FE9438-7DC6-4029-A51C-15FBAC6153F5 - 949ed3a98d53a6f5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhysicsApp.TestViewModel.saveTasksToCoreData() -&gt; ()"
+                  moduleName = "PhysicsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgenykamaev/Desktop/App%2014-07-09-804/PhysicsApp/Trainer/Test/TestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "3760">
+               </Location>
+               <Location
+                  uuid = "C6FE9438-7DC6-4029-A51C-15FBAC6153F5 - 1e1124098a371d43"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Any) -&gt; Swift.Bool in PhysicsApp.TestViewModel.saveTasksToCoreData() -&gt; ()"
+                  moduleName = "PhysicsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgenykamaev/Desktop/App%2014-07-09-804/PhysicsApp/Trainer/Test/TestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "87">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91D8CDA7-961C-41F2-81E8-DC28B87D731B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "saveTasksToCoreData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "87FB5084-C5D5-4385-82D5-A171134DDE97"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "getTestTasks(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CEB18EF5-137C-4C36-B482-D9081A4D4561"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "getTestTasks(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54E524B6-D869-4C20-9C99-776BEF8EA2E2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "getTestTasks(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "54E524B6-D869-4C20-9C99-776BEF8EA2E2 - 856386822ee8cccf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhysicsApp.TestViewModel.getTestTasks(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "PhysicsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgenykamaev/Desktop/App%2014-07-09-804/PhysicsApp/Trainer/Test/TestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "912">
+               </Location>
+               <Location
+                  uuid = "54E524B6-D869-4C20-9C99-776BEF8EA2E2 - e49a67fc270a1562"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in PhysicsApp.TestViewModel.getTestTasks(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "PhysicsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgenykamaev/Desktop/App%2014-07-09-804/PhysicsApp/Trainer/Test/TestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "41">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E426DBDF-1A14-442C-BE3F-6BAC210E2F51"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "getTestTasks(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E426DBDF-1A14-442C-BE3F-6BAC210E2F51 - 856386822ee8cccf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhysicsApp.TestViewModel.getTestTasks(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "PhysicsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgenykamaev/Desktop/App%2014-07-09-804/PhysicsApp/Trainer/Test/TestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "1097">
+               </Location>
+               <Location
+                  uuid = "E426DBDF-1A14-442C-BE3F-6BAC210E2F51 - c7f651ba58a3fb5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in PhysicsApp.TestViewModel.getTestTasks(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "PhysicsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgenykamaev/Desktop/App%2014-07-09-804/PhysicsApp/Trainer/Test/TestViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "41">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6C4E7FB4-9008-4E3F-AC4D-3A5ADF436640"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "getTasksFromCoreData(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B4C48583-3426-436F-B736-9E75FC4C349C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "getTasksFromCoreData(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DEA3286A-D14B-4753-8A5C-76F037301E23"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "getTasksFromCoreData(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B1F895CC-52E8-463E-A9C2-70E6BF58765F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "getTestTasks(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "373E9F7F-C227-42E7-A370-A811D5B8A62C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhysicsApp/Trainer/Test/TestViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "getTestTasks(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

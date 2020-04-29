@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BlackDiamond.ttf">
+            <string>BlackDiamond</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestResultsViewController" customModule="PhysicsApp" customModuleProvider="target">
+            <connections>
+                <outlet property="resultsTableView" destination="AWO-JL-I21" id="sX2-93-ice"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результаты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iv6-KC-2uY">
+                    <rect key="frame" x="121.5" y="44" width="171" height="85.5"/>
+                    <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="45"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlp-5D-prx">
+                    <rect key="frame" x="364" y="62" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="35" id="mz4-oP-Gy8"/>
+                        <constraint firstAttribute="height" constant="35" id="qAQ-JC-7MX"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="close copy"/>
+                    <connections>
+                        <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="usL-DT-Cb5"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AWO-JL-I21">
+                    <rect key="frame" x="0.0" y="129.5" width="414" height="732.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AWO-JL-I21" secondAttribute="trailing" id="781-X8-Nsj"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Tlp-5D-prx" secondAttribute="trailing" constant="15" id="7go-s3-Ip3"/>
+                <constraint firstItem="iv6-KC-2uY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="EaU-ye-wXn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="AWO-JL-I21" secondAttribute="bottom" id="KC7-WP-gRF"/>
+                <constraint firstItem="AWO-JL-I21" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NEd-0I-g4N"/>
+                <constraint firstItem="Tlp-5D-prx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="18" id="fdh-cH-A6M"/>
+                <constraint firstItem="AWO-JL-I21" firstAttribute="top" secondItem="iv6-KC-2uY" secondAttribute="bottom" id="j12-YN-Pz9"/>
+                <constraint firstItem="iv6-KC-2uY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="vhp-tz-84M"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="116"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close copy" width="512" height="512"/>
+    </resources>
+</document>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="BlackDiamond.ttf">
+            <string>BlackDiamond</string>
+        </array>
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AwardCompletedViewController" customModule="PhysicsApp" customModuleProvider="target">
+            <connections>
+                <outlet property="awardImageView" destination="i0M-Ea-ux0" id="0AA-7K-dgp"/>
+                <outlet property="confettiView" destination="q4k-Hj-vXg" id="8k2-BD-vlD"/>
+                <outlet property="containerView" destination="ekv-un-ss6" id="k6C-8h-uRF"/>
+                <outlet property="descriptionLabel" destination="SMO-OF-NGO" id="aFG-2F-0GJ"/>
+                <outlet property="nameLabel" destination="9hZ-cl-thE" id="9Xx-YO-FpA"/>
+                <outlet property="okButton" destination="78y-I1-GBY" id="s0w-Eq-4dt"/>
+                <outlet property="tickView" destination="Ptd-dG-16c" id="UIc-0t-JK2"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4k-Hj-vXg" customClass="AnimationView" customModule="Lottie">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i0M-Ea-ux0">
+                            <rect key="frame" x="87" y="190" width="240" height="309"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="i0M-Ea-ux0" secondAttribute="height" multiplier="80:103" id="PcK-Yd-Mxi"/>
+                                <constraint firstAttribute="width" constant="240" id="rXi-lu-Gpf"/>
+                            </constraints>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekv-un-ss6">
+                            <rect key="frame" x="132" y="269" width="150" height="150"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptd-dG-16c" customClass="AnimationView" customModule="Lottie">
+                                    <rect key="frame" x="5" y="5" width="140" height="140"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="140" id="DxB-gR-Fn8"/>
+                                        <constraint firstAttribute="width" secondItem="Ptd-dG-16c" secondAttribute="height" multiplier="1:1" id="mas-Tb-6RQ"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="EOx-NW-KZv"/>
+                                <constraint firstItem="Ptd-dG-16c" firstAttribute="centerY" secondItem="ekv-un-ss6" secondAttribute="centerY" id="Mon-jt-yWM"/>
+                                <constraint firstAttribute="width" secondItem="ekv-un-ss6" secondAttribute="height" multiplier="1:1" id="p0R-p4-rGU"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hZ-cl-thE">
+                            <rect key="frame" x="10" y="30" width="394" height="160"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="160" id="FCu-dU-ebT"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="40"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78y-I1-GBY">
+                            <rect key="frame" x="132" y="806" width="150" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="GTc-jU-oI8"/>
+                                <constraint firstAttribute="height" constant="60" id="z7E-Hr-bg4"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="25"/>
+                            <state key="normal" title="Отлично!">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="okTapped:" destination="-1" eventType="touchUpInside" id="1o2-vK-nAO"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMO-OF-NGO">
+                            <rect key="frame" x="10" y="686" width="394" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="gAW-1k-D7A"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="25"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="78y-I1-GBY" firstAttribute="top" secondItem="SMO-OF-NGO" secondAttribute="bottom" constant="20" id="A2s-EG-jK0"/>
+                        <constraint firstItem="78y-I1-GBY" firstAttribute="centerX" secondItem="q4k-Hj-vXg" secondAttribute="centerX" id="DbS-FZ-ciQ"/>
+                        <constraint firstItem="9hZ-cl-thE" firstAttribute="top" secondItem="q4k-Hj-vXg" secondAttribute="top" constant="30" id="JTS-XW-viH"/>
+                        <constraint firstItem="SMO-OF-NGO" firstAttribute="leading" secondItem="q4k-Hj-vXg" secondAttribute="leading" constant="10" id="aM7-yd-iRf"/>
+                        <constraint firstItem="ekv-un-ss6" firstAttribute="centerX" secondItem="i0M-Ea-ux0" secondAttribute="centerX" id="abu-Tx-bmB"/>
+                        <constraint firstAttribute="bottom" secondItem="78y-I1-GBY" secondAttribute="bottom" constant="30" id="er4-Hc-HJX"/>
+                        <constraint firstItem="i0M-Ea-ux0" firstAttribute="centerX" secondItem="q4k-Hj-vXg" secondAttribute="centerX" id="fTz-pP-iAu"/>
+                        <constraint firstAttribute="trailing" secondItem="9hZ-cl-thE" secondAttribute="trailing" constant="10" id="l0q-4E-gUR"/>
+                        <constraint firstItem="i0M-Ea-ux0" firstAttribute="top" secondItem="9hZ-cl-thE" secondAttribute="bottom" id="leA-jt-mHy"/>
+                        <constraint firstItem="9hZ-cl-thE" firstAttribute="leading" secondItem="q4k-Hj-vXg" secondAttribute="leading" constant="10" id="nFn-6X-60t"/>
+                        <constraint firstItem="ekv-un-ss6" firstAttribute="top" secondItem="9hZ-cl-thE" secondAttribute="bottom" constant="79" id="rH6-g1-Hpg"/>
+                        <constraint firstAttribute="trailing" secondItem="SMO-OF-NGO" secondAttribute="trailing" constant="10" id="tK8-Os-VSs"/>
+                        <constraint firstItem="Ptd-dG-16c" firstAttribute="centerX" secondItem="i0M-Ea-ux0" secondAttribute="centerX" id="uYd-6T-pro"/>
+                        <constraint firstItem="SMO-OF-NGO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i0M-Ea-ux0" secondAttribute="bottom" constant="10" id="x0H-Ev-M6q"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="q4k-Hj-vXg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="CP4-7Y-zk6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="q4k-Hj-vXg" secondAttribute="bottom" constant="-34" id="Kqu-aT-vOH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q4k-Hj-vXg" secondAttribute="trailing" id="fN0-9W-duD"/>
+                <constraint firstItem="q4k-Hj-vXg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-44" id="rMG-U9-JQI"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="123.88392857142857"/>
+        </view>
+    </objects>
+</document>
