@@ -10,7 +10,7 @@
         <array key="BlackDiamond.ttf">
             <string>BlackDiamond</string>
         </array>
-        <array key="Montserrat-Medium.otf">
+        <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
         <array key="Montserrat-MediumItalic.ttf">
@@ -48,7 +48,7 @@
                         <constraint firstAttribute="height" constant="60" id="jyp-8Q-Hht"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
-                    <state key="normal" title="Нерешенные задачи ">
+                    <state key="normal" title="Задачи с ошибкой">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>

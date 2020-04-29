@@ -63,8 +63,29 @@ class TestResultsViewModel {
             if let (wrightAnswer, alternativeAnswer, stringAnswer) = wrightAnswers[taskName] {
                 let defaultStringAnswer = userAnswers[taskName]?.replacingOccurrences(of: ",", with: ".")
                 if let wrightAnswer = wrightAnswer, let userAnswer = Double(defaultStringAnswer ?? "") {
-                    if let alternativeAnswer = alternativeAnswer {
-                        isWright = (wrightAnswer == userAnswer || alternativeAnswer == userAnswer)
+                    if alternativeAnswer != nil {
+                        // wrightAnswer
+                        let stringWrightAnswer = "\(wrightAnswer)"
+                        let charsArray = [Character](stringWrightAnswer)
+                        var wrightCount = 0
+                        var wrightSum = 0
+                        for letter in charsArray {
+                            wrightSum += Int(String(letter)) ?? 0
+                            wrightCount += 1
+                        }
+                        
+                        // usersAnswer
+                        let stringUsersAnswer = "\(userAnswer)"
+                        let charsUsersArray = [Character](stringUsersAnswer)
+                        var usersCount = 0
+                        var usersSum = 0
+                        for letter in charsUsersArray {
+                            usersSum += Int(String(letter)) ?? 0
+                            usersCount += 1
+                        }
+                        
+                        // checking
+                        isWright = ((wrightCount == usersCount) && (wrightSum == usersSum))
                     } else {
                         isWright = wrightAnswer == userAnswer
                     }

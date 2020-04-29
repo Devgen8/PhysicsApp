@@ -12,26 +12,96 @@ import FirebaseAuth
 import FirebaseStorage
 
 class TrainerAdminViewModel {
+    let egeReference = Firestore.firestore().collection("EGE")
     let trainerReference = Firestore.firestore().collection("trainer")
+    let testReference = Firestore.firestore().collection("tests")
+    var tasks = [String]()
     var themes = [String]()
     var imageData: Data?
+    var selectedTask: String?
     var selectedTheme: String?
+    var inverseState = false
+    var stringState = false
+    var tasksNumber = 0
+    var taskThemes = [String]()
+    var wrightAnswer = ""
     
-    func getThemes(completion: @escaping (Bool) -> ()) {
-        trainerReference.getDocuments { [weak self] (snapshot, error) in
-            guard error == nil, let documents = snapshot?.documents else {
+    func getTrainerData(completion: @escaping (Bool) -> ()) {
+        egeReference.document("themes").getDocument { [weak self] (document, error) in
+            guard error == nil else {
                 print("Error reading themes in admin: \(String(describing: error?.localizedDescription))")
                 completion(false)
                 return
             }
-            var newThemes = [String]()
-            for document in documents {
-                if let theme = document.data()["name"] as? String {
-                    newThemes.append(theme)
-                }
+            self?.tasks = document?.data()?["tasks"] as? [String] ?? []
+            self?.selectedTask = self?.tasks[0]
+            self?.themes = document?.data()?["themes"] as? [String] ?? []
+            self?.selectedTheme = self?.themes[0]
+            completion(true)
+        }
+    }
+    
+    func uploadNewTaskToTest(_ testName: String, completion: @escaping (Bool) -> ()) {
+        wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
+        wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
+        testReference.document(testName).setData(["name":testName])
+        let taskNumber = getSelectedTaskNumber()
+        let newKeyValuePairs = self.getKeyValuesForTask()
+        testReference.document(testName).collection("tasks").document("task\(taskNumber)").setData(newKeyValuePairs)
+        uploadTaskImage(path: "tests/\(testName)/task\(taskNumber).png")
+        completion(true)
+    }
+    
+    func getSelectedTaskNumber() -> Int {
+        var index = 1
+        for task in tasks {
+            if task == selectedTask {
+                break
             }
-            self?.themes = newThemes
-            self?.selectedTheme = newThemes.first
+            index += 1
+        }
+        return index
+    }
+    
+    func uploadNewTaskToTrainer(completion: @escaping (Bool) -> ()) {
+        wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
+        wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
+        getSelectedTaskInfo { (isReady) in
+            if isReady {
+                self.trainerReference.document(self.selectedTask ?? "").updateData(["numberOfTasks" : self.tasksNumber + 1,
+                                                                                    "themes" : (self.taskThemes + [self.selectedTheme])])
+                let newKeyValuePairs = self.getKeyValuesForTask()
+                self.trainerReference.document(self.selectedTask ?? "").collection("tasks").document("task\(self.tasksNumber + 1)").setData(newKeyValuePairs)
+                self.uploadTaskImage(path: "trainer/\(self.selectedTask ?? "")/task\(self.tasksNumber + 1).png")
+                completion(true)
+            }
+        }
+    }
+    
+    func getKeyValuesForTask() -> [String : Any] {
+        var taskData = [String : Any]()
+        if stringState == true {
+            taskData["stringAnswer"] = wrightAnswer
+        } else {
+            taskData["wrightAnswer"] = Double(wrightAnswer)
+            if inverseState == true {
+                let charactersArray = [Character](wrightAnswer)
+                taskData["alternativeAnswer"] = Double(String([charactersArray[1], charactersArray[0]]))
+            }
+        }
+        taskData["serialNumber"] = tasksNumber + 1
+        return taskData
+    }
+    
+    func getSelectedTaskInfo(completion: @escaping (Bool) -> ()) {
+        trainerReference.document(selectedTask ?? "").getDocument { [weak self] (document, error) in
+            guard error == nil else {
+                print("Error reading themes in admin: \(String(describing: error?.localizedDescription))")
+                completion(false)
+                return
+            }
+            self?.tasksNumber = document?.data()?["numberOfTasks"] as? Int ?? 0
+            self?.taskThemes = document?.data()?["themes"] as? [String] ?? []
             completion(true)
         }
     }
@@ -40,17 +110,45 @@ class TrainerAdminViewModel {
         return themes.count
     }
     
+    func getTasksNumber() -> Int {
+        return tasks.count
+    }
+    
     func getTheme(for index: Int) -> String {
         return index < themes.count ? themes[index] : ""
+    }
+    
+    func getTask(for index: Int) -> String {
+        return index < tasks.count ? tasks[index] : ""
     }
     
     func updatePhotoData(with data: Data) {
         imageData = data
     }
     
-    func uploadTaskImage() {
+    func updateInverseState(to bool: Bool) {
+        inverseState = bool
+    }
+    
+    func updateStringState(to bool: Bool) {
+        stringState = bool
+    }
+    
+    func updateWrightAnswer(with text: String) {
+        wrightAnswer = text
+    }
+    
+    func updateSelectedTask(with index: Int) {
+        selectedTask = tasks[index]
+    }
+    
+    func updateSelectedTheme(with index: Int) {
+        selectedTheme = themes[index]
+    }
+    
+    func uploadTaskImage(path: String) {
         if let data = imageData {
-            Storage.storage().reference().child("trainer/\(selectedTheme ?? "")/").putData(data)
+            Storage.storage().reference().child(path).putData(data)
         }
     }
 }

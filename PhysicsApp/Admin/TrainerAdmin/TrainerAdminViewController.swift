@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class TrainerAdminViewController: UIViewController {
 
@@ -14,6 +15,10 @@ class TrainerAdminViewController: UIViewController {
     @IBOutlet weak var uploadImageView: UIImageView!
     @IBOutlet weak var wrightAnswerTextField: UITextField!
     @IBOutlet weak var uploadButton: UIButton!
+    @IBOutlet weak var taskPickerView: UIPickerView!
+    @IBOutlet weak var inverseSwitch: UISwitch!
+    @IBOutlet weak var stringSwitch: UISwitch!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var viewModel = TrainerAdminViewModel()
     
@@ -21,23 +26,38 @@ class TrainerAdminViewController: UIViewController {
         super.viewDidLoad()
         themePicker.dataSource = self
         themePicker.delegate = self
+        taskPickerView.delegate = self
+        taskPickerView.dataSource = self
+        
         designScreenElements()
         preparePickerData()
     }
     
     func preparePickerData() {
-        viewModel.getThemes { [weak self] (isReady) in
+        viewModel.getTrainerData { [weak self] (isReady) in
             if isReady {
                 DispatchQueue.main.async {
                     self?.themePicker.reloadAllComponents()
+                    self?.taskPickerView.reloadAllComponents()
                 }
             }
         }
     }
     
+    func createBlurEffect() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.tag = 100
+        view.addSubview(blurEffectView)
+    }
+    
     func designScreenElements() {
         DesignService.setAdminGradient(for: view)
         DesignService.designWhiteButton(uploadButton)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.isHidden = true
         themePicker.layer.cornerRadius = 15
         setUpUsersImage()
     }
@@ -48,6 +68,83 @@ class TrainerAdminViewController: UIViewController {
     }
     
     @IBAction func uploadTapped(_ sender: UIButton) {
+        viewModel.updateWrightAnswer(with: wrightAnswerTextField.text ?? "")
+        let alertController = UIAlertController(title: "Куда загрузить задачу?", message: nil, preferredStyle: .actionSheet)
+        let trainerButton = UIAlertAction(title: "Тренажер", style: .default) { (_) in
+            self.uploadTask(to: "Тренажер")
+        }
+        let testButton = UIAlertAction(title: "Пробник", style: .default) { (_) in
+            self.presentTestAlert()
+        }
+        let cancelButton = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
+        alertController.addAction(trainerButton)
+        alertController.addAction(testButton)
+        alertController.addAction(cancelButton)
+        
+        present(alertController, animated: true)
+    }
+    
+    func presentTestAlert() {
+        let testAlertController = UIAlertController(title: "Загрузка в пробник", message: " Введите название пробника", preferredStyle: .alert)
+        testAlertController.addTextField { (textField) in
+            textField.placeholder = "Название пробника"
+        }
+        let upload = UIAlertAction(title: "Загрузить", style: .default) { (_) in
+            self.uploadTask(to: "Пробник", testAlertController.textFields?.first?.text ?? "")
+        }
+        let cancel = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
+        testAlertController.addAction(upload)
+        testAlertController.addAction(cancel)
+        
+        present(testAlertController, animated: true)
+    }
+    
+    func uploadTask(to place: String, _ test: String = "") {
+        createBlurEffect()
+        view.bringSubviewToFront(activityIndicator)
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        let closure: (Bool) -> () = { (isReady) in
+            if isReady {
+                self.activityIndicator.stopAnimating()
+                sleep(3)
+                self.clearOldDataOnScreen()
+            }
+        }
+        if place == "Тренажер" {
+            viewModel.uploadNewTaskToTrainer(completion: closure)
+        }
+        if place == "Пробник" {
+            viewModel.uploadNewTaskToTest(test, completion: closure)
+        }
+    }
+    
+    func clearOldDataOnScreen() {
+        view.viewWithTag(100)?.removeFromSuperview()
+        taskPickerView.selectRow(0, inComponent: 0, animated: true)
+        themePicker.selectRow(0, inComponent: 0, animated: true)
+        uploadImageView.image = #imageLiteral(resourceName: "upload (1)")
+        wrightAnswerTextField.text = ""
+        inverseSwitch.isOn = false
+        stringSwitch.isOn = false
+    }
+    
+    @IBAction func inverseChanged(_ sender: UISwitch) {
+        let state = sender.isOn
+        viewModel.updateInverseState(to: state)
+        if state == true {
+            viewModel.updateStringState(to: false)
+            stringSwitch.isOn = false
+        }
+    }
+    
+    @IBAction func stringChanged(_ sender: UISwitch) {
+        let state = sender.isOn
+        viewModel.updateStringState(to: sender.isOn)
+        if state == true {
+            viewModel.updateInverseState(to: false)
+            inverseSwitch.isOn = false
+        }
     }
     
     private func setUpUsersImage() {
@@ -66,23 +163,43 @@ class TrainerAdminViewController: UIViewController {
 
 extension TrainerAdminViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 60
+        return 50
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.font = UIFont(name: "Montserrat", size: 25)
         pickerLabel.textAlignment = .center
-        pickerLabel.text = viewModel.getTheme(for: row)
+        if pickerView == taskPickerView {
+            pickerLabel.text = viewModel.getTask(for: row)
+        }
+        if pickerView == themePicker {
+            pickerLabel.text = viewModel.getTheme(for: row)
+        }
         pickerLabel.textColor = .black
 
         return pickerLabel
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == taskPickerView {
+            viewModel.updateSelectedTask(with: row)
+        }
+        if pickerView == themePicker {
+            viewModel.updateSelectedTheme(with: row)
+        }
     }
 }
 
 extension TrainerAdminViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return viewModel.getThemesNumber()
+        if pickerView == taskPickerView {
+            return viewModel.getTasksNumber()
+        }
+        if pickerView == themePicker {
+            return viewModel.getThemesNumber()
+        }
+        return 0
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

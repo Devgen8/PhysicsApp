@@ -40,7 +40,7 @@ class TrainerViewController: UIViewController {
             if self.viewModel is TestTrainerViewModel {
                 self.notSolvedButton.setTitle("Сформировать вариант", for: .normal)
             } else {
-                self.notSolvedButton.setTitle("Нерешенные задачи (\(self.viewModel.getUnsolvedTasksCount()))", for: .normal)
+                self.notSolvedButton.setTitle("Задачи с ошибкой (\(self.viewModel.getUnsolvedTasksCount()))", for: .normal)
             }
             DispatchQueue.main.async {
                 self.themesTableView.reloadData()
@@ -71,7 +71,7 @@ class TrainerViewController: UIViewController {
     }
     
     func routeForTasks() {
-        if notSolvedButton.title(for: .normal) != "Нерешенные задачи (0)" {
+        if notSolvedButton.title(for: .normal) != "Задачи с ошибкой (0)" {
             Animations.swipeViewController(.fromRight, for: view)
             let unsolvedThemesViewController = UnsolvedThemesViewController()
             unsolvedThemesViewController.viewModel = UnsolvedThemesViewModel()

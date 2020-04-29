@@ -756,8 +756,8 @@
 			isa = PBXGroup;
 			children = (
 				244ABACE242A9B1500066CB3 /* TrainerAdminViewController.swift */,
-				244ABACD242A9B1400066CB3 /* TrainerAdminViewController.xib */,
 				244ABAFC242A9B1700066CB3 /* TrainerAdminViewModel.swift */,
+				244ABACD242A9B1400066CB3 /* TrainerAdminViewController.xib */,
 			);
 			path = TrainerAdmin;
 			sourceTree = "<group>";
