@@ -61,6 +61,28 @@ public class ThemeTasksSafe: NSObject, NSCoding {
     }
 }
 
+public class ThemesInEgeTask: NSObject, NSCoding {
+    
+    public var egeTaskThemes = [String]()
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(egeTaskThemes, forKey: "egeTaskThemes")
+    }
+    
+    public override init() {
+        super.init()
+    }
+    
+    init(egeTaskThemes: [String]) {
+        self.egeTaskThemes = egeTaskThemes
+    }
+    
+    public required convenience init?(coder: NSCoder) {
+        let decodedTasks = coder.decodeObject(forKey: "egeTaskThemes") as! [String]
+        self.init(egeTaskThemes: decodedTasks)
+    }
+}
+
 public class TestObject: NSObject, NSCoding {
     
     var testTasks = [TaskModel]()

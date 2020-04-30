@@ -20,6 +20,7 @@ class TrainerViewModel: TrainerViewModelProvider {
     var themes = [String]()
     var numberOfTasksIn = [String:Int]()
     var isFirstTimeReading = false
+    var egeTasksThemes = [String:[String]]()
     
     func getThemes(completion: @escaping (Bool) -> ()) {
         if let lastUpdateDate = UserDefaults.standard.value(forKey: "taskTypeUpdateDate") as? Date,
@@ -67,6 +68,7 @@ class TrainerViewModel: TrainerViewModelProvider {
                     if let tasksNumbers = numberOfTasksIn[theme] {
                         newTask.numberOfTasks = Int16(tasksNumbers)
                     }
+                    newTask.themes = ThemesInEgeTask(egeTaskThemes: egeTasksThemes[theme] ?? [])
                     egeTasks.add(newTask)
                     index += 1
                 }
@@ -125,15 +127,18 @@ class TrainerViewModel: TrainerViewModelProvider {
                 return
             }
             var allThemes = [String]()
+            var tasksThemes = [String:[String]]()
             for document in documents {
                 if let themeName = document.data()[Theme.name.rawValue] as? String {
                     allThemes.append(themeName)
+                    tasksThemes[themeName] = document.data()["themes"] as? [String] ?? []
                     if let numberOfTasks = document.data()["numberOfTasks"] as? Int {
                         self.numberOfTasksIn[themeName] = numberOfTasks
                     }
                 }
             }
             self.themes = allThemes
+            self.egeTasksThemes = tasksThemes
             if self.isFirstTimeReading {
                 self.getUnsolvedTasks { (isReady) in
                     completion(isReady)

@@ -113,7 +113,7 @@ class TasksListViewModel {
                     if let newTasks = coreDataThemeTasks {
                         for task in newTasks {
                             if goalTasks[dictKey]?.contains(Int((task as! TaskData).serialNumber)) ?? false {
-                                var newTask = TaskModel()
+                                let newTask = TaskModel()
                                 newTask.alternativeAnswer = (task as! TaskData).alternativeAnswer
                                 newTask.wrightAnswer = (task as! TaskData).wrightAnswer
                                 newTask.serialNumber = Int((task as! TaskData).serialNumber)
@@ -189,7 +189,7 @@ class TasksListViewModel {
                 let egeTask = trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == theme })
                 if let newTasks = (egeTask as! EgeTask).tasks {
                     for task in newTasks {
-                        var newTask = TaskModel()
+                        let newTask = TaskModel()
                         newTask.alternativeAnswer = (task as! TaskData).alternativeAnswer
                         newTask.wrightAnswer = (task as! TaskData).wrightAnswer
                         newTask.serialNumber = Int((task as! TaskData).serialNumber)
@@ -217,7 +217,7 @@ class TasksListViewModel {
                 let egeTheme = trainer?.egeThemes?.first(where: { ($0 as! EgeTheme).name == theme })
                 if let newTasks = (egeTheme as! EgeTheme).tasks {
                     for task in newTasks {
-                        var newTask = TaskModel()
+                        let newTask = TaskModel()
                         newTask.alternativeAnswer = (task as! TaskData).alternativeAnswer
                         newTask.wrightAnswer = (task as! TaskData).wrightAnswer
                         newTask.serialNumber = Int((task as! TaskData).serialNumber)
@@ -319,7 +319,7 @@ class TasksListViewModel {
                         number = lookingNumbers?.first ?? 0
                     }
                     if index == number {
-                        var task = TaskModel()
+                        let task = TaskModel()
                         task.serialNumber = document.data()[Task.serialNumber.rawValue] as? Int
                         task.wrightAnswer = document.data()[Task.wrightAnswer.rawValue] as? Double
                         task.alternativeAnswer = document.data()[Task.alternativeAnswer.rawValue] as? Double
@@ -354,7 +354,7 @@ class TasksListViewModel {
             self.getUsersSolvedTasksFromCoreData()
             if let documents = snapshot?.documents {
                 for document in documents {
-                    var task = TaskModel()
+                    let task = TaskModel()
                     task.serialNumber = document.data()[Task.serialNumber.rawValue] as? Int
                     task.wrightAnswer = document.data()[Task.wrightAnswer.rawValue] as? Double
                     task.alternativeAnswer = document.data()[Task.alternativeAnswer.rawValue] as? Double

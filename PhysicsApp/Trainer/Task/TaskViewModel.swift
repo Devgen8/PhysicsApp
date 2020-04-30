@@ -17,6 +17,7 @@ class TaskViewModel {
     var theme: String?
     let themeReference = Firestore.firestore().collection("trainer")
     let usersReference = Firestore.firestore().collection("users")
+    let adminStatsReference = Firestore.firestore().collection("adminStats")
     var task: TaskModel?
     var taskNumber: Int?
     var numberOfTasks:  Int?
@@ -25,6 +26,7 @@ class TaskViewModel {
     var unsolvedTasksUpdater: UnsolvedTaskUpdater?
     var solvedTasks = [String:[String]]()
     var themesUnsolvedTasks = [String:[String]]()
+    var isFirstAnswer = true
     
     func checkAnswer(_ stringAnswer: String?) -> (Bool, String) {
         var isWright = false
@@ -79,21 +81,18 @@ class TaskViewModel {
         }
         // stats for school
         if !(solvedTasks[theme]?.contains(unsolvedTask) ?? false || unsolvedTasks[theme]?.contains(unsolvedTask) ?? false) {
-            if isTaskUnsolved == true {
-                if let failed = task?.failed {
-                    task?.failed = failed + 1
-                } else {
-                    task?.failed = 1
+            if isFirstAnswer {
+                var change = 0
+                if isTaskUnsolved == true {
+                    change = -1
+                    isFirstAnswer = false
+                    updateTaskStats(with: change)
                 }
-                updateTaskStats()
-            }
-            if isTaskUnsolved == false {
-                if let succeded = task?.succeded {
-                    task?.succeded = succeded + 1
-                } else {
-                    task?.succeded = 1
+                if isTaskUnsolved == false {
+                    change = 1
+                    isFirstAnswer = false
+                    updateTaskStats(with: change)
                 }
-                updateTaskStats()
             }
         }
     }
@@ -133,10 +132,65 @@ class TaskViewModel {
         putTaskUnsolved()
     }
     
-    func updateTaskStats() {
-        if let theme = theme, let number = task?.serialNumber {
-            themeReference.document(theme).collection("tasks").document("task\(number)").updateData([Task.succeded.rawValue : task?.succeded ?? 0,
-                                                                                          Task.failed.rawValue : task?.failed ?? 0])
+    func updateTaskStats(with change: Int) {
+        if let taskName = task?.name, change != 0 {
+            adminStatsReference.document(taskName).getDocument { (document, error) in
+                guard error == nil else {
+                    print("error reading task stats: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                var successes: Int = document?.data()?["succeded"] as? Int ?? 0
+                var failures: Int = document?.data()?["failed"] as? Int ?? 0
+                if change > 0 {
+                    successes += 1
+                }
+                if change < 0 {
+                    failures += 1
+                }
+                if failures + successes == 1 {
+                    var themeTypeString = [Character]()
+                    var taskTheme = ""
+                    for letter in self.theme ?? "" {
+                        if themeTypeString.count < 7 {
+                            themeTypeString.append(letter)
+                        } else {
+                            break
+                        }
+                    }
+                    if String(themeTypeString) != "Задание" {
+                        taskTheme = self.theme ?? ""
+                    } else {
+                        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                            do {
+                                let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+                                let result = try context.fetch(fechRequest)
+                                let trainer = result.first
+                                var taskNameArray = [Character](taskName)
+                                var index = taskNameArray.count
+                                for _ in taskNameArray {
+                                    index -= 1
+                                    let removedLetter = taskNameArray.remove(at: index)
+                                    if removedLetter == "." {
+                                        break
+                                    }
+                                }
+                                let egeTaskName = String(taskNameArray)
+                                let egeThemesInTask = ((trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == egeTaskName }) as! EgeTask).themes as! ThemesInEgeTask)
+                                taskTheme = egeThemesInTask.egeTaskThemes[self.task?.serialNumber ?? 0]
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                    self.adminStatsReference.document(taskName).setData([Task.succeded.rawValue : successes,
+                                                                        Task.failed.rawValue : failures,
+                                                                        "name" : taskName,
+                                                                        "theme" : taskTheme])
+                } else {
+                    self.adminStatsReference.document(taskName).updateData([Task.succeded.rawValue : successes,
+                                                                            Task.failed.rawValue : failures])
+                }
+            }
         }
     }
     

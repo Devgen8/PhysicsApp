@@ -12,8 +12,10 @@ class ImagePreviewViewController: UIViewController {
     
     @IBOutlet weak var closeButton: UIButton!
     var imageScrollView: ImageScrollView!
+    @IBOutlet weak var wrightAnswerLabel: UILabel!
     
     var taskImage: UIImage?
+    var wrightAnswer: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,10 @@ class ImagePreviewViewController: UIViewController {
             imageScrollView.set(image: image)
         }
         view.bringSubviewToFront(closeButton)
+        if wrightAnswer != nil {
+            wrightAnswerLabel.text = "Ответ: " + wrightAnswer!
+            view.bringSubviewToFront(wrightAnswerLabel)
+        }
     }
     
     func setupImageScrollView() {

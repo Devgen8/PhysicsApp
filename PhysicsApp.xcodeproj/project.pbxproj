@@ -170,6 +170,14 @@
 		4842939E2458835100BE8CB6 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842939C2458835100BE8CB6 /* User+CoreDataProperties.swift */; };
 		484293A124588FEF00BE8CB6 /* TaskData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842939F24588FEF00BE8CB6 /* TaskData+CoreDataClass.swift */; };
 		484293A224588FEF00BE8CB6 /* TaskData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293A024588FEF00BE8CB6 /* TaskData+CoreDataProperties.swift */; };
+		484293AE245ABCD700BE8CB6 /* AdminStatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293AD245ABCD700BE8CB6 /* AdminStatsModel.swift */; };
+		484293B3245AC09000BE8CB6 /* AdminStatTask+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293AF245AC09000BE8CB6 /* AdminStatTask+CoreDataClass.swift */; };
+		484293B4245AC09000BE8CB6 /* AdminStatTask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293B0245AC09000BE8CB6 /* AdminStatTask+CoreDataProperties.swift */; };
+		484293B9245AC7F500BE8CB6 /* Admin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293B7245AC7F500BE8CB6 /* Admin+CoreDataClass.swift */; };
+		484293BA245AC7F500BE8CB6 /* Admin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293B8245AC7F500BE8CB6 /* Admin+CoreDataProperties.swift */; };
+		484293BD245B023100BE8CB6 /* TasksDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293BB245B023100BE8CB6 /* TasksDetailViewController.swift */; };
+		484293BE245B023100BE8CB6 /* TasksDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484293BC245B023100BE8CB6 /* TasksDetailViewController.xib */; };
+		484293C1245B02A900BE8CB6 /* TasksDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293C0245B02A900BE8CB6 /* TasksDetailViewModel.swift */; };
 		486362162441E7AB004924FD /* ProgressStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486362152441E7AB004924FD /* ProgressStatsView.swift */; };
 		6910FC61EACA1D262F52A3D2 /* Pods_PhysicsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */; };
 /* End PBXBuildFile section */
@@ -243,7 +251,7 @@
 		244ABAA2242A9AF300066CB3 /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		244ABAA3242A9AF300066CB3 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		244ABAA4242A9AF300066CB3 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
-		244ABACC242A9B1400066CB3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = "../New Group/ProfileViewController.swift"; sourceTree = "<group>"; };
+		244ABACC242A9B1400066CB3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		244ABACD242A9B1400066CB3 /* TrainerAdminViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainerAdminViewController.xib; sourceTree = "<group>"; };
 		244ABACE242A9B1500066CB3 /* TrainerAdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerAdminViewController.swift; sourceTree = "<group>"; };
 		244ABACF242A9B1500066CB3 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -341,6 +349,14 @@
 		4842939C2458835100BE8CB6 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		4842939F24588FEF00BE8CB6 /* TaskData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskData+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		484293A024588FEF00BE8CB6 /* TaskData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskData+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		484293AD245ABCD700BE8CB6 /* AdminStatsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminStatsModel.swift; sourceTree = "<group>"; };
+		484293AF245AC09000BE8CB6 /* AdminStatTask+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdminStatTask+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		484293B0245AC09000BE8CB6 /* AdminStatTask+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdminStatTask+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		484293B7245AC7F500BE8CB6 /* Admin+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Admin+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		484293B8245AC7F500BE8CB6 /* Admin+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Admin+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		484293BB245B023100BE8CB6 /* TasksDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDetailViewController.swift; sourceTree = "<group>"; };
+		484293BC245B023100BE8CB6 /* TasksDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TasksDetailViewController.xib; sourceTree = "<group>"; };
+		484293C0245B02A900BE8CB6 /* TasksDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDetailViewModel.swift; sourceTree = "<group>"; };
 		486362152441E7AB004924FD /* ProgressStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStatsView.swift; sourceTree = "<group>"; };
 		5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhysicsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B327A80248CB58F8603354D5 /* Pods-PhysicsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhysicsApp.debug.xcconfig"; path = "Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -382,17 +398,10 @@
 				4842936B2451B10600BE8CB6 /* Core Data */,
 				244ABA32242A933B00066CB3 /* AppDelegate.swift */,
 				244ABA50242A9ABB00066CB3 /* Animations.swift */,
-				244ABB5B242E249100066CB3 /* 7893-confetti-cannons.json */,
-				244ABB5D242E2A1500066CB3 /* 1708-success.json */,
-				4802C2E6243EEA8C0017B75B /* 17694-cube-grid.json */,
-				244ABA78242A9ADF00066CB3 /* CustomProtocols.swift */,
-				244ABA7A242A9AE500066CB3 /* DesignService.swift */,
-				244ABACF242A9B1500066CB3 /* UIViewExtension.swift */,
-				244ABA7C242A9AEA00066CB3 /* FirebaseService.swift */,
+				484293A3245AB74800BE8CB6 /* Animations */,
+				484293A4245AB79200BE8CB6 /* Helpers */,
 				244ABA34242A933B00066CB3 /* SceneDelegate.swift */,
-				244ABB5F242E432500066CB3 /* AwardCompletedViewController.swift */,
-				244ABB63242E436400066CB3 /* AwardCompletedViewModel.swift */,
-				244ABB60242E432600066CB3 /* AwardCompletedViewController.xib */,
+				484293A5245AB7A300BE8CB6 /* AwardCompleted */,
 				244ABA46242A93DE00066CB3 /* GoogleService-Info.plist */,
 				244ABB6F24361F8700066CB3 /* ProgressBarView.swift */,
 				48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */,
@@ -419,6 +428,8 @@
 			isa = PBXGroup;
 			children = (
 				244ABA49242A9A6E00066CB3 /* MainAdmin */,
+				484293AC245AB89400BE8CB6 /* AdminStats */,
+				484293BF245B023800BE8CB6 /* TasksDetail */,
 				4842935424519F5A00BE8CB6 /* TrainerAdmin */,
 			);
 			path = Admin;
@@ -430,9 +441,6 @@
 				244ABA4A242A9A6E00066CB3 /* MainAdminViewModel.swift */,
 				244ABA4B242A9A6E00066CB3 /* MainAdminViewController.xib */,
 				244ABA4C242A9A6E00066CB3 /* MainAdminViewController.swift */,
-				244ABB772438D3E800066CB3 /* AdminStatsViewController.swift */,
-				244ABB7F2438E29000066CB3 /* AdminStatsViewModel.swift */,
-				244ABB782438D3E800066CB3 /* AdminStatsViewController.xib */,
 			);
 			path = MainAdmin;
 			sourceTree = "<group>";
@@ -556,21 +564,10 @@
 		244ABAD0242A9B1500066CB3 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				244ABAD1242A9B1500066CB3 /* ProfileViewController.xib */,
-				244ABACC242A9B1400066CB3 /* ProfileViewController.swift */,
-				244ABAD2242A9B1500066CB3 /* ProfileViewModel.swift */,
-				244ABAD3242A9B1500066CB3 /* ProfileModel.swift */,
-				244ABB51242CED4000066CB3 /* AwardDetailViewController.swift */,
-				244ABB55242CF2A500066CB3 /* AwardDetailViewModel.swift */,
-				244ABB52242CED4000066CB3 /* AwardDetailViewController.xib */,
-				244ABB4B242C96E800066CB3 /* AwardsViewController.swift */,
-				244ABB4F242C970500066CB3 /* AwardsViewModel.swift */,
-				244ABB57242CF34B00066CB3 /* AwardsModel.swift */,
-				244ABB4C242C96E800066CB3 /* AwardsViewController.xib */,
-				244ABB6724325C0C00066CB3 /* UserStatsViewController.swift */,
-				244ABB7324377D6E00066CB3 /* UserStatsViewModel.swift */,
-				244ABB6824325C0C00066CB3 /* UserStatsViewController.xib */,
-				486362152441E7AB004924FD /* ProgressStatsView.swift */,
+				484293A8245AB81E00BE8CB6 /* ProfileStart */,
+				484293A9245AB83800BE8CB6 /* AwardDetail */,
+				484293AA245AB84B00BE8CB6 /* Awards */,
+				484293AB245AB86D00BE8CB6 /* UserStats */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -678,10 +675,6 @@
 				244ABB81243A382200066CB3 /* MixesViewController.swift */,
 				244ABB85243A439900066CB3 /* MixesViewModel.swift */,
 				244ABB82243A382200066CB3 /* MixesViewController.xib */,
-				4802C2E2243E436D0017B75B /* MixViewController.swift */,
-				4802C2E8243EF1330017B75B /* DayMixViewModel.swift */,
-				4802C2EA243FB0F30017B75B /* DayMixModel.swift */,
-				4802C2E3243E436D0017B75B /* MixViewController.xib */,
 			);
 			path = MixesStart;
 			sourceTree = "<group>";
@@ -690,6 +683,7 @@
 			isa = PBXGroup;
 			children = (
 				4802C2E1243E43340017B75B /* MixesStart */,
+				484293A6245AB7E700BE8CB6 /* Mix */,
 			);
 			path = Mixes;
 			sourceTree = "<group>";
@@ -765,6 +759,10 @@
 		4842936B2451B10600BE8CB6 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				484293B7245AC7F500BE8CB6 /* Admin+CoreDataClass.swift */,
+				484293B8245AC7F500BE8CB6 /* Admin+CoreDataProperties.swift */,
+				484293AF245AC09000BE8CB6 /* AdminStatTask+CoreDataClass.swift */,
+				484293B0245AC09000BE8CB6 /* AdminStatTask+CoreDataProperties.swift */,
 				4842939F24588FEF00BE8CB6 /* TaskData+CoreDataClass.swift */,
 				484293A024588FEF00BE8CB6 /* TaskData+CoreDataProperties.swift */,
 				4842939B2458835100BE8CB6 /* User+CoreDataClass.swift */,
@@ -779,6 +777,120 @@
 				48429383245420C500BE8CB6 /* Test+CoreDataProperties.swift */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		484293A3245AB74800BE8CB6 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				244ABB5B242E249100066CB3 /* 7893-confetti-cannons.json */,
+				244ABB5D242E2A1500066CB3 /* 1708-success.json */,
+				4802C2E6243EEA8C0017B75B /* 17694-cube-grid.json */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		484293A4245AB79200BE8CB6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				244ABA78242A9ADF00066CB3 /* CustomProtocols.swift */,
+				244ABA7A242A9AE500066CB3 /* DesignService.swift */,
+				244ABACF242A9B1500066CB3 /* UIViewExtension.swift */,
+				244ABA7C242A9AEA00066CB3 /* FirebaseService.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		484293A5245AB7A300BE8CB6 /* AwardCompleted */ = {
+			isa = PBXGroup;
+			children = (
+				244ABB5F242E432500066CB3 /* AwardCompletedViewController.swift */,
+				244ABB63242E436400066CB3 /* AwardCompletedViewModel.swift */,
+				244ABB60242E432600066CB3 /* AwardCompletedViewController.xib */,
+			);
+			path = AwardCompleted;
+			sourceTree = "<group>";
+		};
+		484293A6245AB7E700BE8CB6 /* Mix */ = {
+			isa = PBXGroup;
+			children = (
+				4802C2E2243E436D0017B75B /* MixViewController.swift */,
+				484293A7245AB80300BE8CB6 /* DayMix */,
+				4802C2E3243E436D0017B75B /* MixViewController.xib */,
+			);
+			path = Mix;
+			sourceTree = "<group>";
+		};
+		484293A7245AB80300BE8CB6 /* DayMix */ = {
+			isa = PBXGroup;
+			children = (
+				4802C2E8243EF1330017B75B /* DayMixViewModel.swift */,
+				4802C2EA243FB0F30017B75B /* DayMixModel.swift */,
+			);
+			path = DayMix;
+			sourceTree = "<group>";
+		};
+		484293A8245AB81E00BE8CB6 /* ProfileStart */ = {
+			isa = PBXGroup;
+			children = (
+				244ABACC242A9B1400066CB3 /* ProfileViewController.swift */,
+				244ABAD2242A9B1500066CB3 /* ProfileViewModel.swift */,
+				244ABAD3242A9B1500066CB3 /* ProfileModel.swift */,
+				244ABAD1242A9B1500066CB3 /* ProfileViewController.xib */,
+			);
+			path = ProfileStart;
+			sourceTree = "<group>";
+		};
+		484293A9245AB83800BE8CB6 /* AwardDetail */ = {
+			isa = PBXGroup;
+			children = (
+				244ABB51242CED4000066CB3 /* AwardDetailViewController.swift */,
+				244ABB55242CF2A500066CB3 /* AwardDetailViewModel.swift */,
+				244ABB52242CED4000066CB3 /* AwardDetailViewController.xib */,
+			);
+			path = AwardDetail;
+			sourceTree = "<group>";
+		};
+		484293AA245AB84B00BE8CB6 /* Awards */ = {
+			isa = PBXGroup;
+			children = (
+				244ABB4B242C96E800066CB3 /* AwardsViewController.swift */,
+				244ABB4F242C970500066CB3 /* AwardsViewModel.swift */,
+				244ABB57242CF34B00066CB3 /* AwardsModel.swift */,
+				244ABB4C242C96E800066CB3 /* AwardsViewController.xib */,
+			);
+			path = Awards;
+			sourceTree = "<group>";
+		};
+		484293AB245AB86D00BE8CB6 /* UserStats */ = {
+			isa = PBXGroup;
+			children = (
+				244ABB6724325C0C00066CB3 /* UserStatsViewController.swift */,
+				244ABB7324377D6E00066CB3 /* UserStatsViewModel.swift */,
+				244ABB6824325C0C00066CB3 /* UserStatsViewController.xib */,
+				486362152441E7AB004924FD /* ProgressStatsView.swift */,
+			);
+			path = UserStats;
+			sourceTree = "<group>";
+		};
+		484293AC245AB89400BE8CB6 /* AdminStats */ = {
+			isa = PBXGroup;
+			children = (
+				244ABB772438D3E800066CB3 /* AdminStatsViewController.swift */,
+				244ABB7F2438E29000066CB3 /* AdminStatsViewModel.swift */,
+				484293AD245ABCD700BE8CB6 /* AdminStatsModel.swift */,
+				244ABB782438D3E800066CB3 /* AdminStatsViewController.xib */,
+			);
+			path = AdminStats;
+			sourceTree = "<group>";
+		};
+		484293BF245B023800BE8CB6 /* TasksDetail */ = {
+			isa = PBXGroup;
+			children = (
+				484293BB245B023100BE8CB6 /* TasksDetailViewController.swift */,
+				484293C0245B02A900BE8CB6 /* TasksDetailViewModel.swift */,
+				484293BC245B023100BE8CB6 /* TasksDetailViewController.xib */,
+			);
+			path = TasksDetail;
 			sourceTree = "<group>";
 		};
 		C45A5A78C5B824455C8DA084 /* Pods */ = {
@@ -860,6 +972,7 @@
 			files = (
 				244ABA6B242A9AC900066CB3 /* BattleFinalViewController.xib in Resources */,
 				244ABAC3242A9AF400066CB3 /* Montserrat-ExtraBold.otf in Resources */,
+				484293BE245B023100BE8CB6 /* TasksDetailViewController.xib in Resources */,
 				244ABB06242A9B1700066CB3 /* WelcomeViewController.xib in Resources */,
 				244ABAC4242A9AF400066CB3 /* Montserrat-ExtraLightItalic.otf in Resources */,
 				244ABB1B242A9B1700066CB3 /* TabBarViewController.xib in Resources */,
@@ -989,6 +1102,7 @@
 			files = (
 				4842931B2448732B00BE8CB6 /* TestViewModel.swift in Sources */,
 				244ABB16242A9B1700066CB3 /* TaskViewController.swift in Sources */,
+				484293C1245B02A900BE8CB6 /* TasksDetailViewModel.swift in Sources */,
 				4842931E2448C4BA00BE8CB6 /* MyAnswersViewController.swift in Sources */,
 				244ABA7D242A9AEA00066CB3 /* FirebaseService.swift in Sources */,
 				48429318244855DD00BE8CB6 /* TestViewController.swift in Sources */,
@@ -996,7 +1110,9 @@
 				244ABB0C242A9B1700066CB3 /* TrainerViewController.swift in Sources */,
 				244ABB64242E436500066CB3 /* AwardCompletedViewModel.swift in Sources */,
 				244ABB7D2438D61D00066CB3 /* AdminStatsTableViewCell.swift in Sources */,
+				484293BA245AC7F500BE8CB6 /* Admin+CoreDataProperties.swift in Sources */,
 				4842932E244C24CD00BE8CB6 /* TestResultTaskTableViewCell.swift in Sources */,
+				484293B4245AC09000BE8CB6 /* AdminStatTask+CoreDataProperties.swift in Sources */,
 				244ABA65242A9AC900066CB3 /* BattleViewController.swift in Sources */,
 				244ABB00242A9B1700066CB3 /* UIViewExtension.swift in Sources */,
 				244ABB11242A9B1700066CB3 /* TasksListViewModel.swift in Sources */,
@@ -1007,6 +1123,7 @@
 				244ABB1E242A9B1700066CB3 /* SignInViewModel.swift in Sources */,
 				244ABB61242E432600066CB3 /* AwardCompletedViewController.swift in Sources */,
 				484293992458363B00BE8CB6 /* EgeTheme+CoreDataClass.swift in Sources */,
+				484293B3245AC09000BE8CB6 /* AdminStatTask+CoreDataClass.swift in Sources */,
 				484293122447647500BE8CB6 /* TaskListModel.swift in Sources */,
 				244ABB0D242A9B1700066CB3 /* TrainerModel.swift in Sources */,
 				486362162441E7AB004924FD /* ProgressStatsView.swift in Sources */,
@@ -1017,10 +1134,12 @@
 				244ABA74242A9AD700066CB3 /* ThemeTableViewCell.swift in Sources */,
 				244ABB792438D3E800066CB3 /* AdminStatsViewController.swift in Sources */,
 				244ABA66242A9AC900066CB3 /* BattleViewModel.swift in Sources */,
+				484293BD245B023100BE8CB6 /* TasksDetailViewController.swift in Sources */,
 				244ABB19242A9B1700066CB3 /* ImageScrollView.swift in Sources */,
 				244ABB58242CF34B00066CB3 /* AwardsModel.swift in Sources */,
 				48429396245835B300BE8CB6 /* EgeTask+CoreDataProperties.swift in Sources */,
 				244ABA4D242A9A6E00066CB3 /* MainAdminViewModel.swift in Sources */,
+				484293B9245AC7F500BE8CB6 /* Admin+CoreDataClass.swift in Sources */,
 				244ABAFF242A9B1700066CB3 /* TrainerAdminViewController.swift in Sources */,
 				244ABA68242A9AC900066CB3 /* GamesNumberAlertViewController.swift in Sources */,
 				244ABB53242CED4000066CB3 /* AwardDetailViewController.swift in Sources */,
@@ -1036,6 +1155,7 @@
 				244ABA51242A9ABB00066CB3 /* Animations.swift in Sources */,
 				244ABB1F242A9B1700066CB3 /* SignInViewController.swift in Sources */,
 				244ABB10242A9B1700066CB3 /* FormSheetViewController.swift in Sources */,
+				484293AE245ABCD700BE8CB6 /* AdminStatsModel.swift in Sources */,
 				244ABA63242A9AC900066CB3 /* BattleModel.swift in Sources */,
 				244ABA69242A9AC900066CB3 /* BattleFinalViewController.swift in Sources */,
 				244ABB83243A382300066CB3 /* MixesViewController.swift in Sources */,
