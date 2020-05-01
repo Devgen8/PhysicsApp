@@ -14,16 +14,23 @@ class TestResultTaskTableViewCell: UITableViewCell {
     @IBOutlet weak var taskImageView: UIImageView!
     @IBOutlet weak var usersAnswerLabel: UILabel!
     @IBOutlet weak var wrightAnswerLabel: UILabel!
-    @IBOutlet weak var isCorrectImage: UIImageView!
+    @IBOutlet weak var extendButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
         setRoundedBackground()
+        setupRoundedButton()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
+    }
+    
+    func setupRoundedButton() {
+        extendButton.layer.cornerRadius = 0.5 * extendButton.bounds.size.width
+        extendButton.imageEdgeInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
     }
     
     func setRoundedBackground() {

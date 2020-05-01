@@ -15,6 +15,7 @@ class TestResultStatsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
         setRoundedBackground()
     }
 

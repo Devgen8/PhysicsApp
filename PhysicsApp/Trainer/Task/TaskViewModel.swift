@@ -133,6 +133,9 @@ class TaskViewModel {
     }
     
     func updateTaskStats(with change: Int) {
+        if change > 0 {
+            saveFirstTryTaskInCoreData()
+        }
         if let taskName = task?.name, change != 0 {
             adminStatsReference.document(taskName).getDocument { (document, error) in
                 guard error == nil else {
@@ -194,6 +197,33 @@ class TaskViewModel {
         }
     }
     
+    func saveFirstTryTaskInCoreData() {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fechRequest: NSFetchRequest<User> = User.fetchRequest()
+                let result = try context.fetch(fechRequest)
+                let user = result.first
+                var newFirstTryTasks = (user?.solvedTasks as! StatusTasks).firstTryTasks
+                let coreDataUnsolved = (user?.solvedTasks as! StatusTasks).unsolvedTasks
+                let coreDataSolved = (user?.solvedTasks as! StatusTasks).solvedTasks
+                if let taskName = task?.name {
+                    newFirstTryTasks.append(taskName)
+                }
+                user?.solvedTasks = StatusTasks(solvedTasks: coreDataSolved, unsolvedTasks: coreDataUnsolved, firstTryTasks: newFirstTryTasks)
+                saveFirstTryTaskInFirestore(tasks: (user?.solvedTasks as! StatusTasks).firstTryTasks)
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func saveFirstTryTaskInFirestore(tasks: [String]) {
+        if let userId = Auth.auth().currentUser?.uid {
+            usersReference.document(userId).updateData(["firstTryTasks" : tasks])
+        }
+    }
+    
     func getTaskLocation(taskName: String) -> (String, String) {
         var themeNameSet = [Character]()
         var taskNumberSet = [Character]()
@@ -228,8 +258,8 @@ class TaskViewModel {
                 let fechRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fechRequest)
                 let user = result.first
-                let statusTasks = StatusTasks(solvedTasks: solvedTasks, unsolvedTasks: unsolvedTasks)
-                user?.solvedTasks = statusTasks
+                let firstTryTasksFromUser = (user?.solvedTasks as! StatusTasks).firstTryTasks
+                user?.solvedTasks = StatusTasks(solvedTasks: solvedTasks, unsolvedTasks: unsolvedTasks, firstTryTasks: firstTryTasksFromUser)
                 
                 try context.save()
             } catch {

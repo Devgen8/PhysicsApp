@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Regular.otf">
+        <array key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
         </array>
     </customFonts>
@@ -21,21 +21,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="364" height="435"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Задание №1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jp3-8h-u6G">
-                        <rect key="frame" x="119" y="15" width="126" height="24.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Задание №1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jp3-8h-u6G">
+                        <rect key="frame" x="10" y="15" width="344" height="24.5"/>
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LVk-jb-WlM">
-                        <rect key="frame" x="7" y="49.5" width="350" height="200"/>
+                        <rect key="frame" x="7" y="139.5" width="350" height="200"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="350" id="FNr-sy-jg7"/>
                             <constraint firstAttribute="width" secondItem="LVk-jb-WlM" secondAttribute="height" multiplier="7:4" id="QDg-L1-X44"/>
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Nk9-Gj-QHR">
-                        <rect key="frame" x="20" y="269.5" width="179.5" height="59"/>
+                        <rect key="frame" x="20" y="59.5" width="179.5" height="59"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ваш ответ:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dt-0u-cUk">
                                 <rect key="frame" x="0.0" y="0.0" width="99.5" height="22"/>
@@ -52,7 +52,7 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="rgP-jQ-gpp">
-                        <rect key="frame" x="207.5" y="269.5" width="37.5" height="59"/>
+                        <rect key="frame" x="207.5" y="59.5" width="37.5" height="59"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eH-gl-sYc">
                                 <rect key="frame" x="0.0" y="0.0" width="37.5" height="22"/>
@@ -68,31 +68,34 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xoc-6W-3dB">
-                        <rect key="frame" x="284" y="269.5" width="60" height="60"/>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKl-YQ-Bvd">
+                        <rect key="frame" x="284" y="59.5" width="60" height="60"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="60" id="O6L-i5-nKo"/>
-                            <constraint firstAttribute="width" constant="60" id="hNs-io-eNe"/>
+                            <constraint firstAttribute="height" constant="60" id="Gl5-UR-Fcd"/>
+                            <constraint firstAttribute="width" constant="60" id="LMc-lQ-gsp"/>
                         </constraints>
-                    </imageView>
+                        <state key="normal" title="Button" image="multimedia"/>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Nk9-Gj-QHR" firstAttribute="top" secondItem="LVk-jb-WlM" secondAttribute="bottom" constant="20" id="5fy-Cj-s51"/>
-                    <constraint firstItem="Xoc-6W-3dB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Dd8-7T-joQ"/>
+                    <constraint firstItem="Nk9-Gj-QHR" firstAttribute="top" secondItem="Jp3-8h-u6G" secondAttribute="bottom" constant="20" id="1bV-UP-9p9"/>
+                    <constraint firstItem="LVk-jb-WlM" firstAttribute="top" secondItem="aKl-YQ-Bvd" secondAttribute="bottom" constant="20" id="Anx-RO-Png"/>
+                    <constraint firstItem="LVk-jb-WlM" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="EfV-5d-evt"/>
                     <constraint firstItem="rgP-jQ-gpp" firstAttribute="leading" secondItem="Nk9-Gj-QHR" secondAttribute="trailing" constant="8" id="Efo-3Q-j6w"/>
-                    <constraint firstItem="Jp3-8h-u6G" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="RyC-Hb-6u8"/>
                     <constraint firstItem="Nk9-Gj-QHR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="VBK-om-UBc"/>
-                    <constraint firstItem="LVk-jb-WlM" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="WqP-yh-ilB"/>
-                    <constraint firstItem="Xoc-6W-3dB" firstAttribute="top" secondItem="LVk-jb-WlM" secondAttribute="bottom" constant="20" id="Xbw-1M-qk9"/>
+                    <constraint firstItem="rgP-jQ-gpp" firstAttribute="top" secondItem="Jp3-8h-u6G" secondAttribute="bottom" constant="20" id="f6Z-On-d06"/>
+                    <constraint firstItem="aKl-YQ-Bvd" firstAttribute="top" secondItem="Jp3-8h-u6G" secondAttribute="bottom" constant="20" id="kXm-3d-i8W"/>
                     <constraint firstItem="Jp3-8h-u6G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="mrU-Bb-6wt"/>
-                    <constraint firstItem="rgP-jQ-gpp" firstAttribute="top" secondItem="LVk-jb-WlM" secondAttribute="bottom" constant="20" id="nrA-Wj-zNY"/>
-                    <constraint firstItem="LVk-jb-WlM" firstAttribute="top" secondItem="Jp3-8h-u6G" secondAttribute="bottom" constant="10" id="yVC-9Q-mH9"/>
+                    <constraint firstItem="Jp3-8h-u6G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="naT-3Q-Phz"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="aKl-YQ-Bvd" secondAttribute="trailing" id="q1k-Xm-CKz"/>
+                    <constraint firstAttribute="trailing" secondItem="Jp3-8h-u6G" secondAttribute="trailing" constant="10" id="q77-aK-akK"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="isCorrectImage" destination="Xoc-6W-3dB" id="uqv-df-Oxd"/>
+                <outlet property="extendButton" destination="aKl-YQ-Bvd" id="4gH-Y6-ZXd"/>
                 <outlet property="taskImageView" destination="LVk-jb-WlM" id="Uyz-3N-BBy"/>
                 <outlet property="taskName" destination="Jp3-8h-u6G" id="0LB-Bc-tBx"/>
                 <outlet property="usersAnswerLabel" destination="1eH-gl-sYc" id="qsM-Dv-i8W"/>
@@ -101,4 +104,7 @@
             <point key="canvasLocation" x="239.13043478260872" y="246.76339285714283"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="multimedia" width="512" height="512"/>
+    </resources>
 </document>

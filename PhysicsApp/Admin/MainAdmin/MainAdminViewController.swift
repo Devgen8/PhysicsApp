@@ -11,8 +11,6 @@ import UIKit
 class MainAdminViewController: UIViewController {
 
     @IBOutlet weak var trainerButton: UIButton!
-    @IBOutlet weak var battleButton: UIButton!
-    @IBOutlet weak var ratingButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
     @IBOutlet weak var messagesButton: UIButton!
     @IBOutlet weak var quitButton: UIButton!
@@ -28,10 +26,6 @@ class MainAdminViewController: UIViewController {
         DesignService.setAdminGradient(for: view)
         trainerButton.backgroundColor = .white
         trainerButton.layer.cornerRadius = 10
-        battleButton.backgroundColor = .white
-        battleButton.layer.cornerRadius = 10
-        ratingButton.backgroundColor = .white
-        ratingButton.layer.cornerRadius = 10
         statsButton.backgroundColor = .white
         statsButton.layer.cornerRadius = 10
         messagesButton.backgroundColor = .white
@@ -50,6 +44,13 @@ class MainAdminViewController: UIViewController {
         adminStatsViewController.modalPresentationStyle = .fullScreen
         Animations.swipeViewController(.fromRight, for: view)
         present(adminStatsViewController, animated: true)
+    }
+    
+    @IBAction func messagesTapped(_ sender: UIButton) {
+        let adminMessagesViewController = AdminMessagesViewController()
+        adminMessagesViewController.modalPresentationStyle = .fullScreen
+        Animations.swipeViewController(.fromRight, for: view)
+        present(adminMessagesViewController, animated: true)
     }
     
     @IBAction func quitTapped(_ sender: UIButton) {

@@ -17,25 +17,30 @@ public class StatusTasks: NSObject, NSCoding {
     
     public var solvedTasks = [String:[String]]()
     public var unsolvedTasks = [String:[String]]()
+    public var firstTryTasks = [String]()
     
     public func encode(with coder: NSCoder) {
         coder.encode(solvedTasks, forKey: "solvedTasks")
         coder.encode(unsolvedTasks, forKey: "unsolvedTasks")
+        coder.encode(firstTryTasks, forKey: "firstTryTasks")
     }
     
     public override init() {
         super.init()
     }
     
-    init(solvedTasks: [String:[String]], unsolvedTasks: [String:[String]]) {
+    init(solvedTasks: [String:[String]], unsolvedTasks: [String:[String]], firstTryTasks: [String]) {
         self.solvedTasks = solvedTasks
         self.unsolvedTasks = unsolvedTasks
+        self.firstTryTasks = firstTryTasks
     }
     
     public required convenience init?(coder: NSCoder) {
         let solved = coder.decodeObject(forKey: "solvedTasks") as! [String:[String]]
         let unsolved = coder.decodeObject(forKey: "unsolvedTasks") as! [String:[String]]
-        self.init(solvedTasks: solved, unsolvedTasks: unsolved)
+        let firstTry = coder.decodeObject(forKey: "firstTryTasks") as! [String]
+        //let firstTry = [""]
+        self.init(solvedTasks: solved, unsolvedTasks: unsolved, firstTryTasks: firstTry)
     }
 }
 

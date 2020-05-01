@@ -17,6 +17,7 @@ class TasksListViewModel {
     var tasks = [TaskModel]()
     var usersSolvedTasks = [String:[String]]()
     var unsolvedTasks = [String:[String]]()
+    var firstTryTasks = [String]()
     let themeReference = Firestore.firestore().collection("trainer")
     let userReference = Firestore.firestore().collection("users")
     var lookingForUnsolvedTasks: Bool?
@@ -384,6 +385,7 @@ class TasksListViewModel {
                 let result = try context.fetch(fechRequest)
                 let user = result.first
                 usersSolvedTasks = (user?.solvedTasks as! StatusTasks).solvedTasks
+                firstTryTasks = (user?.solvedTasks as! StatusTasks).firstTryTasks
             } catch {
                 print(error.localizedDescription)
             }
@@ -465,6 +467,45 @@ class TasksListViewModel {
             }
         }
         return false
+    }
+    
+    func checkIfTaskUnsolved(name: String) -> Bool {
+        let (themeName, _) = getTaskLocation(taskName: name)
+        return unsolvedTasks[themeName]?.contains(name) ?? false
+    }
+    
+    func getDoneTasksNumber() -> Int {
+        var doneTasksNumber = 0
+        for task in tasks {
+            if let taskName = task.name, (checkIfTaskSolved(name: taskName) || checkIfTaskUnsolved(name: taskName)) {
+                doneTasksNumber += 1
+            }
+        }
+        return doneTasksNumber
+    }
+    
+    func getTasksNumber() -> Int {
+        return tasks.count
+    }
+    
+    func getFirstTryTasksNumber() -> Int {
+        var firstTryTasksNumber = 0
+        for task in tasks {
+            if let taskName = task.name, firstTryTasks.contains(taskName) {
+                firstTryTasksNumber += 1
+            }
+        }
+        return firstTryTasksNumber
+    }
+    
+    func getSolvedTasksNumber() -> Int {
+        var solvedTasksNumber = 0
+        for task in tasks {
+            if let taskName = task.name, checkIfTaskSolved(name: taskName) {
+                solvedTasksNumber += 1
+            }
+        }
+        return solvedTasksNumber
     }
     
     func transportData(for viewModel: TaskViewModel, at index: Int) {

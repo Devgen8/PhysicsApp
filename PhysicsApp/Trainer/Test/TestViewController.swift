@@ -20,6 +20,7 @@ class TestViewController: UIViewController {
     @IBOutlet weak var answerButton: UIButton!
     @IBOutlet weak var loaderView: AnimationView!
     @IBOutlet weak var lookAnswersButton: UIButton!
+    @IBOutlet weak var finishButton: UIButton!
     
     var viewModel = TestViewModel()
     var taskNumber = 0
@@ -80,6 +81,7 @@ class TestViewController: UIViewController {
         taskImageView.layer.cornerRadius = 20
         DesignService.designBlueButton(answerButton)
         DesignService.designBlueButton(lookAnswersButton)
+        DesignService.designBlueButton(finishButton)
     }
     
     func createBlurEffect() {
@@ -105,15 +107,12 @@ class TestViewController: UIViewController {
         taskPicker.selectRow(taskNumber, inComponent: 0, animated: true)
         answerTextField.text = viewModel.getUsersAnswer(for: index)
         if taskNumber == 31 {
+            finishButton.isHidden = true
             answerButton.setTitle("Завершить", for: .normal)
         } else {
+            finishButton.isHidden = false
             answerButton.setTitle("Ответить", for: .normal)
         }
-    }
-    
-    @objc func getBackTapped() {
-        Animations.swipeViewController(.fromLeft, for: view)
-        dismiss(animated: true)
     }
     
     @IBAction func answerTapped(_ sender: UIButton) {
@@ -140,6 +139,14 @@ class TestViewController: UIViewController {
         myAnswersViewController.tasksAnswers = viewModel.testAnswers
         myAnswersViewController.delegate = self
         present(myAnswersViewController, animated: true)
+    }
+    
+    @IBAction func finishTapped(_ sender: UIButton) {
+        let testResultsViewController = TestResultsViewController()
+        viewModel.transportData(to: testResultsViewController.viewModel, with: Int(currentDuration))
+        currentDuration = 14100
+        testResultsViewController.modalPresentationStyle = .fullScreen
+        present(testResultsViewController, animated: true)
     }
 }
 

@@ -10,20 +10,18 @@
         <array key="BlackDiamond.ttf">
             <string>BlackDiamond</string>
         </array>
-        <array key="Montserrat-Medium.otf">
+        <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
-        <array key="Montserrat-Regular.ttf">
+        <array key="Montserrat-Regular.otf">
             <string>Montserrat-Regular</string>
         </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainAdminViewController" customModule="PhysicsApp" customModuleProvider="target">
             <connections>
-                <outlet property="battleButton" destination="tDZ-HA-Hey" id="cXv-Jz-LZT"/>
                 <outlet property="messagesButton" destination="8ZP-73-Jcd" id="hSY-pF-g5S"/>
                 <outlet property="quitButton" destination="W1e-DF-6PU" id="jd9-S8-nMn"/>
-                <outlet property="ratingButton" destination="Wxu-DU-6yO" id="8Jp-VB-GRM"/>
                 <outlet property="statsButton" destination="935-Sn-bMT" id="ame-z8-qTb"/>
                 <outlet property="trainerButton" destination="TZD-kh-SJ3" id="X1Y-gC-wNU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -35,7 +33,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="KIU-nr-URR">
-                    <rect key="frame" x="50" y="270" width="314" height="320"/>
+                    <rect key="frame" x="50" y="270" width="314" height="180"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZD-kh-SJ3">
                             <rect key="frame" x="3" y="0.0" width="308" height="40"/>
@@ -50,28 +48,8 @@
                                 <action selector="trainerTapped:" destination="-1" eventType="touchUpInside" id="weO-Gr-bqU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDZ-HA-Hey">
-                            <rect key="frame" x="3" y="70" width="308" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="0dT-DJ-Iq8"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
-                            <state key="normal" title="Битва">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wxu-DU-6yO">
-                            <rect key="frame" x="3" y="140" width="308" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="Jsz-Y9-g2g"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
-                            <state key="normal" title="Рейтинг">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="935-Sn-bMT">
-                            <rect key="frame" x="3" y="210" width="308" height="40"/>
+                            <rect key="frame" x="3" y="70" width="308" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="GyM-aF-Ur2"/>
                             </constraints>
@@ -84,7 +62,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ZP-73-Jcd">
-                            <rect key="frame" x="3" y="280" width="308" height="40"/>
+                            <rect key="frame" x="3" y="140" width="308" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="pP9-xK-uNc"/>
                             </constraints>
@@ -92,18 +70,17 @@
                             <state key="normal" title="Сообщения учеников">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="messagesTapped:" destination="-1" eventType="touchUpInside" id="YjY-TE-IR2"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="TZD-kh-SJ3" secondAttribute="trailing" constant="3" id="0bU-Kg-gBn"/>
-                        <constraint firstItem="Wxu-DU-6yO" firstAttribute="leading" secondItem="KIU-nr-URR" secondAttribute="leading" constant="3" id="5G7-nM-cvm"/>
                         <constraint firstAttribute="trailing" secondItem="935-Sn-bMT" secondAttribute="trailing" constant="3" id="8xP-CS-rvK"/>
-                        <constraint firstAttribute="trailing" secondItem="Wxu-DU-6yO" secondAttribute="trailing" constant="3" id="ELN-wv-7xM"/>
                         <constraint firstItem="935-Sn-bMT" firstAttribute="leading" secondItem="KIU-nr-URR" secondAttribute="leading" constant="3" id="GwL-VF-Yz9"/>
                         <constraint firstAttribute="trailing" secondItem="8ZP-73-Jcd" secondAttribute="trailing" constant="3" id="OTt-Ze-GlW"/>
                         <constraint firstItem="TZD-kh-SJ3" firstAttribute="leading" secondItem="KIU-nr-URR" secondAttribute="leading" constant="3" id="QpR-8B-5pB"/>
-                        <constraint firstItem="tDZ-HA-Hey" firstAttribute="leading" secondItem="KIU-nr-URR" secondAttribute="leading" constant="3" id="gHr-ev-bnJ"/>
-                        <constraint firstAttribute="trailing" secondItem="tDZ-HA-Hey" secondAttribute="trailing" constant="3" id="lBh-uI-Cnl"/>
                         <constraint firstItem="8ZP-73-Jcd" firstAttribute="leading" secondItem="KIU-nr-URR" secondAttribute="leading" constant="3" id="xqI-0r-hGa"/>
                     </constraints>
                 </stackView>
@@ -114,7 +91,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1e-DF-6PU">
-                    <rect key="frame" x="50" y="680" width="314" height="70"/>
+                    <rect key="frame" x="50" y="540" width="314" height="70"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="dgT-lk-21W"/>
                     </constraints>

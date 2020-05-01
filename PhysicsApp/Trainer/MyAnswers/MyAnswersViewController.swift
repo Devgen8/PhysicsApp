@@ -49,7 +49,6 @@ extension MyAnswersViewController: UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         let decorativeView = UIView()
-        decorativeView.backgroundColor = .white
         cell.contentView.addSubview(decorativeView)
         decorativeView.translatesAutoresizingMaskIntoConstraints = false
         decorativeView.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 5).isActive = true
@@ -60,8 +59,10 @@ extension MyAnswersViewController: UITableViewDataSource {
         cell.textLabel?.font = UIFont(name: "Montserrat", size: 20)
         if let answer = tasksAnswers["Задание №\(indexPath.row + 1)"], answer != "" {
             cell.textLabel?.text = "Задание №\(indexPath.row + 1) Ваш ответ: \(answer)"
+            decorativeView.backgroundColor = #colorLiteral(red: 0, green: 0.7012014389, blue: 1, alpha: 1)
         } else {
             cell.textLabel?.text = "Задание №\(indexPath.row + 1) Нет ответа"
+            decorativeView.backgroundColor = .white
         }
         
         return cell

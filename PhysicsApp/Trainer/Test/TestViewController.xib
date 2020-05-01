@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Regular.otf">
+        <array key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
         </array>
     </customFonts>
@@ -16,6 +16,7 @@
             <connections>
                 <outlet property="answerButton" destination="Acs-Sz-87R" id="3z1-Qi-okz"/>
                 <outlet property="answerTextField" destination="UAd-j8-xg3" id="lve-P8-VNm"/>
+                <outlet property="finishButton" destination="QK0-eN-FHw" id="IO0-QE-vS8"/>
                 <outlet property="loaderView" destination="rAo-9w-73U" id="7gx-x3-xRH"/>
                 <outlet property="lookAnswersButton" destination="n4a-bk-ov1" id="MBZ-Cy-dhb"/>
                 <outlet property="taskImageView" destination="sAE-B4-zge" id="gmJ-SH-UWd"/>
@@ -114,6 +115,20 @@
                         <action selector="lookAtMyAnswers:" destination="-1" eventType="touchUpInside" id="D4h-Fk-G93"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QK0-eN-FHw">
+                    <rect key="frame" x="137" y="624" width="140" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="NwR-hO-uwi"/>
+                        <constraint firstAttribute="width" constant="140" id="zbs-5W-1xF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                    <state key="normal" title="Завершить">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="finishTapped:" destination="-1" eventType="touchUpInside" id="L7a-PM-gWv"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -121,6 +136,7 @@
                 <constraint firstItem="n4a-bk-ov1" firstAttribute="top" secondItem="Acs-Sz-87R" secondAttribute="bottom" constant="10" id="CSK-c2-4fa"/>
                 <constraint firstItem="rAo-9w-73U" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="IGT-vS-DKy"/>
                 <constraint firstItem="n4a-bk-ov1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KLC-g2-fah"/>
+                <constraint firstItem="QK0-eN-FHw" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="L9r-oa-EJJ"/>
                 <constraint firstItem="0ko-k5-gsc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="O05-LB-Hkm"/>
                 <constraint firstItem="sAE-B4-zge" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Ogv-NX-TVC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="13T-ML-Og7" secondAttribute="trailing" constant="15" id="SMt-qj-wvG"/>
@@ -132,6 +148,7 @@
                 <constraint firstItem="rAo-9w-73U" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="iqY-WI-Icp"/>
                 <constraint firstItem="Acs-Sz-87R" firstAttribute="top" secondItem="UAd-j8-xg3" secondAttribute="bottom" constant="20" id="jyn-8B-udm"/>
                 <constraint firstItem="UAd-j8-xg3" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="p7l-q6-mUB"/>
+                <constraint firstItem="QK0-eN-FHw" firstAttribute="top" secondItem="n4a-bk-ov1" secondAttribute="bottom" constant="10" id="sYS-Ac-gZh"/>
                 <constraint firstItem="UAd-j8-xg3" firstAttribute="top" secondItem="sAE-B4-zge" secondAttribute="bottom" constant="10" id="v3L-mQ-6kz"/>
                 <constraint firstItem="mQj-Rf-ppf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yu0-w6-2HM"/>
                 <constraint firstItem="sAE-B4-zge" firstAttribute="top" secondItem="DEW-pY-zUp" secondAttribute="bottom" constant="20" id="zQG-lX-pJs"/>

@@ -17,6 +17,7 @@ class TrainerViewModel: TrainerViewModelProvider {
     let usersReference = Firestore.firestore().collection("users")
     var unsolvedTasks = [String:[String]]()
     var solvedTasks = [String:[String]]()
+    var firstTryTasks = [String]()
     var themes = [String]()
     var numberOfTasksIn = [String:Int]()
     var isFirstTimeReading = false
@@ -77,7 +78,9 @@ class TrainerViewModel: TrainerViewModelProvider {
                 //filling user
                 if isFirstTimeReading {
                     let newUser = User(context: context)
-                    let statusTasks = StatusTasks(solvedTasks: solvedTasks, unsolvedTasks: unsolvedTasks)
+                    let statusTasks = StatusTasks(solvedTasks: solvedTasks,
+                                                  unsolvedTasks: unsolvedTasks,
+                                                  firstTryTasks: firstTryTasks)
                     newUser.solvedTasks = statusTasks
                 }
                 
@@ -171,8 +174,10 @@ class TrainerViewModel: TrainerViewModelProvider {
                 }
                 let mistakeTasks = document.data()?["unsolvedTasks"] as? [String : [String]]
                 let wrightTasks = document.data()?["solvedTasks"] as? [String : [String]]
+                let firstTryTasks = document.data()?["firstTryTasks"] as? [String]
                 self.unsolvedTasks = mistakeTasks ?? [String:[String]]()
                 self.solvedTasks = wrightTasks ?? [String:[String]]()
+                self.firstTryTasks = firstTryTasks ?? [String]()
                 self.saveTasksInCoreData()
                 self.updateKeysInfo()
                 completion(true)

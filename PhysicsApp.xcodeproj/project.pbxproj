@@ -178,6 +178,14 @@
 		484293BD245B023100BE8CB6 /* TasksDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293BB245B023100BE8CB6 /* TasksDetailViewController.swift */; };
 		484293BE245B023100BE8CB6 /* TasksDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484293BC245B023100BE8CB6 /* TasksDetailViewController.xib */; };
 		484293C1245B02A900BE8CB6 /* TasksDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293C0245B02A900BE8CB6 /* TasksDetailViewModel.swift */; };
+		484293C3245B31A400BE8CB6 /* FormSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293C2245B31A400BE8CB6 /* FormSheetViewModel.swift */; };
+		484293C6245B3CF300BE8CB6 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293C4245B3CF300BE8CB6 /* MessageTableViewCell.swift */; };
+		484293C7245B3CF300BE8CB6 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484293C5245B3CF300BE8CB6 /* MessageTableViewCell.xib */; };
+		484293CA245B402500BE8CB6 /* AdminMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293C8245B402500BE8CB6 /* AdminMessagesViewController.swift */; };
+		484293CB245B402500BE8CB6 /* AdminMessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484293C9245B402500BE8CB6 /* AdminMessagesViewController.xib */; };
+		484293CD245B41EA00BE8CB6 /* AdminMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293CC245B41EA00BE8CB6 /* AdminMessagesViewModel.swift */; };
+		484293CF245B423A00BE8CB6 /* AdminMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293CE245B423A00BE8CB6 /* AdminMessageModel.swift */; };
+		484293D4245C23A600BE8CB6 /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293D3245C23A500BE8CB6 /* ProgressRingView.swift */; };
 		486362162441E7AB004924FD /* ProgressStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486362152441E7AB004924FD /* ProgressStatsView.swift */; };
 		6910FC61EACA1D262F52A3D2 /* Pods_PhysicsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */; };
 /* End PBXBuildFile section */
@@ -357,6 +365,14 @@
 		484293BB245B023100BE8CB6 /* TasksDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDetailViewController.swift; sourceTree = "<group>"; };
 		484293BC245B023100BE8CB6 /* TasksDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TasksDetailViewController.xib; sourceTree = "<group>"; };
 		484293C0245B02A900BE8CB6 /* TasksDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDetailViewModel.swift; sourceTree = "<group>"; };
+		484293C2245B31A400BE8CB6 /* FormSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSheetViewModel.swift; sourceTree = "<group>"; };
+		484293C4245B3CF300BE8CB6 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		484293C5245B3CF300BE8CB6 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
+		484293C8245B402500BE8CB6 /* AdminMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessagesViewController.swift; sourceTree = "<group>"; };
+		484293C9245B402500BE8CB6 /* AdminMessagesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminMessagesViewController.xib; sourceTree = "<group>"; };
+		484293CC245B41EA00BE8CB6 /* AdminMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessagesViewModel.swift; sourceTree = "<group>"; };
+		484293CE245B423A00BE8CB6 /* AdminMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessageModel.swift; sourceTree = "<group>"; };
+		484293D3245C23A500BE8CB6 /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
 		486362152441E7AB004924FD /* ProgressStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStatsView.swift; sourceTree = "<group>"; };
 		5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhysicsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B327A80248CB58F8603354D5 /* Pods-PhysicsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhysicsApp.debug.xcconfig"; path = "Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -404,6 +420,7 @@
 				484293A5245AB7A300BE8CB6 /* AwardCompleted */,
 				244ABA46242A93DE00066CB3 /* GoogleService-Info.plist */,
 				244ABB6F24361F8700066CB3 /* ProgressBarView.swift */,
+				484293D3245C23A500BE8CB6 /* ProgressRingView.swift */,
 				48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */,
 				48271783243E0AEF003C6CF1 /* Mixes */,
 				244ABAD0242A9B1500066CB3 /* Profile */,
@@ -431,6 +448,7 @@
 				484293AC245AB89400BE8CB6 /* AdminStats */,
 				484293BF245B023800BE8CB6 /* TasksDetail */,
 				4842935424519F5A00BE8CB6 /* TrainerAdmin */,
+				484293D0245BF20E00BE8CB6 /* AdminMessages */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -439,8 +457,8 @@
 			isa = PBXGroup;
 			children = (
 				244ABA4A242A9A6E00066CB3 /* MainAdminViewModel.swift */,
-				244ABA4B242A9A6E00066CB3 /* MainAdminViewController.xib */,
 				244ABA4C242A9A6E00066CB3 /* MainAdminViewController.swift */,
+				244ABA4B242A9A6E00066CB3 /* MainAdminViewController.xib */,
 			);
 			path = MainAdmin;
 			sourceTree = "<group>";
@@ -512,6 +530,8 @@
 				48429329244C211F00BE8CB6 /* TestResultStatsTableViewCell.xib */,
 				4842932C244C24CD00BE8CB6 /* TestResultTaskTableViewCell.swift */,
 				4842932D244C24CD00BE8CB6 /* TestResultTaskTableViewCell.xib */,
+				484293C4245B3CF300BE8CB6 /* MessageTableViewCell.swift */,
+				484293C5245B3CF300BE8CB6 /* MessageTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -692,6 +712,7 @@
 			isa = PBXGroup;
 			children = (
 				244ABAE4242A9B1600066CB3 /* FormSheetViewController.swift */,
+				484293C2245B31A400BE8CB6 /* FormSheetViewModel.swift */,
 				244ABAEE242A9B1600066CB3 /* FormSheetViewController.xib */,
 			);
 			path = FormSheet;
@@ -893,6 +914,17 @@
 			path = TasksDetail;
 			sourceTree = "<group>";
 		};
+		484293D0245BF20E00BE8CB6 /* AdminMessages */ = {
+			isa = PBXGroup;
+			children = (
+				484293C8245B402500BE8CB6 /* AdminMessagesViewController.swift */,
+				484293CC245B41EA00BE8CB6 /* AdminMessagesViewModel.swift */,
+				484293CE245B423A00BE8CB6 /* AdminMessageModel.swift */,
+				484293C9245B402500BE8CB6 /* AdminMessagesViewController.xib */,
+			);
+			path = AdminMessages;
+			sourceTree = "<group>";
+		};
 		C45A5A78C5B824455C8DA084 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1002,6 +1034,7 @@
 				4842931F2448C4BA00BE8CB6 /* MyAnswersViewController.xib in Resources */,
 				244ABA4E242A9A6E00066CB3 /* MainAdminViewController.xib in Resources */,
 				244ABB18242A9B1700066CB3 /* FormSheetViewController.xib in Resources */,
+				484293CB245B402500BE8CB6 /* AdminMessagesViewController.xib in Resources */,
 				244ABAAE242A9AF400066CB3 /* Montserrat-Thin.otf in Resources */,
 				244ABAA7242A9AF400066CB3 /* Montserrat-BlackItalic.otf in Resources */,
 				244ABB54242CED4000066CB3 /* AwardDetailViewController.xib in Resources */,
@@ -1043,6 +1076,7 @@
 				244ABAB5242A9AF400066CB3 /* Montserrat-Bold.ttf in Resources */,
 				244ABAAA242A9AF400066CB3 /* Montserrat-Medium.ttf in Resources */,
 				244ABABF242A9AF400066CB3 /* Montserrat-Italic.otf in Resources */,
+				484293C7245B3CF300BE8CB6 /* MessageTableViewCell.xib in Resources */,
 				244ABAA6242A9AF400066CB3 /* Montserrat-Bold.otf in Resources */,
 				244ABAAC242A9AF400066CB3 /* Montserrat-Light.otf in Resources */,
 				244ABABA242A9AF400066CB3 /* Montserrat-SemiBold.ttf in Resources */,
@@ -1105,6 +1139,7 @@
 				484293C1245B02A900BE8CB6 /* TasksDetailViewModel.swift in Sources */,
 				4842931E2448C4BA00BE8CB6 /* MyAnswersViewController.swift in Sources */,
 				244ABA7D242A9AEA00066CB3 /* FirebaseService.swift in Sources */,
+				484293D4245C23A600BE8CB6 /* ProgressRingView.swift in Sources */,
 				48429318244855DD00BE8CB6 /* TestViewController.swift in Sources */,
 				4802C2E9243EF1330017B75B /* DayMixViewModel.swift in Sources */,
 				244ABB0C242A9B1700066CB3 /* TrainerViewController.swift in Sources */,
@@ -1129,7 +1164,9 @@
 				486362162441E7AB004924FD /* ProgressStatsView.swift in Sources */,
 				244ABB1A242A9B1700066CB3 /* UnsolvedThemesViewController.swift in Sources */,
 				244ABA79242A9ADF00066CB3 /* CustomProtocols.swift in Sources */,
+				484293C6245B3CF300BE8CB6 /* MessageTableViewCell.swift in Sources */,
 				244ABB17242A9B1700066CB3 /* TaskViewModel.swift in Sources */,
+				484293CF245B423A00BE8CB6 /* AdminMessageModel.swift in Sources */,
 				244ABA6E242A9AC900066CB3 /* AnswerChooserViewModel.swift in Sources */,
 				244ABA74242A9AD700066CB3 /* ThemeTableViewCell.swift in Sources */,
 				244ABB792438D3E800066CB3 /* AdminStatsViewController.swift in Sources */,
@@ -1143,6 +1180,7 @@
 				244ABAFF242A9B1700066CB3 /* TrainerAdminViewController.swift in Sources */,
 				244ABA68242A9AC900066CB3 /* GamesNumberAlertViewController.swift in Sources */,
 				244ABB53242CED4000066CB3 /* AwardDetailViewController.swift in Sources */,
+				484293CD245B41EA00BE8CB6 /* AdminMessagesViewModel.swift in Sources */,
 				4802C2E4243E436D0017B75B /* MixViewController.swift in Sources */,
 				484293A124588FEF00BE8CB6 /* TaskData+CoreDataClass.swift in Sources */,
 				244ABB21242A9B1700066CB3 /* SignUpViewModel.swift in Sources */,
@@ -1166,7 +1204,9 @@
 				244ABB03242A9B1700066CB3 /* ProfileModel.swift in Sources */,
 				244ABB09242A9B1700066CB3 /* UnsolvedThemesViewModel.swift in Sources */,
 				244ABB02242A9B1700066CB3 /* ProfileViewModel.swift in Sources */,
+				484293C3245B31A400BE8CB6 /* FormSheetViewModel.swift in Sources */,
 				244ABA7B242A9AE500066CB3 /* DesignService.swift in Sources */,
+				484293CA245B402500BE8CB6 /* AdminMessagesViewController.swift in Sources */,
 				244ABB7024361F8800066CB3 /* ProgressBarView.swift in Sources */,
 				48429384245420C500BE8CB6 /* Trainer+CoreDataClass.swift in Sources */,
 				244ABB05242A9B1700066CB3 /* WelcomeViewController.swift in Sources */,

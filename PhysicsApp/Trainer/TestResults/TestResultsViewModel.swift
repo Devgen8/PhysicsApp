@@ -19,6 +19,19 @@ class TestResultsViewModel {
     var userAnswers = [String:String]()
     var answersCorrection = [Bool]()
     var taskImages = [String:UIImage]()
+    var openedCells = [Int]()
+    
+    func isCellOpened(index: Int) -> Bool {
+        return openedCells.contains(index)
+    }
+    
+    func closeCell(for index: Int) {
+        openedCells = openedCells.filter( { $0 != index } )
+    }
+    
+    func openCell(for index: Int) {
+        openedCells.append(index)
+    }
     
     func getTestDurationString() -> String {
         let seconds = 14100 - timeTillEnd

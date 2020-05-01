@@ -66,9 +66,27 @@ extension TestResultsViewController: UITableViewDelegate {
         case 0:
             return 200
         case 1:
-            return 350
+            if viewModel.isCellOpened(index: indexPath.row) {
+                return 350
+            } else {
+                return 140
+            }
         default:
             return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            tableView.beginUpdates()
+            if viewModel.isCellOpened(index: indexPath.row) {
+                (tableView.cellForRow(at: indexPath) as! TestResultTaskTableViewCell).extendButton.setImage(#imageLiteral(resourceName: "multimedia"), for: .normal)
+                viewModel.closeCell(for: indexPath.row)
+            } else {
+                (tableView.cellForRow(at: indexPath) as! TestResultTaskTableViewCell).extendButton.setImage(#imageLiteral(resourceName: "up-arrow"), for: .normal)
+                viewModel.openCell(for: indexPath.row)
+            }
+            tableView.endUpdates()
         }
     }
 }
@@ -124,7 +142,6 @@ extension TestResultsViewController: UITableViewDataSource {
         }
         cell.wrightAnswerLabel.text = viewModel.getWrightAnswer(for: taskName)
         let isWright = viewModel.getTaskCorrection(for: index)
-        cell.isCorrectImage.image = isWright ? #imageLiteral(resourceName: "checked"):#imageLiteral(resourceName: "close")
         cell.setupCorrectionBar(with: isWright ? .systemGreen : .red)
         return cell
     }
