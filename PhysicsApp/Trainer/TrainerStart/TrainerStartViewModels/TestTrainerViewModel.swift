@@ -14,7 +14,6 @@ import CoreData
 class TestTrainerViewModel: TrainerViewModelProvider {
     
     let testReference = Firestore.firestore().collection("tests")
-    let egeReference = Firestore.firestore().collection("EGE")
     var tests = [String]()
     var numbersOfWrightTasks = [String:Int]()
     var numbersOfSemiWrightTasks = [String:Int]()
@@ -124,23 +123,25 @@ class TestTrainerViewModel: TrainerViewModelProvider {
     }
     
     func getEgeData(completion: @escaping (Bool) -> ()) {
-        egeReference.document("scales").getDocument { (document, error) in
-            guard error == nil else {
-                print("Error reading ege data for trainer: \(String(describing: error?.localizedDescription))")
-                return
+        var index = 1
+        for points in EGEInfo.primarySystem {
+            primarySystem["Задание №\(index)"] = points
+            index += 1
+        }
+        index = 0
+        for points in EGEInfo.hundredSystem {
+            hundredSystem["\(index)"] = points
+            index += 1
+        }
+        if self.isFirstTimeReading {
+            self.getUsersStats { (isReady) in
+                completion(isReady)
             }
-            self.primarySystem = document?.data()?["primarySystem"] as? [String:Int] ?? [:]
-            self.hundredSystem = document?.data()?["hundredSystem"] as? [String:Int] ?? [:]
-            if self.isFirstTimeReading {
-                self.getUsersStats { (isReady) in
-                    completion(isReady)
-                }
-            } else {
-                self.saveTestsInCoreData()
-                self.updateKeysInfo()
-                self.getTestsFromCoreData { (isReady) in
-                    completion(isReady)
-                }
+        } else {
+            self.saveTestsInCoreData()
+            self.updateKeysInfo()
+            self.getTestsFromCoreData { (isReady) in
+                completion(isReady)
             }
         }
     }

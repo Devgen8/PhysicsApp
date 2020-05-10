@@ -14,7 +14,6 @@ import FirebaseStorage
 class AdminStatsViewModel {
     
     let adminStatsReference = Firestore.firestore().collection("adminStats")
-    let egeReference = Firestore.firestore().collection("EGE")
     let trainerReference = Firestore.firestore().collection("trainer")
     var tasks = [AdminStatsModel]()
     var tasksLevel = [String:[String]]()
@@ -92,21 +91,17 @@ class AdminStatsViewModel {
     }
     
     func getTasksLevel(completion: @escaping (Bool) -> ()) {
-        egeReference.document("scales").getDocument { (document, error) in
-            guard error == nil else {
-                print("Error reading tasks level: \(String(describing: error?.localizedDescription))")
-                completion(false)
-                return
-            }
-            var levels = [String:[String]]()
-            levels["Базовый"] = document?.data()?["baseTasks"] as? [String] ?? []
-            levels["Повышенный"] = document?.data()?["advancedTasks"] as? [String] ?? []
-            levels["Высокий"] = document?.data()?["masterTasks"] as? [String] ?? []
-            self.tasksLevel = levels
-            self.saveTasksInCoreData()
-            self.updateKeysInfo()
-            completion(true)
-        }
+        var levels = [String:[String]]()
+        levels["Базовый"] = []
+        levels["Повышенный"] = []
+        levels["Высокий"] = []
+        EGEInfo.baseTasks.forEach({ levels["Базовый"]?.append("Задание №\($0)") })
+        EGEInfo.advancedTasks.forEach({ levels["Повышенный"]?.append("Задание №\($0)") })
+        EGEInfo.masterTasks.forEach({ levels["Высокий"]?.append("Задание №\($0)") })
+        self.tasksLevel = levels
+        self.saveTasksInCoreData()
+        self.updateKeysInfo()
+        completion(true)
     }
     
     func updateKeysInfo() {

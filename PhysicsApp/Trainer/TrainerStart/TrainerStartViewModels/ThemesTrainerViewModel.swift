@@ -13,7 +13,6 @@ import CoreData
 
 class ThemesTrainerViewModel: TrainerViewModelProvider {
     
-    let egeReference = Firestore.firestore().collection("EGE")
     let trainerReference = Firestore.firestore().collection("trainer")
     let usersReference = Firestore.firestore().collection("users")
     var themes = [String]()
@@ -42,20 +41,9 @@ class ThemesTrainerViewModel: TrainerViewModelProvider {
     }
     
     func getThemesFromFirestore(completion: @escaping (Bool) -> ()) {
-        egeReference.document("themes").getDocument { [weak self] (document, error) in
-            guard let `self` = self, error == nil else {
-                print("Error reading themes for trainer: \(String(describing: error?.localizedDescription))")
-                completion(false)
-                return
-            }
-            if let themesFromDB = document?.data()?["themes"] as? [String] {
-                self.themes = themesFromDB
-            } else {
-                completion(false)
-            }
-            self.getThemeTasks { (isReady) in
-                completion(isReady)
-            }
+        themes = EGEInfo.egeSystemThemes
+        getThemeTasks { (isReady) in
+            completion(isReady)
         }
     }
     

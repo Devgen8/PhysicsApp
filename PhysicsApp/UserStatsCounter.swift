@@ -14,7 +14,6 @@ class UserStatsCounter {
     
     let userReference = Firestore.firestore().collection("users")
     let trainerReference = Firestore.firestore().collection("trainer")
-    let egeReference = Firestore.firestore().collection("EGE")
     var srEGE = 0
     var nextValue = 0
     static let shared = UserStatsCounter()
@@ -24,72 +23,36 @@ class UserStatsCounter {
     }
     
     func calculateSrEGE() {
-        getUserTasksPercentage { [weak self] (solvedTasks, unsolvedTasks, themes) in
-            guard let `self` = self else {
-                return
-            }
-            self.getMarkSystem { (primarySystem, hundredSystem) in
-                var srEge = 0.0
-                for theme in themes {
-                    var accuracy = 0.0
-                    if let solved = solvedTasks[theme]?.count,
-                        let unsolved = unsolvedTasks[theme]?.count,
-                        (unsolved != 0 || solved != 0) {
-                        accuracy = Double(solved) / Double(solved + unsolved)
-                    }
-                    if let taskPoints = primarySystem[theme] {
-                        srEge += Double(taskPoints) * accuracy
-                    }
+        getUserTasksPercentage { (solvedTasks, unsolvedTasks, themes) in
+            var srEge = 0.0
+            var themeIndex = 0
+            for theme in themes {
+                var accuracy = 0.0
+                if let solved = solvedTasks[theme]?.count,
+                    let unsolved = unsolvedTasks[theme]?.count,
+                    (unsolved != 0 || solved != 0) {
+                    accuracy = Double(solved) / Double(solved + unsolved)
                 }
-                UserStatsCounter.shared.srEGE = hundredSystem["\(Int(srEge))"] ?? 0
-                UserStatsCounter.shared.nextValue = hundredSystem["\(Int(srEge + 1))"] ?? 0
+                srEge += Double(EGEInfo.primarySystem[themeIndex]) * accuracy
+                themeIndex += 1
             }
+            UserStatsCounter.shared.srEGE = EGEInfo.hundredSystem[Int(srEge)]
+            UserStatsCounter.shared.nextValue = EGEInfo.hundredSystem[Int(srEge + 1)]
         }
     }
     
     func getUserTasksPercentage(completion: @escaping ([String:[String]], [String:[String]], [String]) -> ()) {
         if let userId = Auth.auth().currentUser?.uid {
-            userReference.document(userId).getDocument { [weak self] (document, error) in
-                guard let `self` = self, error == nil else {
+            userReference.document(userId).getDocument { (document, error) in
+                guard error == nil else {
                     print("error reading solvedTasks: \(String(describing: error?.localizedDescription))")
                     return
                 }
                 let solvedTasks = document?.data()?["solvedTasks"] as? [String:[String]]
                 let unsolvedTasks = document?.data()?["unsolvedTasks"] as? [String:[String]]
-                self.getThemes { (themes) in
-                    if let solvedTasks = solvedTasks, let unsolvedTasks = unsolvedTasks {
-                        completion(solvedTasks, unsolvedTasks, themes)
-                    }
+                if let solvedTasks = solvedTasks, let unsolvedTasks = unsolvedTasks {
+                    completion(solvedTasks, unsolvedTasks, EGEInfo.egeSystemTasks)
                 }
-            }
-        }
-    }
-    
-    func getThemes(completion: @escaping ([String]) -> ()) {
-        trainerReference.getDocuments { (snapshot, error) in
-            guard error == nil, let documents = snapshot?.documents else {
-                print("error reading themes: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            var themes = [String]()
-            for document in documents {
-                if let theme = document.data()["name"] as? String {
-                    themes.append(theme)
-                }
-            }
-            completion(themes)
-        }
-    }
-    
-    func getMarkSystem(completion: @escaping ([String:Int], [String:Int]) -> ()) {
-        egeReference.document("scales").getDocument { (document, error) in
-            guard error == nil else {
-                print("error reading mark systems: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            if let primarySystem = document?.data()?["primarySystem"] as? [String:Int],
-                let hundredSystem = document?.data()?["hundredSystem"] as? [String:Int] {
-                completion(primarySystem, hundredSystem)
             }
         }
     }

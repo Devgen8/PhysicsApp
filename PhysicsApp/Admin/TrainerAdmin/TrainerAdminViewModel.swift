@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseStorage
 
 class TrainerAdminViewModel {
-    let egeReference = Firestore.firestore().collection("EGE")
+    
     let trainerReference = Firestore.firestore().collection("trainer")
     let testReference = Firestore.firestore().collection("tests")
     var tasks = [String]()
@@ -28,18 +28,11 @@ class TrainerAdminViewModel {
     var wrightAnswer = ""
     
     func getTrainerData(completion: @escaping (Bool) -> ()) {
-        egeReference.document("themes").getDocument { [weak self] (document, error) in
-            guard error == nil else {
-                print("Error reading themes in admin: \(String(describing: error?.localizedDescription))")
-                completion(false)
-                return
-            }
-            self?.tasks = document?.data()?["tasks"] as? [String] ?? []
-            self?.selectedTask = self?.tasks[0]
-            self?.themes = document?.data()?["themes"] as? [String] ?? []
-            self?.selectedTheme = self?.themes[0]
-            completion(true)
-        }
+        tasks = EGEInfo.egeSystemTasks
+        selectedTask = tasks[0]
+        themes = EGEInfo.egeSystemThemes
+        selectedTheme = themes[0]
+        completion(true)
     }
     
     func uploadNewTaskToTest(_ testName: String, completion: @escaping (Bool) -> ()) {
