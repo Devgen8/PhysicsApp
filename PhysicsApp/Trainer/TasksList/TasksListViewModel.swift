@@ -121,6 +121,7 @@ class TasksListViewModel {
                                 newTask.stringAnswer = (task as! TaskData).stringAnswer
                                 newTask.image = UIImage(data: (task as! TaskData).image ?? Data())
                                 newTask.name = (task as! TaskData).name
+                                newTask.taskDescription = UIImage(data: (task as! TaskData).taskDescription ?? Data())
                                 tasks.append(newTask)
                             }
                         }
@@ -160,6 +161,7 @@ class TasksListViewModel {
                         newTask.stringAnswer = task.stringAnswer
                         newTask.image = task.image?.pngData()
                         newTask.name = task.name
+                        newTask.taskDescription = task.taskDescription?.pngData()
                         arrayOfThemes[themeName]! += [newTask]
                     }
                 }
@@ -196,6 +198,7 @@ class TasksListViewModel {
                         newTask.serialNumber = Int((task as! TaskData).serialNumber)
                         newTask.stringAnswer = (task as! TaskData).stringAnswer
                         newTask.image = UIImage(data: (task as! TaskData).image ?? Data())
+                        newTask.taskDescription = UIImage(data: (task as! TaskData).taskDescription ?? Data())
                         newTask.name = (task as! TaskData).name
                         tasks.append(newTask)
                     }
@@ -224,6 +227,7 @@ class TasksListViewModel {
                         newTask.serialNumber = Int((task as! TaskData).serialNumber)
                         newTask.stringAnswer = (task as! TaskData).stringAnswer
                         newTask.image = UIImage(data: (task as! TaskData).image ?? Data())
+                        newTask.taskDescription = UIImage(data: (task as! TaskData).taskDescription ?? Data())
                         newTask.name = (task as! TaskData).name
                         tasks.append(newTask)
                     }
@@ -256,6 +260,7 @@ class TasksListViewModel {
                     }
                     newTask.stringAnswer = task.stringAnswer
                     newTask.image = task.image?.pngData()
+                    newTask.taskDescription = task.taskDescription?.pngData()
                     newTask.name = task.name
                     newTasks.add(newTask)
                 }
@@ -415,6 +420,29 @@ class TasksListViewModel {
                 }
                 if let data = data, let image = UIImage(data: data) {
                     self.tasks[index].image = image
+                    count += 1
+                }
+                if count == self.tasks.count {
+                    self.downloadDescription { (isReady) in
+                        completion(isReady)
+                    }
+                }
+            }
+        }
+    }
+    
+    func downloadDescription(completion: @escaping (Bool) -> ()) {
+        var count = 0
+        for index in stride(from: 0, to: tasks.count, by: 1) {
+            let (themeName, taskNumber) = getTaskLocation(taskName: tasks[index].name ?? "")
+            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
+            imageRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
+                guard let `self` = self, error == nil else {
+                    print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                if let data = data, let image = UIImage(data: data) {
+                    self.tasks[index].taskDescription = image
                     count += 1
                 }
                 if count == self.tasks.count {

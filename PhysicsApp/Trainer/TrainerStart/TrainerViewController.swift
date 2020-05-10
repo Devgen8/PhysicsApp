@@ -122,9 +122,19 @@ extension TrainerViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("ThemeTableViewCell", owner: self, options: nil)?.first as! ThemeTableViewCell
         
-        cell.themeName.text = viewModel.getTheme(for: indexPath.row)
-        let (success, mistake) = viewModel.getTasksProgress(for: indexPath.row)
-        cell.setupStatsLines(mistakesProgress: mistake, successProgress: success, fullWidth: tableView.frame.size.width - 6)
+        var cellName = viewModel.getTheme(for: indexPath.row)
+        if viewModel is TestTrainerViewModel {
+            let numberOfPoints = (viewModel as? TestTrainerViewModel)?.getTestPoints(for: indexPath.row) ?? 0
+            if numberOfPoints != 0 {
+                cellName += " (\(numberOfPoints) баллов)"
+            }
+            let (success, semiSuccess) = viewModel.getTasksProgress(for: indexPath.row)
+            cell.setupStatsLines(mistakesProgress: 1.0, successProgress: success, fullWidth: tableView.frame.size.width - 6, semiSuccessProgress: semiSuccess)
+        } else {
+            let (success, mistake) = viewModel.getTasksProgress(for: indexPath.row)
+            cell.setupStatsLines(mistakesProgress: mistake, successProgress: success, fullWidth: tableView.frame.size.width - 6)
+        }
+        cell.themeName.text = cellName
         return cell
     }
 }

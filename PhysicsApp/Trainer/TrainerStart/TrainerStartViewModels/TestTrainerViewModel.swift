@@ -14,8 +14,13 @@ import CoreData
 class TestTrainerViewModel: TrainerViewModelProvider {
     
     let testReference = Firestore.firestore().collection("tests")
+    let egeReference = Firestore.firestore().collection("EGE")
     var tests = [String]()
     var numbersOfWrightTasks = [String:Int]()
+    var numbersOfSemiWrightTasks = [String:Int]()
+    var testsPoints = [String:Int]()
+    var primarySystem = [String:Int]()
+    var hundredSystem = [String:Int]()
     var isFirstTimeReading = false
     
     func getThemes(completion: @escaping (Bool) -> ()) {
@@ -58,6 +63,8 @@ class TestTrainerViewModel: TrainerViewModelProvider {
                         let egeTest = (test as! Test)
                         tests.append(egeTest.name ?? "")
                         numbersOfWrightTasks[egeTest.name ?? ""] = Int(egeTest.numberOfWrightAnswers)
+                        testsPoints[egeTest.name ?? ""] = Int(egeTest.points)
+                        numbersOfSemiWrightTasks[egeTest.name ?? ""] = Int(egeTest.numberOfSemiWrightAnswers)
                     }
                 }
                 completion(true)
@@ -78,9 +85,12 @@ class TestTrainerViewModel: TrainerViewModelProvider {
                     let newTest = Test(context: context)
                     newTest.name = test
                     newTest.numberOfWrightAnswers = Int16(numbersOfWrightTasks[test] ?? 0)
+                    newTest.numberOfSemiWrightAnswers = Int16(numbersOfSemiWrightTasks[test] ?? 0)
+                    newTest.points = Int16(testsPoints[test] ?? 0)
                     egeTests.add(newTest)
                 }
                 trainer?.tests = egeTests
+                trainer?.testParameters = TestParametersObject(primarySystem: primarySystem, hundredSystem: hundredSystem)
 
                 try context.save()
             } catch {
@@ -107,6 +117,20 @@ class TestTrainerViewModel: TrainerViewModelProvider {
                     self.tests.append(testName)
                 }
             }
+            self.getEgeData { (isReady) in
+                completion(isReady)
+            }
+        }
+    }
+    
+    func getEgeData(completion: @escaping (Bool) -> ()) {
+        egeReference.document("scales").getDocument { (document, error) in
+            guard error == nil else {
+                print("Error reading ege data for trainer: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            self.primarySystem = document?.data()?["primarySystem"] as? [String:Int] ?? [:]
+            self.hundredSystem = document?.data()?["hundredSystem"] as? [String:Int] ?? [:]
             if self.isFirstTimeReading {
                 self.getUsersStats { (isReady) in
                     completion(isReady)
@@ -130,6 +154,8 @@ class TestTrainerViewModel: TrainerViewModelProvider {
                 for document in documents {
                     if let name = document.data()["name"] as? String {
                         self.numbersOfWrightTasks[name] = document.data()["doneTasks"] as? Int ?? 0
+                        self.testsPoints[name] = document.data()["points"] as? Int ?? 0
+                        self.numbersOfSemiWrightTasks[name] = document.data()["semiDoneTasks"] as? Int ?? 0
                     }
                 }
                 self.saveTestsInCoreData()
@@ -149,7 +175,14 @@ class TestTrainerViewModel: TrainerViewModelProvider {
     
     func getTasksProgress(for index: Int) -> (Float, Float) {
         let testName = tests[index]
-        return (Float(Float(numbersOfWrightTasks[testName] ?? 0) / Float(32)), 1.0)
+        let success = Float(Float(numbersOfWrightTasks[testName] ?? 0) / Float(32))
+        let semiSuccess = Float(Float(numbersOfSemiWrightTasks[testName] ?? 0) / Float(32)) + success
+        return (success, semiSuccess)
+    }
+    
+    func getTestPoints(for index: Int) -> Int {
+        let testName = tests[index]
+        return testsPoints[testName] ?? 0
     }
     
     // we do not need this functions for this view model

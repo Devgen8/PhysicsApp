@@ -12,6 +12,10 @@ protocol UnsolvedTaskUpdater {
     func updateUnsolvedTasks(with unsolvedTasks: [String:[String]], and solvedTasks: [String:[String]]?)
 }
 
+protocol TestAnswersUpdater {
+    func deleteTestsAnswers()
+}
+
 protocol DataConstructer {
     var unsolvedTasks: [String:[String]] { set get }
     func constructData(for row: Int) -> String
@@ -35,4 +39,8 @@ protocol TrainerViewModelProvider {
     func getTasksProgress(for index: Int) -> (Float, Float)
     func getUnsolvedTasksCount() -> Int
     func getUnsolvedTasks() -> [String:[String]]
+}
+
+protocol CPartPointsUpdater {
+    func updatePoints(for index: Int, with points: Int)
 }

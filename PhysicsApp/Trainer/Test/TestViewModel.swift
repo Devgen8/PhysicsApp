@@ -21,18 +21,24 @@ class TestViewModel {
     var timeTillEnd = 14100
     var wrightAnswers = [String:(Double?, Double?, String?)]()
     var tasksImages = [String:UIImage]()
+    var tasksDescriptions = [String:UIImage]()
     
     func getTestTasks(completion: @escaping (Bool) -> ()) {
         if let notUpdatedTests = UserDefaults.standard.value(forKey: "notUpdatedTests") as? [String],
             notUpdatedTests.contains(name) {
-            getTasksFromFirestore { (isReady) in
-                completion(isReady)
+            getTasksFromFirestore { (_) in
+                completion(!self.isTestFinished())
             }
         } else {
-            getTasksFromCoreData { (isReady) in
-                completion(isReady)
+            getTasksFromCoreData { (_) in
+                completion(!self.isTestFinished())
             }
         }
+    }
+    
+    func isTestFinished() -> Bool {
+        let finishedTests = UserDefaults.standard.value(forKey: "finishedTests") as? [String] ?? []
+        return finishedTests.contains(name)
     }
     
     func getTasksFromCoreData(completion: @escaping (Bool) -> ()) {
@@ -50,6 +56,7 @@ class TestViewModel {
                     for task in tasks {
                         wrightAnswers[task.name ?? ""] = (task.wrightAnswer, task.alternativeAnswer, task.stringAnswer)
                         tasksImages[task.name ?? ""] = task.image
+                        tasksDescriptions[task.name ?? ""] = task.taskDescription
                     }
                 }
                 
@@ -124,6 +131,30 @@ class TestViewModel {
                     let taskName = "Задание №\(index + 1)"
                     self.tasksImages[taskName] = image
                     self.tasks.first(where: { $0.name == taskName })?.image = image
+                }
+                count += 1
+                if count == self.tasks.count {
+                    self.downloadDesciptions { (isReady) in
+                        completion(isReady)
+                    }
+                }
+            }
+        }
+    }
+    
+    func downloadDesciptions(completion: @escaping (Bool) -> ()) {
+        var count = 0
+        for index in stride(from: 0, to: tasks.count, by: 1) {
+            let imageRef = Storage.storage().reference().child("tests/\(name)/task\(index + 1)description.png")
+            imageRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
+                guard let `self` = self, error == nil else {
+                    print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                if let data = data, let image = UIImage(data: data) {
+                    let taskName = "Задание №\(index + 1)"
+                    self.tasksDescriptions[taskName] = image
+                    self.tasks.first(where: { $0.name == taskName })?.taskDescription = image
                 }
                 count += 1
                 if count == self.tasks.count {
@@ -206,13 +237,14 @@ class TestViewModel {
         return testAnswers["Задание №1"]
     }
     
-    func transportData(to viewModel: TestResultsViewModel, with time: Int) {
+    func transportData(to viewModel: CPartTestViewModel, with time: Int) {
         viewModel.timeTillEnd = time
         viewModel.wrightAnswers = wrightAnswers
-        viewModel.userAnswers = testAnswers
-        viewModel.taskImages = tasksImages
-        viewModel.testName = name
-        deleteData()
+        viewModel.testAnswers = testAnswers
+        viewModel.tasksImages = tasksImages
+        viewModel.name = name
+        viewModel.testAnswersUpdater = self
+        //deleteData()
     }
     
     func deleteData() {
@@ -222,5 +254,11 @@ class TestViewModel {
         }
         testAnswers = newAnswers
         timeTillEnd = 14100
+    }
+}
+
+extension TestViewModel: TestAnswersUpdater {
+    func deleteTestsAnswers() {
+        deleteData()
     }
 }

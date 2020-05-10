@@ -15,11 +15,18 @@ class TestResultsViewModel {
     var testName = ""
     var timeTillEnd = 0
     var wrightAnswerNumber = 0
+    var semiWrightAnswerNumber = 0
     var wrightAnswers = [String:(Double?, Double?, String?)]()
     var userAnswers = [String:String]()
-    var answersCorrection = [Bool]()
+    var answersCorrection = [Int]()
     var taskImages = [String:UIImage]()
     var openedCells = [Int]()
+    var cPartPoints = [Int]()
+    var tasksWithShuffle = [5,6,7,11,12,16,17,18,21]
+    var resultPoints = [Int]()
+    var hundredSystemPoints = 0
+    var testPoints = 0
+    var testAnswersUpdater: TestAnswersUpdater?
     
     func isCellOpened(index: Int) -> Bool {
         return openedCells.contains(index)
@@ -50,17 +57,34 @@ class TestResultsViewModel {
         return userAnswers[taskName]
     }
     
-    func getTaskCorrection(for index: Int) -> Bool {
+    func getTaskCorrection(for index: Int) -> Int {
         return answersCorrection[index]
     }
     
-    func getWrightAnswer(for taskName: String) -> String {
+    func getUsersFinalPoints() -> Int {
+        return hundredSystemPoints
+    }
+    
+    func getUserPoints(for taskNumber: Int) -> String {
+        if taskNumber < 26 {
+            return "\(resultPoints[taskNumber])"
+        } else {
+            return "\(cPartPoints[taskNumber - 26])"
+        }
+    }
+    
+    func getWrightAnswer(for index: Int) -> String {
+        let taskName = "Задание №\(index)"
         if let (wrightAnswer, alternativeAnswer, stringAnswer) = wrightAnswers[taskName] {
             if stringAnswer != nil {
                 return stringAnswer ?? "0"
             }
-            if alternativeAnswer != nil {
-                return "\(wrightAnswer ?? 0) или \(alternativeAnswer ?? 0)"
+            if tasksWithShuffle.contains(index) {
+                if  alternativeAnswer != nil {
+                    return "\(Int(wrightAnswer ?? 0.0)) или \(Int(alternativeAnswer ?? 0.0))"
+                } else {
+                    return "\(Int(wrightAnswer ?? 0.0))"
+                }
             }
             if wrightAnswer != nil {
                 return "\(wrightAnswer ?? 0)"
@@ -69,56 +93,132 @@ class TestResultsViewModel {
         return "0"
     }
     
+    func updateTestCompletion() {
+        var finishedTests = UserDefaults.standard.value(forKey: "finishedTests") as? [String] ?? []
+        finishedTests = finishedTests.filter({ $0 != testName })
+        UserDefaults.standard.set(finishedTests, forKey: "finishedTests")
+    }
+    
     func checkUserAnswers(completion: (Bool) -> ()) {
-        for index in 1...32 {
+        updateTestCompletion()
+        for index in 1...26 {
             let taskName = "Задание №\(index)"
-            var isWright = false
+            var isWright = 0
             if let (wrightAnswer, alternativeAnswer, stringAnswer) = wrightAnswers[taskName] {
                 let defaultStringAnswer = userAnswers[taskName]?.replacingOccurrences(of: ",", with: ".")
                 if let wrightAnswer = wrightAnswer, let userAnswer = Double(defaultStringAnswer ?? "") {
-                    if alternativeAnswer != nil {
-                        // wrightAnswer
-                        let stringWrightAnswer = "\(wrightAnswer)"
-                        let charsArray = [Character](stringWrightAnswer)
-                        var wrightCount = 0
-                        var wrightSum = 0
-                        for letter in charsArray {
-                            wrightSum += Int(String(letter)) ?? 0
-                            wrightCount += 1
+                    if index == 24 {
+                        let userAnswerLetters = [Character]("\(Int(userAnswer))")
+                        let wrightAnswerLetters = [Character]("\(Int(wrightAnswer))")
+                        var mistakes = 0
+                        for letterIndex in 0..<wrightAnswerLetters.count {
+                            if alternativeAnswer != nil {
+                                if !userAnswerLetters.contains(wrightAnswerLetters[letterIndex]) {
+                                    mistakes += 1
+                                }
+                            } else {
+                                if userAnswerLetters.count > letterIndex, userAnswerLetters[letterIndex] != wrightAnswerLetters[letterIndex] {
+                                    mistakes += 1
+                                }
+                            }
                         }
-                        
-                        // usersAnswer
-                        let stringUsersAnswer = "\(userAnswer)"
-                        let charsUsersArray = [Character](stringUsersAnswer)
-                        var usersCount = 0
-                        var usersSum = 0
-                        for letter in charsUsersArray {
-                            usersSum += Int(String(letter)) ?? 0
-                            usersCount += 1
+                        mistakes += abs(userAnswerLetters.count - wrightAnswerLetters.count)
+                        if mistakes == 0 {
+                            isWright = 2
+                        } else if mistakes == 1 {
+                            isWright = 1
+                        } else {
+                            isWright = 0
                         }
-                        
-                        // checking
-                        isWright = ((wrightCount == usersCount) && (wrightSum == usersSum))
                     } else {
-                        isWright = wrightAnswer == userAnswer
+                        if tasksWithShuffle.contains(index) {
+                            let userAnswerLetters = [Character]("\(Int(userAnswer))")
+                            let wrightAnswerLetters = [Character]("\(Int(wrightAnswer))")
+                            if userAnswerLetters.count - wrightAnswerLetters.count > 0 {
+                                isWright = 0
+                            } else {
+                                var mistakes = wrightAnswerLetters.count - userAnswerLetters.count
+                                for letterIndex in 0..<wrightAnswerLetters.count {
+                                    if alternativeAnswer != nil {
+                                        if !userAnswerLetters.contains(wrightAnswerLetters[letterIndex]) {
+                                            mistakes += 1
+                                        }
+                                    } else {
+                                        if userAnswerLetters.count > letterIndex, userAnswerLetters[letterIndex] != wrightAnswerLetters[letterIndex] {
+                                            mistakes += 1
+                                        }
+                                    }
+                                }
+                                if mistakes == 0 {
+                                    isWright = 2
+                                } else if mistakes == 1 {
+                                    isWright = 1
+                                } else {
+                                    isWright = 0
+                                }
+                            }
+                        } else {
+                            isWright = wrightAnswer == userAnswer ? 2 : 0
+                        }
                     }
                 }
                 if let wrightAnswer = stringAnswer, let userAnswer = defaultStringAnswer {
-                    isWright = wrightAnswer == userAnswer
+                    isWright = wrightAnswer == userAnswer ? 2 : 0
                 }
                 answersCorrection.append(isWright)
-                if isWright {
+                if isWright == 2 {
                     wrightAnswerNumber += 1
+                }
+                if isWright == 1 {
+                    semiWrightAnswerNumber += 1
+                }
+                if EGEInfo.advancedTasks.contains(index), index != 25 && index != 26  {
+                    resultPoints.append(isWright)
+                } else {
+                    resultPoints.append(isWright == 2 ? 1 : 0)
                 }
             }
         }
+        hundredSystemPoints = getHundredSystemPoints()
         completion(true)
     }
     
+    func getHundredSystemPoints() -> Int {
+        var primaryPoints = 0
+        resultPoints.forEach({ primaryPoints += $0 })
+        var index = 0
+        for rowNumber in 26..<26 + cPartPoints.count {
+            primaryPoints += cPartPoints[index]
+            if rowNumber + 1 == 28 {
+                answersCorrection.append(cPartPoints[1])
+                if cPartPoints[1] == 2 {
+                    wrightAnswerNumber += 1
+                }
+                if cPartPoints[1] == 1 {
+                    semiWrightAnswerNumber += 1
+                }
+            } else {
+                if cPartPoints[rowNumber - 26] == 3 {
+                    answersCorrection.append(2)
+                    wrightAnswerNumber += 1
+                } else if cPartPoints[rowNumber - 26] == 0 {
+                    answersCorrection.append(0)
+                } else {
+                    answersCorrection.append(1)
+                    semiWrightAnswerNumber += 1
+                }
+            }
+            index += 1
+        }
+        testPoints = EGEInfo.hundredSystem[primaryPoints]
+        return testPoints
+    }
+    
     func updateTestDataAsDone() {
+        testAnswersUpdater?.deleteTestsAnswers()
         updateTestDataInCoreData()
         if let userId = Auth.auth().currentUser?.uid {
-            Firestore.firestore().collection("users").document(userId).collection("stats").document(testName).setData(["doneTasks":wrightAnswerNumber])
+            Firestore.firestore().collection("users").document(userId).collection("stats").document(testName).setData(["doneTasks":wrightAnswerNumber, "points":testPoints, "semiDoneTasks":semiWrightAnswerNumber])
         }
     }
     
@@ -129,11 +229,19 @@ class TestResultsViewModel {
                 let result = try context.fetch(fechRequest)
                 let trainer = result.first
                 (trainer?.tests?.first(where: { ($0 as! Test).name == testName }) as! Test).numberOfWrightAnswers = Int16(wrightAnswerNumber)
+                (trainer?.tests?.first(where: { ($0 as! Test).name == testName }) as! Test).points = Int16(testPoints)
+                (trainer?.tests?.first(where: { ($0 as! Test).name == testName }) as! Test).numberOfSemiWrightAnswers = Int16(semiWrightAnswerNumber)
                 
                 try context.save()
             } catch {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func getColorPercentage() -> (Float, Float) {
+        let greenPercentage = Float(wrightAnswerNumber) / Float(32)
+        let yellowPercentage = Float(semiWrightAnswerNumber) / Float(32) + greenPercentage
+        return (greenPercentage, yellowPercentage)
     }
 }

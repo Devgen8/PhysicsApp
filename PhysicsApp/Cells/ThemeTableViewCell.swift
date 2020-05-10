@@ -28,7 +28,7 @@ class ThemeTableViewCell: UITableViewCell {
         decorativeView.layer.cornerRadius = 30
     }
     
-    func setupStatsLines(mistakesProgress: Float, successProgress: Float, fullWidth: CGFloat) {
+    func setupStatsLines(mistakesProgress: Float, successProgress: Float, fullWidth: CGFloat, semiSuccessProgress: Float? = nil) {
         decorativeView.backgroundColor = .gray
         let decorativeWidth = fullWidth
         
@@ -40,6 +40,17 @@ class ThemeTableViewCell: UITableViewCell {
         mistakesProgressView.widthAnchor.constraint(equalToConstant: decorativeWidth * CGFloat(mistakesProgress)).isActive = true
         mistakesProgressView.leadingAnchor.constraint(equalTo: decorativeView.leadingAnchor).isActive = true
         mistakesProgressView.centerYAnchor.constraint(equalTo: decorativeView.centerYAnchor).isActive = true
+        
+        if let semiSuccessProgress = semiSuccessProgress {
+            let semiSuccessProgressView = ProgressBarView(color: .yellow)
+            semiSuccessProgressView.translatesAutoresizingMaskIntoConstraints = false
+            decorativeView.addSubview(semiSuccessProgressView)
+            semiSuccessProgressView.backgroundColor = .clear
+            semiSuccessProgressView.heightAnchor.constraint(equalToConstant: contentView.frame.height).isActive = true
+            semiSuccessProgressView.widthAnchor.constraint(equalToConstant: decorativeWidth * CGFloat(semiSuccessProgress)).isActive = true
+            semiSuccessProgressView.leadingAnchor.constraint(equalTo: decorativeView.leadingAnchor).isActive = true
+            semiSuccessProgressView.centerYAnchor.constraint(equalTo: decorativeView.centerYAnchor).isActive = true
+        }
         
         let successProgressView = ProgressBarView(color: .systemGreen)
         successProgressView.translatesAutoresizingMaskIntoConstraints = false

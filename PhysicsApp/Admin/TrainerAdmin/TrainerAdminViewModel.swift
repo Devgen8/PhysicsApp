@@ -18,6 +18,7 @@ class TrainerAdminViewModel {
     var tasks = [String]()
     var themes = [String]()
     var imageData: Data?
+    var descriptionImageData: Data?
     var selectedTask: String?
     var selectedTheme: String?
     var inverseState = false
@@ -49,6 +50,7 @@ class TrainerAdminViewModel {
         let newKeyValuePairs = self.getKeyValuesForTask()
         testReference.document(testName).collection("tasks").document("task\(taskNumber)").setData(newKeyValuePairs)
         uploadTaskImage(path: "tests/\(testName)/task\(taskNumber).png")
+        uploadTaskDescription(path: "tests/\(testName)/task\(taskNumber)description.png")
         completion(true)
     }
     
@@ -73,6 +75,7 @@ class TrainerAdminViewModel {
                 let newKeyValuePairs = self.getKeyValuesForTask()
                 self.trainerReference.document(self.selectedTask ?? "").collection("tasks").document("task\(self.tasksNumber + 1)").setData(newKeyValuePairs)
                 self.uploadTaskImage(path: "trainer/\(self.selectedTask ?? "")/task\(self.tasksNumber + 1).png")
+                self.uploadTaskDescription(path: "trainer/\(self.selectedTask ?? "")/task\(self.tasksNumber + 1)description.png")
                 completion(true)
             }
         }
@@ -126,6 +129,10 @@ class TrainerAdminViewModel {
         imageData = data
     }
     
+    func updateTaskDescription(with data: Data) {
+        descriptionImageData = data
+    }
+    
     func updateInverseState(to bool: Bool) {
         inverseState = bool
     }
@@ -148,6 +155,12 @@ class TrainerAdminViewModel {
     
     func uploadTaskImage(path: String) {
         if let data = imageData {
+            Storage.storage().reference().child(path).putData(data)
+        }
+    }
+    
+    func uploadTaskDescription(path: String) {
+        if let data = descriptionImageData {
             Storage.storage().reference().child(path).putData(data)
         }
     }

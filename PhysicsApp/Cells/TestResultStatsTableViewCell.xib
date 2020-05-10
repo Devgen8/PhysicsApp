@@ -10,7 +10,7 @@
         <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
-        <array key="Montserrat-Medium.otf">
+        <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
     </customFonts>
@@ -72,13 +72,21 @@
                             <constraint firstAttribute="width" constant="5" id="tja-vs-puF"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 баллов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wag-Ka-SSl">
+                        <rect key="frame" x="172" y="130.5" width="94.5" height="24.5"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Wag-Ka-SSl" secondAttribute="bottom" constant="30" id="0fH-Tb-fFI"/>
                     <constraint firstItem="iZk-SH-EHX" firstAttribute="leading" secondItem="W3J-aP-nJT" secondAttribute="trailing" constant="30" id="Alg-P3-wXj"/>
                     <constraint firstItem="iZk-SH-EHX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="40" id="CBJ-BW-1NH"/>
                     <constraint firstItem="W3J-aP-nJT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="RcR-bj-lwc"/>
                     <constraint firstItem="iZk-SH-EHX" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ZLm-RJ-nge"/>
+                    <constraint firstItem="Wag-Ka-SSl" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gSZ-ak-oMj"/>
                     <constraint firstItem="MCZ-zI-hhk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="hT3-u0-XX9"/>
                     <constraint firstItem="MCZ-zI-hhk" firstAttribute="leading" secondItem="iZk-SH-EHX" secondAttribute="trailing" constant="30" id="wul-yb-KwU"/>
                 </constraints>
@@ -86,6 +94,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="pointsLabel" destination="Wag-Ka-SSl" id="QjW-83-fR2"/>
                 <outlet property="timeLabel" destination="crl-ly-gIC" id="O57-eK-gS6"/>
                 <outlet property="wrightAnswersLabel" destination="HBy-jU-1Qz" id="SjE-Q0-cjj"/>
             </connections>

@@ -12,6 +12,7 @@ public class TaskModel:NSObject, NSCoding {
     var name: String?
     var serialNumber: Int?
     var image: UIImage?
+    var taskDescription: UIImage?
     var wrightAnswer: Double?
     var alternativeAnswer: Double?
     var stringAnswer: String?
@@ -29,6 +30,7 @@ public class TaskModel:NSObject, NSCoding {
         coder.encode(succeded, forKey: "succeded")
         coder.encode(failed, forKey: "failed")
         coder.encode(theme, forKey: "theme")
+        coder.encode(taskDescription?.pngData(), forKey: "taskDescription")
     }
     
     public override init() {
@@ -38,6 +40,7 @@ public class TaskModel:NSObject, NSCoding {
     init(name: String?,
          serialNumber: Int?,
          image: Data?,
+         taskDescription: Data?,
          wrightAnswer: Double?,
          alternativeAnswer: Double?,
          stringAnswer: String?,
@@ -47,6 +50,7 @@ public class TaskModel:NSObject, NSCoding {
         self.name = name
         self.serialNumber = serialNumber
         self.image = UIImage(data: image ?? Data())
+        self.taskDescription = UIImage(data: taskDescription ?? Data())
         self.wrightAnswer = wrightAnswer
         self.alternativeAnswer = alternativeAnswer
         self.stringAnswer = stringAnswer
@@ -59,6 +63,7 @@ public class TaskModel:NSObject, NSCoding {
         let decodedName = coder.decodeObject(forKey: "name") as? String
         let decodedSerialNumber = coder.decodeObject(forKey: "serialNumber") as? Int
         let decodedImage = coder.decodeObject(forKey: "image") as? Data
+        let decodedTaskDescription = coder.decodeObject(forKey: "taskDescription") as? Data
         let decodedWrightanswer = coder.decodeObject(forKey: "wrightAnswer") as? Double
         let decodedAlternativeAnswer = coder.decodeObject(forKey: "alternativeAnswer") as? Double
         let decodedStringAnswer = coder.decodeObject(forKey: "stringAnswer") as? String
@@ -69,6 +74,7 @@ public class TaskModel:NSObject, NSCoding {
         self.init(name: decodedName,
         serialNumber: decodedSerialNumber,
         image: decodedImage,
+        taskDescription: decodedTaskDescription,
         wrightAnswer: decodedWrightanswer,
         alternativeAnswer: decodedAlternativeAnswer,
         stringAnswer: decodedStringAnswer,

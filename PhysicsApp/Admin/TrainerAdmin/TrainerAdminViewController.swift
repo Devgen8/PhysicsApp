@@ -19,8 +19,11 @@ class TrainerAdminViewController: UIViewController {
     @IBOutlet weak var inverseSwitch: UISwitch!
     @IBOutlet weak var stringSwitch: UISwitch!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var descriptionImageView: UIImageView!
     
     var viewModel = TrainerAdminViewModel()
+    
+    var imageTapped = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +63,7 @@ class TrainerAdminViewController: UIViewController {
         activityIndicator.isHidden = true
         themePicker.layer.cornerRadius = 15
         setUpUsersImage()
+        setupDescriptionImage()
     }
     
     @IBAction func backTapped(_ sender: UIButton) {
@@ -124,6 +128,7 @@ class TrainerAdminViewController: UIViewController {
         taskPickerView.selectRow(0, inComponent: 0, animated: true)
         themePicker.selectRow(0, inComponent: 0, animated: true)
         uploadImageView.image = #imageLiteral(resourceName: "upload (1)")
+        descriptionImageView.image = #imageLiteral(resourceName: "upload (1)")
         wrightAnswerTextField.text = ""
         inverseSwitch.isOn = false
         stringSwitch.isOn = false
@@ -153,7 +158,22 @@ class TrainerAdminViewController: UIViewController {
         uploadImageView.isUserInteractionEnabled = true
     }
     
+    private func setupDescriptionImage() {
+        descriptionImageView.layer.cornerRadius = 15
+        descriptionImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDescriptionTap)))
+        descriptionImageView.isUserInteractionEnabled = true
+    }
+    
+    @objc func handleDescriptionTap() {
+        imageTapped = "descriptionImageView"
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
     @objc private func handlePickingPhoto() {
+        imageTapped = "uploadImageView"
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
@@ -222,9 +242,17 @@ extension TrainerAdminViewController: UIImagePickerControllerDelegate, UINavigat
         }
         
         if let selectedImage = selectedImageFromPicker {
-            uploadImageView.image = selectedImage
-            if let uploadData = selectedImage.pngData() {
-                viewModel.updatePhotoData(with: uploadData)
+            if imageTapped == "uploadImageView" {
+                uploadImageView.image = #imageLiteral(resourceName: "checked")
+                if let uploadData = selectedImage.pngData() {
+                    viewModel.updatePhotoData(with: uploadData)
+                }
+            }
+            if imageTapped == "descriptionImageView" {
+                descriptionImageView.image = #imageLiteral(resourceName: "checked")
+                if let uploadData = selectedImage.pngData() {
+                    viewModel.updateTaskDescription(with: uploadData)
+                }
             }
         }
         

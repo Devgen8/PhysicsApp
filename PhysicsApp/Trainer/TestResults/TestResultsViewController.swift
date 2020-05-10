@@ -67,9 +67,9 @@ extension TestResultsViewController: UITableViewDelegate {
             return 200
         case 1:
             if viewModel.isCellOpened(index: indexPath.row) {
-                return 350
+                return 365
             } else {
-                return 140
+                return 180
             }
         default:
             return 0
@@ -123,9 +123,9 @@ extension TestResultsViewController: UITableViewDataSource {
         cell.timeLabel.text = viewModel.getTestDurationString()
         let wrightAnswersNumber = viewModel.getWrightAnswersNumberString()
         cell.wrightAnswersLabel.text = wrightAnswersNumber
-        if let wrightNumber = Float(wrightAnswersNumber) {
-            cell.setupProgressBar(with: wrightNumber / Float(32))
-        }
+        let (greenPercentage, yellowPercentage) = viewModel.getColorPercentage()
+        cell.setupProgressBar(withGreenPercentage: greenPercentage, withYellowPercentage: yellowPercentage)
+        cell.pointsLabel.text = "Баллы: \(viewModel.getUsersFinalPoints())"
         return cell
     }
     
@@ -134,15 +134,23 @@ extension TestResultsViewController: UITableViewDataSource {
         let taskName = "Задание №\(index + 1)"
         cell.taskName.text = taskName
         cell.taskImageView.image = viewModel.getImage(for: taskName)
+        cell.userPointsLabel.text = viewModel.getUserPoints(for: index)
         let userAnswer = viewModel.getUsersAnswer(for: taskName)
         if userAnswer == "" {
             cell.usersAnswerLabel.text = "Нет ответа"
         } else {
             cell.usersAnswerLabel.text = userAnswer
         }
-        cell.wrightAnswerLabel.text = viewModel.getWrightAnswer(for: taskName)
+        cell.wrightAnswerLabel.text = viewModel.getWrightAnswer(for: index + 1)
         let isWright = viewModel.getTaskCorrection(for: index)
-        cell.setupCorrectionBar(with: isWright ? .systemGreen : .red)
+        var cellBarColor = UIColor()
+        switch isWright {
+        case 0: cellBarColor = .red
+        case 1: cellBarColor = .yellow
+        case 2: cellBarColor = .systemGreen
+        default: print("Unexpeted case in cell creation")
+        }
+        cell.setupCorrectionBar(with: cellBarColor)
         return cell
     }
 }

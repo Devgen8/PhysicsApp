@@ -2,7 +2,7 @@
 //  TaskData+CoreDataProperties.swift
 //  PhysicsApp
 //
-//  Created by Evgeny Kamaev on 28.04.2020.
+//  Created by Evgeny Kamaev on 04.05.2020.
 //  Copyright © 2020 Devgen. All rights reserved.
 //
 //
@@ -23,6 +23,7 @@ extension TaskData {
     @NSManaged public var serialNumber: Int16
     @NSManaged public var stringAnswer: String?
     @NSManaged public var wrightAnswer: Double
+    @NSManaged public var taskDescription: Data?
     @NSManaged public var egeTask: EgeTask?
     @NSManaged public var egeTheme: EgeTheme?
 

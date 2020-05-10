@@ -39,7 +39,6 @@ public class StatusTasks: NSObject, NSCoding {
         let solved = coder.decodeObject(forKey: "solvedTasks") as! [String:[String]]
         let unsolved = coder.decodeObject(forKey: "unsolvedTasks") as! [String:[String]]
         let firstTry = coder.decodeObject(forKey: "firstTryTasks") as! [String]
-        //let firstTry = [""]
         self.init(solvedTasks: solved, unsolvedTasks: unsolved, firstTryTasks: firstTry)
     }
 }
@@ -111,6 +110,32 @@ public class TestObject: NSObject, NSCoding {
         let decodedTasks = coder.decodeObject(forKey: "testTasks") as! [TaskModel]
         let decodedAnswers = coder.decodeObject(forKey: "usersAnswers") as! [String : String]
         self.init(testTasks: decodedTasks, usersAnswers: decodedAnswers)
+    }
+}
+
+public class TestParametersObject: NSObject, NSCoding {
+    
+    var primarySystem = [String:Int]()
+    var hundredSystem = [String:Int]()
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(primarySystem, forKey: "primarySystem")
+        coder.encode(hundredSystem, forKey: "hundredSystem")
+    }
+    
+    public override init() {
+        super.init()
+    }
+    
+    init(primarySystem: [String:Int], hundredSystem: [String : Int]) {
+        self.primarySystem = primarySystem
+        self.hundredSystem = hundredSystem
+    }
+    
+    public required convenience init?(coder: NSCoder) {
+        let decodedPrimary = coder.decodeObject(forKey: "primarySystem") as! [String:Int]
+        let decodedHundred = coder.decodeObject(forKey: "hundredSystem") as! [String:Int]
+        self.init(primarySystem: decodedPrimary, hundredSystem: decodedHundred)
     }
 }
 

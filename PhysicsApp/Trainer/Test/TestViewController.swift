@@ -34,9 +34,15 @@ class TestViewController: UIViewController {
         taskPicker.dataSource = self
         
         designScreenElements()
-        prepareData()
         createBlurEffect()
+        prepareData()
         setAnimation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if viewModel.isTestFinished() {
+            presentCPartViewController()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,11 +57,7 @@ class TestViewController: UIViewController {
             self.timeLabel.text = "\(seconds / 3600) : \((seconds % 3600) / 60) : \((seconds % 3600) % 60)"
             if self.currentDuration <= 0 {
                 self.timer.invalidate()
-                let testResultsViewController = TestResultsViewController()
-                self.viewModel.transportData(to: testResultsViewController.viewModel, with: Int(self.currentDuration))
-                self.currentDuration = 14100
-                testResultsViewController.modalPresentationStyle = .fullScreen
-                self.present(testResultsViewController, animated: true)
+                self.presentCPartViewController()
             }
         }
     }
@@ -74,6 +76,15 @@ class TestViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func presentCPartViewController() {
+        let cPartTestViewController = CPartTestViewController()
+        viewModel.transportData(to: cPartTestViewController.viewModel, with: Int(currentDuration))
+        currentDuration = 14100
+        cPartTestViewController.viewModel.tasks = viewModel.tasks
+        cPartTestViewController.modalPresentationStyle = .fullScreen
+        present(cPartTestViewController, animated: true)
     }
     
     func designScreenElements() {
@@ -121,11 +132,7 @@ class TestViewController: UIViewController {
         taskNumber = viewModel.getNextTaskIndex(after: taskNumber)
         changeForTask(taskNumber)
         } else {
-            let testResultsViewController = TestResultsViewController()
-            viewModel.transportData(to: testResultsViewController.viewModel, with: Int(currentDuration))
-            currentDuration = 14100
-            testResultsViewController.modalPresentationStyle = .fullScreen
-            present(testResultsViewController, animated: true)
+            presentCPartViewController()
         }
     }
     
@@ -142,11 +149,7 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func finishTapped(_ sender: UIButton) {
-        let testResultsViewController = TestResultsViewController()
-        viewModel.transportData(to: testResultsViewController.viewModel, with: Int(currentDuration))
-        currentDuration = 14100
-        testResultsViewController.modalPresentationStyle = .fullScreen
-        present(testResultsViewController, animated: true)
+        presentCPartViewController()
     }
 }
 

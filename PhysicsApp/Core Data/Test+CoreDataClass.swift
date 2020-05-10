@@ -2,7 +2,7 @@
 //  Test+CoreDataClass.swift
 //  PhysicsApp
 //
-//  Created by Evgeny Kamaev on 25.04.2020.
+//  Created by Evgeny Kamaev on 10.05.2020.
 //  Copyright © 2020 Devgen. All rights reserved.
 //
 //
