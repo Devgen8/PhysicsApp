@@ -96,7 +96,10 @@ class TrainerViewController: UIViewController {
     }
     
     func routeForTests() {
-        
+        let testViewController = TestViewController()
+        testViewController.viewModel = CustomTestViewModel()
+        testViewController.modalPresentationStyle = .fullScreen
+        present(testViewController, animated: true)
     }
     
     @IBAction func sortTypeChanged(_ sender: UISegmentedControl) {
@@ -147,6 +150,7 @@ extension TrainerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if viewModel is TestTrainerViewModel {
             let testViewController = TestViewController()
+            testViewController.viewModel = DownloadedTestViewModel()
             testViewController.viewModel.name = (viewModel as! TestTrainerViewModel).tests[indexPath.row]
             testViewController.modalPresentationStyle = .fullScreen
             present(testViewController, animated: true)

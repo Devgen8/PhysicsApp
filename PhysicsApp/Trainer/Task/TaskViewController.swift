@@ -17,6 +17,8 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var writeButton: UIButton!
+    @IBOutlet weak var showDescriptionButton: UIButton!
+    @IBOutlet weak var descriptionImageView: UIImageView!
     
     var viewModel = TaskViewModel()
     
@@ -36,6 +38,7 @@ class TaskViewController: UIViewController {
         themeLabel.text = viewModel.theme
         taskNumberLabel.text = "Задача \(viewModel.taskNumber ?? 1) из \(viewModel.numberOfTasks ?? 10)"
         taskImage.image = viewModel.task?.image
+        descriptionImageView.image = viewModel.task?.taskDescription
     }
     
     func designScreenElements() {
@@ -48,6 +51,9 @@ class TaskViewController: UIViewController {
         writeButton.layer.cornerRadius = 0.5 * writeButton.bounds.size.width
         writeButton.imageEdgeInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         resultLabel.alpha = 0
+        showDescriptionButton.isHidden = true
+        showDescriptionButton.layer.cornerRadius = 20
+        descriptionImageView.alpha = 0
     }
     
     @IBAction func backTapped(_ sender: UIButton) {
@@ -66,6 +72,7 @@ class TaskViewController: UIViewController {
             self.resultLabel.alpha = 0
             self.resultLabel.alpha = 1
         }
+        showDescriptionButton.isHidden = false
     }
     
     @IBAction func writeTapped(_ sender: UIButton) {
@@ -78,5 +85,12 @@ class TaskViewController: UIViewController {
         imagePreviewViewController.taskImage = taskImage.image
         imagePreviewViewController.modalPresentationStyle = .fullScreen
         present(imagePreviewViewController, animated: true)
+    }
+    
+    @IBAction func showDescriptionTapped(_ sender: UIButton) {
+        resultLabel.isHidden = true
+        UIView.animate(withDuration: 1.5) {
+            self.descriptionImageView.alpha = 1
+        }
     }
 }

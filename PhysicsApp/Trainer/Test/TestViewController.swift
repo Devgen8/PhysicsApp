@@ -22,11 +22,12 @@ class TestViewController: UIViewController {
     @IBOutlet weak var lookAnswersButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
     
-    var viewModel = TestViewModel()
+    var viewModel: TestViewModel!
     var taskNumber = 0
     var currentDuration = 14100.0
     let timeDifference = 1.0
     var timer = Timer()
+    var isClosing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,12 @@ class TestViewController: UIViewController {
         if viewModel.isTestFinished() {
             presentCPartViewController()
         }
+        if isClosing {
+            createBlurEffect()
+            loaderView.isHidden = false
+            setAnimation()
+        }
+        isClosing = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,7 +89,6 @@ class TestViewController: UIViewController {
         let cPartTestViewController = CPartTestViewController()
         viewModel.transportData(to: cPartTestViewController.viewModel, with: Int(currentDuration))
         currentDuration = 14100
-        cPartTestViewController.viewModel.tasks = viewModel.tasks
         cPartTestViewController.modalPresentationStyle = .fullScreen
         present(cPartTestViewController, animated: true)
     }

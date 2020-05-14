@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Black.ttf">
+        <array key="Montserrat-Black.otf">
             <string>Montserrat-Black</string>
         </array>
-        <array key="Montserrat-Medium.otf">
+        <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
         <array key="Montserrat-MediumItalic.otf">
@@ -21,11 +21,13 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TaskViewController" customModule="TrainingApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TaskViewController" customModule="PhysicsApp" customModuleProvider="target">
             <connections>
                 <outlet property="answerTextField" destination="Y2T-NJ-5YG" id="4Qo-6y-YJv"/>
                 <outlet property="checkButton" destination="FS1-W8-Hl8" id="aBI-JP-Hc4"/>
-                <outlet property="resultLabel" destination="98P-7C-3VD" id="IDR-Au-EC5"/>
+                <outlet property="descriptionImageView" destination="gSW-f8-vT2" id="peB-LL-aTR"/>
+                <outlet property="resultLabel" destination="fNl-9v-AGt" id="WCw-Zc-Iai"/>
+                <outlet property="showDescriptionButton" destination="wmY-Ss-ZGA" id="Cud-LL-yRf"/>
                 <outlet property="taskImage" destination="Hte-4a-1UW" id="DGn-t5-a2C"/>
                 <outlet property="taskNumberLabel" destination="naX-sI-aba" id="S7p-aH-wz4"/>
                 <outlet property="themeLabel" destination="X9A-9U-54q" id="wde-aG-dd3"/>
@@ -100,16 +102,6 @@
                         <action selector="checkTapped:" destination="-1" eventType="touchUpInside" id="Wd0-iJ-TQS"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Правильно +1 балл" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="98P-7C-3VD">
-                    <rect key="frame" x="97" y="473" width="220" height="150"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="220" id="5g1-za-gBm"/>
-                        <constraint firstAttribute="height" constant="150" id="NLB-kD-9rj"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Black" family="Montserrat" pointSize="25"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Есть ошибка в задаче? Напиши нам!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPJ-yL-zkn">
                     <rect key="frame" x="113" y="714" width="188" height="42"/>
                     <constraints>
@@ -155,23 +147,58 @@
                         <constraint firstAttribute="height" constant="50" id="gMG-D7-dq1"/>
                     </constraints>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wmY-Ss-ZGA">
+                    <rect key="frame" x="32" y="458" width="182" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Zo8-2g-yc0"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
+                    <state key="normal" title="Посмотреть решение">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="showDescriptionTapped:" destination="-1" eventType="touchUpInside" id="8OQ-gh-bnD"/>
+                    </connections>
+                </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gSW-f8-vT2">
+                    <rect key="frame" x="32" y="503" width="350" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="MCj-cI-8iW"/>
+                        <constraint firstAttribute="width" secondItem="gSW-f8-vT2" secondAttribute="height" multiplier="7:4" id="P0n-AF-Y6v"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Правильно!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNl-9v-AGt">
+                    <rect key="frame" x="57" y="548" width="300" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="l66-QV-hvc"/>
+                        <constraint firstAttribute="width" constant="300" id="nIi-80-o8x"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Montserrat-Black" family="Montserrat" pointSize="25"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="0yM-9h-oKV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0I7-YD-xSQ"/>
+                <constraint firstItem="fNl-9v-AGt" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="0xK-AC-1tN"/>
                 <constraint firstItem="naX-sI-aba" firstAttribute="top" secondItem="X9A-9U-54q" secondAttribute="bottom" constant="15" id="1Pt-OI-NaM"/>
                 <constraint firstAttribute="bottom" secondItem="0yM-9h-oKV" secondAttribute="bottom" constant="20" id="5vB-QG-afl"/>
                 <constraint firstItem="0yM-9h-oKV" firstAttribute="top" secondItem="aqR-fY-bwb" secondAttribute="bottom" constant="20" id="8QX-2u-tbO"/>
+                <constraint firstItem="gSW-f8-vT2" firstAttribute="top" secondItem="wmY-Ss-ZGA" secondAttribute="bottom" constant="5" id="Dvm-0d-KxW"/>
                 <constraint firstItem="PKE-SM-q1Z" firstAttribute="top" secondItem="Hte-4a-1UW" secondAttribute="bottom" constant="20" id="FtV-8f-0qF"/>
                 <constraint firstItem="FS1-W8-Hl8" firstAttribute="top" secondItem="Hte-4a-1UW" secondAttribute="bottom" constant="15" id="GIc-qY-sDh"/>
                 <constraint firstItem="X9A-9U-54q" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="70" id="GwV-w9-Tz8"/>
                 <constraint firstItem="aqR-fY-bwb" firstAttribute="top" secondItem="xPJ-yL-zkn" secondAttribute="bottom" constant="10" id="IhI-RI-abu"/>
+                <constraint firstItem="wmY-Ss-ZGA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="KQe-2j-WJJ"/>
                 <constraint firstItem="aqR-fY-bwb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OvS-VK-Flo"/>
-                <constraint firstItem="98P-7C-3VD" firstAttribute="top" secondItem="Y2T-NJ-5YG" secondAttribute="bottom" constant="40" id="TXB-Rh-J3S"/>
+                <constraint firstItem="gSW-f8-vT2" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="QKf-Ok-7zL"/>
+                <constraint firstItem="wmY-Ss-ZGA" firstAttribute="top" secondItem="Y2T-NJ-5YG" secondAttribute="bottom" constant="25" id="RaN-f9-l56"/>
                 <constraint firstItem="xPJ-yL-zkn" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="XCM-xQ-MWg"/>
                 <constraint firstItem="NOK-fu-Sx2" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="YMN-ex-kj8"/>
                 <constraint firstItem="X9A-9U-54q" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="YwS-8m-lPV"/>
                 <constraint firstItem="Hte-4a-1UW" firstAttribute="top" secondItem="naX-sI-aba" secondAttribute="bottom" constant="10" id="a2z-nn-5Fx"/>
+                <constraint firstItem="fNl-9v-AGt" firstAttribute="top" secondItem="wmY-Ss-ZGA" secondAttribute="bottom" constant="50" id="aOQ-M7-siZ"/>
                 <constraint firstItem="Hte-4a-1UW" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="cZi-2L-Jxh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FS1-W8-Hl8" secondAttribute="trailing" constant="10" id="dfW-4l-Qhe"/>
                 <constraint firstItem="naX-sI-aba" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="fTt-T4-h76"/>
@@ -179,7 +206,6 @@
                 <constraint firstItem="PKE-SM-q1Z" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="oap-O8-dV6"/>
                 <constraint firstItem="Y2T-NJ-5YG" firstAttribute="top" secondItem="Hte-4a-1UW" secondAttribute="bottom" constant="20" id="pOO-Mf-hfB"/>
                 <constraint firstItem="Y2T-NJ-5YG" firstAttribute="leading" secondItem="PKE-SM-q1Z" secondAttribute="trailing" constant="15" id="tX5-xX-DeU"/>
-                <constraint firstItem="98P-7C-3VD" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="tit-v9-OGK"/>
                 <constraint firstItem="FS1-W8-Hl8" firstAttribute="leading" secondItem="Y2T-NJ-5YG" secondAttribute="trailing" constant="15" id="yZl-bY-eJq"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

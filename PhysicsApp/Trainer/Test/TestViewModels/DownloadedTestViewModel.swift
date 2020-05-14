@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseAuth
 import CoreData
 
-class TestViewModel {
+class DownloadedTestViewModel: TestViewModel {
     
     var name = ""
     var tasks = [TaskModel]()
@@ -67,6 +67,26 @@ class TestViewModel {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func getTaskLocation(taskName: String) -> (String, String) {
+        var themeNameSet = [Character]()
+        var taskNumberSet = [Character]()
+        var isDotFound = false
+        for letter in taskName {
+            if letter == "." {
+                isDotFound = true
+                continue
+            }
+            if isDotFound {
+                taskNumberSet.append(letter)
+            } else {
+                themeNameSet.append(letter)
+            }
+        }
+        let themeName = String(themeNameSet)
+        let taskNumber = String(taskNumberSet)
+        return (themeName, taskNumber)
     }
     
     func saveTasksToCoreData() {
@@ -168,9 +188,30 @@ class TestViewModel {
     
     func saveUsersProgress(with time: Int) {
         saveProgressToCoreData(with: time)
-        if let userId = Auth.auth().currentUser?.uid {
+        if let userId = Auth.auth().currentUser?.uid, !isTestCustom() {
             userReference.document(userId).collection("tests").document(name).setData(["answers":testAnswers,
                                                                                        "time":time])
+        }
+    }
+    
+    func isTestCustom() -> Bool {
+        if name.count < 7 {
+            return false
+        } else {
+            var charsArray = [Character]()
+            var index = 0
+            for letter in name {
+                charsArray.append(letter)
+                index += 1
+                if index == 7 {
+                    break
+                }
+            }
+            if String(charsArray) == "Пробник" {
+                return true
+            } else {
+                return false
+            }
         }
     }
     
@@ -180,10 +221,12 @@ class TestViewModel {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
                 let trainer = result.first
-                (trainer?.tests?.first(where: { ($0 as! Test).name == name }) as! Test).time = Int64(time)
-                (trainer?.tests?.first(where: { ($0 as! Test).name == name }) as! Test).testObject = TestObject(testTasks: tasks, usersAnswers: testAnswers)
-                
-                try context.save()
+                if trainer?.tests?.first(where: { ($0 as! Test).name == name }) != nil {
+                    (trainer?.tests?.first(where: { ($0 as! Test).name == name }) as! Test).time = Int64(time)
+                    (trainer?.tests?.first(where: { ($0 as! Test).name == name }) as! Test).testObject = TestObject(testTasks: tasks, usersAnswers: testAnswers)
+                    
+                    try context.save()
+                }
             } catch {
                 print(error.localizedDescription)
             }
@@ -210,7 +253,7 @@ class TestViewModel {
     }
     
     func getPhotoForTask(_ index: Int) -> UIImage {
-        return tasksImages["Задание №\(index + 1)"] ?? UIImage()
+        return tasksImages[tasks[index].name ?? ""] ?? UIImage()
     }
     
     func getTasksNumber() -> Int {
@@ -234,7 +277,7 @@ class TestViewModel {
     }
     
     func getFirstQuestionAnswer() -> String? {
-        return testAnswers["Задание №1"]
+        return testAnswers[tasks[0].name ?? ""]
     }
     
     func transportData(to viewModel: CPartTestViewModel, with time: Int) {
@@ -244,7 +287,8 @@ class TestViewModel {
         viewModel.tasksImages = tasksImages
         viewModel.name = name
         viewModel.testAnswersUpdater = self
-        //deleteData()
+        viewModel.tasks = tasks
+        viewModel.tasksDescriptions = tasksDescriptions
     }
     
     func deleteData() {
@@ -257,7 +301,7 @@ class TestViewModel {
     }
 }
 
-extension TestViewModel: TestAnswersUpdater {
+extension DownloadedTestViewModel: TestAnswersUpdater {
     func deleteTestsAnswers() {
         deleteData()
     }

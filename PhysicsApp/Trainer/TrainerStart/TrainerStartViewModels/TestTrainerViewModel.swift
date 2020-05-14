@@ -73,20 +73,47 @@ class TestTrainerViewModel: TrainerViewModelProvider {
         }
     }
     
+    func isTestCustom(_ testName: String) -> Bool {
+        if testName.count < 7 {
+            return false
+        } else {
+            var charsArray = [Character]()
+            var index = 0
+            for letter in testName {
+                charsArray.append(letter)
+                index += 1
+                if index == 7 {
+                    break
+                }
+            }
+            if String(charsArray) == "Пробник" {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    
     func saveTestsInCoreData() {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
                 let trainer = result.first
+                let oldTests = trainer?.tests?.mutableCopy() as? NSMutableSet
                 let egeTests = NSMutableSet()
                 for test in tests {
-                    let newTest = Test(context: context)
-                    newTest.name = test
-                    newTest.numberOfWrightAnswers = Int16(numbersOfWrightTasks[test] ?? 0)
-                    newTest.numberOfSemiWrightAnswers = Int16(numbersOfSemiWrightTasks[test] ?? 0)
-                    newTest.points = Int16(testsPoints[test] ?? 0)
-                    egeTests.add(newTest)
+                    if oldTests?.first(where: { ($0 as! Test).name == test }) == nil {
+                        let newTest = Test(context: context)
+                        newTest.name = test
+                        newTest.numberOfWrightAnswers = Int16(numbersOfWrightTasks[test] ?? 0)
+                        newTest.numberOfSemiWrightAnswers = Int16(numbersOfSemiWrightTasks[test] ?? 0)
+                        newTest.points = Int16(testsPoints[test] ?? 0)
+                        egeTests.add(newTest)
+                    }
+                }
+                for oldTest in oldTests ?? NSMutableSet() {
+                    egeTests.add(oldTest)
                 }
                 trainer?.tests = egeTests
                 trainer?.testParameters = TestParametersObject(primarySystem: primarySystem, hundredSystem: hundredSystem)

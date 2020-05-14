@@ -139,3 +139,32 @@ public class TestParametersObject: NSObject, NSCoding {
     }
 }
 
+public class TestsResultsObject: NSObject, NSCoding {
+    
+    public var userAnswers = [String:String]()
+    public var answersCorrection = [Int]()
+    public var tasksNames = [String]()
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(userAnswers, forKey: "userAnswers")
+        coder.encode(answersCorrection, forKey: "answersCorrection")
+        coder.encode(tasksNames, forKey: "tasksNames")
+    }
+    
+    public override init() {
+        super.init()
+    }
+    
+    init(userAnswers: [String:String], answersCorrection: [Int], tasksNames: [String]) {
+        self.userAnswers = userAnswers
+        self.answersCorrection = answersCorrection
+        self.tasksNames = tasksNames
+    }
+    
+    public required convenience init?(coder: NSCoder) {
+        let answers = coder.decodeObject(forKey: "userAnswers") as! [String:String]
+        let correction = coder.decodeObject(forKey: "answersCorrection") as! [Int]
+        let names = coder.decodeObject(forKey: "tasksNames") as! [String]
+        self.init(userAnswers: answers, answersCorrection: correction, tasksNames: names)
+    }
+}

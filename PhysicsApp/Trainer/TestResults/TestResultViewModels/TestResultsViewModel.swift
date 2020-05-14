@@ -11,7 +11,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import CoreData
 
-class TestResultsViewModel {
+class TestResultsViewModel: GeneralTestResultsViewModel {
     var testName = ""
     var timeTillEnd = 0
     var wrightAnswerNumber = 0
@@ -20,6 +20,7 @@ class TestResultsViewModel {
     var userAnswers = [String:String]()
     var answersCorrection = [Int]()
     var taskImages = [String:UIImage]()
+    var taskDescriptions = [String:UIImage]()
     var openedCells = [Int]()
     var cPartPoints = [Int]()
     var tasksWithShuffle = [5,6,7,11,12,16,17,18,21]
@@ -27,6 +28,7 @@ class TestResultsViewModel {
     var hundredSystemPoints = 0
     var testPoints = 0
     var testAnswersUpdater: TestAnswersUpdater?
+    let usersReference = Firestore.firestore().collection("users")
     
     func isCellOpened(index: Int) -> Bool {
         return openedCells.contains(index)
@@ -53,12 +55,20 @@ class TestResultsViewModel {
         return taskImages[taskName]
     }
     
+    func getDescription(for taskName: String) -> UIImage? {
+        return taskDescriptions[taskName]
+    }
+    
     func getUsersAnswer(for taskName: String) -> String? {
         return userAnswers[taskName]
     }
     
     func getTaskCorrection(for index: Int) -> Int {
-        return answersCorrection[index]
+        if answersCorrection.count <= index {
+            return 0
+        } else {
+            return answersCorrection[index]
+        }
     }
     
     func getUsersFinalPoints() -> Int {
@@ -67,7 +77,11 @@ class TestResultsViewModel {
     
     func getUserPoints(for taskNumber: Int) -> String {
         if taskNumber < 26 {
-            return "\(resultPoints[taskNumber])"
+            if resultPoints.count <= taskNumber {
+                return ""
+            } else {
+                return "\(resultPoints[taskNumber])"
+            }
         } else {
             return "\(cPartPoints[taskNumber - 26])"
         }
@@ -80,7 +94,7 @@ class TestResultsViewModel {
                 return stringAnswer ?? "0"
             }
             if tasksWithShuffle.contains(index) {
-                if  alternativeAnswer != nil {
+                if  alternativeAnswer != nil, alternativeAnswer != 0.0 {
                     return "\(Int(wrightAnswer ?? 0.0)) или \(Int(alternativeAnswer ?? 0.0))"
                 } else {
                     return "\(Int(wrightAnswer ?? 0.0))"
@@ -112,7 +126,7 @@ class TestResultsViewModel {
                         let wrightAnswerLetters = [Character]("\(Int(wrightAnswer))")
                         var mistakes = 0
                         for letterIndex in 0..<wrightAnswerLetters.count {
-                            if alternativeAnswer != nil {
+                            if alternativeAnswer != nil, alternativeAnswer != 0.0 {
                                 if !userAnswerLetters.contains(wrightAnswerLetters[letterIndex]) {
                                     mistakes += 1
                                 }
@@ -139,7 +153,7 @@ class TestResultsViewModel {
                             } else {
                                 var mistakes = wrightAnswerLetters.count - userAnswerLetters.count
                                 for letterIndex in 0..<wrightAnswerLetters.count {
-                                    if alternativeAnswer != nil {
+                                    if alternativeAnswer != nil, alternativeAnswer != 0.0 {
                                         if !userAnswerLetters.contains(wrightAnswerLetters[letterIndex]) {
                                             mistakes += 1
                                         }
@@ -180,7 +194,54 @@ class TestResultsViewModel {
             }
         }
         hundredSystemPoints = getHundredSystemPoints()
+        setTestDataInFirestore()
         completion(true)
+    }
+    
+    func setTestDataInFirestore() {
+        if let userId = Auth.auth().currentUser?.uid {
+            var tasksNames = [String]()
+            for index in 1...32 {
+                tasksNames.append("Задание №\(index)")
+            }
+            saveTestResultsInCoreData()
+            usersReference.document(userId).collection("testsHistory").document(testName).setData(["name":testName,
+                                                                                                   "wrightAnswerNumber":wrightAnswerNumber,
+                                                                                                   "semiWrightAnswerNumber":semiWrightAnswerNumber,
+                                                                                                   "userAnswers":userAnswers,
+                                                                                                   "points":hundredSystemPoints,
+                                                                                                   "answersCorrection":answersCorrection,
+                                                                                                   "timeTillEnd":timeTillEnd,
+                                                                                                   "tasksNames":tasksNames])
+        }
+    }
+    
+    func saveTestResultsInCoreData() {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
+                let result = try context.fetch(fechRequest)
+                let testsHistory = result.first ?? TestsHistory(context: context)
+                let testsCopy = testsHistory.tests?.mutableCopy() as! NSMutableOrderedSet
+                let testResults = TestsResults(context: context)
+                testResults.name = testName
+                testResults.wrightAnswerNumber = Int16(wrightAnswerNumber)
+                testResults.semiWrightAnswerNumber = Int16(semiWrightAnswerNumber)
+                testResults.points = Int16(hundredSystemPoints)
+                testResults.timeTillEnd = Int16(timeTillEnd)
+                var tasksNames = [String]()
+                for index in 1...32 {
+                    tasksNames.append("Задание №\(index)")
+                }
+                testResults.testResultObject = TestsResultsObject(userAnswers: userAnswers, answersCorrection: answersCorrection, tasksNames: tasksNames)
+                testsCopy.add(testResults)
+                testsHistory.tests = testsCopy
+                
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func getHundredSystemPoints() -> Int {
@@ -218,7 +279,7 @@ class TestResultsViewModel {
         testAnswersUpdater?.deleteTestsAnswers()
         updateTestDataInCoreData()
         if let userId = Auth.auth().currentUser?.uid {
-            Firestore.firestore().collection("users").document(userId).collection("stats").document(testName).setData(["doneTasks":wrightAnswerNumber, "points":testPoints, "semiDoneTasks":semiWrightAnswerNumber])
+            Firestore.firestore().collection("users").document(userId).collection("stats").document(testName).setData(["name":testName,"doneTasks":wrightAnswerNumber, "points":testPoints, "semiDoneTasks":semiWrightAnswerNumber])
         }
     }
     

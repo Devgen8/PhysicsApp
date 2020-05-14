@@ -44,6 +44,18 @@
         <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="trainer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trainer" inverseName="tests" inverseEntity="Trainer"/>
     </entity>
+    <entity name="TestsHistory" representedClassName="TestsHistory" syncable="YES">
+        <relationship name="tests" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TestsResults" inverseName="testsHistory" inverseEntity="TestsResults"/>
+    </entity>
+    <entity name="TestsResults" representedClassName="TestsResults" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="points" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="semiWrightAnswerNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="testResultObject" optional="YES" attributeType="Transformable"/>
+        <attribute name="timeTillEnd" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wrightAnswerNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="testsHistory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TestsHistory" inverseName="tests" inverseEntity="TestsHistory"/>
+    </entity>
     <entity name="Trainer" representedClassName="Trainer" syncable="YES">
         <attribute name="testParameters" optional="YES" attributeType="Transformable"/>
         <attribute name="themeTasksSafe" optional="YES" attributeType="Transformable"/>
@@ -65,5 +77,7 @@
         <element name="Test" positionX="-171.0546875" positionY="-170.69140625" width="128" height="148"/>
         <element name="Trainer" positionX="-564.09765625" positionY="59.58984375" width="128" height="118"/>
         <element name="User" positionX="25.2890625" positionY="-270.0625" width="128" height="88"/>
+        <element name="TestsHistory" positionX="-360" positionY="-117" width="128" height="58"/>
+        <element name="TestsResults" positionX="-351" positionY="-108" width="128" height="148"/>
     </elements>
 </model>

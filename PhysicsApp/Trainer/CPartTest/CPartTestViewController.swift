@@ -35,6 +35,11 @@ class CPartTestViewController: UIViewController {
 
     @IBAction func nextTapped(_ sender: UIButton) {
         let testResultsViewController = TestResultsViewController()
+        if viewModel.isTestCustom() {
+            testResultsViewController.viewModel = CustomTestResultViewModel()
+        } else {
+            testResultsViewController.viewModel = TestResultsViewModel()
+        }
         viewModel.transportData(to: testResultsViewController.viewModel)
         testResultsViewController.modalPresentationStyle = .fullScreen
         present(testResultsViewController, animated: true)

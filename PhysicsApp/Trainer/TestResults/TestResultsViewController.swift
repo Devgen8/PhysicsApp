@@ -12,7 +12,7 @@ class TestResultsViewController: UIViewController {
     
     @IBOutlet weak var resultsTableView: UITableView!
     
-    var viewModel = TestResultsViewModel()
+    var viewModel: GeneralTestResultsViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +67,7 @@ extension TestResultsViewController: UITableViewDelegate {
             return 200
         case 1:
             if viewModel.isCellOpened(index: indexPath.row) {
-                return 365
+                return 620
             } else {
                 return 180
             }
@@ -134,6 +134,7 @@ extension TestResultsViewController: UITableViewDataSource {
         let taskName = "Задание №\(index + 1)"
         cell.taskName.text = taskName
         cell.taskImageView.image = viewModel.getImage(for: taskName)
+        cell.descriptionImageView.image = viewModel.getDescription(for: taskName)
         cell.userPointsLabel.text = viewModel.getUserPoints(for: index)
         let userAnswer = viewModel.getUsersAnswer(for: taskName)
         if userAnswer == "" {

@@ -66,7 +66,7 @@ class TaskViewModel {
         if isWright {
             isTaskUnsolved = false
             updateStatistics()
-            return (true, "Правильно! +1 балл")
+            return (true, "Правильно!")
         } else {
             isTaskUnsolved = true
             updateStatistics()

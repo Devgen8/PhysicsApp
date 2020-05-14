@@ -147,7 +147,7 @@
 		484293142448461100BE8CB6 /* TestTrainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293132448461100BE8CB6 /* TestTrainerViewModel.swift */; };
 		48429318244855DD00BE8CB6 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429316244855DD00BE8CB6 /* TestViewController.swift */; };
 		48429319244855DD00BE8CB6 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48429317244855DD00BE8CB6 /* TestViewController.xib */; };
-		4842931B2448732B00BE8CB6 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842931A2448732B00BE8CB6 /* TestViewModel.swift */; };
+		4842931B2448732B00BE8CB6 /* DownloadedTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842931A2448732B00BE8CB6 /* DownloadedTestViewModel.swift */; };
 		4842931E2448C4BA00BE8CB6 /* MyAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842931C2448C4BA00BE8CB6 /* MyAnswersViewController.swift */; };
 		4842931F2448C4BA00BE8CB6 /* MyAnswersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4842931D2448C4BA00BE8CB6 /* MyAnswersViewController.xib */; };
 		48429324244C185700BE8CB6 /* TestResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48429322244C185700BE8CB6 /* TestResultsViewController.swift */; };
@@ -193,6 +193,12 @@
 		48BB6A94246727C10010F27D /* EGEInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6A93246727C10010F27D /* EGEInfo.swift */; };
 		48BB6A9B24684F9A0010F27D /* Test+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6A9924684F9A0010F27D /* Test+CoreDataClass.swift */; };
 		48BB6A9C24684F9A0010F27D /* Test+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6A9A24684F9A0010F27D /* Test+CoreDataProperties.swift */; };
+		48BB6AA02469458E0010F27D /* CustomTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6A9F2469458E0010F27D /* CustomTestViewModel.swift */; };
+		48BB6AA3246C4D8A0010F27D /* CustomTestResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AA2246C4D8A0010F27D /* CustomTestResultViewModel.swift */; };
+		48BB6AA8246D282F0010F27D /* TestsResults+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AA4246D282F0010F27D /* TestsResults+CoreDataClass.swift */; };
+		48BB6AA9246D282F0010F27D /* TestsResults+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AA5246D282F0010F27D /* TestsResults+CoreDataProperties.swift */; };
+		48BB6AAA246D282F0010F27D /* TestsHistory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AA6246D282F0010F27D /* TestsHistory+CoreDataClass.swift */; };
+		48BB6AAB246D282F0010F27D /* TestsHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AA7246D282F0010F27D /* TestsHistory+CoreDataProperties.swift */; };
 		6910FC61EACA1D262F52A3D2 /* Pods_PhysicsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -340,7 +346,7 @@
 		484293132448461100BE8CB6 /* TestTrainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTrainerViewModel.swift; sourceTree = "<group>"; };
 		48429316244855DD00BE8CB6 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		48429317244855DD00BE8CB6 /* TestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
-		4842931A2448732B00BE8CB6 /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
+		4842931A2448732B00BE8CB6 /* DownloadedTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedTestViewModel.swift; sourceTree = "<group>"; };
 		4842931C2448C4BA00BE8CB6 /* MyAnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnswersViewController.swift; sourceTree = "<group>"; };
 		4842931D2448C4BA00BE8CB6 /* MyAnswersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAnswersViewController.xib; sourceTree = "<group>"; };
 		48429322244C185700BE8CB6 /* TestResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultsViewController.swift; sourceTree = "<group>"; };
@@ -386,6 +392,12 @@
 		48BB6A93246727C10010F27D /* EGEInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGEInfo.swift; sourceTree = "<group>"; };
 		48BB6A9924684F9A0010F27D /* Test+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test+CoreDataClass.swift"; sourceTree = "<group>"; };
 		48BB6A9A24684F9A0010F27D /* Test+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		48BB6A9F2469458E0010F27D /* CustomTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestViewModel.swift; sourceTree = "<group>"; };
+		48BB6AA2246C4D8A0010F27D /* CustomTestResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestResultViewModel.swift; sourceTree = "<group>"; };
+		48BB6AA4246D282F0010F27D /* TestsResults+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestsResults+CoreDataClass.swift"; sourceTree = "<group>"; };
+		48BB6AA5246D282F0010F27D /* TestsResults+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestsResults+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		48BB6AA6246D282F0010F27D /* TestsHistory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestsHistory+CoreDataClass.swift"; sourceTree = "<group>"; };
+		48BB6AA7246D282F0010F27D /* TestsHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestsHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhysicsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B327A80248CB58F8603354D5 /* Pods-PhysicsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhysicsApp.debug.xcconfig"; path = "Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -622,6 +634,7 @@
 				244ABADC242A9B1600066CB3 /* TrainerStart */,
 				48429320244C180F00BE8CB6 /* Test */,
 				48429321244C182100BE8CB6 /* MyAnswers */,
+				48BB6A9D24693F400010F27D /* CPartTest */,
 				4842935324519F1900BE8CB6 /* TestResults */,
 				484293102447623100BE8CB6 /* UnsolvedTasks */,
 				244ABAE5242A9B1600066CB3 /* TasksList */,
@@ -757,10 +770,7 @@
 			isa = PBXGroup;
 			children = (
 				48429316244855DD00BE8CB6 /* TestViewController.swift */,
-				4842931A2448732B00BE8CB6 /* TestViewModel.swift */,
-				484E7FEB24606840002C5A76 /* CPartTestViewController.swift */,
-				484E7FEF24606B37002C5A76 /* CPartTestViewModel.swift */,
-				484E7FEC24606840002C5A76 /* CPartTestViewController.xib */,
+				48BB6A9E2469456B0010F27D /* TestViewModels */,
 				48429317244855DD00BE8CB6 /* TestViewController.xib */,
 			);
 			path = Test;
@@ -779,7 +789,7 @@
 			isa = PBXGroup;
 			children = (
 				48429322244C185700BE8CB6 /* TestResultsViewController.swift */,
-				48429326244C189000BE8CB6 /* TestResultsViewModel.swift */,
+				48BB6AA1246C4D290010F27D /* TestResultViewModels */,
 				48429323244C185700BE8CB6 /* TestResultsViewController.xib */,
 			);
 			path = TestResults;
@@ -798,6 +808,10 @@
 		4842936B2451B10600BE8CB6 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				48BB6AA4246D282F0010F27D /* TestsResults+CoreDataClass.swift */,
+				48BB6AA5246D282F0010F27D /* TestsResults+CoreDataProperties.swift */,
+				48BB6AA6246D282F0010F27D /* TestsHistory+CoreDataClass.swift */,
+				48BB6AA7246D282F0010F27D /* TestsHistory+CoreDataProperties.swift */,
 				48BB6A9924684F9A0010F27D /* Test+CoreDataClass.swift */,
 				48BB6A9A24684F9A0010F27D /* Test+CoreDataProperties.swift */,
 				484E7FE724605E33002C5A76 /* TaskData+CoreDataClass.swift */,
@@ -941,6 +955,34 @@
 				484293C9245B402500BE8CB6 /* AdminMessagesViewController.xib */,
 			);
 			path = AdminMessages;
+			sourceTree = "<group>";
+		};
+		48BB6A9D24693F400010F27D /* CPartTest */ = {
+			isa = PBXGroup;
+			children = (
+				484E7FEB24606840002C5A76 /* CPartTestViewController.swift */,
+				484E7FEF24606B37002C5A76 /* CPartTestViewModel.swift */,
+				484E7FEC24606840002C5A76 /* CPartTestViewController.xib */,
+			);
+			path = CPartTest;
+			sourceTree = "<group>";
+		};
+		48BB6A9E2469456B0010F27D /* TestViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4842931A2448732B00BE8CB6 /* DownloadedTestViewModel.swift */,
+				48BB6A9F2469458E0010F27D /* CustomTestViewModel.swift */,
+			);
+			path = TestViewModels;
+			sourceTree = "<group>";
+		};
+		48BB6AA1246C4D290010F27D /* TestResultViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				48429326244C189000BE8CB6 /* TestResultsViewModel.swift */,
+				48BB6AA2246C4D8A0010F27D /* CustomTestResultViewModel.swift */,
+			);
+			path = TestResultViewModels;
 			sourceTree = "<group>";
 		};
 		C45A5A78C5B824455C8DA084 /* Pods */ = {
@@ -1154,7 +1196,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4842931B2448732B00BE8CB6 /* TestViewModel.swift in Sources */,
+				4842931B2448732B00BE8CB6 /* DownloadedTestViewModel.swift in Sources */,
 				244ABB16242A9B1700066CB3 /* TaskViewController.swift in Sources */,
 				484293C1245B02A900BE8CB6 /* TasksDetailViewModel.swift in Sources */,
 				48BB6A9C24684F9A0010F27D /* Test+CoreDataProperties.swift in Sources */,
@@ -1175,6 +1217,7 @@
 				4842938E245829F200BE8CB6 /* PhysicsApp.xcdatamodeld in Sources */,
 				244ABAFD242A9B1700066CB3 /* ProfileViewController.swift in Sources */,
 				4842939A2458363B00BE8CB6 /* EgeTheme+CoreDataProperties.swift in Sources */,
+				48BB6AA8246D282F0010F27D /* TestsResults+CoreDataClass.swift in Sources */,
 				244ABB1E242A9B1700066CB3 /* SignInViewModel.swift in Sources */,
 				244ABB61242E432600066CB3 /* AwardCompletedViewController.swift in Sources */,
 				484293992458363B00BE8CB6 /* EgeTheme+CoreDataClass.swift in Sources */,
@@ -1226,12 +1269,15 @@
 				4802C2EB243FB0F30017B75B /* DayMixModel.swift in Sources */,
 				244ABB03242A9B1700066CB3 /* ProfileModel.swift in Sources */,
 				244ABB09242A9B1700066CB3 /* UnsolvedThemesViewModel.swift in Sources */,
+				48BB6AAA246D282F0010F27D /* TestsHistory+CoreDataClass.swift in Sources */,
 				244ABB02242A9B1700066CB3 /* ProfileViewModel.swift in Sources */,
 				484293C3245B31A400BE8CB6 /* FormSheetViewModel.swift in Sources */,
+				48BB6AAB246D282F0010F27D /* TestsHistory+CoreDataProperties.swift in Sources */,
 				244ABA7B242A9AE500066CB3 /* DesignService.swift in Sources */,
 				484293CA245B402500BE8CB6 /* AdminMessagesViewController.swift in Sources */,
 				244ABB7024361F8800066CB3 /* ProgressBarView.swift in Sources */,
 				484E7FE924605E33002C5A76 /* TaskData+CoreDataClass.swift in Sources */,
+				48BB6AA3246C4D8A0010F27D /* CustomTestResultViewModel.swift in Sources */,
 				244ABB05242A9B1700066CB3 /* WelcomeViewController.swift in Sources */,
 				244ABB0A242A9B1700066CB3 /* TrainerViewModel.swift in Sources */,
 				244ABB56242CF2A500066CB3 /* AwardDetailViewModel.swift in Sources */,
@@ -1246,11 +1292,13 @@
 				484293142448461100BE8CB6 /* TestTrainerViewModel.swift in Sources */,
 				48BB6A9B24684F9A0010F27D /* Test+CoreDataClass.swift in Sources */,
 				244ABB6D24325FCB00066CB3 /* UserStatsTableViewCell.swift in Sources */,
+				48BB6AA02469458E0010F27D /* CustomTestViewModel.swift in Sources */,
 				244ABB7424377D6F00066CB3 /* UserStatsViewModel.swift in Sources */,
 				48429395245835B300BE8CB6 /* EgeTask+CoreDataClass.swift in Sources */,
 				484293D8245C822700BE8CB6 /* Trainer+CoreDataProperties.swift in Sources */,
 				244ABA76242A9AD700066CB3 /* AwardCollectionViewCell.swift in Sources */,
 				4842930E24470B5400BE8CB6 /* ThemesTrainerViewModel.swift in Sources */,
+				48BB6AA9246D282F0010F27D /* TestsResults+CoreDataProperties.swift in Sources */,
 				4842939E2458835100BE8CB6 /* User+CoreDataProperties.swift in Sources */,
 				48429324244C185700BE8CB6 /* TestResultsViewController.swift in Sources */,
 				244ABB12242A9B1700066CB3 /* TasksListViewController.swift in Sources */,

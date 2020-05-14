@@ -16,6 +16,7 @@ class TestResultTaskTableViewCell: UITableViewCell {
     @IBOutlet weak var wrightAnswerLabel: UILabel!
     @IBOutlet weak var extendButton: UIButton!
     @IBOutlet weak var userPointsLabel: UILabel!
+    @IBOutlet weak var descriptionImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
