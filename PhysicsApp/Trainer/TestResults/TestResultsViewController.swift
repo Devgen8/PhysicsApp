@@ -42,7 +42,11 @@ class TestResultsViewController: UIViewController {
     }
     
     @IBAction func closeTapped(_ sender: UIButton) {
-        view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+        if viewModel is TestsHistoryResultsViewModel {
+            dismiss(animated: true)
+        } else {
+            view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+        }
     }
 }
 

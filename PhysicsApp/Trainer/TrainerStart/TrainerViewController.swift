@@ -95,6 +95,11 @@ class TrainerViewController: UIViewController {
         }
     }
     
+    @IBAction func profileTapped(_ sender: UIButton) {
+        let profileViewController = ProfileViewController()
+        present(profileViewController, animated: true)
+    }
+    
     func routeForTests() {
         let testViewController = TestViewController()
         testViewController.viewModel = CustomTestViewModel()

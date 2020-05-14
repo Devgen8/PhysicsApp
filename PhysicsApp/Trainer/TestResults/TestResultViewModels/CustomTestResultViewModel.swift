@@ -30,6 +30,7 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
     var hundredSystemPoints = 0
     var testPoints = 0
     let usersReference = Firestore.firestore().collection("users")
+    var everyTaskAnswer = [Int]()
     
     func updateTestCompletion() {
         var finishedTests = UserDefaults.standard.value(forKey: "finishedTests") as? [String] ?? []
@@ -37,7 +38,7 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
         UserDefaults.standard.set(finishedTests, forKey: "finishedTests")
     }
     
-    func checkUserAnswers(completion: (Bool) -> ()) {
+    func checkUserAnswers(completion: @escaping (Bool) -> ()) {
         updateTestCompletion()
         for index in 1...26 {
             let taskName = tasks[index - 1].name ?? ""
@@ -227,8 +228,12 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
                                                      "solvedTasks" : solvedTasks,
                                                      "firstTryTasks" : firstTryTasks])
             var tasksNames = [String]()
+            var wrightAnswerStrings = [String]()
+            var index = 0
             for task in tasks {
                 tasksNames.append(task.name ?? "")
+                wrightAnswerStrings.append(getWrightAnswer(for: index + 1))
+                index += 1
             }
             saveTestResultsInCoreData()
             usersReference.document(userId).collection("testsHistory").document(testName).setData(["name":testName,
@@ -238,7 +243,10 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
                                                                                                    "points":hundredSystemPoints,
                                                                                                    "answersCorrection":answersCorrection,
                                                                                                    "timeTillEnd":timeTillEnd,
-                                                                                                   "tasksNames":tasksNames])
+                                                                                                   "tasksNames":tasksNames,
+                                                                                                   "wrightAnswers":wrightAnswerStrings,
+                                                                                                   "primaryPoints":everyTaskAnswer,
+                                                                                                   "date":Date()])
         }
     }
     
@@ -256,10 +264,14 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
                 testResults.points = Int16(hundredSystemPoints)
                 testResults.timeTillEnd = Int16(timeTillEnd)
                 var tasksNames = [String]()
+                var wrightAnswerStrings = [String]()
+                var index = 0
                 for task in tasks {
                     tasksNames.append(task.name ?? "")
+                    wrightAnswerStrings.append(getWrightAnswer(for: index + 1))
+                    index += 1
                 }
-                testResults.testResultObject = TestsResultsObject(userAnswers: userAnswers, answersCorrection: answersCorrection, tasksNames: tasksNames)
+                testResults.testResultObject = TestsResultsObject(userAnswers: userAnswers, answersCorrection: answersCorrection, tasksNames: tasksNames, wrightAnswers: wrightAnswerStrings, primaryPoints: everyTaskAnswer)
                 testsCopy.add(testResults)
                 testsHistory.tests = testsCopy
                 
@@ -272,10 +284,11 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
     
     func getHundredSystemPoints() -> Int {
         var primaryPoints = 0
-        resultPoints.forEach({ primaryPoints += $0 })
+        resultPoints.forEach({ primaryPoints += $0; everyTaskAnswer.append($0)})
         var index = 0
         for rowNumber in 26..<26 + cPartPoints.count {
             primaryPoints += cPartPoints[index]
+            everyTaskAnswer.append(cPartPoints[index])
             if rowNumber + 1 == 28 {
                 answersCorrection.append(cPartPoints[1])
                 if cPartPoints[1] == 2 {

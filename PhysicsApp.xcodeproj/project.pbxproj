@@ -199,6 +199,10 @@
 		48BB6AA9246D282F0010F27D /* TestsResults+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AA5246D282F0010F27D /* TestsResults+CoreDataProperties.swift */; };
 		48BB6AAA246D282F0010F27D /* TestsHistory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AA6246D282F0010F27D /* TestsHistory+CoreDataClass.swift */; };
 		48BB6AAB246D282F0010F27D /* TestsHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AA7246D282F0010F27D /* TestsHistory+CoreDataProperties.swift */; };
+		48BB6AAE246D708C0010F27D /* TestsHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AAC246D708C0010F27D /* TestsHistoryViewController.swift */; };
+		48BB6AAF246D708C0010F27D /* TestsHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48BB6AAD246D708C0010F27D /* TestsHistoryViewController.xib */; };
+		48BB6AB1246D721D0010F27D /* TestsHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AB0246D721D0010F27D /* TestsHistoryViewModel.swift */; };
+		48BB6AB4246D84A80010F27D /* TestsHistoryResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AB3246D84A80010F27D /* TestsHistoryResultsViewModel.swift */; };
 		6910FC61EACA1D262F52A3D2 /* Pods_PhysicsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -398,6 +402,10 @@
 		48BB6AA5246D282F0010F27D /* TestsResults+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestsResults+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		48BB6AA6246D282F0010F27D /* TestsHistory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestsHistory+CoreDataClass.swift"; sourceTree = "<group>"; };
 		48BB6AA7246D282F0010F27D /* TestsHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestsHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		48BB6AAC246D708C0010F27D /* TestsHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsHistoryViewController.swift; sourceTree = "<group>"; };
+		48BB6AAD246D708C0010F27D /* TestsHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestsHistoryViewController.xib; sourceTree = "<group>"; };
+		48BB6AB0246D721D0010F27D /* TestsHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsHistoryViewModel.swift; sourceTree = "<group>"; };
+		48BB6AB3246D84A80010F27D /* TestsHistoryResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsHistoryResultsViewModel.swift; sourceTree = "<group>"; };
 		5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhysicsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B327A80248CB58F8603354D5 /* Pods-PhysicsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhysicsApp.debug.xcconfig"; path = "Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -611,6 +619,7 @@
 		244ABAD0242A9B1500066CB3 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				48BB6AB2246D7EAC0010F27D /* TestsHistory */,
 				484293A8245AB81E00BE8CB6 /* ProfileStart */,
 				484293A9245AB83800BE8CB6 /* AwardDetail */,
 				484293AA245AB84B00BE8CB6 /* Awards */,
@@ -981,8 +990,19 @@
 			children = (
 				48429326244C189000BE8CB6 /* TestResultsViewModel.swift */,
 				48BB6AA2246C4D8A0010F27D /* CustomTestResultViewModel.swift */,
+				48BB6AB3246D84A80010F27D /* TestsHistoryResultsViewModel.swift */,
 			);
 			path = TestResultViewModels;
+			sourceTree = "<group>";
+		};
+		48BB6AB2246D7EAC0010F27D /* TestsHistory */ = {
+			isa = PBXGroup;
+			children = (
+				48BB6AAC246D708C0010F27D /* TestsHistoryViewController.swift */,
+				48BB6AB0246D721D0010F27D /* TestsHistoryViewModel.swift */,
+				48BB6AAD246D708C0010F27D /* TestsHistoryViewController.xib */,
+			);
+			path = TestsHistory;
 			sourceTree = "<group>";
 		};
 		C45A5A78C5B824455C8DA084 /* Pods */ = {
@@ -1112,6 +1132,7 @@
 				244ABAA8242A9AF400066CB3 /* Montserrat-LightItalic.ttf in Resources */,
 				244ABAB4242A9AF400066CB3 /* Montserrat-Thin.ttf in Resources */,
 				244ABB0F242A9B1700066CB3 /* ImagePreviewViewController.xib in Resources */,
+				48BB6AAF246D708C0010F27D /* TestsHistoryViewController.xib in Resources */,
 				244ABA47242A93DE00066CB3 /* GoogleService-Info.plist in Resources */,
 				244ABAAB242A9AF400066CB3 /* Montserrat-BoldItalic.otf in Resources */,
 				244ABAAF242A9AF400066CB3 /* Montserrat-ExtraLight.otf in Resources */,
@@ -1215,6 +1236,7 @@
 				244ABB00242A9B1700066CB3 /* UIViewExtension.swift in Sources */,
 				244ABB11242A9B1700066CB3 /* TasksListViewModel.swift in Sources */,
 				4842938E245829F200BE8CB6 /* PhysicsApp.xcdatamodeld in Sources */,
+				48BB6AAE246D708C0010F27D /* TestsHistoryViewController.swift in Sources */,
 				244ABAFD242A9B1700066CB3 /* ProfileViewController.swift in Sources */,
 				4842939A2458363B00BE8CB6 /* EgeTheme+CoreDataProperties.swift in Sources */,
 				48BB6AA8246D282F0010F27D /* TestsResults+CoreDataClass.swift in Sources */,
@@ -1234,7 +1256,9 @@
 				244ABA6E242A9AC900066CB3 /* AnswerChooserViewModel.swift in Sources */,
 				244ABA74242A9AD700066CB3 /* ThemeTableViewCell.swift in Sources */,
 				244ABB792438D3E800066CB3 /* AdminStatsViewController.swift in Sources */,
+				48BB6AB1246D721D0010F27D /* TestsHistoryViewModel.swift in Sources */,
 				244ABA66242A9AC900066CB3 /* BattleViewModel.swift in Sources */,
+				48BB6AB4246D84A80010F27D /* TestsHistoryResultsViewModel.swift in Sources */,
 				484293BD245B023100BE8CB6 /* TasksDetailViewController.swift in Sources */,
 				484E7FF024606B37002C5A76 /* CPartTestViewModel.swift in Sources */,
 				244ABB19242A9B1700066CB3 /* ImageScrollView.swift in Sources */,

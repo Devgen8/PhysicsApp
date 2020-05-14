@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
-        <array key="Montserrat-MediumItalic.ttf">
+        <array key="Montserrat-MediumItalic.otf">
             <string>Montserrat-MediumItalic</string>
         </array>
     </customFonts>
@@ -95,6 +95,17 @@
                         <constraint firstAttribute="width" constant="120" id="TpJ-EU-nmX"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="roX-Zz-rQP">
+                    <rect key="frame" x="187" y="54" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="FZ6-2r-vex"/>
+                        <constraint firstAttribute="height" constant="40" id="Z7D-gs-wRM"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="account"/>
+                    <connections>
+                        <action selector="profileTapped:" destination="-1" eventType="touchUpInside" id="QOS-bK-QaT"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -104,14 +115,16 @@
                 <constraint firstItem="kkb-4d-wf3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="6te-ms-vig"/>
                 <constraint firstItem="8Ve-lf-hZU" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Cjp-Kg-Nbk"/>
                 <constraint firstItem="qIP-Cc-SB0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="E1c-iQ-wcr"/>
+                <constraint firstItem="bLi-Ru-Gha" firstAttribute="top" secondItem="roX-Zz-rQP" secondAttribute="bottom" constant="20" id="Tuz-BJ-Ovl"/>
                 <constraint firstItem="dJ3-xI-jIk" firstAttribute="top" secondItem="kkb-4d-wf3" secondAttribute="bottom" constant="5" id="U0A-mx-6kO"/>
                 <constraint firstItem="bLi-Ru-Gha" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="XOo-LA-Pow"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qIP-Cc-SB0" secondAttribute="bottom" constant="5" id="aKN-QF-POs"/>
+                <constraint firstItem="roX-Zz-rQP" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="cO8-nt-jdn"/>
                 <constraint firstItem="lTS-oq-R7L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="gdH-O9-QxA"/>
                 <constraint firstItem="dJ3-xI-jIk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kog-hm-zUU"/>
+                <constraint firstItem="roX-Zz-rQP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="m6l-Uv-SaA"/>
                 <constraint firstItem="8Ve-lf-hZU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oLe-O5-lcu"/>
                 <constraint firstItem="lTS-oq-R7L" firstAttribute="top" secondItem="dJ3-xI-jIk" secondAttribute="bottom" constant="20" id="qjs-h6-UY9"/>
-                <constraint firstItem="bLi-Ru-Gha" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="70" id="t5X-XC-Z0z"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lTS-oq-R7L" secondAttribute="trailing" constant="30" id="w03-X9-pwy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dJ3-xI-jIk" secondAttribute="trailing" id="xiF-NK-MB6"/>
             </constraints>
@@ -121,5 +134,6 @@
     </objects>
     <resources>
         <image name="Montazhnaya_oblast_98_4x" width="801" height="801"/>
+        <image name="account" width="512" height="512"/>
     </resources>
 </document>

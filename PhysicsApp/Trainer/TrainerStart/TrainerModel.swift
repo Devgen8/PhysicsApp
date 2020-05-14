@@ -144,27 +144,35 @@ public class TestsResultsObject: NSObject, NSCoding {
     public var userAnswers = [String:String]()
     public var answersCorrection = [Int]()
     public var tasksNames = [String]()
+    public var wrightAnswers = [String]()
+    public var primaryPoints = [Int]()
     
     public func encode(with coder: NSCoder) {
         coder.encode(userAnswers, forKey: "userAnswers")
         coder.encode(answersCorrection, forKey: "answersCorrection")
         coder.encode(tasksNames, forKey: "tasksNames")
+        coder.encode(wrightAnswers, forKey: "wrightAnswers")
+        coder.encode(primaryPoints, forKey: "primaryPoints")
     }
     
     public override init() {
         super.init()
     }
     
-    init(userAnswers: [String:String], answersCorrection: [Int], tasksNames: [String]) {
+    init(userAnswers: [String:String], answersCorrection: [Int], tasksNames: [String], wrightAnswers: [String], primaryPoints: [Int]) {
         self.userAnswers = userAnswers
         self.answersCorrection = answersCorrection
         self.tasksNames = tasksNames
+        self.wrightAnswers = wrightAnswers
+        self.primaryPoints = primaryPoints
     }
     
     public required convenience init?(coder: NSCoder) {
         let answers = coder.decodeObject(forKey: "userAnswers") as! [String:String]
         let correction = coder.decodeObject(forKey: "answersCorrection") as! [Int]
         let names = coder.decodeObject(forKey: "tasksNames") as! [String]
-        self.init(userAnswers: answers, answersCorrection: correction, tasksNames: names)
+        let wright = coder.decodeObject(forKey: "wrightAnswers") as! [String]
+        let primary = coder.decodeObject(forKey: "primaryPoints") as! [Int]
+        self.init(userAnswers: answers, answersCorrection: correction, tasksNames: names, wrightAnswers: wright, primaryPoints: primary)
     }
 }

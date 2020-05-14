@@ -138,6 +138,7 @@ class TestViewController: UIViewController {
         taskNumber = viewModel.getNextTaskIndex(after: taskNumber)
         changeForTask(taskNumber)
         } else {
+            viewModel.writeAnswerForTask(taskNumber, with: answerTextField.text ?? "")
             presentCPartViewController()
         }
     }

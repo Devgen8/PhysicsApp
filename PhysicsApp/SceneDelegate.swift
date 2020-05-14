@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if currentUser.email == "nastena020300@ya.ru" {
                 window?.rootViewController = MainAdminViewController()
             } else {
-                //UserStatsCounter.shared.calculateSrEGE()
+                UserStatsCounter.shared.calculateSrEGE()
                 window?.rootViewController = TabBarViewController()
             }
         } else {

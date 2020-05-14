@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,10 +10,10 @@
         <array key="BlackDiamond.ttf">
             <string>BlackDiamond</string>
         </array>
-        <array key="Montserrat-Medium.otf">
+        <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
-        <array key="Montserrat-MediumItalic.ttf">
+        <array key="Montserrat-MediumItalic.otf">
             <string>Montserrat-MediumItalic</string>
         </array>
         <array key="Montserrat-Regular.ttf">
@@ -25,11 +25,10 @@
             <connections>
                 <outlet property="emailLabel" destination="WYr-gC-f5q" id="JWb-Ve-95L"/>
                 <outlet property="logOutButton" destination="kTq-0u-D8h" id="PTo-gY-icB"/>
-                <outlet property="myAwardsButton" destination="p2Z-yo-SEq" id="2C3-j6-zFq"/>
                 <outlet property="nameLabel" destination="9kp-wE-56l" id="myW-59-15G"/>
                 <outlet property="passwordLabel" destination="HQX-ZN-ZEX" id="5Fd-pd-P0O"/>
                 <outlet property="ratingLabel" destination="sla-Rv-XEk" id="zeO-gt-Erf"/>
-                <outlet property="statsButton" destination="7mu-H0-OcZ" id="vsb-Gq-84d"/>
+                <outlet property="testsHistoryButton" destination="ztc-0u-cP4" id="No8-tj-T9N"/>
                 <outlet property="userImage" destination="lae-fJ-9gY" id="7Tq-5g-9pW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -168,49 +167,33 @@
                         <action selector="logOutTapped:" destination="-1" eventType="touchUpInside" id="x6f-s9-Ypg"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2Z-yo-SEq">
-                    <rect key="frame" x="122" y="572.5" width="170" height="60"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztc-0u-cP4">
+                    <rect key="frame" x="97" y="572.5" width="220" height="60"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="170" id="jJv-SI-nGN"/>
-                        <constraint firstAttribute="height" constant="60" id="y1Z-EX-IQ0"/>
+                        <constraint firstAttribute="width" constant="220" id="hPE-g3-iit"/>
+                        <constraint firstAttribute="height" constant="60" id="uKI-iz-MLk"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
-                    <state key="normal" title="Мои награды">
+                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                    <state key="normal" title="История пробников">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
-                        <action selector="myAwardsTapped:" destination="-1" eventType="touchUpInside" id="JkK-iS-Sdo"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mu-H0-OcZ">
-                    <rect key="frame" x="122" y="642.5" width="170" height="60"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="170" id="hmA-Dv-Cyi"/>
-                        <constraint firstAttribute="height" constant="60" id="yJa-Xr-OwE"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
-                    <state key="normal" title="Статистика">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <connections>
-                        <action selector="statsTapped:" destination="-1" eventType="touchUpInside" id="bpW-CZ-yQ9"/>
+                        <action selector="testsHistoryTapped:" destination="-1" eventType="touchUpInside" id="wzn-Z0-wQK"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="7mu-H0-OcZ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="4jN-zB-uUy"/>
                 <constraint firstItem="bZg-EB-UDi" firstAttribute="top" secondItem="lae-fJ-9gY" secondAttribute="bottom" constant="40" id="4p1-Hg-WiX"/>
                 <constraint firstItem="bZg-EB-UDi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="C51-PL-utW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bZg-EB-UDi" secondAttribute="trailing" constant="20" id="Clz-gL-yDL"/>
                 <constraint firstItem="kTq-0u-D8h" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="EEk-io-9A7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="N48-Ox-BU6" secondAttribute="bottom" constant="10" id="IqE-A7-q56"/>
+                <constraint firstItem="ztc-0u-cP4" firstAttribute="top" secondItem="sla-Rv-XEk" secondAttribute="bottom" constant="10" id="JBA-un-uEl"/>
                 <constraint firstItem="eFR-dH-rkP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="KE3-l2-8y8"/>
-                <constraint firstItem="p2Z-yo-SEq" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="KpS-Pu-Dok"/>
                 <constraint firstItem="lae-fJ-9gY" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="L80-2O-FZ3"/>
-                <constraint firstItem="p2Z-yo-SEq" firstAttribute="top" secondItem="sla-Rv-XEk" secondAttribute="bottom" constant="10" id="MCH-cb-y1H"/>
                 <constraint firstItem="sla-Rv-XEk" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Rwp-tV-1aA"/>
-                <constraint firstItem="7mu-H0-OcZ" firstAttribute="top" secondItem="p2Z-yo-SEq" secondAttribute="bottom" constant="10" id="a0t-vh-ywd"/>
+                <constraint firstItem="ztc-0u-cP4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ZOV-WX-e5i"/>
                 <constraint firstItem="N48-Ox-BU6" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="b16-t5-2Gm"/>
                 <constraint firstItem="bZg-EB-UDi" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="bVI-Jr-B97"/>
                 <constraint firstItem="kTq-0u-D8h" firstAttribute="top" secondItem="eFR-dH-rkP" secondAttribute="bottom" id="cJB-2q-O9U"/>

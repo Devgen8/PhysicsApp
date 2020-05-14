@@ -16,8 +16,9 @@ import UIKit
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var logOutButton: UIButton!
-    @IBOutlet weak var myAwardsButton: UIButton!
-    @IBOutlet weak var statsButton: UIButton!
+    @IBOutlet weak var testsHistoryButton: UIButton!
+    //@IBOutlet weak var myAwardsButton: UIButton!
+    //@IBOutlet weak var statsButton: UIButton!
     
     var viewModel = ProfileViewModel()
     
@@ -61,8 +62,9 @@ import UIKit
         ratingLabel.clipsToBounds = true
         DesignService.designWhiteButton(logOutButton)
         logOutButton.layer.cornerRadius = 5
-        DesignService.designWhiteButton(myAwardsButton)
-    DesignService.designWhiteButton(statsButton)
+        DesignService.designWhiteButton(testsHistoryButton)
+        //DesignService.designWhiteButton(myAwardsButton)
+        //DesignService.designWhiteButton(statsButton)
     }
     
     @IBAction func logOutTapped(_ sender: UIButton) {
@@ -74,29 +76,37 @@ import UIKit
     
     private func setUpUsersImage() {
          userImage.layer.cornerRadius = 10
-         userImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlePickingPhoto)))
-         userImage.isUserInteractionEnabled = true
-     }
-     
-     @objc private func handlePickingPhoto() {
-         let imagePicker = UIImagePickerController()
-         imagePicker.delegate = self
-         imagePicker.allowsEditing = true
-         present(imagePicker, animated: true, completion: nil)
-     }
-    @IBAction func myAwardsTapped(_ sender: UIButton) {
-        Animations.swipeViewController(.fromRight, for: view)
-        let awardsViewController = AwardsViewController()
-        awardsViewController.modalPresentationStyle = .fullScreen
-        present(awardsViewController, animated: true)
+        userImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlePickingPhoto)))
+        userImage.isUserInteractionEnabled = true
     }
     
-    @IBAction func statsTapped(_ sender: UIButton) {
-        Animations.swipeViewController(.fromRight, for: view)
-        let userStatsViewController = UserStatsViewController()
-        userStatsViewController.modalPresentationStyle = .fullScreen
-        present(userStatsViewController, animated: true)
+    @objc private func handlePickingPhoto() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true, completion: nil)
     }
+    
+    @IBAction func testsHistoryTapped(_ sender: UIButton) {
+        let testsHistoryViewController = TestsHistoryViewController()
+        Animations.swipeViewController(.fromRight, for: view)
+        testsHistoryViewController.modalPresentationStyle = .fullScreen
+        present(testsHistoryViewController, animated: true)
+    }
+    
+    //    @IBAction func myAwardsTapped(_ sender: UIButton) {
+    //        Animations.swipeViewController(.fromRight, for: view)
+//        let awardsViewController = AwardsViewController()
+//        awardsViewController.modalPresentationStyle = .fullScreen
+//        present(awardsViewController, animated: true)
+//    }
+//
+//    @IBAction func statsTapped(_ sender: UIButton) {
+//        Animations.swipeViewController(.fromRight, for: view)
+//        let userStatsViewController = UserStatsViewController()
+//        userStatsViewController.modalPresentationStyle = .fullScreen
+//        present(userStatsViewController, animated: true)
+//    }
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{

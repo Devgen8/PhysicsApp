@@ -69,7 +69,7 @@ protocol GeneralTestResultsViewModel {
     var testName: String { get set }
     var cPartPoints: [Int] { get set }
     var testAnswersUpdater: TestAnswersUpdater? { get set }
-    func checkUserAnswers(completion: (Bool) -> ())
+    func checkUserAnswers(completion: @escaping (Bool) -> ())
     func updateTestDataAsDone()
     func isCellOpened(index: Int) -> Bool
     func closeCell(for index: Int)
