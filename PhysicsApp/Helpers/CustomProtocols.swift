@@ -85,3 +85,7 @@ protocol GeneralTestResultsViewModel {
     func getColorPercentage() -> (Float, Float)
     func getWrightAnswer(for index: Int) -> String
 }
+
+protocol ProfileInfoUpdater {
+    func updateProfileInfo()
+}

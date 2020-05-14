@@ -17,6 +17,7 @@ import UIKit
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var testsHistoryButton: UIButton!
+    @IBOutlet weak var changeButton: UIButton!
     //@IBOutlet weak var myAwardsButton: UIButton!
     //@IBOutlet weak var statsButton: UIButton!
     
@@ -63,15 +64,24 @@ import UIKit
         DesignService.designWhiteButton(logOutButton)
         logOutButton.layer.cornerRadius = 5
         DesignService.designWhiteButton(testsHistoryButton)
+        DesignService.designWhiteButton(changeButton)
+        changeButton.layer.cornerRadius = 5
         //DesignService.designWhiteButton(myAwardsButton)
         //DesignService.designWhiteButton(statsButton)
     }
     
     @IBAction func logOutTapped(_ sender: UIButton) {
+        viewModel.eraseUserDefaults()
         viewModel.logOut()
         let welcomeViewController = WelcomeViewController()
         welcomeViewController.modalPresentationStyle = .fullScreen
         present(welcomeViewController, animated: true)
+    }
+    @IBAction func changeTapped(_ sender: UIButton) {
+        let profileDataChangeViewController = ProfileDataChangeViewController()
+        viewModel.transportData(to: profileDataChangeViewController.viewModel)
+        profileDataChangeViewController.profileInfoUpdater = self
+        present(profileDataChangeViewController, animated: true)
     }
     
     private func setUpUsersImage() {
@@ -130,5 +140,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             }
         }
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ProfileViewController: ProfileInfoUpdater {
+    func updateProfileInfo() {
+        prepareData()
     }
 }

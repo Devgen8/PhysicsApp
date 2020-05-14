@@ -64,6 +64,10 @@
         <relationship name="tests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Test" inverseName="trainer" inverseEntity="Test"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="photo" optional="YES" attributeType="Binary"/>
         <attribute name="solvedTasks" optional="YES" attributeType="Transformable"/>
         <attribute name="unsolvedTasks" optional="YES" attributeType="Transformable"/>
         <relationship name="tasksForSolving" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskData"/>
@@ -75,9 +79,9 @@
         <element name="EgeTheme" positionX="-175.60546875" positionY="-37" width="128" height="88"/>
         <element name="TaskData" positionX="251.0625" positionY="-93.5703125" width="128" height="178"/>
         <element name="Test" positionX="-171.0546875" positionY="-170.69140625" width="128" height="148"/>
-        <element name="Trainer" positionX="-564.09765625" positionY="59.58984375" width="128" height="118"/>
-        <element name="User" positionX="25.2890625" positionY="-270.0625" width="128" height="88"/>
         <element name="TestsHistory" positionX="-360" positionY="-117" width="128" height="58"/>
         <element name="TestsResults" positionX="-351" positionY="-108" width="128" height="148"/>
+        <element name="Trainer" positionX="-564.09765625" positionY="59.58984375" width="128" height="118"/>
+        <element name="User" positionX="25.2890625" positionY="-270.0625" width="128" height="148"/>
     </elements>
 </model>

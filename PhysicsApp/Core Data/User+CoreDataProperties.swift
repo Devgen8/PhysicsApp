@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  PhysicsApp
 //
-//  Created by Evgeny Kamaev on 28.04.2020.
+//  Created by Evgeny Kamaev on 15.05.2020.
 //  Copyright © 2020 Devgen. All rights reserved.
 //
 //
@@ -17,8 +17,12 @@ extension User {
         return NSFetchRequest<User>(entityName: "User")
     }
 
+    @NSManaged public var email: String?
+    @NSManaged public var name: String?
+    @NSManaged public var password: String?
     @NSManaged public var solvedTasks: NSObject?
     @NSManaged public var unsolvedTasks: NSObject?
+    @NSManaged public var photo: Data?
     @NSManaged public var tasksForSolving: NSSet?
 
 }

@@ -19,6 +19,7 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var writeButton: UIButton!
     @IBOutlet weak var showDescriptionButton: UIButton!
     @IBOutlet weak var descriptionImageView: UIImageView!
+    @IBOutlet weak var canNotSolveButton: UIButton!
     
     var viewModel = TaskViewModel()
     
@@ -54,6 +55,7 @@ class TaskViewController: UIViewController {
         showDescriptionButton.isHidden = true
         showDescriptionButton.layer.cornerRadius = 20
         descriptionImageView.alpha = 0
+        DesignService.designWhiteButton(canNotSolveButton)
     }
     
     @IBAction func backTapped(_ sender: UIButton) {
@@ -72,12 +74,25 @@ class TaskViewController: UIViewController {
             self.resultLabel.alpha = 0
             self.resultLabel.alpha = 1
         }
+        canNotSolveButton.isHidden = true
+        showDescriptionButton.isHidden = false
+    }
+    
+    @IBAction func canNotSolveTapped(_ sender: UIButton) {
+        canNotSolveButton.isHidden = true
+        let (_, _) = viewModel.checkAnswer("")
         showDescriptionButton.isHidden = false
     }
     
     @IBAction func writeTapped(_ sender: UIButton) {
         let formSheetViewController = FormSheetViewController()
         present(formSheetViewController, animated: true)
+    }
+    @IBAction func desriptionTapped(_ sender: UITapGestureRecognizer) {
+        let imagePreviewViewController = ImagePreviewViewController()
+        imagePreviewViewController.taskImage = descriptionImageView.image
+        imagePreviewViewController.modalPresentationStyle = .fullScreen
+        present(imagePreviewViewController, animated: true)
     }
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {

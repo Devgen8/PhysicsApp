@@ -232,12 +232,49 @@ class TasksListViewModel {
                         tasks.append(newTask)
                     }
                 }
-                
+                tasks = tasks.sorted(by: {
+                    let (firstTheme, firstNumber) = getTaskLocation(taskName: $0.name ?? "")
+                    let (secondTheme, secondNumber) = getTaskLocation(taskName: $1.name ?? "")
+                    if getTaskPosition(taskName: firstTheme) == getTaskPosition(taskName: secondTheme) {
+                        return Int(firstNumber) ?? 0 < Int(secondNumber) ?? 0
+                    } else {
+                        return getTaskPosition(taskName: firstTheme) < getTaskPosition(taskName: secondTheme)
+                    }
+                })
                 completion(true)
             } catch {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func getTaskLocation(taskName: String) -> (String, String) {
+        var themeNameSet = [Character]()
+        var taskNumberSet = [Character]()
+        var isDotFound = false
+        for letter in taskName {
+            if letter == "." {
+                isDotFound = true
+                continue
+            }
+            if isDotFound {
+                taskNumberSet.append(letter)
+            } else {
+                themeNameSet.append(letter)
+            }
+        }
+        let themeName = String(themeNameSet)
+        let taskNumber = String(taskNumberSet)
+        return (themeName, taskNumber)
+    }
+    
+    func getTaskPosition(taskName: String) -> Int {
+        let (themeName, _) = getTaskLocation(taskName: taskName)
+        if let range = themeName.range(of: "№") {
+            let numberString = String(themeName[range.upperBound...])
+            return Int(numberString) ?? 0
+        }
+        return 0
     }
     
     func saveTasksToCoreDataForSolved() {
@@ -339,6 +376,15 @@ class TasksListViewModel {
                     index += 1
                 }
                 if self.themeTasks.count == self.tasks.count {
+                    self.tasks = self.tasks.sorted(by: {
+                        let (firstTheme, firstNumber) = self.getTaskLocation(taskName: $0.name ?? "")
+                        let (secondTheme, secondNumber) = self.getTaskLocation(taskName: $1.name ?? "")
+                        if self.getTaskPosition(taskName: firstTheme) == self.getTaskPosition(taskName: secondTheme) {
+                            return Int(firstNumber) ?? 0 < Int(secondNumber) ?? 0
+                        } else {
+                            return self.getTaskPosition(taskName: firstTheme) < self.getTaskPosition(taskName: secondTheme)
+                        }
+                    })
                     self.downloadPhotos { (isReady) in
                         completion(isReady)
                     }
@@ -459,26 +505,6 @@ class TasksListViewModel {
                 }
             }
         }
-    }
-    
-    func getTaskLocation(taskName: String) -> (String, String) {
-        var themeNameSet = [Character]()
-        var taskNumberSet = [Character]()
-        var isDotFound = false
-        for letter in taskName {
-            if letter == "." {
-                isDotFound = true
-                continue
-            }
-            if isDotFound {
-                taskNumberSet.append(letter)
-            } else {
-                themeNameSet.append(letter)
-            }
-        }
-        let themeName = String(themeNameSet)
-        let taskNumber = String(taskNumberSet)
-        return (themeName, taskNumber)
     }
     
     func checkIfTaskSolved(name: String) -> Bool {

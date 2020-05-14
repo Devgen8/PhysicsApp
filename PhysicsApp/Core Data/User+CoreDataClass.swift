@@ -2,7 +2,7 @@
 //  User+CoreDataClass.swift
 //  PhysicsApp
 //
-//  Created by Evgeny Kamaev on 28.04.2020.
+//  Created by Evgeny Kamaev on 15.05.2020.
 //  Copyright © 2020 Devgen. All rights reserved.
 //
 //
