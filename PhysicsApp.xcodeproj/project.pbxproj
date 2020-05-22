@@ -141,6 +141,8 @@
 		4802C2E7243EEA8D0017B75B /* 17694-cube-grid.json in Resources */ = {isa = PBXBuildFile; fileRef = 4802C2E6243EEA8C0017B75B /* 17694-cube-grid.json */; };
 		4802C2E9243EF1330017B75B /* DayMixViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802C2E8243EF1330017B75B /* DayMixViewModel.swift */; };
 		4802C2EB243FB0F30017B75B /* DayMixModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802C2EA243FB0F30017B75B /* DayMixModel.swift */; };
+		4825D07924779B2300E938FF /* ChooseThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825D07724779B2300E938FF /* ChooseThemeViewController.swift */; };
+		4825D07A24779B2300E938FF /* ChooseThemeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4825D07824779B2300E938FF /* ChooseThemeViewController.xib */; };
 		48271785243E0B2A003C6CF1 /* UserStatsCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */; };
 		4842930E24470B5400BE8CB6 /* ThemesTrainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842930D24470B5400BE8CB6 /* ThemesTrainerViewModel.swift */; };
 		484293122447647500BE8CB6 /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293112447647500BE8CB6 /* TaskListModel.swift */; };
@@ -206,6 +208,7 @@
 		48BB6ABA246DD05B0010F27D /* ProfileDataChangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AB9246DD05B0010F27D /* ProfileDataChangeViewModel.swift */; };
 		48BB6AC2246DF0DD0010F27D /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AC0246DF0DD0010F27D /* User+CoreDataClass.swift */; };
 		48BB6AC3246DF0DD0010F27D /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AC1246DF0DD0010F27D /* User+CoreDataProperties.swift */; };
+		48BB6AC5247576870010F27D /* ThemeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AC4247576870010F27D /* ThemeParser.swift */; };
 		6910FC61EACA1D262F52A3D2 /* Pods_PhysicsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -347,6 +350,8 @@
 		4802C2E6243EEA8C0017B75B /* 17694-cube-grid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "17694-cube-grid.json"; sourceTree = "<group>"; };
 		4802C2E8243EF1330017B75B /* DayMixViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayMixViewModel.swift; sourceTree = "<group>"; };
 		4802C2EA243FB0F30017B75B /* DayMixModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayMixModel.swift; sourceTree = "<group>"; };
+		4825D07724779B2300E938FF /* ChooseThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseThemeViewController.swift; sourceTree = "<group>"; };
+		4825D07824779B2300E938FF /* ChooseThemeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseThemeViewController.xib; sourceTree = "<group>"; };
 		48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsCounter.swift; sourceTree = "<group>"; };
 		4842930D24470B5400BE8CB6 /* ThemesTrainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesTrainerViewModel.swift; sourceTree = "<group>"; };
 		484293112447647500BE8CB6 /* TaskListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModel.swift; sourceTree = "<group>"; };
@@ -412,6 +417,7 @@
 		48BB6AB9246DD05B0010F27D /* ProfileDataChangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataChangeViewModel.swift; sourceTree = "<group>"; };
 		48BB6AC0246DF0DD0010F27D /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		48BB6AC1246DF0DD0010F27D /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		48BB6AC4247576870010F27D /* ThemeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeParser.swift; sourceTree = "<group>"; };
 		5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhysicsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B327A80248CB58F8603354D5 /* Pods-PhysicsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhysicsApp.debug.xcconfig"; path = "Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -461,6 +467,7 @@
 				484293D3245C23A500BE8CB6 /* ProgressRingView.swift */,
 				48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */,
 				48BB6A93246727C10010F27D /* EGEInfo.swift */,
+				48BB6AC4247576870010F27D /* ThemeParser.swift */,
 				48271783243E0AEF003C6CF1 /* Mixes */,
 				244ABAD0242A9B1500066CB3 /* Profile */,
 				244ABAF4242A9B1600066CB3 /* SignInScreen */,
@@ -716,9 +723,9 @@
 		244ABAF4242A9B1600066CB3 /* SignInScreen */ = {
 			isa = PBXGroup;
 			children = (
-				244ABAF5242A9B1600066CB3 /* SignInViewController.xib */,
-				244ABAF6242A9B1600066CB3 /* SignInViewModel.swift */,
 				244ABAF7242A9B1600066CB3 /* SignInViewController.swift */,
+				244ABAF6242A9B1600066CB3 /* SignInViewModel.swift */,
+				244ABAF5242A9B1600066CB3 /* SignInViewController.xib */,
 			);
 			path = SignInScreen;
 			sourceTree = "<group>";
@@ -817,6 +824,8 @@
 				244ABACE242A9B1500066CB3 /* TrainerAdminViewController.swift */,
 				244ABAFC242A9B1700066CB3 /* TrainerAdminViewModel.swift */,
 				244ABACD242A9B1400066CB3 /* TrainerAdminViewController.xib */,
+				4825D07724779B2300E938FF /* ChooseThemeViewController.swift */,
+				4825D07824779B2300E938FF /* ChooseThemeViewController.xib */,
 			);
 			path = TrainerAdmin;
 			sourceTree = "<group>";
@@ -1125,6 +1134,7 @@
 				244ABB62242E432600066CB3 /* AwardCompletedViewController.xib in Resources */,
 				244ABB4E242C96E800066CB3 /* AwardsViewController.xib in Resources */,
 				244ABB7E2438D61D00066CB3 /* AdminStatsTableViewCell.xib in Resources */,
+				4825D07A24779B2300E938FF /* ChooseThemeViewController.xib in Resources */,
 				244ABA6D242A9AC900066CB3 /* AnswerChooserViewController.xib in Resources */,
 				484E7FEE24606840002C5A76 /* CPartTestViewController.xib in Resources */,
 				4802C2E7243EEA8D0017B75B /* 17694-cube-grid.json in Resources */,
@@ -1259,7 +1269,9 @@
 				4842939A2458363B00BE8CB6 /* EgeTheme+CoreDataProperties.swift in Sources */,
 				48BB6AA8246D282F0010F27D /* TestsResults+CoreDataClass.swift in Sources */,
 				244ABB1E242A9B1700066CB3 /* SignInViewModel.swift in Sources */,
+				48BB6AC5247576870010F27D /* ThemeParser.swift in Sources */,
 				244ABB61242E432600066CB3 /* AwardCompletedViewController.swift in Sources */,
+				4825D07924779B2300E938FF /* ChooseThemeViewController.swift in Sources */,
 				484293992458363B00BE8CB6 /* EgeTheme+CoreDataClass.swift in Sources */,
 				484293B3245AC09000BE8CB6 /* AdminStatTask+CoreDataClass.swift in Sources */,
 				484293122447647500BE8CB6 /* TaskListModel.swift in Sources */,

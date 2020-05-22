@@ -25,6 +25,9 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
         designScreenElements()
     }
     
@@ -186,3 +189,9 @@ extension SignInViewController: VKSdkUIDelegate {
     }
 }
 
+extension SignInViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}

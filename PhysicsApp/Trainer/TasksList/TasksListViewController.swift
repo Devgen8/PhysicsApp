@@ -185,6 +185,12 @@ extension TasksListViewController: UITableViewDataSource {
         if isTaskUnsolved, !(viewModel.lookingForUnsolvedTasks ?? false) {
             cell.tickImage.image = #imageLiteral(resourceName: "close")
         }
+        let themeImages = viewModel.getTaskThemeImages(taskName ?? "")
+        var index = 0
+        for themeImage in themeImages {
+            cell.themesImages[index].image = themeImage
+            index += 1
+        }
         return cell
     }
 }

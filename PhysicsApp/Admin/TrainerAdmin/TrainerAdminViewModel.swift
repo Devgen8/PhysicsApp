@@ -20,7 +20,7 @@ class TrainerAdminViewModel {
     var imageData: Data?
     var descriptionImageData: Data?
     var selectedTask: String?
-    var selectedTheme: String?
+    var selectedTheme = ""
     var inverseState = false
     var stringState = false
     var tasksNumber = 0
@@ -31,7 +31,6 @@ class TrainerAdminViewModel {
         tasks = EGEInfo.egeSystemTasks
         selectedTask = tasks[0]
         themes = EGEInfo.egeSystemThemes
-        selectedTheme = themes[0]
         completion(true)
     }
     
@@ -40,7 +39,8 @@ class TrainerAdminViewModel {
         wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
         testReference.document(testName).setData(["name":testName])
         let taskNumber = getSelectedTaskNumber()
-        let newKeyValuePairs = self.getKeyValuesForTask()
+        var newKeyValuePairs = self.getKeyValuesForTask()
+        newKeyValuePairs["serialNumber"] = taskNumber
         testReference.document(testName).collection("tasks").document("task\(taskNumber)").setData(newKeyValuePairs)
         uploadTaskImage(path: "tests/\(testName)/task\(taskNumber).png")
         uploadTaskDescription(path: "tests/\(testName)/task\(taskNumber)description.png")
@@ -156,5 +156,11 @@ class TrainerAdminViewModel {
         if let data = descriptionImageData {
             Storage.storage().reference().child(path).putData(data)
         }
+    }
+}
+
+extension TrainerAdminViewModel: SelectedThemesUpdater {
+    func updateTheme(with theme: String) {
+        selectedTheme = theme
     }
 }

@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -116,7 +116,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Прохождение темы" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3a-AC-pvc">
-                    <rect key="frame" x="12" y="213.5" width="140" height="37"/>
+                    <rect key="frame" x="0.0" y="213.5" width="140" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="140" id="n2Z-sI-6yK"/>
                     </constraints>
@@ -134,7 +134,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Верно решенные задачи" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ht-tu-qVg">
-                    <rect key="frame" x="262" y="213.5" width="140" height="37"/>
+                    <rect key="frame" x="274" y="213.5" width="140" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="140" id="nmO-IB-Ghm"/>
                     </constraints>
@@ -155,10 +155,10 @@
                 <constraint firstItem="heO-s6-YN5" firstAttribute="top" secondItem="meM-vW-vFO" secondAttribute="bottom" constant="15" id="GNp-XU-Kb6"/>
                 <constraint firstItem="4ht-tu-qVg" firstAttribute="top" secondItem="ybI-IQ-Eey" secondAttribute="bottom" id="PDm-oG-aRT"/>
                 <constraint firstItem="x6b-9r-Qob" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Rlj-Qf-wKg"/>
-                <constraint firstItem="h3a-AC-pvc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="Z7O-q4-YQE"/>
+                <constraint firstItem="h3a-AC-pvc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Z7O-q4-YQE"/>
                 <constraint firstItem="ybI-IQ-Eey" firstAttribute="top" secondItem="heO-s6-YN5" secondAttribute="top" id="n3K-va-9eF"/>
                 <constraint firstItem="heO-s6-YN5" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="pew-p7-uJ9"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4ht-tu-qVg" secondAttribute="trailing" constant="12" id="qv4-3c-oZz"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4ht-tu-qVg" secondAttribute="trailing" id="qv4-3c-oZz"/>
                 <constraint firstItem="cQ6-8l-WXi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="qvH-9j-fiW"/>
                 <constraint firstItem="4DT-XQ-8Od" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="txa-3M-g14"/>
                 <constraint firstItem="cQ6-8l-WXi" firstAttribute="top" secondItem="heO-s6-YN5" secondAttribute="top" id="wdC-hN-lKA"/>

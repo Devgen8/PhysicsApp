@@ -59,14 +59,7 @@ extension UnsolvedThemesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tasksListViewController = TasksListViewController()
-        var themes = [String]()
-        var keys = viewModel.unsolvedTasks.keys
-        if let sort = viewModel.sortType {
-            if sort == .themes {
-                keys = viewModel.themesUnsolvedTasks.keys
-            }
-        }
-        themes = Array<String>(keys)
+        let themes = viewModel.themesKeys
         tasksListViewController.viewModel.theme = themes[indexPath.row]
         tasksListViewController.viewModel.unsolvedTasks = viewModel.unsolvedTasks
         tasksListViewController.viewModel.themesUnsolvedTasks = viewModel.themesUnsolvedTasks

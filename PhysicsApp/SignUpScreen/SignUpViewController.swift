@@ -21,6 +21,11 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
+        
         designScreenElements()
     }
     
@@ -54,5 +59,12 @@ class SignUpViewController: UIViewController {
     func showError(_ error: String?) {
         errorLabel.isHidden = false
         errorLabel.text = error
+    }
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

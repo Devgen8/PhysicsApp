@@ -25,58 +25,104 @@ class TasksListViewModel {
     var sortType: TasksSortType?
     var themeTasks = [String]()
     var themesUnsolvedTasks = [String:[String]]()
-    var isFirstTimeLookingForUnsolved = false
+    var tasksThemes = [String:[String]]()
     
     func getTasks(completion: @escaping (Bool) -> ()) {
         getUsersSolvedTasksFromCoreData()
-        if lookingForUnsolvedTasks != true {
-            if let sortType = sortType {
-                if sortType == .tasks {
-                    if let notUpdatedTasks = UserDefaults.standard.value(forKey: "notUpdatedTasks") as? [String],
-                        notUpdatedTasks.contains(theme ?? "") {
-                        getTasksByTasks { (isReady) in
-                            completion(isReady)
-                        }
-                    } else {
-                        getTasksByTasksFromCoreData { (isReady) in
-                            completion(isReady)
-                        }
-                    }
-                }
-                if sortType == .themes {
-                    if let notUpdatedThemes = UserDefaults.standard.value(forKey: "notUpdatedThemes") as? [String],
-                        notUpdatedThemes.contains(theme ?? "") {
-                        getTasksByThemes { (isReady) in
-                            completion(isReady)
-                        }
-                    } else {
-                        getTasksByThemesFromCoreData { (isReady) in
-                            completion(isReady)
-                        }
-                    }
-                }
-            } else {
+        getTasksThemes { [weak self] (isReady) in
+            guard let `self` = self else {
                 completion(false)
+                return
             }
-        } else {
-            if let _ = UserDefaults.standard.value(forKey: "areUnsolvedTasksUpdated") as? Bool {
-                getUnsolvedTasksFromCoreData { (isReady) in
-                    completion(isReady)
-                }
-            } else {
-                isFirstTimeLookingForUnsolved = true
-                if let sort = sortType {
-                    if sort == .tasks {
-                        getTasksByTasks { (isReady) in
-                            completion(isReady)
+            if isReady {
+                if self.lookingForUnsolvedTasks != true {
+                    if let sortType = self.sortType {
+                        if sortType == .tasks {
+                            if let notUpdatedTasks = UserDefaults.standard.value(forKey: "notUpdatedTasks") as? [String],
+                                notUpdatedTasks.contains(self.theme ?? "") {
+                                self.getTasksByTasks { (isReady) in
+                                    self.sortTasks()
+                                    completion(isReady)
+                                }
+                            } else {
+                                self.getTasksByTasksFromCoreData { (isReady) in
+                                    self.sortTasks()
+                                    completion(isReady)
+                                }
+                            }
                         }
-                }
-                if sort == .themes {
-                    getTasksByThemes { (isReady) in
-                        completion(isReady)
+                        if sortType == .themes {
+                            if let notUpdatedThemes = UserDefaults.standard.value(forKey: "notUpdatedThemes") as? [String],
+                                notUpdatedThemes.contains(self.theme ?? "") {
+                                self.getTasksByThemes { (isReady) in
+                                    self.sortTasks()
+                                    completion(isReady)
+                                }
+                            } else {
+                                self.getTasksByThemesFromCoreData { (isReady) in
+                                    self.sortTasks()
+                                    completion(isReady)
+                                }
+                            }
+                        }
+                    } else {
+                        completion(false)
+                    }
+                } else {
+                    if let sortType = self.sortType {
+                        if sortType == .tasks {
+                            if let notUpdatedTasks = UserDefaults.standard.value(forKey: "notUpdatedUnsolvedTasks") as? [String],
+                                notUpdatedTasks.contains(self.theme ?? "") {
+                                self.getTasksByTasks { (isReady) in
+                                    self.sortTasks()
+                                    completion(isReady)
+                                }
+                            } else {
+                                self.getUnsolvedTasksFromCoreData { (isReady) in
+                                    self.sortTasks()
+                                    completion(isReady)
+                                }
+                            }
+                        }
+                        if sortType == .themes {
+                            if let notUpdatedThemes = UserDefaults.standard.value(forKey: "notUpdatedUnsolvedThemes") as? [String],
+                                notUpdatedThemes.contains(self.theme ?? "") {
+                                self.getTasksByThemes { (isReady) in
+                                    self.sortTasks()
+                                    completion(isReady)
+                                }
+                            } else {
+                                self.getUnsolvedTasksFromCoreData { (isReady) in
+                                    self.sortTasks()
+                                    completion(isReady)
+                                }
+                            }
+                        }
+                    } else {
+                        completion(false)
                     }
                 }
+            }
+        }
+    }
+    
+    func getTasksThemes(completion: @escaping (Bool) -> ()) {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+            
+            do {
+                let result = try context.fetch(fechRequest)
+                let trainer = result.first
+                if let egetasks = trainer?.egeTasks {
+                    let sortedEgeTasks = egetasks.sorted { ($0 as! EgeTask).themeNumber < ($1 as! EgeTask).themeNumber }
+                    for egetask in sortedEgeTasks {
+                        let task = (egetask as! EgeTask)
+                        tasksThemes[task.name ?? ""] = (task.themes as? ThemesInEgeTask)?.egeTaskThemes
+                    }
                 }
+                completion(true)
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
@@ -86,7 +132,6 @@ class TasksListViewModel {
             let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
             
             do {
-                var goalTasks = [String:[Int]]()
                 var searchTasks = [String]()
                 if let sort = sortType {
                     if sort == .tasks, let newSearchTasks = unsolvedTasks[theme ?? ""] {
@@ -96,38 +141,33 @@ class TasksListViewModel {
                         searchTasks = themeTasks
                     }
                 }
-                for task in searchTasks {
-                    let (themeName, taskNumberString) = getTaskLocation(taskName: task)
-                    if let taskNumber = Int(taskNumberString) {
-                        if goalTasks[themeName] != nil {
-                            goalTasks[themeName]?.append(taskNumber)
-                        } else {
-                            goalTasks[themeName] = [taskNumber]
-                        }
-                    }
-                }
                 tasks = []
                 let result = try context.fetch(fechRequest)
                 let trainer = result.first
-                for dictKey in goalTasks.keys {
-                    let coreDataThemeTasks = (trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == dictKey }) as! EgeTask).tasks
-                    if let newTasks = coreDataThemeTasks {
-                        for task in newTasks {
-                            if goalTasks[dictKey]?.contains(Int((task as! TaskData).serialNumber)) ?? false {
-                                let newTask = TaskModel()
-                                newTask.alternativeAnswer = (task as! TaskData).alternativeAnswer
-                                newTask.wrightAnswer = (task as! TaskData).wrightAnswer
-                                newTask.serialNumber = Int((task as! TaskData).serialNumber)
-                                newTask.stringAnswer = (task as! TaskData).stringAnswer
-                                newTask.image = UIImage(data: (task as! TaskData).image ?? Data())
-                                newTask.name = (task as! TaskData).name
-                                newTask.taskDescription = UIImage(data: (task as! TaskData).taskDescription ?? Data())
-                                tasks.append(newTask)
-                            }
+                var coreDataThemeTasks: NSOrderedSet?
+                if let sort = sortType {
+                    if sort == .tasks {
+                        coreDataThemeTasks = (trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == theme }) as! EgeTask).tasks
+                    }
+                    if sort == .themes {
+                        coreDataThemeTasks = (trainer?.egeThemes?.first(where: { ($0 as! EgeTheme).name == theme }) as! EgeTheme).tasks
+                    }
+                }
+                if let newTasks = coreDataThemeTasks {
+                    for task in newTasks {
+                        if searchTasks.contains((task as! TaskData).name ?? "") {
+                            let newTask = TaskModel()
+                            newTask.alternativeAnswer = (task as! TaskData).alternativeAnswer
+                            newTask.wrightAnswer = (task as! TaskData).wrightAnswer
+                            newTask.serialNumber = Int((task as! TaskData).serialNumber)
+                            newTask.stringAnswer = (task as! TaskData).stringAnswer
+                            newTask.image = UIImage(data: (task as! TaskData).image ?? Data())
+                            newTask.name = (task as! TaskData).name
+                            newTask.taskDescription = UIImage(data: (task as! TaskData).taskDescription ?? Data())
+                            tasks.append(newTask)
                         }
                     }
                 }
-                
                 completion(true)
             } catch {
                 print(error.localizedDescription)
@@ -135,19 +175,15 @@ class TasksListViewModel {
         }
     }
     
-    func saveToCoreDataUnsolvedTasks() {
+    func saveToCoreDataUnsolvedTasksByTasks() {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
                 let trainer = result.first
-                var arrayOfThemes = [String:[TaskData]]()
-                for task in tasks {
-                    let (themeName, _) = getTaskLocation(taskName: task.name ?? "")
-                    if arrayOfThemes[themeName] == nil {
-                        arrayOfThemes[themeName] = [TaskData]()
-                    }
-                    if (trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == themeName}) as! EgeTask).tasks?.count == 0 {
+                let arrayOfThemes = NSMutableOrderedSet()
+                if (trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == theme}) as! EgeTask).tasks?.count == 0 {
+                    for task in tasks {
                         let newTask = TaskData(context: context)
                         if let alternativeAnswer = task.alternativeAnswer {
                             newTask.alternativeAnswer = alternativeAnswer
@@ -162,13 +198,44 @@ class TasksListViewModel {
                         newTask.image = task.image?.pngData()
                         newTask.name = task.name
                         newTask.taskDescription = task.taskDescription?.pngData()
-                        arrayOfThemes[themeName]! += [newTask]
+                        arrayOfThemes.add(newTask)
                     }
+                    (trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == theme}) as! EgeTask).tasks = arrayOfThemes
                 }
-                for dictPair in arrayOfThemes {
-                    if dictPair.value.count > 0 {
-                        (trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == dictPair.key}) as! EgeTask).tasks = NSOrderedSet(array: dictPair.value)
+                
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func saveToCoreDataUnsolvedTasksByThemes() {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+                let result = try context.fetch(fechRequest)
+                let trainer = result.first
+                let arrayOfThemes = NSMutableOrderedSet()
+                if (trainer?.egeThemes?.first(where: { ($0 as! EgeTheme).name == theme}) as! EgeTheme).tasks?.count == 0 {
+                    for task in tasks {
+                        let newTask = TaskData(context: context)
+                        if let alternativeAnswer = task.alternativeAnswer {
+                            newTask.alternativeAnswer = alternativeAnswer
+                        }
+                        if let wrightAnswer = task.wrightAnswer {
+                            newTask.wrightAnswer = wrightAnswer
+                        }
+                        if let serialNumber = task.serialNumber {
+                            newTask.serialNumber = Int16(serialNumber)
+                        }
+                        newTask.stringAnswer = task.stringAnswer
+                        newTask.image = task.image?.pngData()
+                        newTask.name = task.name
+                        newTask.taskDescription = task.taskDescription?.pngData()
+                        arrayOfThemes.add(newTask)
                     }
+                    (trainer?.egeThemes?.first(where: { ($0 as! EgeTheme).name == theme}) as! EgeTheme).tasks = arrayOfThemes
                 }
                 
                 try context.save()
@@ -179,7 +246,20 @@ class TasksListViewModel {
     }
     
     func updateAreUnsolvedTasksUpdatedKey() {
-        UserDefaults.standard.set(true, forKey: "areUnsolvedTasksUpdated")
+        if let sort = sortType {
+            if sort == .tasks {
+                if let notUpdatedTasks = UserDefaults.standard.value(forKey: "notUpdatedUnsolvedTasks") as? [String] {
+                    let leftTasks = notUpdatedTasks.filter({ $0 != theme })
+                    UserDefaults.standard.set(leftTasks, forKey: "notUpdatedUnsolvedTasks")
+                }
+            }
+            if sort == .themes {
+                if let notUpdatedThemes = UserDefaults.standard.value(forKey: "notUpdatedUnsolvedThemes") as? [String] {
+                    let leftThemes = notUpdatedThemes.filter({ $0 != theme })
+                    UserDefaults.standard.set(leftThemes, forKey: "notUpdatedUnsolvedThemes")
+                }
+            }
+        }
     }
     
     func getTasksByTasksFromCoreData(completion: @escaping (Bool) -> ()) {
@@ -203,12 +283,23 @@ class TasksListViewModel {
                         tasks.append(newTask)
                     }
                 }
-                
                 completion(true)
             } catch {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func sortTasks() {
+        tasks = tasks.sorted(by: {
+            let (firstTheme, firstNumber) = getTaskLocation(taskName: $0.name ?? "")
+            let (secondTheme, secondNumber) = getTaskLocation(taskName: $1.name ?? "")
+            if getTaskPosition(taskName: firstTheme) == getTaskPosition(taskName: secondTheme) {
+                return Int(firstNumber) ?? 0 < Int(secondNumber) ?? 0
+            } else {
+                return getTaskPosition(taskName: firstTheme) < getTaskPosition(taskName: secondTheme)
+            }
+        })
     }
     
     func getTasksByThemesFromCoreData(completion: @escaping (Bool) -> ()) {
@@ -232,15 +323,6 @@ class TasksListViewModel {
                         tasks.append(newTask)
                     }
                 }
-                tasks = tasks.sorted(by: {
-                    let (firstTheme, firstNumber) = getTaskLocation(taskName: $0.name ?? "")
-                    let (secondTheme, secondNumber) = getTaskLocation(taskName: $1.name ?? "")
-                    if getTaskPosition(taskName: firstTheme) == getTaskPosition(taskName: secondTheme) {
-                        return Int(firstNumber) ?? 0 < Int(secondNumber) ?? 0
-                    } else {
-                        return getTaskPosition(taskName: firstTheme) < getTaskPosition(taskName: secondTheme)
-                    }
-                })
                 completion(true)
             } catch {
                 print(error.localizedDescription)
@@ -354,7 +436,7 @@ class TasksListViewModel {
                     completion(false)
                     return
                 }
-                var lookingNumbers = goalTasks[dictKey]
+                var lookingNumbers = goalTasks[dictKey]?.sorted(by: <)
                 var index = 1
                 for document in documents {
                     var number = 0
@@ -496,9 +578,14 @@ class TasksListViewModel {
                         self.updateKeysInfoForSolved()
                         self.saveTasksToCoreDataForSolved()
                     } else {
-                        if self.isFirstTimeLookingForUnsolved {
-                            self.updateAreUnsolvedTasksUpdatedKey()
-                            self.saveToCoreDataUnsolvedTasks()
+                        self.updateAreUnsolvedTasksUpdatedKey()
+                        if let sort = self.sortType {
+                            if sort == .tasks {
+                                self.saveToCoreDataUnsolvedTasksByTasks()
+                            }
+                            if sort == .themes {
+                                self.saveToCoreDataUnsolvedTasksByThemes()
+                            }
                         }
                     }
                     completion(true)
@@ -562,6 +649,16 @@ class TasksListViewModel {
         return solvedTasksNumber
     }
     
+    func getTaskThemeImages(_ taskName: String) -> [UIImage] {
+        let (task, number) = getTaskLocation(taskName: taskName)
+        if let currentTaskThemes = tasksThemes[task], currentTaskThemes.count >= Int(number) ?? 1 {
+            let currentTheme = currentTaskThemes[(Int(number) ?? 1) - 1]
+            let allTaskThemes = ThemeParser.parseTaskThemes(currentTheme)
+            return ThemeParser.getImageArray(forTaskThemes: allTaskThemes)
+        }
+        return [UIImage]()
+    }
+    
     func transportData(for viewModel: TaskViewModel, at index: Int) {
         viewModel.numberOfTasks = tasks.count
         viewModel.taskNumber = index + 1
@@ -576,6 +673,7 @@ class TasksListViewModel {
 
 extension TasksListViewModel: UnsolvedTaskUpdater {
     func updateUnsolvedTasks(with unsolvedTasks: [String : [String]], and solvedTasks: [String : [String]]?) {
+        getUsersSolvedTasksFromCoreData()
         self.unsolvedTasks = unsolvedTasks
         usersSolvedTasks = solvedTasks ?? [:]
         if lookingForUnsolvedTasks ?? false {

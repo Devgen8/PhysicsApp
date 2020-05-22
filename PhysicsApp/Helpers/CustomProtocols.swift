@@ -89,3 +89,7 @@ protocol GeneralTestResultsViewModel {
 protocol ProfileInfoUpdater {
     func updateProfileInfo()
 }
+
+protocol SelectedThemesUpdater {
+    func updateTheme(with theme: String)
+}

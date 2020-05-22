@@ -25,7 +25,12 @@ class TestTrainerViewModel: TrainerViewModelProvider {
     func getThemes(completion: @escaping (Bool) -> ()) {
         if let lastUpdateDate = UserDefaults.standard.value(forKey: "testsUpdateDate") as? Date,
             let weeksDifference = Calendar.current.dateComponents([.weekOfMonth], from: Date(), to: lastUpdateDate).weekOfMonth {
-            if weeksDifference >= 1 {
+            let formater = DateFormatter()
+            let weekday = formater.weekdaySymbols[Calendar.current.component(.weekday, from: Date()) - 1]
+            formater.dateFormat = "dd-MM-yyyy"
+            let oldDate = formater.string(from: lastUpdateDate)
+            let todayDate = formater.string(from: Date())
+            if (weeksDifference >= 1 || weekday == "Monday") && oldDate != todayDate {
                 getTestsFromFirestore { (isReady) in
                     completion(isReady)
                 }
@@ -143,8 +148,31 @@ class TestTrainerViewModel: TrainerViewModelProvider {
                     self.tests.append(testName)
                 }
             }
-            self.getEgeData { (isReady) in
-                completion(isReady)
+            self.checkTestsAccessibility { (isReady) in
+                completion(true)
+            }
+        }
+    }
+    
+    func checkTestsAccessibility(completion: @escaping (Bool) -> ()) {
+        var index = 0
+        let testsNumber = tests.count
+        for test in tests {
+            testReference.document(test).collection("tasks").getDocuments { [weak self] (snapshot, error) in
+                guard let `self` = self, error == nil, let documents = snapshot?.documents else {
+                    print("Error reading tasks number in each test: \(String(describing: error?.localizedDescription))")
+                    completion(false)
+                    return
+                }
+                if documents.count != 32 {
+                    self.tests = self.tests.filter({ $0 != test })
+                }
+                index += 1
+                if index == testsNumber {
+                    self.getEgeData { (isReady) in
+                        completion(isReady)
+                    }
+                }
             }
         }
     }

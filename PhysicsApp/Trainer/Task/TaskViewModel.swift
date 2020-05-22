@@ -179,7 +179,7 @@ class TaskViewModel {
                                 }
                                 let egeTaskName = String(taskNameArray)
                                 let egeThemesInTask = ((trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == egeTaskName }) as! EgeTask).themes as! ThemesInEgeTask)
-                                taskTheme = egeThemesInTask.egeTaskThemes[self.task?.serialNumber ?? 0]
+                                taskTheme = egeThemesInTask.egeTaskThemes[(self.task?.serialNumber ?? 1) - 1]
                             } catch {
                                 print(error.localizedDescription)
                             }
@@ -207,10 +207,13 @@ class TaskViewModel {
                 let coreDataUnsolved = (user?.solvedTasks as! StatusTasks).unsolvedTasks
                 let coreDataSolved = (user?.solvedTasks as! StatusTasks).solvedTasks
                 if let taskName = task?.name {
-                    newFirstTryTasks.append(taskName)
+                    let (taskNumber, _) = getTaskLocation(taskName: taskName)
+                    if !(coreDataUnsolved[taskNumber]?.contains(taskName) ?? false) && !(coreDataSolved[taskNumber]?.contains(taskName) ?? false) {
+                        newFirstTryTasks.append(taskName)
+                        saveFirstTryTaskInFirestore(tasks: newFirstTryTasks)
+                    }
                 }
                 user?.solvedTasks = StatusTasks(solvedTasks: coreDataSolved, unsolvedTasks: coreDataUnsolved, firstTryTasks: newFirstTryTasks)
-                saveFirstTryTaskInFirestore(tasks: (user?.solvedTasks as! StatusTasks).firstTryTasks)
                 try context.save()
             } catch {
                 print(error.localizedDescription)

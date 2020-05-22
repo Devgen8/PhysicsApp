@@ -24,7 +24,12 @@ class ThemesTrainerViewModel: TrainerViewModelProvider {
     func getThemes(completion: @escaping (Bool) -> ()) {
         if let lastUpdateDate = UserDefaults.standard.value(forKey: "themeTypeUpdateDate") as? Date,
             let weeksDifference = Calendar.current.dateComponents([.weekOfMonth], from: Date(), to: lastUpdateDate).weekOfMonth {
-            if weeksDifference >= 1 {
+            let formater = DateFormatter()
+            let weekday = formater.weekdaySymbols[Calendar.current.component(.weekday, from: Date()) - 1]
+            formater.dateFormat = "dd-MM-yyyy"
+            let oldDate = formater.string(from: lastUpdateDate)
+            let todayDate = formater.string(from: Date())
+            if (weeksDifference >= 1 || weekday == "Monday") && oldDate != todayDate {
                 getThemesFromFirestore { (isReady) in
                     completion(isReady)
                 }
@@ -111,6 +116,7 @@ class ThemesTrainerViewModel: TrainerViewModelProvider {
     func updateKeysInfo() {
         UserDefaults.standard.set(Date(), forKey: "themeTypeUpdateDate")
         UserDefaults.standard.set(themes, forKey: "notUpdatedThemes")
+        UserDefaults.standard.set(themes, forKey: "notUpdatedUnsolvedThemes")
     }
     
     func getThemeTasks(completion: @escaping (Bool) -> ()) {
@@ -128,7 +134,14 @@ class ThemesTrainerViewModel: TrainerViewModelProvider {
                     let taskName = document.data()["name"] as? String {
                     var index = 1
                     for themeName in egeThemes {
-                        self.tasks[themeName]?.append(taskName + "." + "\(index)")
+                        let allThemesInTask = ThemeParser.parseTaskThemes(themeName)
+                        for taskTheme in allThemesInTask {
+                            if self.tasks[taskTheme] != nil {
+                                self.tasks[taskTheme]?.append(taskName + "." + "\(index)")
+                            } else {
+                                self.tasks[taskTheme] = [taskName + "." + "\(index)"]
+                            }
+                        }
                         index += 1
                     }
                 }
@@ -163,7 +176,7 @@ class ThemesTrainerViewModel: TrainerViewModelProvider {
     }
     
     func getTheme(for index: Int) -> String {
-        return themes[index]
+        return themes[index].uppercased()
     }
     
     func getTasksProgress(for index: Int) -> (Float, Float) {

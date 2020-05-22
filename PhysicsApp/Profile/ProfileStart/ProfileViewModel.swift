@@ -27,9 +27,22 @@ class ProfileViewModel {
         UserDefaults.standard.set(nil, forKey: "finishedTests")
         UserDefaults.standard.set(nil, forKey: "notUpdatedTasks")
         UserDefaults.standard.set(nil, forKey: "notUpdatedThemes")
-        UserDefaults.standard.set(nil, forKey: "areUnsolvedTasksUpdated")
+        UserDefaults.standard.set(nil, forKey: "notUpdatedUnsolvedTasks")
+        UserDefaults.standard.set(nil, forKey: "notUpdatedUnsolvedThemes")
         UserDefaults.standard.set(nil, forKey: "isUserInfoDownloaded")
         UserDefaults.standard.set(nil, forKey: "isUserPhotoDownloaded")
+        
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+                let result = try context.fetch(fetchRequest)
+                for user in result {
+                    context.delete(user)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func getUsersData(completion: @escaping (UserProfile?) -> ()) {

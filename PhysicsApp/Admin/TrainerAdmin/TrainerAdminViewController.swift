@@ -11,7 +11,6 @@ import Lottie
 
 class TrainerAdminViewController: UIViewController {
 
-    @IBOutlet weak var themePicker: UIPickerView!
     @IBOutlet weak var uploadImageView: UIImageView!
     @IBOutlet weak var wrightAnswerTextField: UITextField!
     @IBOutlet weak var uploadButton: UIButton!
@@ -20,6 +19,7 @@ class TrainerAdminViewController: UIViewController {
     @IBOutlet weak var stringSwitch: UISwitch!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var descriptionImageView: UIImageView!
+    @IBOutlet weak var chooseThemeButton: UIButton!
     
     var viewModel = TrainerAdminViewModel()
     
@@ -27,8 +27,6 @@ class TrainerAdminViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        themePicker.dataSource = self
-        themePicker.delegate = self
         taskPickerView.delegate = self
         taskPickerView.dataSource = self
         
@@ -40,7 +38,6 @@ class TrainerAdminViewController: UIViewController {
         viewModel.getTrainerData { [weak self] (isReady) in
             if isReady {
                 DispatchQueue.main.async {
-                    self?.themePicker.reloadAllComponents()
                     self?.taskPickerView.reloadAllComponents()
                 }
             }
@@ -59,9 +56,9 @@ class TrainerAdminViewController: UIViewController {
     func designScreenElements() {
         DesignService.setAdminGradient(for: view)
         DesignService.designWhiteButton(uploadButton)
+        DesignService.designWhiteButton(chooseThemeButton)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.isHidden = true
-        themePicker.layer.cornerRadius = 15
         setUpUsersImage()
         setupDescriptionImage()
     }
@@ -126,12 +123,12 @@ class TrainerAdminViewController: UIViewController {
     func clearOldDataOnScreen() {
         view.viewWithTag(100)?.removeFromSuperview()
         taskPickerView.selectRow(0, inComponent: 0, animated: true)
-        themePicker.selectRow(0, inComponent: 0, animated: true)
         uploadImageView.image = #imageLiteral(resourceName: "upload (1)")
         descriptionImageView.image = #imageLiteral(resourceName: "upload (1)")
         wrightAnswerTextField.text = ""
         inverseSwitch.isOn = false
         stringSwitch.isOn = false
+        viewModel.selectedTheme = ""
     }
     
     @IBAction func inverseChanged(_ sender: UISwitch) {
@@ -150,6 +147,14 @@ class TrainerAdminViewController: UIViewController {
             viewModel.updateInverseState(to: false)
             inverseSwitch.isOn = false
         }
+    }
+    @IBAction func chooseThemeTapped(_ sender: UIButton) {
+        let chooseThemeViewController = ChooseThemeViewController()
+        chooseThemeViewController.selectedThemesUpdater = viewModel
+        chooseThemeViewController.selectedThemes = ThemeParser.parseTaskThemes(viewModel.selectedTheme)
+        chooseThemeViewController.modalPresentationStyle = .fullScreen
+        Animations.swipeViewController(.fromRight, for: view)
+        present(chooseThemeViewController, animated: false)
     }
     
     private func setUpUsersImage() {
@@ -193,9 +198,6 @@ extension TrainerAdminViewController: UIPickerViewDelegate {
         if pickerView == taskPickerView {
             pickerLabel.text = viewModel.getTask(for: row)
         }
-        if pickerView == themePicker {
-            pickerLabel.text = viewModel.getTheme(for: row)
-        }
         pickerLabel.textColor = .black
 
         return pickerLabel
@@ -205,9 +207,6 @@ extension TrainerAdminViewController: UIPickerViewDelegate {
         if pickerView == taskPickerView {
             viewModel.updateSelectedTask(with: row)
         }
-        if pickerView == themePicker {
-            viewModel.updateSelectedTheme(with: row)
-        }
     }
 }
 
@@ -215,9 +214,6 @@ extension TrainerAdminViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == taskPickerView {
             return viewModel.getTasksNumber()
-        }
-        if pickerView == themePicker {
-            return viewModel.getThemesNumber()
         }
         return 0
     }

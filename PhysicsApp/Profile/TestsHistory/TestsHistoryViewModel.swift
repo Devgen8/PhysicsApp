@@ -58,11 +58,11 @@ class TestsHistoryViewModel {
                         self.primaryPoints[name] = document.data()["primaryPoints"] as? [Int]
                     }
                 }
+                self.saveTestsHistoryInCoreData()
+                self.updateKey()
                 completion(true)
             }
         }
-        saveTestsHistoryInCoreData()
-        updateKey()
     }
     
     func saveTestsHistoryInCoreData() {
