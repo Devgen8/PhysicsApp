@@ -56,16 +56,18 @@ import UIKit
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
-        userImage.layer.cornerRadius = 20
-        ratingLabel.layer.cornerRadius = 10
-        ratingLabel.textColor = UIColor(displayP3Red: 0, green: 0.57, blue: 0.85, alpha: 1)
-        ratingLabel.clipsToBounds = true
-        DesignService.designWhiteButton(logOutButton)
+        DesignService.setWhiteBackground(for: view)
+        userImage.layer.cornerRadius = 15
+        userImage.layer.borderWidth = 1
+        userImage.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        ratingLabel.layer.cornerRadius = 15
+        ratingLabel.textColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        ratingLabel.layer.borderWidth = 1
+        ratingLabel.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        logOutButton.layer.cornerRadius = 15
         logOutButton.layer.cornerRadius = 5
-        DesignService.designWhiteButton(testsHistoryButton)
-        DesignService.designWhiteButton(changeButton)
-        changeButton.layer.cornerRadius = 5
+        testsHistoryButton.layer.cornerRadius = 15
+        changeButton.layer.cornerRadius = 15
         //DesignService.designWhiteButton(myAwardsButton)
         //DesignService.designWhiteButton(statsButton)
     }
@@ -81,6 +83,7 @@ import UIKit
         let profileDataChangeViewController = ProfileDataChangeViewController()
         viewModel.transportData(to: profileDataChangeViewController.viewModel)
         profileDataChangeViewController.profileInfoUpdater = self
+        profileDataChangeViewController.modalPresentationStyle = .fullScreen
         present(profileDataChangeViewController, animated: true)
     }
     
@@ -99,9 +102,12 @@ import UIKit
     
     @IBAction func testsHistoryTapped(_ sender: UIButton) {
         let testsHistoryViewController = TestsHistoryViewController()
-        Animations.swipeViewController(.fromRight, for: view)
         testsHistoryViewController.modalPresentationStyle = .fullScreen
         present(testsHistoryViewController, animated: true)
+    }
+    
+    @IBAction func closeTapped(_ sender: UIButton) {
+        dismiss(animated: true)
     }
     
     //    @IBAction func myAwardsTapped(_ sender: UIButton) {

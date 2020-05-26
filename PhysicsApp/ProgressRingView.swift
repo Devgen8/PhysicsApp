@@ -24,7 +24,7 @@ class ProgressRingView {
         let trackLayer = CAShapeLayer()
         trackLayer.path = circularPath.cgPath
         
-        trackLayer.strokeColor = UIColor.gray.cgColor
+        trackLayer.strokeColor = UIColor.lightGray.cgColor
         trackLayer.lineWidth = 10
         trackLayer.lineCap = .round
         trackLayer.fillColor = UIColor.clear.cgColor

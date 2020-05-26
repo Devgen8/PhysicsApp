@@ -35,7 +35,7 @@ class TestsHistoryViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
     }
     
     func createBlurEffect() {
@@ -66,8 +66,7 @@ class TestsHistoryViewController: UIViewController {
     }
     
     @IBAction func backTapped(_ sender: UIButton) {
-        Animations.swipeViewController(.fromLeft, for: view)
-        dismiss(animated: false)
+        dismiss(animated: true)
     }
 }
 

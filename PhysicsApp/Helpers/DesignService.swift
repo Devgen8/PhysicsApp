@@ -10,17 +10,28 @@ import UIKit
 
 class DesignService {
     static func designBlueButton(_ button: UIButton) {
-        button.backgroundColor = UIColor(displayP3Red: 0.0, green: 0.57, blue: 0.85, alpha: 0.66)
-        button.layer.cornerRadius = 30
+        button.backgroundColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1
+        button.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
     }
     
     static func designWhiteButton(_ button: UIButton) {
         button.backgroundColor = .white
-        button.layer.cornerRadius = 30
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1
+        button.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
     }
     
-    static func setGradient(for view: UIView) {
-        view.setGradientBackground(firstColor: UIColor(displayP3Red: 0.0, green: 0.57, blue: 0.85, alpha: 1), secondColor: UIColor(displayP3Red: 0.41, green: 0.64, blue: 0.86, alpha: 0.12))
+    static func createPadding(for textField: UITextField) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textField.frame.height))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
+    }
+    
+    static func setWhiteBackground(for view: UIView) {
+        view.backgroundColor = .white
+        //view.setGradientBackground(firstColor: UIColor(displayP3Red: 0.0, green: 0.57, blue: 0.85, alpha: 1), secondColor: UIColor(displayP3Red: 0.41, green: 0.64, blue: 0.86, alpha: 0.12))
     }
     
     static func setAdminGradient(for view: UIView) {

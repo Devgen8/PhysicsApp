@@ -31,7 +31,7 @@ class GamesNumberAlertViewController: UIViewController {
     
     func designScreenElements() {
         alertView.clipsToBounds = true
-        DesignService.setGradient(for: alertView)
+        DesignService.setWhiteBackground(for: alertView)
         alertView.layer.cornerRadius = 20
         DesignService.designBlueButton(okButton)
     }

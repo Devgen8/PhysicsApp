@@ -47,6 +47,8 @@ class TestResultTaskTableViewCell: UITableViewCell {
         roundedView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
         roundedView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
         roundedView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        roundedView.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        roundedView.layer.borderWidth = 1
     }
     
     func setupCorrectionBar(with color: UIColor) {
@@ -57,8 +59,8 @@ class TestResultTaskTableViewCell: UITableViewCell {
         contentView.addSubview(progressViewTrace)
         progressViewTrace.backgroundColor = .clear
         progressViewTrace.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        progressViewTrace.widthAnchor.constraint(equalToConstant: traceWidthConstant).isActive = true
-        progressViewTrace.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25).isActive = true
+        progressViewTrace.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        progressViewTrace.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         progressViewTrace.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         
         contentView.bringSubviewToFront(taskName)

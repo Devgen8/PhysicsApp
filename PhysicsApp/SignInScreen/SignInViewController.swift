@@ -32,11 +32,18 @@ class SignInViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
         DesignService.designBlueButton(signInButton)
         DesignService.designWhiteButton(vkButton)
+        vkButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         errorLabel.isHidden = true
         loaderView.isHidden = true
+        
+        emailTextField.layer.borderWidth = 1
+        passwordTextField.layer.borderWidth = 1
+        
+        emailTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        passwordTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
     }
     
     func createBlurEffect() {
@@ -114,6 +121,9 @@ class SignInViewController: UIViewController {
                 }
             }
         })
+    }
+    @IBAction func closeTapped(_ sender: UIButton) {
+        dismiss(animated: true)
     }
 }
 

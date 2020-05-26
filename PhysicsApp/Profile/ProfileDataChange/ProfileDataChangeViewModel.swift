@@ -91,8 +91,7 @@ class ProfileDataChangeViewModel {
     }
     
     func checkEmail(_ email: String) -> String? {
-        if !(email.contains("@") && email.contains(".")),
-            email.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        if !(email.contains("@") && email.contains(".")) {
             return "Пожалуйста, заполните почту в соответствии со следующим форматом: example@gmail.com"
         }
         return nil

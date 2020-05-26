@@ -27,7 +27,7 @@ class BattleFinalViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
         DesignService.designBlueButton(finishButton)
         setupScore()
         setupAnswersImages()

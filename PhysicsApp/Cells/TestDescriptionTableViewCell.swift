@@ -47,6 +47,8 @@ class TestDescriptionTableViewCell: UITableViewCell {
         roundedView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
         roundedView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
         roundedView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        roundedView.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        roundedView.layer.borderWidth = 1
     }
     
 }
@@ -60,7 +62,7 @@ extension TestDescriptionTableViewCell: UIPickerViewDelegate {
         let pickerLabel = UILabel()
         pickerView.subviews[1].isHidden = true
         pickerView.subviews[2].isHidden = true
-        pickerLabel.font = UIFont(name: "Montserrat", size: 20)
+        pickerLabel.font = UIFont(name: "Montserrat-Medium", size: 20)
         pickerLabel.textAlignment = .center
         pickerLabel.text = "\(row)"
         pickerLabel.textColor = .black

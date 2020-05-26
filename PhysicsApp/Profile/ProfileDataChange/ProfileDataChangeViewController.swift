@@ -15,7 +15,6 @@ class ProfileDataChangeViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var okButton: UIButton!
-    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var errorLabel: UILabel!
     
     var viewModel = ProfileDataChangeViewModel()
@@ -25,7 +24,6 @@ class ProfileDataChangeViewController: UIViewController {
         super.viewDidLoad()
 
         designScreenElements()
-        createBlurEffect()
         getData()
     }
     
@@ -39,21 +37,14 @@ class ProfileDataChangeViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.designBlueButton(cancelButton)
-        DesignService.designBlueButton(okButton)
-        mainView.clipsToBounds = true
-        mainView.layer.cornerRadius = 20
+        cancelButton.layer.cornerRadius = 15
+        okButton.layer.cornerRadius = 15
+        for textField in [emailTextField, nameTextField, passwordTextField, confirmPasswordTextField] {
+            textField?.layer.borderWidth = 1
+            textField?.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+            DesignService.createPadding(for: textField ?? UITextField())
+        }
         errorLabel.isHidden = true
-    }
-    
-    func createBlurEffect() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.tag = 100
-        view.addSubview(blurEffectView)
-        view.sendSubviewToBack(blurEffectView)
     }
     
     @IBAction func cancelTapped(_ sender: UIButton) {

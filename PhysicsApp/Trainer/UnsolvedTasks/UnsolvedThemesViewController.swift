@@ -11,7 +11,6 @@ import UIKit
 class UnsolvedThemesViewController: UIViewController {
 
     @IBOutlet weak var themesTableView: UITableView!
-    @IBOutlet weak var itemsLabel: UILabel!
     
     var viewModel = UnsolvedThemesViewModel()
     
@@ -28,13 +27,12 @@ class UnsolvedThemesViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
     }
     
     @IBAction func backTapped(_ sender: UIButton) {
-        Animations.swipeViewController(.fromLeft, for: view)
         viewModel.unsolvedTasksUpdater?.updateUnsolvedTasks(with: viewModel.unsolvedTasks, and: nil)
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -46,6 +44,7 @@ extension UnsolvedThemesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("ThemeTableViewCell", owner: self, options: nil)?.first as! ThemeTableViewCell
         cell.themeName.text = viewModel.constructData(for: indexPath.row)
+        cell.createBorder()
         return cell
     }
     

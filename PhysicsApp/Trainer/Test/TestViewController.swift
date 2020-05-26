@@ -94,11 +94,17 @@ class TestViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
         taskImageView.layer.cornerRadius = 20
-        DesignService.designBlueButton(answerButton)
-        DesignService.designBlueButton(lookAnswersButton)
-        DesignService.designBlueButton(finishButton)
+        taskImageView.layer.borderWidth = 1
+        taskImageView.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        
+        answerTextField.layer.borderWidth = 1
+        answerTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        
+        answerButton.layer.cornerRadius = 15
+        lookAnswersButton.layer.cornerRadius = 15
+        finishButton.layer.cornerRadius = 15
     }
     
     func createBlurEffect() {
@@ -125,15 +131,15 @@ class TestViewController: UIViewController {
         answerTextField.text = viewModel.getUsersAnswer(for: index)
         if taskNumber == 31 {
             finishButton.isHidden = true
-            answerButton.setTitle("Завершить", for: .normal)
+            answerButton.setTitle("ЗАВЕРШИТЬ", for: .normal)
         } else {
             finishButton.isHidden = false
-            answerButton.setTitle("Ответить", for: .normal)
+            answerButton.setTitle("ОТВЕТИТЬ", for: .normal)
         }
     }
     
     @IBAction func answerTapped(_ sender: UIButton) {
-        if answerButton.title(for: .normal) == "Ответить" {
+        if answerButton.title(for: .normal) == "ОТВЕТИТЬ" {
         viewModel.writeAnswerForTask(taskNumber, with: answerTextField.text ?? "")
         taskNumber = viewModel.getNextTaskIndex(after: taskNumber)
         changeForTask(taskNumber)
@@ -144,7 +150,6 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func backTapped(_ sender: UIButton) {
-        Animations.swipeViewController(.fromLeft, for: view)
         dismiss(animated: true)
     }
     
@@ -152,6 +157,7 @@ class TestViewController: UIViewController {
         let myAnswersViewController = MyAnswersViewController()
         myAnswersViewController.tasksAnswers = viewModel.testAnswers
         myAnswersViewController.delegate = self
+        myAnswersViewController.modalPresentationStyle = .fullScreen
         present(myAnswersViewController, animated: true)
     }
     

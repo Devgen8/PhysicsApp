@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -7,17 +7,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BlackDiamond.ttf">
-            <string>BlackDiamond</string>
+        <array key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
         </array>
         <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
         <array key="Montserrat-MediumItalic.otf">
             <string>Montserrat-MediumItalic</string>
-        </array>
-        <array key="Montserrat-Regular.ttf">
-            <string>Montserrat-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -39,47 +36,26 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="N48-Ox-BU6">
-                    <rect key="frame" x="89" y="802" width="236" height="50"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Montazhnaya_oblast_98_4x" translatesAutoresizingMaskIntoConstraints="NO" id="kSY-TJ-dhU">
-                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="3h2-H7-nGT"/>
-                                <constraint firstAttribute="width" secondItem="kSY-TJ-dhU" secondAttribute="height" multiplier="1:1" id="VKv-Ck-PHr"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="онлайн-школа webium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHQ-2u-mVf">
-                            <rect key="frame" x="50" y="15.5" width="186" height="19"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="19" id="Tiz-OK-4rt"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Montserrat-MediumItalic" family="Montserrat" pointSize="15"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Профиль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFR-dH-rkP">
-                    <rect key="frame" x="149.5" y="84" width="115.5" height="85.5"/>
-                    <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="45"/>
+                    <rect key="frame" x="50" y="74" width="150" height="37"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="lae-fJ-9gY">
-                    <rect key="frame" x="147" y="204.5" width="120" height="120"/>
+                    <rect key="frame" x="147" y="175" width="120" height="120"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="0pR-WE-Hh3"/>
                         <constraint firstAttribute="height" constant="120" id="aDf-em-UhF"/>
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bZg-EB-UDi">
-                    <rect key="frame" x="20" y="364.5" width="374" height="93.5"/>
+                    <rect key="frame" x="20" y="335" width="374" height="93.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fFM-cz-Ome">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="24.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Анастасия" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kp-wE-56l">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kp-wE-56l">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="24.5"/>
                                     <fontDescription key="fontDescription" name="Montserrat-MediumItalic" family="Montserrat" pointSize="20"/>
                                     <nil key="textColor"/>
@@ -90,7 +66,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GR1-27-9Zb">
                             <rect key="frame" x="0.0" y="34.5" width="374" height="24.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="anannas@ya.ru" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYr-gC-f5q">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Почта" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYr-gC-f5q">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="24.5"/>
                                     <fontDescription key="fontDescription" name="Montserrat-MediumItalic" family="Montserrat" pointSize="20"/>
                                     <nil key="textColor"/>
@@ -101,7 +77,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BDp-1y-IXQ">
                             <rect key="frame" x="0.0" y="69" width="374" height="24.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•••••••••••" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQX-ZN-ZEX">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пароль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQX-ZN-ZEX">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="24.5"/>
                                     <fontDescription key="fontDescription" name="Montserrat-MediumItalic" family="Montserrat" pointSize="20"/>
                                     <nil key="textColor"/>
@@ -112,57 +88,93 @@
                     </subviews>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг: 1 место" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sla-Rv-XEk">
-                    <rect key="frame" x="30" y="518" width="354" height="40"/>
+                    <rect key="frame" x="32" y="488.5" width="350" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Ojr-cP-IXc"/>
-                        <constraint firstAttribute="width" constant="354" id="vvh-GZ-cfB"/>
+                        <constraint firstAttribute="width" constant="350" id="vvh-GZ-cfB"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-0u-D8h">
-                    <rect key="frame" x="174.5" y="169.5" width="65" height="32"/>
+                    <rect key="frame" x="174.5" y="141" width="65" height="31"/>
+                    <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="65" id="QmQ-oQ-TAH"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
-                    <state key="normal" title="Выйти">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
+                    <state key="normal" title="ВЫЙТИ">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="logOutTapped:" destination="-1" eventType="touchUpInside" id="x6f-s9-Ypg"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztc-0u-cP4">
-                    <rect key="frame" x="97" y="568" width="220" height="60"/>
+                    <rect key="frame" x="32" y="538.5" width="350" height="60"/>
+                    <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="220" id="hPE-g3-iit"/>
+                        <constraint firstAttribute="width" constant="350" id="hPE-g3-iit"/>
                         <constraint firstAttribute="height" constant="60" id="uKI-iz-MLk"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
-                    <state key="normal" title="История пробников">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
+                    <state key="normal" title="ИСТОРИЯ ПРОБНИКОВ">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="testsHistoryTapped:" destination="-1" eventType="touchUpInside" id="wzn-Z0-wQK"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1A-0L-Eea">
-                    <rect key="frame" x="162" y="473" width="90" height="40"/>
+                    <rect key="frame" x="147" y="443.5" width="120" height="40"/>
+                    <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="foF-s9-IL8"/>
-                        <constraint firstAttribute="width" constant="90" id="kxl-YJ-ZOP"/>
+                        <constraint firstAttribute="width" constant="120" id="kxl-YJ-ZOP"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
-                    <state key="normal" title="Изменить">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
+                    <state key="normal" title="ИЗМЕНИТЬ">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="changeTapped:" destination="-1" eventType="touchUpInside" id="F3d-JB-vOM"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0N-JL-sLF">
+                    <rect key="frame" x="314" y="60" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="5GM-Ih-yIz"/>
+                        <constraint firstAttribute="height" constant="70" id="pj4-UN-wbj"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="крестик экран 2"/>
+                    <connections>
+                        <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="mo7-Pp-hi0"/>
+                    </connections>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="7R0-4k-2Zn">
+                    <rect key="frame" x="136.5" y="822" width="141" height="54"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Montazhnaya_oblast_98_4x" translatesAutoresizingMaskIntoConstraints="NO" id="WHi-nb-2Vp">
+                            <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="WHi-nb-2Vp" secondAttribute="height" multiplier="1:1" id="6W3-GU-obC"/>
+                                <constraint firstAttribute="height" constant="54" id="DE4-FB-agG"/>
+                            </constraints>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="webium экран 12" translatesAutoresizingMaskIntoConstraints="NO" id="PRc-T7-fuO">
+                            <rect key="frame" x="57" y="17" width="84" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="PRc-T7-fuO" secondAttribute="height" multiplier="156:37" id="hNa-Ou-lK9"/>
+                                <constraint firstAttribute="height" constant="20" id="wDX-Fm-nFw"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="1gC-SV-M6O"/>
+                    </constraints>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -170,19 +182,21 @@
                 <constraint firstItem="bZg-EB-UDi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="C51-PL-utW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bZg-EB-UDi" secondAttribute="trailing" constant="20" id="Clz-gL-yDL"/>
                 <constraint firstItem="kTq-0u-D8h" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="EEk-io-9A7"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="N48-Ox-BU6" secondAttribute="bottom" constant="10" id="IqE-A7-q56"/>
                 <constraint firstItem="ztc-0u-cP4" firstAttribute="top" secondItem="sla-Rv-XEk" secondAttribute="bottom" constant="10" id="JBA-un-uEl"/>
-                <constraint firstItem="eFR-dH-rkP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="KE3-l2-8y8"/>
+                <constraint firstItem="eFR-dH-rkP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="KE3-l2-8y8"/>
                 <constraint firstItem="lae-fJ-9gY" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="L80-2O-FZ3"/>
                 <constraint firstItem="sla-Rv-XEk" firstAttribute="top" secondItem="C1A-0L-Eea" secondAttribute="bottom" constant="5" id="QfF-mX-iWd"/>
                 <constraint firstItem="sla-Rv-XEk" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Rwp-tV-1aA"/>
+                <constraint firstItem="f0N-JL-sLF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Vj1-RM-bpl"/>
+                <constraint firstItem="eFR-dH-rkP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="WVH-pG-dqO"/>
                 <constraint firstItem="ztc-0u-cP4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ZOV-WX-e5i"/>
                 <constraint firstItem="C1A-0L-Eea" firstAttribute="top" secondItem="bZg-EB-UDi" secondAttribute="bottom" constant="15" id="Zsa-T3-WAf"/>
-                <constraint firstItem="N48-Ox-BU6" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="b16-t5-2Gm"/>
                 <constraint firstItem="bZg-EB-UDi" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="bVI-Jr-B97"/>
-                <constraint firstItem="kTq-0u-D8h" firstAttribute="top" secondItem="eFR-dH-rkP" secondAttribute="bottom" id="cJB-2q-O9U"/>
+                <constraint firstItem="kTq-0u-D8h" firstAttribute="top" secondItem="eFR-dH-rkP" secondAttribute="bottom" constant="30" id="cJB-2q-O9U"/>
+                <constraint firstItem="7R0-4k-2Zn" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="e7n-IO-5JE"/>
+                <constraint firstAttribute="bottom" secondItem="7R0-4k-2Zn" secondAttribute="bottom" constant="20" id="f2C-6s-wCH"/>
                 <constraint firstItem="C1A-0L-Eea" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="fpX-0H-np1"/>
-                <constraint firstItem="eFR-dH-rkP" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="jFh-Jx-AhD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="f0N-JL-sLF" secondAttribute="trailing" constant="30" id="jqB-zp-udV"/>
                 <constraint firstItem="lae-fJ-9gY" firstAttribute="top" secondItem="kTq-0u-D8h" secondAttribute="bottom" constant="3" id="oiW-71-Ue4"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -200,5 +214,7 @@
     <resources>
         <image name="Montazhnaya_oblast_98_4x" width="801" height="801"/>
         <image name="photo-placeholder" width="600" height="600"/>
+        <image name="webium экран 12" width="156" height="37"/>
+        <image name="крестик экран 2" width="140" height="135"/>
     </resources>
 </document>

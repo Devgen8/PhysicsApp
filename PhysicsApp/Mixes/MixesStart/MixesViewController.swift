@@ -26,7 +26,7 @@ class MixesViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
     }
     
     @IBAction func profileTapped(_ sender: UIButton) {

@@ -17,7 +17,6 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var writeButton: UIButton!
-    @IBOutlet weak var showDescriptionButton: UIButton!
     @IBOutlet weak var descriptionImageView: UIImageView!
     @IBOutlet weak var canNotSolveButton: UIButton!
     
@@ -43,29 +42,30 @@ class TaskViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
-        taskImage.layer.cornerRadius = 30
+        DesignService.setWhiteBackground(for: view)
+        taskImage.layer.cornerRadius = 15
+        taskImage.layer.borderWidth = 1
+        taskImage.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        descriptionImageView.layer.cornerRadius = 15
+        descriptionImageView.layer.borderWidth = 1
+        descriptionImageView.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        answerTextField.layer.borderWidth = 1
+        answerTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
         DesignService.designBlueButton(checkButton)
-        checkButton.layer.cornerRadius = 5
+        checkButton.layer.cornerRadius = 15
         resultLabel.textColor = UIColor(displayP3Red: 0, green: 0.78, blue: 0.37, alpha: 0.99)
-        DesignService.designWhiteButton(writeButton)
-        writeButton.layer.cornerRadius = 0.5 * writeButton.bounds.size.width
-        writeButton.imageEdgeInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
+        writeButton.layer.cornerRadius = 15
         resultLabel.alpha = 0
-        showDescriptionButton.isHidden = true
-        showDescriptionButton.layer.cornerRadius = 20
         descriptionImageView.alpha = 0
-        DesignService.designWhiteButton(canNotSolveButton)
     }
     
     @IBAction func backTapped(_ sender: UIButton) {
-        modalTransitionStyle = .flipHorizontal
         dismiss(animated: true)
     }
     
     @IBAction func checkTapped(_ sender: UIButton) {
         let greenColor = UIColor(displayP3Red: 0, green: 0.78, blue: 0.37, alpha: 0.99)
-        let redColor = UIColor(displayP3Red: 0.88, green: 0.23, blue: 0.23, alpha: 0.75)
+        let redColor = #colorLiteral(red: 0.7611784935, green: 0, blue: 0.06764990836, alpha: 1)
         
         let (isWright, message) = viewModel.checkAnswer(answerTextField.text)
         resultLabel.text = message
@@ -75,17 +75,23 @@ class TaskViewController: UIViewController {
             self.resultLabel.alpha = 1
         }
         canNotSolveButton.isHidden = true
-        showDescriptionButton.isHidden = false
+        UIView.animate(withDuration: 1.5) {
+            self.descriptionImageView.alpha = 1
+        }
     }
     
     @IBAction func canNotSolveTapped(_ sender: UIButton) {
         canNotSolveButton.isHidden = true
         let (_, _) = viewModel.checkAnswer("")
-        showDescriptionButton.isHidden = false
+        resultLabel.isHidden = true
+        UIView.animate(withDuration: 1.5) {
+            self.descriptionImageView.alpha = 1
+        }
     }
     
     @IBAction func writeTapped(_ sender: UIButton) {
         let formSheetViewController = FormSheetViewController()
+        formSheetViewController.modalPresentationStyle = .fullScreen
         present(formSheetViewController, animated: true)
     }
     @IBAction func desriptionTapped(_ sender: UITapGestureRecognizer) {
@@ -100,12 +106,5 @@ class TaskViewController: UIViewController {
         imagePreviewViewController.taskImage = taskImage.image
         imagePreviewViewController.modalPresentationStyle = .fullScreen
         present(imagePreviewViewController, animated: true)
-    }
-    
-    @IBAction func showDescriptionTapped(_ sender: UIButton) {
-        resultLabel.isHidden = true
-        UIView.animate(withDuration: 1.5) {
-            self.descriptionImageView.alpha = 1
-        }
     }
 }

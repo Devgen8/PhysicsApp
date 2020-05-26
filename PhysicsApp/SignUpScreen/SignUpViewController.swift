@@ -30,9 +30,19 @@ class SignUpViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
         DesignService.designBlueButton(signUpButton)
         errorLabel.isHidden = true
+        
+        nameTextField.layer.borderWidth = 1
+        emailTextField.layer.borderWidth = 1
+        passwordTextField.layer.borderWidth = 1
+        confirmPasswordTextField.layer.borderWidth = 1
+        
+        nameTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        emailTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        passwordTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        confirmPasswordTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
     }
     
     @IBAction func signUpTapped(_ sender: UIButton) {
@@ -59,6 +69,10 @@ class SignUpViewController: UIViewController {
     func showError(_ error: String?) {
         errorLabel.isHidden = false
         errorLabel.text = error
+    }
+    
+    @IBAction func closeTapped(_ sender: UIButton) {
+        dismiss(animated: true)
     }
 }
 

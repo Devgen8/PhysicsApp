@@ -29,18 +29,20 @@ class WelcomeViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
-        DesignService.designWhiteButton(signInButton)
+        DesignService.setWhiteBackground(for: view)
+        DesignService.designBlueButton(signInButton)
         DesignService.designWhiteButton(signUpButton)
     }
     
     @IBAction func signInTapped(_ sender: UIButton) {
         let signInViewController = SignInViewController()
+        signInViewController.modalPresentationStyle = .fullScreen
         present(signInViewController, animated: true)
     }
     
     @IBAction func signUpTapped(_ sender: UIButton) {
         let signUpViewController = SignUpViewController()
+        signUpViewController.modalPresentationStyle = .fullScreen
         present(signUpViewController, animated: true)
     }
 }

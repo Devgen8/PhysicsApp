@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -7,8 +7,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BlackDiamond.ttf">
-            <string>BlackDiamond</string>
+        <array key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
         </array>
     </customFonts>
     <objects>
@@ -25,24 +25,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="История пробников" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4US-Ke-Yxn">
-                    <rect key="frame" x="106.5" y="64" width="201" height="67"/>
-                    <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="35"/>
+                    <rect key="frame" x="20" y="74" width="327.5" height="37"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMC-Al-05m">
-                    <rect key="frame" x="15" y="59" width="30" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="JHf-0n-Gqt"/>
-                        <constraint firstAttribute="height" constant="30" id="llJ-vS-mzO"/>
-                    </constraints>
-                    <state key="normal" title="Button" image="back"/>
-                    <connections>
-                        <action selector="backTapped:" destination="-1" eventType="touchUpInside" id="II2-fp-FbV"/>
-                    </connections>
-                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W4e-Qz-UYe">
-                    <rect key="frame" x="0.0" y="141" width="414" height="721"/>
+                    <rect key="frame" x="0.0" y="151" width="414" height="711"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqS-t2-ENO" customClass="AnimationView" customModule="Lottie">
@@ -53,25 +42,36 @@
                         <constraint firstAttribute="width" constant="120" id="vsV-9O-9fa"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCL-Pv-JXd">
+                    <rect key="frame" x="334" y="60" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="WUT-WM-3Vl"/>
+                        <constraint firstAttribute="width" constant="70" id="t8D-Qq-vnb"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="крестик экран 2"/>
+                    <connections>
+                        <action selector="backTapped:" destination="-1" eventType="touchUpInside" id="ox1-jt-0Qn"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="MMC-Al-05m" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="0Px-yT-niF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="W4e-Qz-UYe" secondAttribute="trailing" id="2Z4-ww-5kB"/>
-                <constraint firstItem="4US-Ke-Yxn" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="3q8-G9-iMJ"/>
-                <constraint firstItem="4US-Ke-Yxn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="6th-RB-jqT"/>
-                <constraint firstItem="MMC-Al-05m" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="BWe-wK-dsS"/>
+                <constraint firstItem="4US-Ke-Yxn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="6th-RB-jqT"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FCL-Pv-JXd" secondAttribute="trailing" constant="10" id="7oq-Zm-ZTW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="W4e-Qz-UYe" secondAttribute="bottom" id="GHy-It-vna"/>
-                <constraint firstItem="W4e-Qz-UYe" firstAttribute="top" secondItem="4US-Ke-Yxn" secondAttribute="bottom" constant="10" id="HYf-bY-1JW"/>
+                <constraint firstItem="W4e-Qz-UYe" firstAttribute="top" secondItem="4US-Ke-Yxn" secondAttribute="bottom" constant="40" id="HYf-bY-1JW"/>
                 <constraint firstItem="W4e-Qz-UYe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="b8z-5P-Ezo"/>
+                <constraint firstItem="FCL-Pv-JXd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="kN8-hc-t0j"/>
                 <constraint firstItem="cqS-t2-ENO" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="m7l-3u-rqn"/>
                 <constraint firstItem="cqS-t2-ENO" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="rYe-eu-knL"/>
+                <constraint firstItem="4US-Ke-Yxn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="uUa-rv-arE"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="116"/>
         </view>
     </objects>
     <resources>
-        <image name="back" width="512" height="512"/>
+        <image name="крестик экран 2" width="140" height="135"/>
     </resources>
 </document>

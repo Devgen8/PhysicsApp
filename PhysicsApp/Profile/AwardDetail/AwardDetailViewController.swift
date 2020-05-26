@@ -26,7 +26,7 @@ class AwardDetailViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
     }
     
     func prepareData() {

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BlackDiamond.ttf">
-            <string>BlackDiamond</string>
+        <array key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
         </array>
         <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
@@ -32,89 +32,92 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXs-Eg-RWr">
-                    <rect key="frame" x="50" y="595" width="120" height="60"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="120" id="cfg-L6-fiv"/>
-                        <constraint firstAttribute="height" constant="60" id="qOf-Pt-ZPe"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
-                    <state key="normal" title="Отменить">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <connections>
-                        <action selector="cancelTapped:" destination="-1" eventType="touchUpInside" id="Zut-Pz-KD7"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-or-acA">
-                    <rect key="frame" x="244" y="595" width="120" height="60"/>
+                    <rect key="frame" x="30" y="657" width="354" height="60"/>
+                    <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="ACi-SR-kfh"/>
-                        <constraint firstAttribute="width" constant="120" id="Xyl-AP-SQU"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                     <state key="normal" title="Отправить">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="sendTapped:" destination="-1" eventType="touchUpInside" id="hqp-UM-OKN"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тема:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocv-3f-rmy">
-                    <rect key="frame" x="10" y="140" width="70" height="31"/>
-                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="25"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kkg-oR-lWX">
-                    <rect key="frame" x="85" y="140" width="319" height="34"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="       Тема письма" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kkg-oR-lWX">
+                    <rect key="frame" x="30" y="155" width="354" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="cFj-fP-TuN"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="19"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Отправь нам вопрос" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBi-Qf-dzV">
-                    <rect key="frame" x="73.5" y="44" width="267" height="86"/>
-                    <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="45"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вопрос:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="me3-Jc-ec8">
-                    <rect key="frame" x="10" y="184" width="105" height="31"/>
+                    <rect key="frame" x="30" y="225" width="105" height="30.5"/>
                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="25"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="anW-vg-PH3">
-                    <rect key="frame" x="10" y="225" width="394" height="350"/>
+                    <rect key="frame" x="30" y="265.5" width="354" height="371.5"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="350" id="U2V-es-yUa"/>
-                    </constraints>
                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="22"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpk-ri-ACZ">
+                    <rect key="frame" x="314" y="60" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="Lqi-8w-qGT"/>
+                        <constraint firstAttribute="height" constant="70" id="kvY-fq-cao"/>
+                    </constraints>
+                    <state key="normal" image="крестик экран 2"/>
+                    <connections>
+                        <action selector="cancelTapped:" destination="-1" eventType="touchUpInside" id="WUZ-BA-ywa"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXs-Eg-RWr">
+                    <rect key="frame" x="30" y="742" width="354" height="60"/>
+                    <color key="backgroundColor" red="0.69736534360000002" green="0.14242923260000001" blue="0.1254176199" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="qOf-Pt-ZPe"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                    <state key="normal" title="Отменить">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelTapped:" destination="-1" eventType="touchUpInside" id="Zut-Pz-KD7"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="fBi-Qf-dzV" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="20S-7U-c3c"/>
-                <constraint firstItem="Ocv-3f-rmy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="4BH-B9-rjP"/>
-                <constraint firstItem="Ocv-3f-rmy" firstAttribute="top" secondItem="fBi-Qf-dzV" secondAttribute="bottom" constant="10" id="6Ow-US-DUY"/>
-                <constraint firstItem="me3-Jc-ec8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="KYW-uk-OG3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="YXs-Eg-RWr" secondAttribute="bottom" constant="60" id="3xE-X5-Eyg"/>
+                <constraint firstItem="Wpk-ri-ACZ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="5tQ-xC-6Gh"/>
+                <constraint firstItem="YXs-Eg-RWr" firstAttribute="top" secondItem="Ieb-or-acA" secondAttribute="bottom" constant="25" id="7Sr-nc-sTb"/>
+                <constraint firstItem="Kkg-oR-lWX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="Dqe-vu-WIf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YXs-Eg-RWr" secondAttribute="trailing" constant="30" id="Fb7-NW-WGK"/>
+                <constraint firstItem="Ieb-or-acA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="KVi-28-X14"/>
+                <constraint firstItem="me3-Jc-ec8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="KYW-uk-OG3"/>
                 <constraint firstItem="anW-vg-PH3" firstAttribute="top" secondItem="me3-Jc-ec8" secondAttribute="bottom" constant="10" id="Kgb-px-7hN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Wpk-ri-ACZ" secondAttribute="trailing" constant="30" id="Mln-Uv-lPb"/>
                 <constraint firstItem="me3-Jc-ec8" firstAttribute="top" secondItem="Kkg-oR-lWX" secondAttribute="bottom" constant="10" id="Noy-1j-mR7"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Kkg-oR-lWX" secondAttribute="trailing" constant="10" id="OMe-VT-sgP"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="anW-vg-PH3" secondAttribute="trailing" constant="10" id="QY8-X9-UrO"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ieb-or-acA" secondAttribute="trailing" constant="50" id="TNm-TO-Nga"/>
-                <constraint firstItem="YXs-Eg-RWr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="b9I-wG-bO8"/>
-                <constraint firstItem="Kkg-oR-lWX" firstAttribute="top" secondItem="fBi-Qf-dzV" secondAttribute="bottom" constant="10" id="bix-st-UEA"/>
-                <constraint firstItem="fBi-Qf-dzV" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="cRz-yx-tHp"/>
-                <constraint firstItem="Kkg-oR-lWX" firstAttribute="leading" secondItem="Ocv-3f-rmy" secondAttribute="trailing" constant="5" id="fwO-dF-bWu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Kkg-oR-lWX" secondAttribute="trailing" constant="30" id="OMe-VT-sgP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="anW-vg-PH3" secondAttribute="trailing" constant="30" id="QY8-X9-UrO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ieb-or-acA" secondAttribute="trailing" constant="30" id="TNm-TO-Nga"/>
+                <constraint firstItem="Kkg-oR-lWX" firstAttribute="top" secondItem="Wpk-ri-ACZ" secondAttribute="bottom" constant="25" id="aft-oS-IlY"/>
+                <constraint firstItem="YXs-Eg-RWr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="bOB-PW-9ue"/>
                 <constraint firstItem="Ieb-or-acA" firstAttribute="top" secondItem="anW-vg-PH3" secondAttribute="bottom" constant="20" id="lvH-l0-RQg"/>
-                <constraint firstItem="YXs-Eg-RWr" firstAttribute="top" secondItem="anW-vg-PH3" secondAttribute="bottom" constant="20" id="m0X-hl-cad"/>
-                <constraint firstItem="anW-vg-PH3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="xJx-ZS-nNh"/>
+                <constraint firstItem="anW-vg-PH3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="xJx-ZS-nNh"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
         </view>
     </objects>
+    <resources>
+        <image name="крестик экран 2" width="140" height="135"/>
+    </resources>
 </document>

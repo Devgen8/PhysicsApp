@@ -101,7 +101,6 @@
 		244ABB18242A9B1700066CB3 /* FormSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAEE242A9B1600066CB3 /* FormSheetViewController.xib */; };
 		244ABB19242A9B1700066CB3 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAEF242A9B1600066CB3 /* ImageScrollView.swift */; };
 		244ABB1A242A9B1700066CB3 /* UnsolvedThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF0242A9B1600066CB3 /* UnsolvedThemesViewController.swift */; };
-		244ABB1B242A9B1700066CB3 /* TabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAF2242A9B1600066CB3 /* TabBarViewController.xib */; };
 		244ABB1C242A9B1700066CB3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF3242A9B1600066CB3 /* TabBarViewController.swift */; };
 		244ABB1D242A9B1700066CB3 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAF5242A9B1600066CB3 /* SignInViewController.xib */; };
 		244ABB1E242A9B1700066CB3 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF6242A9B1600066CB3 /* SignInViewModel.swift */; };
@@ -143,6 +142,7 @@
 		4802C2EB243FB0F30017B75B /* DayMixModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802C2EA243FB0F30017B75B /* DayMixModel.swift */; };
 		4825D07924779B2300E938FF /* ChooseThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825D07724779B2300E938FF /* ChooseThemeViewController.swift */; };
 		4825D07A24779B2300E938FF /* ChooseThemeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4825D07824779B2300E938FF /* ChooseThemeViewController.xib */; };
+		4825D07C247B924E00E938FF /* ThemeTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825D07B247B924E00E938FF /* ThemeTableViewCellModel.swift */; };
 		48271785243E0B2A003C6CF1 /* UserStatsCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */; };
 		4842930E24470B5400BE8CB6 /* ThemesTrainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842930D24470B5400BE8CB6 /* ThemesTrainerViewModel.swift */; };
 		484293122447647500BE8CB6 /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293112447647500BE8CB6 /* TaskListModel.swift */; };
@@ -309,7 +309,6 @@
 		244ABAEE242A9B1600066CB3 /* FormSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormSheetViewController.xib; sourceTree = "<group>"; };
 		244ABAEF242A9B1600066CB3 /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		244ABAF0242A9B1600066CB3 /* UnsolvedThemesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsolvedThemesViewController.swift; sourceTree = "<group>"; };
-		244ABAF2242A9B1600066CB3 /* TabBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarViewController.xib; sourceTree = "<group>"; };
 		244ABAF3242A9B1600066CB3 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		244ABAF5242A9B1600066CB3 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
 		244ABAF6242A9B1600066CB3 /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -352,6 +351,7 @@
 		4802C2EA243FB0F30017B75B /* DayMixModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayMixModel.swift; sourceTree = "<group>"; };
 		4825D07724779B2300E938FF /* ChooseThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseThemeViewController.swift; sourceTree = "<group>"; };
 		4825D07824779B2300E938FF /* ChooseThemeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseThemeViewController.xib; sourceTree = "<group>"; };
+		4825D07B247B924E00E938FF /* ThemeTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTableViewCellModel.swift; sourceTree = "<group>"; };
 		48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsCounter.swift; sourceTree = "<group>"; };
 		4842930D24470B5400BE8CB6 /* ThemesTrainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesTrainerViewModel.swift; sourceTree = "<group>"; };
 		484293112447647500BE8CB6 /* TaskListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModel.swift; sourceTree = "<group>"; };
@@ -565,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				244ABA70242A9AD700066CB3 /* ThemeTableViewCell.swift */,
+				4825D07B247B924E00E938FF /* ThemeTableViewCellModel.swift */,
 				244ABA71242A9AD700066CB3 /* ThemeTableViewCell.xib */,
 				244ABA72242A9AD700066CB3 /* AwardCollectionViewCell.swift */,
 				244ABA73242A9AD700066CB3 /* AwardCollectionViewCell.xib */,
@@ -714,7 +715,6 @@
 		244ABAF1242A9B1600066CB3 /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				244ABAF2242A9B1600066CB3 /* TabBarViewController.xib */,
 				244ABAF3242A9B1600066CB3 /* TabBarViewController.swift */,
 			);
 			path = TabBarController;
@@ -1113,7 +1113,6 @@
 				484293BE245B023100BE8CB6 /* TasksDetailViewController.xib in Resources */,
 				244ABB06242A9B1700066CB3 /* WelcomeViewController.xib in Resources */,
 				244ABAC4242A9AF400066CB3 /* Montserrat-ExtraLightItalic.otf in Resources */,
-				244ABB1B242A9B1700066CB3 /* TabBarViewController.xib in Resources */,
 				244ABAC2242A9AF400066CB3 /* Montserrat-Black.ttf in Resources */,
 				244ABA64242A9AC900066CB3 /* BattleViewController.xib in Resources */,
 				48BB6AB8246DD0460010F27D /* ProfileDataChangeViewController.xib in Resources */,
@@ -1276,6 +1275,7 @@
 				484293B3245AC09000BE8CB6 /* AdminStatTask+CoreDataClass.swift in Sources */,
 				484293122447647500BE8CB6 /* TaskListModel.swift in Sources */,
 				244ABB0D242A9B1700066CB3 /* TrainerModel.swift in Sources */,
+				4825D07C247B924E00E938FF /* ThemeTableViewCellModel.swift in Sources */,
 				486362162441E7AB004924FD /* ProgressStatsView.swift in Sources */,
 				484E7FEA24605E33002C5A76 /* TaskData+CoreDataProperties.swift in Sources */,
 				244ABB1A242A9B1700066CB3 /* UnsolvedThemesViewController.swift in Sources */,

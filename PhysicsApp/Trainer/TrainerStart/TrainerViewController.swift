@@ -38,9 +38,9 @@ class TrainerViewController: UIViewController {
             guard let `self` = self, isReady else { return }
             UIView.transition(with: self.notSolvedButton, duration: 0.5, options: .transitionFlipFromBottom, animations: nil, completion: nil)
             if self.viewModel is TestTrainerViewModel {
-                self.notSolvedButton.setTitle("Сформировать вариант", for: .normal)
+                self.notSolvedButton.setTitle("СФОРМИРОВАТЬ ВАРИАНТ", for: .normal)
             } else {
-                self.notSolvedButton.setTitle("Задачи с ошибкой (\(self.viewModel.getUnsolvedTasksCount()))", for: .normal)
+                self.notSolvedButton.setTitle("ЗАДАЧИ С ОШИБКОЙ (\(self.viewModel.getUnsolvedTasksCount()))", for: .normal)
             }
             DispatchQueue.main.async {
                 self.themesTableView.reloadData()
@@ -51,8 +51,13 @@ class TrainerViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
-        DesignService.designRedButton(notSolvedButton)
+        DesignService.setWhiteBackground(for: view)
+        //DesignService.designRedButton(notSolvedButton)
+        notSolvedButton.layer.cornerRadius = 10
+        sortTypeSegmentedControl.layer.borderWidth = 2
+        sortTypeSegmentedControl.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        sortTypeSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 13) ?? UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)], for: .normal)
+        sortTypeSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 13) ?? UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)], for: .selected)
     }
     
     func setAnimation() {
@@ -63,7 +68,7 @@ class TrainerViewController: UIViewController {
     }
     
     @IBAction func unsolvedTasksTapped(_ sender: UIButton) {
-        if notSolvedButton.title(for: .normal) == "Сформировать вариант" {
+        if notSolvedButton.title(for: .normal) == "СФОРМИРОВАТЬ ВАРИАНТ" {
             routeForTests()
         } else {
             routeForTasks()
@@ -71,8 +76,7 @@ class TrainerViewController: UIViewController {
     }
     
     func routeForTasks() {
-        if notSolvedButton.title(for: .normal) != "Задачи с ошибкой (0)" {
-            Animations.swipeViewController(.fromRight, for: view)
+        if notSolvedButton.title(for: .normal) != "ЗАДАЧИ С ОШИБКОЙ (0)" {
             let unsolvedThemesViewController = UnsolvedThemesViewController()
             unsolvedThemesViewController.viewModel = UnsolvedThemesViewModel()
             if let viewModel = viewModel as? TrainerViewModel {
@@ -97,6 +101,7 @@ class TrainerViewController: UIViewController {
     
     @IBAction func profileTapped(_ sender: UIButton) {
         let profileViewController = ProfileViewController()
+        profileViewController.modalPresentationStyle = .fullScreen
         present(profileViewController, animated: true)
     }
     
@@ -143,13 +148,14 @@ extension TrainerViewController: UITableViewDataSource {
             cell.setupStatsLines(mistakesProgress: mistake, successProgress: success, fullWidth: tableView.frame.size.width - 6)
         }
         cell.themeName.text = cellName
+        cell.presentingVC = .trainerStart
         return cell
     }
 }
 
 extension TrainerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 66
+        return 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

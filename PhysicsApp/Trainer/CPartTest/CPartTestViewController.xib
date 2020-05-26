@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BlackDiamond.ttf">
-            <string>BlackDiamond</string>
-        </array>
-        <array key="Montserrat-Regular.ttf">
-            <string>Montserrat-Regular</string>
+        <array key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
         </array>
     </customFonts>
     <objects>
@@ -28,24 +25,25 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZA7-g6-nOl">
-                    <rect key="frame" x="0.0" y="130" width="414" height="662"/>
+                    <rect key="frame" x="0.0" y="111" width="414" height="681"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Проверь себя" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nu-jW-3r4">
-                    <rect key="frame" x="119" y="44" width="176" height="86"/>
-                    <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="45"/>
+                    <rect key="frame" x="94" y="64" width="226" height="37"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvb-jX-MMR">
-                    <rect key="frame" x="82" y="797" width="250" height="60"/>
+                    <rect key="frame" x="57" y="797" width="300" height="60"/>
+                    <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="250" id="8xH-tj-9Qq"/>
+                        <constraint firstAttribute="width" constant="300" id="8xH-tj-9Qq"/>
                         <constraint firstAttribute="height" constant="60" id="Vev-Vh-Veb"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
-                    <state key="normal" title="Посмотреть результаты">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
+                    <state key="normal" title="ПОСМОТРЕТЬ РЕЗУЛЬТАТЫ">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="nextTapped:" destination="-1" eventType="touchUpInside" id="0Pe-zy-w0j"/>
@@ -54,9 +52,9 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="ZA7-g6-nOl" firstAttribute="top" secondItem="4Nu-jW-3r4" secondAttribute="bottom" constant="10" id="BMh-JX-K7T"/>
                 <constraint firstItem="4Nu-jW-3r4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="I8G-ZD-ha2"/>
-                <constraint firstItem="ZA7-g6-nOl" firstAttribute="top" secondItem="4Nu-jW-3r4" secondAttribute="bottom" id="Wdb-fM-qk8"/>
-                <constraint firstItem="4Nu-jW-3r4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="gVn-1e-dnA"/>
+                <constraint firstItem="4Nu-jW-3r4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="Vbw-bY-NJz"/>
                 <constraint firstItem="kvb-jX-MMR" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="h1r-eb-GWF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZA7-g6-nOl" secondAttribute="trailing" id="h2K-0P-Dd2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kvb-jX-MMR" secondAttribute="bottom" constant="5" id="igx-vq-itP"/>

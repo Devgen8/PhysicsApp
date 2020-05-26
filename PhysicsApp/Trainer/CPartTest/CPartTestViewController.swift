@@ -25,8 +25,8 @@ class CPartTestViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
-        DesignService.designBlueButton(nextButton)
+        DesignService.setWhiteBackground(for: view)
+        nextButton.layer.cornerRadius = 15
     }
     
     func saveCurrentState() {
@@ -48,7 +48,7 @@ class CPartTestViewController: UIViewController {
 
 extension CPartTestViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return 350
     }
 }
 

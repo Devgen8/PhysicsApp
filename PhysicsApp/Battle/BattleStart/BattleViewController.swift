@@ -41,7 +41,7 @@ class BattleViewController: UIViewController {
     }
     
     func designScreen() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
         DesignService.designBlueButton(playButton)
         themeOutlet.isHidden = true
         themeImage.isHidden = true

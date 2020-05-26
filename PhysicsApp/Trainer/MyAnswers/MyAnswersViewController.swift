@@ -24,7 +24,7 @@ class MyAnswersViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
     }
     
     func getTaskLocation(taskName: String) -> (String, String) {
@@ -46,6 +46,11 @@ class MyAnswersViewController: UIViewController {
         let taskNumber = String(taskNumberSet)
         return (themeName, taskNumber)
     }
+    
+    @IBAction func closeTapped(_ sender: UIButton) {
+        delegate?.isClosing = false
+        dismiss(animated: true)
+    }
 }
 
 extension MyAnswersViewController: UITableViewDelegate {
@@ -55,7 +60,8 @@ extension MyAnswersViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.changeForTask(indexPath.row)
-        dismiss(animated: false)
+        delegate?.isClosing = false
+        dismiss(animated: true)
     }
 }
 
@@ -75,14 +81,18 @@ extension MyAnswersViewController: UITableViewDataSource {
         decorativeView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 5).isActive = true
         decorativeView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -5).isActive = true
         decorativeView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -5).isActive = true
-        decorativeView.layer.cornerRadius = 30
-        cell.textLabel?.font = UIFont(name: "Montserrat", size: 20)
+        decorativeView.layer.cornerRadius = 15
+        decorativeView.layer.borderWidth = 1
+        decorativeView.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        cell.textLabel?.font = UIFont(name: "Montserrat-Bold", size: 20)
         if let answer = tasksAnswers.first(where: { getTaskLocation(taskName: $0.key).0 == "Задание №\(indexPath.row + 1)" })?.value, answer != "" {
-            cell.textLabel?.text = "Задание №\(indexPath.row + 1) Ваш ответ: \(answer)"
-            decorativeView.backgroundColor = #colorLiteral(red: 0, green: 0.7012014389, blue: 1, alpha: 1)
+            cell.textLabel?.text = "Задание №\(indexPath.row + 1)         Ваш ответ: \(answer)"
+            decorativeView.backgroundColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+            cell.textLabel?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         } else {
-            cell.textLabel?.text = "Задание №\(indexPath.row + 1) Нет ответа"
+            cell.textLabel?.text = "Задание №\(indexPath.row + 1)         Нет ответа"
             decorativeView.backgroundColor = .white
+            cell.textLabel?.textColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
         }
         
         return cell

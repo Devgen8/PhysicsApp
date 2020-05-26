@@ -90,7 +90,7 @@ class AnswerChooserViewController: UIViewController {
     }
     
     func designScreen() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
         DesignService.designBlueButton(nextButton)
         questionImage.layer.cornerRadius = 30
         for button in answerButtons {

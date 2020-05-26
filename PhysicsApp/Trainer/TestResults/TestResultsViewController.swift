@@ -28,7 +28,7 @@ class TestResultsViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
     }
     
     func prepareData() {
@@ -53,12 +53,13 @@ class TestResultsViewController: UIViewController {
 extension TestResultsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerLabel = UILabel()
-        headerLabel.font = UIFont(name: "Montserrat-Medium", size: 20)
+        headerLabel.font = UIFont(name: "Montserrat-Bold", size: 25)
+        headerLabel.textColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
         switch section {
         case 0:
-            headerLabel.text = "Статистика"
+            headerLabel.text = "СТАТИСТИКА"
         case 1:
-            headerLabel.text = "Задачи"
+            headerLabel.text = "ЗАДАЧИ"
         default:
             headerLabel.text = ""
         }
@@ -128,7 +129,7 @@ extension TestResultsViewController: UITableViewDataSource {
         let wrightAnswersNumber = viewModel.getWrightAnswersNumberString()
         cell.wrightAnswersLabel.text = wrightAnswersNumber
         let (greenPercentage, yellowPercentage) = viewModel.getColorPercentage()
-        cell.setupProgressBar(withGreenPercentage: greenPercentage, withYellowPercentage: yellowPercentage)
+        cell.setupProgressBar(withGreenPercentage: greenPercentage, withYellowPercentage: yellowPercentage, with: resultsTableView.frame.width)
         cell.pointsLabel.text = "Баллы: \(viewModel.getUsersFinalPoints())"
         return cell
     }
@@ -150,8 +151,8 @@ extension TestResultsViewController: UITableViewDataSource {
         let isWright = viewModel.getTaskCorrection(for: index)
         var cellBarColor = UIColor()
         switch isWright {
-        case 0: cellBarColor = .red
-        case 1: cellBarColor = .yellow
+        case 0: cellBarColor = #colorLiteral(red: 0.7611784935, green: 0, blue: 0.06764990836, alpha: 1)
+        case 1: cellBarColor = .systemYellow
         case 2: cellBarColor = .systemGreen
         default: print("Unexpeted case in cell creation")
         }

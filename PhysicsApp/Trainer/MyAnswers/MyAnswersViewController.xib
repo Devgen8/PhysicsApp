@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BlackDiamond.ttf">
-            <string>BlackDiamond</string>
+        <array key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
         </array>
     </customFonts>
     <objects>
@@ -24,27 +24,43 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мои ответы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Lj-bp-Znz">
-                    <rect key="frame" x="127.5" y="44" width="159" height="86"/>
-                    <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="45"/>
+                    <rect key="frame" x="50" y="74" width="193" height="37"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qze-6k-JeW">
-                    <rect key="frame" x="0.0" y="130" width="414" height="732"/>
+                    <rect key="frame" x="0.0" y="151" width="414" height="711"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfR-xJ-SnA">
+                    <rect key="frame" x="314" y="60" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="TWr-g0-9Cc"/>
+                        <constraint firstAttribute="width" constant="70" id="iku-R8-geZ"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="крестик экран 2"/>
+                    <connections>
+                        <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="1HE-bp-l0Z"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="qze-6k-JeW" firstAttribute="top" secondItem="0Lj-bp-Znz" secondAttribute="bottom" id="Gn3-F9-rqY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VfR-xJ-SnA" secondAttribute="trailing" constant="30" id="A5U-la-XgQ"/>
+                <constraint firstItem="qze-6k-JeW" firstAttribute="top" secondItem="0Lj-bp-Znz" secondAttribute="bottom" constant="40" id="Gn3-F9-rqY"/>
                 <constraint firstItem="qze-6k-JeW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="GqR-rX-xSS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qze-6k-JeW" secondAttribute="bottom" id="MBf-D8-efI"/>
-                <constraint firstItem="0Lj-bp-Znz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Xji-z0-xAm"/>
-                <constraint firstItem="0Lj-bp-Znz" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="jaT-rc-TEA"/>
+                <constraint firstItem="0Lj-bp-Znz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="bEF-bR-5ua"/>
+                <constraint firstItem="VfR-xJ-SnA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="gt2-4V-69f"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qze-6k-JeW" secondAttribute="trailing" id="une-aq-Aag"/>
+                <constraint firstItem="0Lj-bp-Znz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="xmA-Ar-PL7"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="116"/>
         </view>
     </objects>
+    <resources>
+        <image name="крестик экран 2" width="140" height="135"/>
+    </resources>
 </document>

@@ -19,10 +19,10 @@ class TabBarViewController: UITabBarController {
     
     func setupTabBarItems() {
         let normalTitleFont = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.regular)
-        let selectedTitleFont = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.bold)
+        let selectedTitleFont = UIFont(name: "Montserrat-Regular", size: 12)
         
-        let normalTitleColor = UIColor.gray
-        let selectedTitleColor = UIColor.black
+        let normalTitleColor = UIColor.black
+        let selectedTitleColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
         
         let mixesViewController = MixesViewController()
         let mixItem = UITabBarItem(title: "Подборка", image: #imageLiteral(resourceName: "person1x").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "growth1x").withRenderingMode(.alwaysOriginal))
@@ -36,7 +36,7 @@ class TabBarViewController: UITabBarController {
         let battleViewController = BattleViewController()
         battleViewController.tabBarItem = battleItem
         
-        let trainerItem = UITabBarItem(title: "Тренажер", image: #imageLiteral(resourceName: "notes1x").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "notes (1)1x").withRenderingMode(.alwaysOriginal))
+        let trainerItem = UITabBarItem(title: "ТРЕНАЖЕР", image: #imageLiteral(resourceName: "картинка тренажер экран 9").withRenderingMode(.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "картинка тренажер экран 9").withRenderingMode(.alwaysOriginal))
         trainerItem.setTitleTextAttributes([NSAttributedString.Key.font: selectedTitleFont, NSAttributedString.Key.foregroundColor: selectedTitleColor], for: .selected)
         trainerItem.setTitleTextAttributes([NSAttributedString.Key.font: normalTitleFont, NSAttributedString.Key.foregroundColor: normalTitleColor], for: .normal)
         let trainerViewController = TrainerViewController()

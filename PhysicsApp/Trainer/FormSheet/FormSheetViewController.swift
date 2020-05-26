@@ -24,10 +24,19 @@ class FormSheetViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
-        DesignService.designWhiteButton(cancelButton)
-        DesignService.designWhiteButton(sendButton)
+        DesignService.setWhiteBackground(for: view)
+        sendButton.layer.cornerRadius = 15
+        cancelButton.layer.cornerRadius = 15
         mistakeTextView.layer.cornerRadius = 20
+        
+        themeTextField.layer.borderWidth = 1
+        themeTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        
+        mistakeTextView.layer.borderWidth = 1
+        mistakeTextView.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        mistakeTextView.layer.cornerRadius = 0
+        
+        DesignService.createPadding(for: themeTextField)
     }
     
     @IBAction func cancelTapped(_ sender: UIButton) {

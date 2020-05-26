@@ -50,13 +50,13 @@ class TasksListViewController: UIViewController {
         tasksTableView.dataSource = self
         view.addSubview(tasksTableView)
         tasksTableView.translatesAutoresizingMaskIntoConstraints = false
-        tasksTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tasksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tasksTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        tasksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         tasksTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         if viewModel.lookingForUnsolvedTasks != true {
             tasksTableView.topAnchor.constraint(equalTo: firstTimeRing.bottomAnchor, constant: 40).isActive = true
         } else {
-            tasksTableView.topAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: 15).isActive = true
+            tasksTableView.topAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: 30).isActive = true
             hideUsersStats()
         }
         tasksTableView.backgroundColor = .clear
@@ -88,21 +88,21 @@ class TasksListViewController: UIViewController {
         // Всего задач
         let doneTasksNumber = viewModel.getDoneTasksNumber()
         let donePercentage = Float(doneTasksNumber) / Float(allTasksNumber)
-        let doneRingLayer = chartsBuilder.getProgressRing(with: donePercentage, color: .red)
+        let doneRingLayer = chartsBuilder.getProgressRing(with: donePercentage, color: #colorLiteral(red: 0.7611784935, green: 0, blue: 0.06764990836, alpha: 1))
         donePercentageLabel.text = "\(Int(donePercentage * 100))%"
         doneRing.layer.addSublayer(doneRingLayer)
         
         // С первой попытки
         let firstTryTasksNumber = viewModel.getFirstTryTasksNumber()
         let firstPercentage = Float(firstTryTasksNumber) / Float(allTasksNumber)
-        let firstTryLayer = chartsBuilder.getProgressRing(with: firstPercentage, color: .systemGreen)
+        let firstTryLayer = chartsBuilder.getProgressRing(with: firstPercentage, color: .systemYellow)
         firstTryPercentageLabel.text = "\(Int(firstPercentage * 100))%"
         firstTimeRing.layer.addSublayer(firstTryLayer)
         
         // Верно решенных задач
         let solvedTasksNumber = viewModel.getSolvedTasksNumber()
         let solvedPercentage = Float(solvedTasksNumber) / Float(allTasksNumber)
-        let solvedTasksLayer = chartsBuilder.getProgressRing(with: solvedPercentage, color: .yellow)
+        let solvedTasksLayer = chartsBuilder.getProgressRing(with: solvedPercentage, color: .systemGreen)
         solvedPercentageLabel.text = "\(Int(solvedPercentage * 100))%"
         solvedRing.layer.addSublayer(solvedTasksLayer)
         
@@ -141,7 +141,7 @@ class TasksListViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setGradient(for: view)
+        DesignService.setWhiteBackground(for: view)
     }
     
     func getTaskData() {
@@ -162,7 +162,6 @@ class TasksListViewController: UIViewController {
     }
 
     @IBAction func backTapped(_ sender: UIButton) {
-        Animations.swipeViewController(.fromLeft, for: view)
         viewModel.unsolvedTaskUpdater?.updateUnsolvedTasks(with: viewModel.unsolvedTasks, and: nil)
         dismiss(animated: true)
     }
@@ -175,6 +174,8 @@ extension TasksListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("ThemeTableViewCell", owner: self, options: nil)?.first as! ThemeTableViewCell
+        cell.presentingVC = .taskList
+        cell.createBorder()
         let taskName = viewModel.tasks[indexPath.row].name
         cell.themeName.text = taskName
         let isTaskSolved = viewModel.checkIfTaskSolved(name: taskName ?? "")

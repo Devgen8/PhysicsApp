@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="BlackDiamond.ttf">
-            <string>BlackDiamond</string>
+        <array key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
         </array>
     </customFonts>
     <objects>
@@ -24,43 +24,43 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результаты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iv6-KC-2uY">
-                    <rect key="frame" x="121.5" y="44" width="171" height="85.5"/>
-                    <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="45"/>
+                    <rect key="frame" x="50" y="74" width="187.5" height="37"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlp-5D-prx">
-                    <rect key="frame" x="364" y="62" width="35" height="35"/>
+                    <rect key="frame" x="314" y="60" width="70" height="70"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="35" id="mz4-oP-Gy8"/>
-                        <constraint firstAttribute="height" constant="35" id="qAQ-JC-7MX"/>
+                        <constraint firstAttribute="width" constant="70" id="mz4-oP-Gy8"/>
+                        <constraint firstAttribute="height" constant="70" id="qAQ-JC-7MX"/>
                     </constraints>
-                    <state key="normal" title="Button" image="close copy"/>
+                    <state key="normal" title="Button" image="крестик экран 2"/>
                     <connections>
                         <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="usL-DT-Cb5"/>
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AWO-JL-I21">
-                    <rect key="frame" x="0.0" y="129.5" width="414" height="732.5"/>
+                    <rect key="frame" x="0.0" y="151" width="414" height="711"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AWO-JL-I21" secondAttribute="trailing" id="781-X8-Nsj"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Tlp-5D-prx" secondAttribute="trailing" constant="15" id="7go-s3-Ip3"/>
-                <constraint firstItem="iv6-KC-2uY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="EaU-ye-wXn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Tlp-5D-prx" secondAttribute="trailing" constant="30" id="7go-s3-Ip3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="AWO-JL-I21" secondAttribute="bottom" id="KC7-WP-gRF"/>
                 <constraint firstItem="AWO-JL-I21" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NEd-0I-g4N"/>
-                <constraint firstItem="Tlp-5D-prx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="18" id="fdh-cH-A6M"/>
-                <constraint firstItem="AWO-JL-I21" firstAttribute="top" secondItem="iv6-KC-2uY" secondAttribute="bottom" id="j12-YN-Pz9"/>
-                <constraint firstItem="iv6-KC-2uY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="vhp-tz-84M"/>
+                <constraint firstItem="Tlp-5D-prx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="fdh-cH-A6M"/>
+                <constraint firstItem="iv6-KC-2uY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="ugN-sZ-foS"/>
+                <constraint firstItem="iv6-KC-2uY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="wOe-jj-Xbr"/>
+                <constraint firstItem="AWO-JL-I21" firstAttribute="top" secondItem="iv6-KC-2uY" secondAttribute="bottom" constant="40" id="zKd-TV-h1m"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="139" y="116"/>
+            <point key="canvasLocation" x="137.68115942028987" y="115.84821428571428"/>
         </view>
     </objects>
     <resources>
-        <image name="close copy" width="512" height="512"/>
+        <image name="крестик экран 2" width="140" height="135"/>
     </resources>
 </document>
