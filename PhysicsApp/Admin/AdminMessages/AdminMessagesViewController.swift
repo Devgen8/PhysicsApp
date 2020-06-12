@@ -72,6 +72,20 @@ class AdminMessagesViewController: UIViewController {
         dismiss(animated: false)
     }
     
+    @IBAction func sortChanges(_ sender: UISegmentedControl) {
+        var type = MessageSortTypes.profile
+        switch sender.selectedSegmentIndex {
+        case 0: type = .profile
+        case 1: type = .tasks
+        default: type = .all
+        }
+        viewModel.changeSortType(for: type) { (isReady) in
+            if isReady {
+                self.messagesTableView.reloadData()
+            }
+        }
+    }
+    
 }
 
 extension AdminMessagesViewController: UITableViewDelegate {

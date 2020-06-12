@@ -62,11 +62,13 @@ class TestsHistoryViewModel {
                 self.updateKey()
                 completion(true)
             }
+        } else {
+            completion(true)
         }
     }
     
     func saveTestsHistoryInCoreData() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -96,7 +98,7 @@ class TestsHistoryViewModel {
     }
     
     func getHistoryFromCoreData(completion: @escaping (Bool) -> ()) {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -123,6 +125,8 @@ class TestsHistoryViewModel {
             } catch {
                 print(error.localizedDescription)
             }
+        } else {
+            completion(true)
         }
     }
     

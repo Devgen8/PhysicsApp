@@ -58,7 +58,8 @@ class ThemeTableViewCell: UITableViewCell {
             traceProgressView.topAnchor.constraint(equalTo: themeName.bottomAnchor, constant: distanceToThemeName).isActive = true
         }
         
-        let mistakesProgressView = ProgressBarView(color: #colorLiteral(red: 0.7228861451, green: 0.003550875001, blue: 0.07001964003, alpha: 1), needShadow: true)
+        var needShadow = mistakesProgress != 1
+        let mistakesProgressView = ProgressBarView(color: #colorLiteral(red: 0.7228861451, green: 0.003550875001, blue: 0.07001964003, alpha: 1), needShadow: needShadow)
         mistakesProgressView.translatesAutoresizingMaskIntoConstraints = false
         decorativeView.addSubview(mistakesProgressView)
         mistakesProgressView.backgroundColor = .clear
@@ -68,7 +69,8 @@ class ThemeTableViewCell: UITableViewCell {
         mistakesProgressView.topAnchor.constraint(equalTo: themeName.bottomAnchor, constant: distanceToThemeName + 2).isActive = true
         
         if let semiSuccessProgress = semiSuccessProgress {
-            let semiSuccessProgressView = ProgressBarView(color: .yellow, needShadow: true)
+            needShadow = semiSuccessProgress != 1
+            let semiSuccessProgressView = ProgressBarView(color: .yellow, needShadow: needShadow)
             semiSuccessProgressView.translatesAutoresizingMaskIntoConstraints = false
             decorativeView.addSubview(semiSuccessProgressView)
             semiSuccessProgressView.backgroundColor = .clear
@@ -78,7 +80,8 @@ class ThemeTableViewCell: UITableViewCell {
             semiSuccessProgressView.topAnchor.constraint(equalTo: themeName.bottomAnchor, constant: distanceToThemeName + 2).isActive = true
         }
         
-        let successProgressView = ProgressBarView(color: #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1), needShadow: true)
+        needShadow = successProgress != 1
+        let successProgressView = ProgressBarView(color: #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1), needShadow: needShadow)
         successProgressView.translatesAutoresizingMaskIntoConstraints = false
         decorativeView.addSubview(successProgressView)
         successProgressView.backgroundColor = .clear

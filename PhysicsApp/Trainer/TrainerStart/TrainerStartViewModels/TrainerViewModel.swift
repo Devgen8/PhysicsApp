@@ -82,7 +82,7 @@ class TrainerViewModel: TrainerViewModelProvider {
                 trainer?.egeTasks = egeTasks
                 
                 //filling user
-                if isFirstTimeReading {
+                if Auth.auth().currentUser?.uid != nil, isFirstTimeReading {
                     let newUser = User(context: context)
                     let statusTasks = StatusTasks(solvedTasks: solvedTasks,
                                                   unsolvedTasks: unsolvedTasks,
@@ -188,6 +188,10 @@ class TrainerViewModel: TrainerViewModelProvider {
                 self.updateKeysInfo()
                 completion(true)
             }
+        } else {
+            self.saveTasksInCoreData()
+            self.updateKeysInfo()
+            completion(true)
         }
     }
     

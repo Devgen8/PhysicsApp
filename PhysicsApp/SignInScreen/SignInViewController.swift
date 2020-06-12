@@ -44,6 +44,9 @@ class SignInViewController: UIViewController {
         
         emailTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
         passwordTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        
+        DesignService.createPadding(for: emailTextField)
+        DesignService.createPadding(for: passwordTextField)
     }
     
     func createBlurEffect() {
@@ -122,6 +125,7 @@ class SignInViewController: UIViewController {
             }
         })
     }
+    
     @IBAction func closeTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }

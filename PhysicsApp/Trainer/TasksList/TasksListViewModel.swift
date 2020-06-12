@@ -176,7 +176,7 @@ class TasksListViewModel {
     }
     
     func saveToCoreDataUnsolvedTasksByTasks() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -211,7 +211,7 @@ class TasksListViewModel {
     }
     
     func saveToCoreDataUnsolvedTasksByThemes() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -516,9 +516,10 @@ class TasksListViewModel {
             do {
                 let fechRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fechRequest)
-                let user = result.first
-                usersSolvedTasks = (user?.solvedTasks as! StatusTasks).solvedTasks
-                firstTryTasks = (user?.solvedTasks as! StatusTasks).firstTryTasks
+                if let user = result.first {
+                    usersSolvedTasks = (user.solvedTasks as! StatusTasks).solvedTasks
+                    firstTryTasks = (user.solvedTasks as! StatusTasks).firstTryTasks
+                }
             } catch {
                 print(error.localizedDescription)
             }

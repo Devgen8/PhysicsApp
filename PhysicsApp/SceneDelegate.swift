@@ -34,12 +34,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            }
 //            self.window?.makeKeyAndVisible()
 //        }
-        if let currentUser = Auth.auth().currentUser {
-            if currentUser.email == "nastena020300@ya.ru" {
+        if Auth.auth().currentUser != nil, let isAdmin = UserDefaults.standard.value(forKey: "isAdmin") as? Bool {
+            if isAdmin {
                 window?.rootViewController = MainAdminViewController()
             } else {
                 UserStatsCounter.shared.calculateSrEGE()
-                window?.rootViewController = TabBarViewController()
+                window?.rootViewController = TrainerViewController()
             }
         } else {
             window?.rootViewController = WelcomeViewController()

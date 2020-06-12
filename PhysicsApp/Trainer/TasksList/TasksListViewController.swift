@@ -22,6 +22,8 @@ class TasksListViewController: UIViewController {
     @IBOutlet weak var doneDescriptionLabel: UILabel!
     @IBOutlet weak var firstTryDescriptionLabel: UILabel!
     @IBOutlet weak var solveddescriptionLabel: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var statsLabel: UILabel!
     
     var shapeLayer = CAShapeLayer()
     var wasAnimation = true
@@ -44,6 +46,19 @@ class TasksListViewController: UIViewController {
         tasksTableView.reloadData()
     }
     
+    func createBlueBackground() {
+        let blueBack = UIView()
+        view.addSubview(blueBack)
+        blueBack.translatesAutoresizingMaskIntoConstraints = false
+        blueBack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        blueBack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        blueBack.topAnchor.constraint(equalTo: statsLabel.bottomAnchor, constant: 10).isActive = true
+        blueBack.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        blueBack.backgroundColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        blueBack.layer.cornerRadius = 15
+        view.sendSubviewToBack(blueBack)
+    }
+    
     func setupTableView() {
         tasksTableView = UITableView()
         tasksTableView.delegate = self
@@ -54,7 +69,8 @@ class TasksListViewController: UIViewController {
         tasksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         tasksTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         if viewModel.lookingForUnsolvedTasks != true {
-            tasksTableView.topAnchor.constraint(equalTo: firstTimeRing.bottomAnchor, constant: 40).isActive = true
+            tasksTableView.topAnchor.constraint(equalTo: firstTimeRing.bottomAnchor, constant: 80).isActive = true
+            createBlueBackground()
         } else {
             tasksTableView.topAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: 30).isActive = true
             hideUsersStats()
@@ -88,22 +104,22 @@ class TasksListViewController: UIViewController {
         // Всего задач
         let doneTasksNumber = viewModel.getDoneTasksNumber()
         let donePercentage = Float(doneTasksNumber) / Float(allTasksNumber)
-        let doneRingLayer = chartsBuilder.getProgressRing(with: donePercentage, color: #colorLiteral(red: 0.7611784935, green: 0, blue: 0.06764990836, alpha: 1))
-        donePercentageLabel.text = "\(Int(donePercentage * 100))%"
+        let doneRingLayer = chartsBuilder.getProgressRing(with: donePercentage, color: #colorLiteral(red: 0, green: 0.9988552928, blue: 0.9997050166, alpha: 1), shadowColor: #colorLiteral(red: 0, green: 0.6517609954, blue: 0.8594373465, alpha: 1))
+        donePercentageLabel.text = "\(Int((donePercentage * 100).isNaN ? 0 : donePercentage * 100))%"
         doneRing.layer.addSublayer(doneRingLayer)
         
         // С первой попытки
         let firstTryTasksNumber = viewModel.getFirstTryTasksNumber()
         let firstPercentage = Float(firstTryTasksNumber) / Float(allTasksNumber)
-        let firstTryLayer = chartsBuilder.getProgressRing(with: firstPercentage, color: .systemYellow)
-        firstTryPercentageLabel.text = "\(Int(firstPercentage * 100))%"
+        let firstTryLayer = chartsBuilder.getProgressRing(with: firstPercentage, color: #colorLiteral(red: 0.8662723303, green: 0.8636504412, blue: 0, alpha: 1), shadowColor: #colorLiteral(red: 0.3829351664, green: 0.6533470154, blue: 0.1208921, alpha: 1))
+        firstTryPercentageLabel.text = "\(Int((firstPercentage * 100).isNaN ? 0 : firstPercentage * 100))%"
         firstTimeRing.layer.addSublayer(firstTryLayer)
         
         // Верно решенных задач
         let solvedTasksNumber = viewModel.getSolvedTasksNumber()
         let solvedPercentage = Float(solvedTasksNumber) / Float(allTasksNumber)
-        let solvedTasksLayer = chartsBuilder.getProgressRing(with: solvedPercentage, color: .systemGreen)
-        solvedPercentageLabel.text = "\(Int(solvedPercentage * 100))%"
+        let solvedTasksLayer = chartsBuilder.getProgressRing(with: solvedPercentage, color: #colorLiteral(red: 1, green: 0.7464466691, blue: 0.9056023955, alpha: 1), shadowColor: #colorLiteral(red: 0.9502119422, green: 0.1624570787, blue: 0.2688195109, alpha: 1))
+        solvedPercentageLabel.text = "\(Int((solvedPercentage * 100).isNaN ? 0 : solvedPercentage * 100))%"
         solvedRing.layer.addSublayer(solvedTasksLayer)
         
         // Добавление анимаций
@@ -142,6 +158,7 @@ class TasksListViewController: UIViewController {
     
     func designScreenElements() {
         DesignService.setWhiteBackground(for: view)
+        DesignService.designCloseButton(closeButton)
     }
     
     func getTaskData() {

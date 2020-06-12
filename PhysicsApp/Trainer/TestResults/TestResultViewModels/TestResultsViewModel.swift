@@ -44,8 +44,20 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
     }
     
     func getTestDurationString() -> String {
-        let seconds = 14100 - timeTillEnd
-        return "\(seconds / 3600) : \((seconds % 3600) / 60) : \((seconds % 3600) % 60)"
+        let allSeconds = 14100 - timeTillEnd
+        var hours = "\(allSeconds / 3600)"
+        if hours.count == 1 {
+            hours = "0" + hours
+        }
+        var minutes = "\((allSeconds % 3600) / 60)"
+        if minutes.count == 1 {
+            minutes = "0" + minutes
+        }
+        var seconds = "\((allSeconds % 3600) % 60)"
+        if seconds.count == 1 {
+            seconds = "0" + seconds
+        }
+        return "\(hours) : \(minutes) : \(seconds)"
     }
     
     func getWrightAnswersNumberString() -> String {
@@ -223,7 +235,7 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
     }
     
     func saveTestResultsInCoreData() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -310,7 +322,7 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
     }
     
     func updateTestDataInCoreData() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)

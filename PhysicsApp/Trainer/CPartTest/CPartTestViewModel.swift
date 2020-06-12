@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class CPartTestViewModel {
     var tasks = [TaskModel]()
@@ -104,7 +105,7 @@ class CPartTestViewModel {
     
     func saveTestCompletion() {
         var finishedTests = UserDefaults.standard.value(forKey: "finishedTests") as? [String] ?? []
-        if !finishedTests.contains(name) {
+        if Auth.auth().currentUser?.uid != nil, !finishedTests.contains(name) {
             finishedTests.append(name)
         }
         UserDefaults.standard.set(finishedTests, forKey: "finishedTests")

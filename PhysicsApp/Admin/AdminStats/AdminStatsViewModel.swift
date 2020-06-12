@@ -142,7 +142,7 @@ class AdminStatsViewModel {
     }
     
     func getTaskName(for index: Int) -> String {
-        return cellLabels[index]
+        return cellLabels[index].uppercased()
     }
     
     func getTaskPercentage(for index: Int) -> Int {
@@ -247,19 +247,22 @@ class AdminStatsViewModel {
         var tasksStats = [String:Int]()
         var numberOfTasksInTheme = [String:Int]()
         for task in tasks {
-            if let taskTheme = task.theme,
+            if let allTaskThemes = task.theme,
                 let failures = task.failed,
                 let successes = task.succeded {
-                let percentage = Int(Double(failures)/Double(failures + successes) * 100.0)
-                if tasksStats[taskTheme] == nil {
-                    tasksStats[taskTheme] = percentage
-                } else {
-                    tasksStats[taskTheme]! += percentage
-                }
-                if numberOfTasksInTheme[taskTheme] == nil {
-                    numberOfTasksInTheme[taskTheme] = 1
-                } else {
-                    numberOfTasksInTheme[taskTheme]! += 1
+                let taskThemesArray = ThemeParser.parseTaskThemes(allTaskThemes)
+                for taskTheme in taskThemesArray {
+                    let percentage = Int(Double(failures)/Double(failures + successes) * 100.0)
+                    if tasksStats[taskTheme] == nil {
+                        tasksStats[taskTheme] = percentage
+                    } else {
+                        tasksStats[taskTheme]! += percentage
+                    }
+                    if numberOfTasksInTheme[taskTheme] == nil {
+                        numberOfTasksInTheme[taskTheme] = 1
+                    } else {
+                        numberOfTasksInTheme[taskTheme]! += 1
+                    }
                 }
             }
         }
@@ -372,8 +375,11 @@ class AdminStatsViewModel {
     func getThemesCount() -> Int {
         var themeNames = [String]()
         for task in tasks {
-            if let theme = task.theme, !themeNames.contains(theme) {
-                themeNames.append(theme)
+            let allTaskThemes = ThemeParser.parseTaskThemes(task.theme ?? "")
+            for taskTheme in allTaskThemes {
+                if !themeNames.contains(taskTheme) {
+                    themeNames.append(taskTheme)
+                }
             }
         }
         return themeNames.count
@@ -407,8 +413,11 @@ class AdminStatsViewModel {
     func prepareByThemesForTransportation(for index: Int) -> [AdminStatsModel] {
         var searchingTasks = [AdminStatsModel]()
         for task in tasks {
-            if task.theme == cellLabels[index] {
-                searchingTasks.append(task)
+            let allTaskThemes = ThemeParser.parseTaskThemes(task.theme ?? "")
+            for taskTheme in allTaskThemes {
+                if taskTheme == cellLabels[index] {
+                    searchingTasks.append(task)
+                }
             }
         }
         return searchingTasks

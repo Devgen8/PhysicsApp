@@ -31,6 +31,8 @@ class ProfileViewModel {
         UserDefaults.standard.set(nil, forKey: "notUpdatedUnsolvedThemes")
         UserDefaults.standard.set(nil, forKey: "isUserInfoDownloaded")
         UserDefaults.standard.set(nil, forKey: "isUserPhotoDownloaded")
+        UserDefaults.standard.set(nil, forKey: "isUserInformedAboutAuth")
+        UserDefaults.standard.set(nil, forKey: "isAdmin")
         
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
@@ -39,6 +41,14 @@ class ProfileViewModel {
                 for user in result {
                     context.delete(user)
                 }
+                
+                let trainerFetchRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+                let trainerResult = try context.fetch(trainerFetchRequest)
+                for trainer in trainerResult {
+                    context.delete(trainer)
+                }
+                
+                try context.save()
             } catch {
                 print(error.localizedDescription)
             }
@@ -58,7 +68,7 @@ class ProfileViewModel {
     }
     
     func getUsersDataFromCoreData(completion: @escaping (UserProfile?) -> ()) {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fetchRequest)
@@ -93,11 +103,13 @@ class ProfileViewModel {
                 self?.saveUsersDataInCoreData()
                 completion(userProfile)
             }
+        } else {
+            completion(nil)
         }
     }
     
     func saveUsersDataInCoreData() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fetchRequest)
@@ -150,11 +162,13 @@ class ProfileViewModel {
                     completion(nil)
                 }
             }
+        } else {
+            completion(nil)
         }
     }
     
     func savePhotoInCoreData() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fetchRequest)
@@ -169,7 +183,7 @@ class ProfileViewModel {
     }
     
     func getUserPhotoFromCoreData(completion: @escaping (UIImage?) -> ()) {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fetchRequest)

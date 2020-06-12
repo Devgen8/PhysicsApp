@@ -17,6 +17,7 @@ class TestResultTaskTableViewCell: UITableViewCell {
     @IBOutlet weak var extendButton: UIButton!
     @IBOutlet weak var userPointsLabel: UILabel!
     @IBOutlet weak var descriptionImageView: UIImageView!
+    @IBOutlet weak var correctionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,19 +52,19 @@ class TestResultTaskTableViewCell: UITableViewCell {
         roundedView.layer.borderWidth = 1
     }
     
-    func setupCorrectionBar(with color: UIColor) {
-        let traceWidthConstant = contentView.frame.width
-        
-        let progressViewTrace = ProgressBarView(color: color)
-        progressViewTrace.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(progressViewTrace)
-        progressViewTrace.backgroundColor = .clear
-        progressViewTrace.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        progressViewTrace.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        progressViewTrace.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        progressViewTrace.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        
-        contentView.bringSubviewToFront(taskName)
-    }
+//    func setupCorrectionBar(with color: UIColor) {
+//        let traceWidthConstant = contentView.frame.width
+//        
+//        let progressViewTrace = ProgressBarView(color: color)
+//        progressViewTrace.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.addSubview(progressViewTrace)
+//        progressViewTrace.backgroundColor = .clear
+//        progressViewTrace.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//        progressViewTrace.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+//        progressViewTrace.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+//        progressViewTrace.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+//        
+//        contentView.bringSubviewToFront(taskName)
+//    }
     
 }

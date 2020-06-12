@@ -7,13 +7,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Bold.ttf">
+        <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UnsolvedThemesViewController" customModule="PhysicsApp" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="aGK-FT-HAx" id="HL3-zs-a8D"/>
                 <outlet property="themesTableView" destination="p6l-Vw-VWI" id="FI5-59-Tdv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,23 +24,23 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Задачи с ошибкой" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHc-ZS-xNQ">
-                    <rect key="frame" x="15" y="74" width="302" height="37"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Задачи с ошибкой" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YHc-ZS-xNQ">
+                    <rect key="frame" x="15" y="74" width="304" height="37"/>
                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p6l-Vw-VWI">
-                    <rect key="frame" x="0.0" y="165" width="414" height="697"/>
+                    <rect key="frame" x="0.0" y="162" width="414" height="700"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGK-FT-HAx">
-                    <rect key="frame" x="329" y="60" width="70" height="70"/>
+                    <rect key="frame" x="329" y="57" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="uI2-c8-2Ri"/>
                         <constraint firstAttribute="height" constant="70" id="yMQ-Ac-vNn"/>
                     </constraints>
-                    <state key="normal" title="Button" image="крестик экран 2"/>
+                    <state key="normal" image="крестик экран 2"/>
                     <connections>
                         <action selector="backTapped:" destination="-1" eventType="touchUpInside" id="YJL-Nd-z16"/>
                     </connections>
@@ -49,9 +50,10 @@
             <constraints>
                 <constraint firstItem="YHc-ZS-xNQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="AnS-AL-8f3"/>
                 <constraint firstItem="p6l-Vw-VWI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Jlh-wj-WzQ"/>
-                <constraint firstItem="aGK-FT-HAx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="MQS-XH-QcQ"/>
+                <constraint firstItem="aGK-FT-HAx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="MQS-XH-QcQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aGK-FT-HAx" secondAttribute="trailing" constant="15" id="Rip-h2-cvJ"/>
                 <constraint firstItem="p6l-Vw-VWI" firstAttribute="top" secondItem="aGK-FT-HAx" secondAttribute="bottom" constant="35" id="bUV-eM-ysE"/>
+                <constraint firstItem="aGK-FT-HAx" firstAttribute="leading" secondItem="YHc-ZS-xNQ" secondAttribute="trailing" constant="10" id="eya-ri-IgM"/>
                 <constraint firstItem="YHc-ZS-xNQ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="jse-XW-Hyc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="p6l-Vw-VWI" secondAttribute="bottom" id="lh5-9q-uIg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="p6l-Vw-VWI" secondAttribute="trailing" id="qT7-8j-2zg"/>

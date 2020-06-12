@@ -7,6 +7,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
+        </array>
         <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
@@ -25,7 +28,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Задание №1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jp3-8h-u6G">
-                        <rect key="frame" x="20" y="15" width="334" height="24.5"/>
+                        <rect key="frame" x="20" y="15" width="150" height="24.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="82z-67-Zo7"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
                         <color key="textColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
@@ -83,7 +89,7 @@
                             <constraint firstAttribute="height" constant="60" id="Gl5-UR-Fcd"/>
                             <constraint firstAttribute="width" constant="60" id="LMc-lQ-gsp"/>
                         </constraints>
-                        <state key="normal" title="Button" image="multimedia"/>
+                        <state key="normal" image="multimedia"/>
                     </button>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LVk-jb-WlM">
                         <rect key="frame" x="7" y="180.5" width="350" height="200"/>
@@ -99,6 +105,12 @@
                             <constraint firstAttribute="width" secondItem="dPu-93-dya" secondAttribute="height" multiplier="7:4" id="oYK-DH-Vym"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="DJ6-JV-3AU">
+                        <rect key="frame" x="175" y="15" width="189" height="24.5"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Nk9-Gj-QHR" firstAttribute="top" secondItem="Jp3-8h-u6G" secondAttribute="bottom" constant="20" id="1bV-UP-9p9"/>
@@ -106,19 +118,22 @@
                     <constraint firstItem="LVk-jb-WlM" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="EfV-5d-evt"/>
                     <constraint firstItem="rgP-jQ-gpp" firstAttribute="leading" secondItem="Nk9-Gj-QHR" secondAttribute="trailing" constant="8" id="Efo-3Q-j6w"/>
                     <constraint firstItem="Nk9-Gj-QHR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="VBK-om-UBc"/>
+                    <constraint firstAttribute="trailing" secondItem="DJ6-JV-3AU" secondAttribute="trailing" id="YFF-zF-yUd"/>
+                    <constraint firstItem="DJ6-JV-3AU" firstAttribute="leading" secondItem="Jp3-8h-u6G" secondAttribute="trailing" constant="5" id="YXg-Iu-Otl"/>
                     <constraint firstItem="dPu-93-dya" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Yhc-ZU-sen"/>
+                    <constraint firstItem="DJ6-JV-3AU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="d6S-Os-NFs"/>
                     <constraint firstItem="rgP-jQ-gpp" firstAttribute="top" secondItem="Jp3-8h-u6G" secondAttribute="bottom" constant="20" id="f6Z-On-d06"/>
                     <constraint firstItem="LVk-jb-WlM" firstAttribute="top" secondItem="Nk9-Gj-QHR" secondAttribute="bottom" constant="25" id="jdT-VG-Mh7"/>
                     <constraint firstItem="aKl-YQ-Bvd" firstAttribute="top" secondItem="Jp3-8h-u6G" secondAttribute="bottom" constant="38" id="kXm-3d-i8W"/>
                     <constraint firstItem="Jp3-8h-u6G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="mrU-Bb-6wt"/>
                     <constraint firstItem="Jp3-8h-u6G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="naT-3Q-Phz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="aKl-YQ-Bvd" secondAttribute="trailing" id="q1k-Xm-CKz"/>
-                    <constraint firstAttribute="trailing" secondItem="Jp3-8h-u6G" secondAttribute="trailing" constant="10" id="q77-aK-akK"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="correctionLabel" destination="DJ6-JV-3AU" id="6v9-Rm-gxY"/>
                 <outlet property="descriptionImageView" destination="dPu-93-dya" id="jHN-FS-LA4"/>
                 <outlet property="extendButton" destination="aKl-YQ-Bvd" id="4gH-Y6-ZXd"/>
                 <outlet property="taskImageView" destination="LVk-jb-WlM" id="Uyz-3N-BBy"/>
@@ -131,6 +146,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="multimedia" width="512" height="512"/>
+        <image name="multimedia" width="72" height="72"/>
     </resources>
 </document>

@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZA7-g6-nOl">
-                    <rect key="frame" x="0.0" y="111" width="414" height="681"/>
+                    <rect key="frame" x="0.0" y="111" width="414" height="624"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Проверь себя" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nu-jW-3r4">
@@ -49,16 +49,23 @@
                         <action selector="nextTapped:" destination="-1" eventType="touchUpInside" id="0Pe-zy-w0j"/>
                     </connections>
                 </button>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="EVv-U7-GDI">
+                    <rect key="frame" x="0.0" y="765" width="414" height="2"/>
+                    <color key="tintColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                </progressView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="ZA7-g6-nOl" firstAttribute="top" secondItem="4Nu-jW-3r4" secondAttribute="bottom" constant="10" id="BMh-JX-K7T"/>
                 <constraint firstItem="4Nu-jW-3r4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="I8G-ZD-ha2"/>
+                <constraint firstItem="EVv-U7-GDI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ICi-o2-1PE"/>
+                <constraint firstAttribute="trailing" secondItem="EVv-U7-GDI" secondAttribute="trailing" id="SXX-gB-bVh"/>
                 <constraint firstItem="4Nu-jW-3r4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="Vbw-bY-NJz"/>
+                <constraint firstItem="kvb-jX-MMR" firstAttribute="top" secondItem="EVv-U7-GDI" secondAttribute="bottom" constant="30" id="X5T-eH-XLN"/>
+                <constraint firstItem="EVv-U7-GDI" firstAttribute="top" secondItem="ZA7-g6-nOl" secondAttribute="bottom" constant="30" id="YQl-XX-V9y"/>
                 <constraint firstItem="kvb-jX-MMR" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="h1r-eb-GWF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZA7-g6-nOl" secondAttribute="trailing" id="h2K-0P-Dd2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kvb-jX-MMR" secondAttribute="bottom" constant="5" id="igx-vq-itP"/>
-                <constraint firstItem="kvb-jX-MMR" firstAttribute="top" secondItem="ZA7-g6-nOl" secondAttribute="bottom" constant="5" id="nMC-A6-jqL"/>
                 <constraint firstItem="ZA7-g6-nOl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tla-if-E7q"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

@@ -21,6 +21,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormSheetViewController" customModule="PhysicsApp" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="YXs-Eg-RWr" id="r4o-YW-T3M"/>
+                <outlet property="closeButton" destination="Wpk-ri-ACZ" id="icc-o5-VSz"/>
                 <outlet property="mistakeTextView" destination="anW-vg-PH3" id="Gf2-yN-Y7W"/>
                 <outlet property="sendButton" destination="Ieb-or-acA" id="I26-Z1-3if"/>
                 <outlet property="themeTextField" destination="Kkg-oR-lWX" id="Jl5-a1-YKF"/>
@@ -46,8 +47,8 @@
                         <action selector="sendTapped:" destination="-1" eventType="touchUpInside" id="hqp-UM-OKN"/>
                     </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="       Тема письма" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kkg-oR-lWX">
-                    <rect key="frame" x="30" y="155" width="354" height="60"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Тема письма" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kkg-oR-lWX">
+                    <rect key="frame" x="30" y="152" width="354" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="cFj-fP-TuN"/>
                     </constraints>
@@ -55,20 +56,20 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вопрос:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="me3-Jc-ec8">
-                    <rect key="frame" x="30" y="225" width="105" height="30.5"/>
+                    <rect key="frame" x="30" y="222" width="105" height="30.5"/>
                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="25"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="anW-vg-PH3">
-                    <rect key="frame" x="30" y="265.5" width="354" height="371.5"/>
+                    <rect key="frame" x="30" y="262.5" width="354" height="374.5"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="22"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wpk-ri-ACZ">
-                    <rect key="frame" x="314" y="60" width="70" height="70"/>
+                    <rect key="frame" x="314" y="57" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="Lqi-8w-qGT"/>
                         <constraint firstAttribute="height" constant="70" id="kvY-fq-cao"/>
@@ -96,7 +97,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="YXs-Eg-RWr" secondAttribute="bottom" constant="60" id="3xE-X5-Eyg"/>
-                <constraint firstItem="Wpk-ri-ACZ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="5tQ-xC-6Gh"/>
+                <constraint firstItem="Wpk-ri-ACZ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="5tQ-xC-6Gh"/>
                 <constraint firstItem="YXs-Eg-RWr" firstAttribute="top" secondItem="Ieb-or-acA" secondAttribute="bottom" constant="25" id="7Sr-nc-sTb"/>
                 <constraint firstItem="Kkg-oR-lWX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="Dqe-vu-WIf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YXs-Eg-RWr" secondAttribute="trailing" constant="30" id="Fb7-NW-WGK"/>

@@ -11,6 +11,7 @@ import UIKit
 class UnsolvedThemesViewController: UIViewController {
 
     @IBOutlet weak var themesTableView: UITableView!
+    @IBOutlet weak var closeButton: UIButton!
     
     var viewModel = UnsolvedThemesViewModel()
     
@@ -28,6 +29,7 @@ class UnsolvedThemesViewController: UIViewController {
     
     func designScreenElements() {
         DesignService.setWhiteBackground(for: view)
+        DesignService.designCloseButton(closeButton)
     }
     
     @IBAction func backTapped(_ sender: UIButton) {

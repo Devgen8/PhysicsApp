@@ -36,7 +36,7 @@ class TasksDetailViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setWhiteBackground(for: view)
+        DesignService.setAdminGradient(for: view)
         DesignService.designBlueButton(priorityButton)
     }
     

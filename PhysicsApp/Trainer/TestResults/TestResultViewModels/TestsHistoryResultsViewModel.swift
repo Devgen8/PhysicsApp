@@ -156,8 +156,20 @@ class TestsHistoryResultsViewModel: GeneralTestResultsViewModel {
     }
     
     func getTestDurationString() -> String {
-        let seconds = 14100 - timeTillEnd
-        return "\(seconds / 3600) : \((seconds % 3600) / 60) : \((seconds % 3600) % 60)"
+        let allSeconds = 14100 - timeTillEnd
+        var hours = "\(allSeconds / 3600)"
+        if hours.count == 1 {
+            hours = "0" + hours
+        }
+        var minutes = "\((allSeconds % 3600) / 60)"
+        if minutes.count == 1 {
+            minutes = "0" + minutes
+        }
+        var seconds = "\((allSeconds % 3600) % 60)"
+        if seconds.count == 1 {
+            seconds = "0" + seconds
+        }
+        return "\(hours) : \(minutes) : \(seconds)"
     }
     
     func getWrightAnswersNumberString() -> String {

@@ -11,6 +11,17 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class FormSheetViewModel {
+    
+    private var taskName: String?
+    
+    func getTaskName() -> String? {
+        return taskName
+    }
+    
+    func setTaskName(_ name: String?) {
+        taskName = name
+    }
+    
     func sendMessage(theme: String, text: String) {
         if let userEmail = Auth.auth().currentUser?.email {
             let symbolsString = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
@@ -22,9 +33,10 @@ class FormSheetViewModel {
                     break
                 }
             }
+            let vkId = userEmail.components(separatedBy: "@").first ?? ""
             Firestore.firestore().collection("messages").document("message" + uid).setData(["theme" : theme,
                                                                                             "text" : text,
-                                                                                            "email" : userEmail,
+                                                                                            "vkId" : vkId,
                                                                                             "date" : Date(),
                                                                                             "messageName" : "message" + uid])
         }

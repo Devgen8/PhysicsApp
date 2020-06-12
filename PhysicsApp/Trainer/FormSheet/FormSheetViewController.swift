@@ -14,6 +14,7 @@ class FormSheetViewController: UIViewController {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var themeTextField: UITextField!
+    @IBOutlet weak var closeButton: UIButton!
     
     var viewModel = FormSheetViewModel()
     
@@ -21,10 +22,53 @@ class FormSheetViewController: UIViewController {
         super.viewDidLoad()
         
         designScreenElements()
+        showMessageTheme()
+        addTextViewObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func showMessageTheme() {
+        if let taskName = viewModel.getTaskName() {
+            themeTextField.text = "Ошибка в \(taskName)"
+        }
+    }
+    
+    func addTextViewObservers() {
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardDidShow(notification: Notification) {
+        let info = notification.userInfo! as NSDictionary
+        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let keyboardY = view.frame.size.height - keyboardSize.height
+        let editingTextFieldY = mistakeTextView.frame.origin.y
+        if view.frame.origin.y >= 0 {
+            if editingTextFieldY > keyboardY - 120 {
+                UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+                    self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editingTextFieldY - (keyboardY - 120)), width: self.view.bounds.width, height: self.view.bounds.height)
+                }, completion: nil)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
     }
     
     func designScreenElements() {
         DesignService.setWhiteBackground(for: view)
+        DesignService.designCloseButton(closeButton)
+        themeTextField.delegate = self
+        mistakeTextView.delegate = self
+        
         sendButton.layer.cornerRadius = 15
         cancelButton.layer.cornerRadius = 15
         mistakeTextView.layer.cornerRadius = 20
@@ -46,5 +90,22 @@ class FormSheetViewController: UIViewController {
     @IBAction func sendTapped(_ sender: UIButton) {
         viewModel.sendMessage(theme: themeTextField.text ?? "", text: mistakeTextView.text)
         dismiss(animated: true)
+    }
+}
+
+extension FormSheetViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension FormSheetViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
 }

@@ -105,7 +105,7 @@ class CustomTestViewModel: TestViewModel {
     }
     
     func saveNewTestInCoreData() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -177,7 +177,7 @@ class CustomTestViewModel: TestViewModel {
         for task in foundTasks {
             let (themeName, taskNumber) = getTaskLocation(taskName: task.name ?? "")
             let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
+            imageRef.getData(maxSize: 1 * 2048 * 2048) { [weak self] data, error in
                 guard let `self` = self, error == nil else {
                     print("Error downloading images: \(String(describing: error?.localizedDescription))")
                     return
@@ -200,7 +200,7 @@ class CustomTestViewModel: TestViewModel {
         for task in foundTasks {
             let (themeName, taskNumber) = getTaskLocation(taskName: task.name ?? "")
             let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] (data, error) in
+            imageRef.getData(maxSize: 1 * 2048 * 2048) { [weak self] (data, error) in
                 guard let `self` = self, error == nil else {
                     print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
                     return
@@ -276,7 +276,7 @@ class CustomTestViewModel: TestViewModel {
     }
     
     func saveUsersProgress(with time: Int) {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -334,6 +334,22 @@ class CustomTestViewModel: TestViewModel {
     
     func getNextTaskIndex(after index: Int) -> Int {
         return index + 1
+    }
+    
+    func getTimeString(from allSeconds: Int) -> String {
+        var hours = "\(allSeconds / 3600)"
+        if hours.count == 1 {
+            hours = "0" + hours
+        }
+        var minutes = "\((allSeconds % 3600) / 60)"
+        if minutes.count == 1 {
+            minutes = "0" + minutes
+        }
+        var seconds = "\((allSeconds % 3600) % 60)"
+        if seconds.count == 1 {
+            seconds = "0" + seconds
+        }
+        return "\(hours) : \(minutes) : \(seconds)"
     }
     
     func deleteData() {

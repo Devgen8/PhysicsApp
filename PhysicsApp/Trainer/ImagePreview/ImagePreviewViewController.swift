@@ -31,6 +31,12 @@ class ImagePreviewViewController: UIViewController {
             wrightAnswerLabel.text = "Ответ: " + wrightAnswer!
             view.bringSubviewToFront(wrightAnswerLabel)
         }
+        
+        designScreenElements()
+    }
+    
+    func designScreenElements() {
+        DesignService.designCloseButton(closeButton)
     }
     
     func setupImageScrollView() {

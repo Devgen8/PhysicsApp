@@ -64,8 +64,8 @@ class ProfileDataChangeViewModel {
     }
     
     func updateInFirestore(with dict: [String:String]) {
-        updateCoreData(with: dict)
         if let userId = Auth.auth().currentUser?.uid, dict.count > 0 {
+            updateCoreData(with: dict)
             usersReference.document(userId).updateData(dict)
         }
     }

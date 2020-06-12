@@ -36,11 +36,11 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dJ3-xI-jIk">
-                    <rect key="frame" x="35" y="197" width="344" height="492"/>
+                    <rect key="frame" x="35" y="197" width="344" height="532"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTS-oq-R7L">
-                    <rect key="frame" x="30" y="742" width="354" height="60"/>
+                    <rect key="frame" x="30" y="782" width="354" height="60"/>
                     <color key="backgroundColor" red="0.69736534360000002" green="0.14242923260000001" blue="0.1254176199" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="jyp-8Q-Hht"/>
@@ -53,28 +53,9 @@
                         <action selector="unsolvedTasksTapped:" destination="-1" eventType="touchUpInside" id="QVi-ds-eqF"/>
                     </connections>
                 </button>
-                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="qIP-Cc-SB0">
-                    <rect key="frame" x="136.5" y="803" width="141" height="54"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Montazhnaya_oblast_98_4x" translatesAutoresizingMaskIntoConstraints="NO" id="4lp-Ib-nx4">
-                            <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="4lp-Ib-nx4" secondAttribute="height" multiplier="1:1" id="Cki-bd-6c7"/>
-                                <constraint firstAttribute="height" constant="54" id="VLS-vl-oN1"/>
-                            </constraints>
-                        </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="webium экран 12" translatesAutoresizingMaskIntoConstraints="NO" id="1IM-j4-7yp">
-                            <rect key="frame" x="57" y="17" width="84" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="20" id="7AA-C0-bi4"/>
-                                <constraint firstAttribute="width" secondItem="1IM-j4-7yp" secondAttribute="height" multiplier="156:37" id="b0Y-Mr-ZZz"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                </stackView>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kkb-4d-wf3">
                     <rect key="frame" x="20" y="161" width="374" height="32"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="31" id="6LF-Ak-ZhM"/>
                     </constraints>
@@ -109,25 +90,23 @@
                     </connections>
                 </button>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="0kh-Ym-EbC">
-                    <rect key="frame" x="0.0" y="710" width="414" height="2"/>
+                    <rect key="frame" x="0.0" y="750" width="414" height="2"/>
                     <color key="progressTintColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </progressView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lTS-oq-R7L" secondAttribute="bottom" constant="20" id="20X-3e-2Yd"/>
                 <constraint firstItem="kkb-4d-wf3" firstAttribute="top" secondItem="bLi-Ru-Gha" secondAttribute="bottom" constant="15" id="2hY-zj-DzZ"/>
                 <constraint firstItem="lTS-oq-R7L" firstAttribute="top" secondItem="0kh-Ym-EbC" secondAttribute="bottom" constant="30" id="445-4G-HdE"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kkb-4d-wf3" secondAttribute="trailing" constant="20" id="4QC-dv-QvF"/>
-                <constraint firstItem="qIP-Cc-SB0" firstAttribute="top" secondItem="lTS-oq-R7L" secondAttribute="bottom" constant="1" id="4mV-Bf-M7B"/>
                 <constraint firstItem="kkb-4d-wf3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="6te-ms-vig"/>
                 <constraint firstAttribute="trailing" secondItem="0kh-Ym-EbC" secondAttribute="trailing" id="CdD-M7-5S0"/>
                 <constraint firstItem="8Ve-lf-hZU" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Cjp-Kg-Nbk"/>
-                <constraint firstItem="qIP-Cc-SB0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="E1c-iQ-wcr"/>
                 <constraint firstItem="0kh-Ym-EbC" firstAttribute="top" secondItem="dJ3-xI-jIk" secondAttribute="bottom" constant="21" id="NQG-F0-V6K"/>
                 <constraint firstItem="bLi-Ru-Gha" firstAttribute="top" secondItem="roX-Zz-rQP" secondAttribute="bottom" constant="15" id="Tuz-BJ-Ovl"/>
                 <constraint firstItem="dJ3-xI-jIk" firstAttribute="top" secondItem="kkb-4d-wf3" secondAttribute="bottom" constant="5" id="U0A-mx-6kO"/>
                 <constraint firstItem="bLi-Ru-Gha" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="XOo-LA-Pow"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qIP-Cc-SB0" secondAttribute="bottom" constant="5" id="aKN-QF-POs"/>
                 <constraint firstItem="roX-Zz-rQP" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="cO8-nt-jdn"/>
                 <constraint firstItem="0kh-Ym-EbC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cbY-2o-pA1"/>
                 <constraint firstItem="lTS-oq-R7L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="gdH-O9-QxA"/>
@@ -142,8 +121,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Montazhnaya_oblast_98_4x" width="801" height="801"/>
         <image name="account" width="512" height="512"/>
-        <image name="webium экран 12" width="156" height="37"/>
     </resources>
 </document>

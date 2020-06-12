@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Bold.ttf">
+        <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
         <array key="Montserrat-Regular.ttf">
@@ -19,6 +19,7 @@
             <connections>
                 <outlet property="answerButton" destination="Acs-Sz-87R" id="3z1-Qi-okz"/>
                 <outlet property="answerTextField" destination="UAd-j8-xg3" id="lve-P8-VNm"/>
+                <outlet property="closeButton" destination="zOs-at-VZh" id="qiq-Nt-bHU"/>
                 <outlet property="finishButton" destination="QK0-eN-FHw" id="IO0-QE-vS8"/>
                 <outlet property="loaderView" destination="rAo-9w-73U" id="7gx-x3-xRH"/>
                 <outlet property="lookAnswersButton" destination="n4a-bk-ov1" id="MBZ-Cy-dhb"/>
@@ -87,7 +88,7 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n4a-bk-ov1">
                     <rect key="frame" x="25" y="567" width="364" height="60"/>
-                    <color key="backgroundColor" red="0.87375926969999995" green="0.69760471580000005" blue="0.33322376009999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="CoX-NJ-M3i"/>
                     </constraints>
@@ -114,12 +115,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOs-at-VZh">
-                    <rect key="frame" x="324" y="60" width="70" height="70"/>
+                    <rect key="frame" x="324" y="57" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="eVd-V5-UJA"/>
                         <constraint firstAttribute="height" constant="70" id="ycU-rC-u24"/>
                     </constraints>
-                    <state key="normal" title="Button" image="крестик экран 2"/>
+                    <state key="normal" image="крестик экран 2"/>
                     <connections>
                         <action selector="backTapped:" destination="-1" eventType="touchUpInside" id="KyY-Bf-fs4"/>
                     </connections>
@@ -134,7 +135,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="zOs-at-VZh" secondAttribute="trailing" constant="20" id="4ZS-R2-Yvb"/>
-                <constraint firstItem="zOs-at-VZh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="9Fe-e0-PbM"/>
+                <constraint firstItem="zOs-at-VZh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="9Fe-e0-PbM"/>
                 <constraint firstItem="n4a-bk-ov1" firstAttribute="top" secondItem="Acs-Sz-87R" secondAttribute="bottom" constant="10" id="CSK-c2-4fa"/>
                 <constraint firstItem="13T-ML-Og7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="FIq-5C-0ma"/>
                 <constraint firstItem="rAo-9w-73U" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="IGT-vS-DKy"/>

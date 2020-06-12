@@ -57,6 +57,7 @@ protocol TestViewModel {
     func getUsersAnswer(for taskIndex: Int) -> String
     func writeAnswerForTask(_ index: Int, with answer: String)
     func getNextTaskIndex(after index: Int) -> Int
+    func getTimeString(from allSeconds: Int) -> String
     var name: String { set get }
     var testAnswers: [String:String] { set get }
 }

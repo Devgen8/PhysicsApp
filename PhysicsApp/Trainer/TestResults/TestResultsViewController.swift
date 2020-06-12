@@ -11,6 +11,7 @@ import UIKit
 class TestResultsViewController: UIViewController {
     
     @IBOutlet weak var resultsTableView: UITableView!
+    @IBOutlet weak var closeButton: UIButton!
     
     var viewModel: GeneralTestResultsViewModel!
 
@@ -29,6 +30,7 @@ class TestResultsViewController: UIViewController {
     
     func designScreenElements() {
         DesignService.setWhiteBackground(for: view)
+        DesignService.designCloseButton(closeButton)
     }
     
     func prepareData() {
@@ -57,9 +59,9 @@ extension TestResultsViewController: UITableViewDelegate {
         headerLabel.textColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
         switch section {
         case 0:
-            headerLabel.text = "СТАТИСТИКА"
+            headerLabel.text = "     СТАТИСТИКА"
         case 1:
-            headerLabel.text = "ЗАДАЧИ"
+            headerLabel.text = "     ЗАДАЧИ"
         default:
             headerLabel.text = ""
         }
@@ -149,14 +151,22 @@ extension TestResultsViewController: UITableViewDataSource {
         }
         cell.wrightAnswerLabel.text = viewModel.getWrightAnswer(for: index + 1)
         let isWright = viewModel.getTaskCorrection(for: index)
-        var cellBarColor = UIColor()
+        var cellCorrectionColor = UIColor()
+        var cellCorrectionText = ""
         switch isWright {
-        case 0: cellBarColor = #colorLiteral(red: 0.7611784935, green: 0, blue: 0.06764990836, alpha: 1)
-        case 1: cellBarColor = .systemYellow
-        case 2: cellBarColor = .systemGreen
+        case 0:
+            cellCorrectionColor = #colorLiteral(red: 0.7611784935, green: 0, blue: 0.06764990836, alpha: 1)
+            cellCorrectionText = "НЕПРАВИЛЬНО"
+        case 1:
+            cellCorrectionColor = .systemYellow
+            cellCorrectionText = "ЧАСТИЧНО"
+        case 2:
+            cellCorrectionColor = .systemGreen
+            cellCorrectionText = "ПРАВИЛЬНО"
         default: print("Unexpeted case in cell creation")
         }
-        cell.setupCorrectionBar(with: cellBarColor)
+        cell.correctionLabel.text = cellCorrectionText
+        cell.correctionLabel.textColor = cellCorrectionColor
         return cell
     }
 }

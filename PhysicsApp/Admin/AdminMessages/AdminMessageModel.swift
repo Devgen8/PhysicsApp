@@ -12,6 +12,12 @@ class AdminMessageModel {
     var name: String?
     var theme: String?
     var text: String?
-    var email: String?
+    var vkId: String?
     var date: Date?
+}
+
+enum MessageSortTypes {
+    case profile
+    case tasks
+    case all
 }

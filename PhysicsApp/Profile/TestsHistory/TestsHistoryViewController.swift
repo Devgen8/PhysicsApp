@@ -13,6 +13,7 @@ class TestsHistoryViewController: UIViewController {
 
     @IBOutlet weak var testsTableView: UITableView!
     @IBOutlet weak var loaderView: AnimationView!
+    @IBOutlet weak var closeButton: UIButton!
     
     var viewModel = TestsHistoryViewModel()
     
@@ -36,6 +37,7 @@ class TestsHistoryViewController: UIViewController {
     
     func designScreenElements() {
         DesignService.setWhiteBackground(for: view)
+        DesignService.designCloseButton(closeButton)
     }
     
     func createBlurEffect() {

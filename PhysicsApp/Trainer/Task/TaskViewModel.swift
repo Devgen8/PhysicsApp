@@ -63,6 +63,7 @@ class TaskViewModel {
         if let wrightAnswer = task?.stringAnswer, let userAnswer = defaultStringAnswer {
             isWright = wrightAnswer == userAnswer
         }
+        updateKeyInfo()
         if isWright {
             isTaskUnsolved = false
             updateStatistics()
@@ -71,6 +72,12 @@ class TaskViewModel {
             isTaskUnsolved = true
             updateStatistics()
             return (false, "НЕПРАВИЛЬНО")
+        }
+    }
+    
+    func updateKeyInfo() {
+        if UserDefaults.standard.value(forKey: "isUserInformedAboutAuth") as? Bool == nil {
+            UserDefaults.standard.set(true, forKey: "isUserInformedAboutAuth")
         }
     }
     
@@ -99,7 +106,7 @@ class TaskViewModel {
     
     func updateTaskStatus() {
         let (theme, _) = getTaskLocation(taskName: task?.name ?? "")
-        guard let unsolvedTask = self.task?.name else {
+        guard Auth.auth().currentUser?.uid != nil, let unsolvedTask = self.task?.name else {
             print("Couldn't write unsolved tasks")
             return
         }
@@ -198,22 +205,23 @@ class TaskViewModel {
     }
     
     func saveFirstTryTaskInCoreData() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fechRequest)
-                let user = result.first
-                var newFirstTryTasks = (user?.solvedTasks as! StatusTasks).firstTryTasks
-                let coreDataUnsolved = (user?.solvedTasks as! StatusTasks).unsolvedTasks
-                let coreDataSolved = (user?.solvedTasks as! StatusTasks).solvedTasks
-                if let taskName = task?.name {
-                    let (taskNumber, _) = getTaskLocation(taskName: taskName)
-                    if !(coreDataUnsolved[taskNumber]?.contains(taskName) ?? false) && !(coreDataSolved[taskNumber]?.contains(taskName) ?? false) {
-                        newFirstTryTasks.append(taskName)
-                        saveFirstTryTaskInFirestore(tasks: newFirstTryTasks)
+                if let user = result.first {
+                    var newFirstTryTasks = (user.solvedTasks as! StatusTasks).firstTryTasks
+                    let coreDataUnsolved = (user.solvedTasks as! StatusTasks).unsolvedTasks
+                    let coreDataSolved = (user.solvedTasks as! StatusTasks).solvedTasks
+                    if let taskName = task?.name {
+                        let (taskNumber, _) = getTaskLocation(taskName: taskName)
+                        if !(coreDataUnsolved[taskNumber]?.contains(taskName) ?? false) && !(coreDataSolved[taskNumber]?.contains(taskName) ?? false) {
+                            newFirstTryTasks.append(taskName)
+                            saveFirstTryTaskInFirestore(tasks: newFirstTryTasks)
+                        }
                     }
+                    user.solvedTasks = StatusTasks(solvedTasks: coreDataSolved, unsolvedTasks: coreDataUnsolved, firstTryTasks: newFirstTryTasks)
                 }
-                user?.solvedTasks = StatusTasks(solvedTasks: coreDataSolved, unsolvedTasks: coreDataUnsolved, firstTryTasks: newFirstTryTasks)
                 try context.save()
             } catch {
                 print(error.localizedDescription)
@@ -248,7 +256,12 @@ class TaskViewModel {
     }
     
     func putTaskUnsolved() {
-        saveUnsolvedTasksToCoreData()
+        if (Auth.auth().currentUser?.uid) != nil {
+            saveUnsolvedTasksToCoreData()
+        }
+    }
+    
+    func saveUnsolvedTasksToFirestore() {
         if let userId = Auth.auth().currentUser?.uid {
             usersReference.document(userId).updateData(["unsolvedTasks" : unsolvedTasks,
                                                      "solvedTasks" : solvedTasks])
@@ -256,14 +269,15 @@ class TaskViewModel {
     }
     
     func saveUnsolvedTasksToCoreData() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fechRequest)
-                let user = result.first
-                let firstTryTasksFromUser = (user?.solvedTasks as! StatusTasks).firstTryTasks
-                user?.solvedTasks = StatusTasks(solvedTasks: solvedTasks, unsolvedTasks: unsolvedTasks, firstTryTasks: firstTryTasksFromUser)
-                
+                if let user = result.first {
+                    let firstTryTasksFromUser = (user.solvedTasks as! StatusTasks).firstTryTasks
+                    user.solvedTasks = StatusTasks(solvedTasks: solvedTasks, unsolvedTasks: unsolvedTasks, firstTryTasks: firstTryTasksFromUser)
+                    saveUnsolvedTasksToFirestore()
+                }
                 try context.save()
             } catch {
                 print(error.localizedDescription)
@@ -289,6 +303,10 @@ class TaskViewModel {
         if change != 0 {
             updateUsersRating(with: change)
         }
+    }
+    
+    func getTaskName() -> String? {
+        return task?.name
     }
     
     func updateUsersRating(with change: Int) {

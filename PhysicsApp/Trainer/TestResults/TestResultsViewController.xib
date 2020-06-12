@@ -14,6 +14,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestResultsViewController" customModule="PhysicsApp" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="Tlp-5D-prx" id="qvm-8s-Jgb"/>
                 <outlet property="resultsTableView" destination="AWO-JL-I21" id="sX2-93-ice"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,19 +24,19 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результаты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iv6-KC-2uY">
-                    <rect key="frame" x="50" y="74" width="187.5" height="37"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результаты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iv6-KC-2uY">
+                    <rect key="frame" x="50" y="74" width="259" height="37"/>
                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlp-5D-prx">
-                    <rect key="frame" x="314" y="60" width="70" height="70"/>
+                    <rect key="frame" x="314" y="57" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="mz4-oP-Gy8"/>
                         <constraint firstAttribute="height" constant="70" id="qAQ-JC-7MX"/>
                     </constraints>
-                    <state key="normal" title="Button" image="крестик экран 2"/>
+                    <state key="normal" image="крестик экран 2"/>
                     <connections>
                         <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="usL-DT-Cb5"/>
                     </connections>
@@ -51,7 +52,8 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Tlp-5D-prx" secondAttribute="trailing" constant="30" id="7go-s3-Ip3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="AWO-JL-I21" secondAttribute="bottom" id="KC7-WP-gRF"/>
                 <constraint firstItem="AWO-JL-I21" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NEd-0I-g4N"/>
-                <constraint firstItem="Tlp-5D-prx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="fdh-cH-A6M"/>
+                <constraint firstItem="Tlp-5D-prx" firstAttribute="leading" secondItem="iv6-KC-2uY" secondAttribute="trailing" constant="5" id="UQF-xA-l8m"/>
+                <constraint firstItem="Tlp-5D-prx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="fdh-cH-A6M"/>
                 <constraint firstItem="iv6-KC-2uY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="ugN-sZ-foS"/>
                 <constraint firstItem="iv6-KC-2uY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="wOe-jj-Xbr"/>
                 <constraint firstItem="AWO-JL-I21" firstAttribute="top" secondItem="iv6-KC-2uY" secondAttribute="bottom" constant="40" id="zKd-TV-h1m"/>

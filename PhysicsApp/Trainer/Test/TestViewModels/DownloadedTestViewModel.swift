@@ -49,14 +49,15 @@ class DownloadedTestViewModel: TestViewModel {
                 let result = try context.fetch(fechRequest)
                 let trainer = result.first
                 if let currentTest = trainer?.tests?.first(where: { ($0 as! Test).name == name }) as? Test {
-                    let testObject = currentTest.testObject as! TestObject
-                    tasks = testObject.testTasks
-                    testAnswers = testObject.usersAnswers
-                    timeTillEnd = Int(currentTest.time)
-                    for task in tasks {
-                        wrightAnswers[task.name ?? ""] = (task.wrightAnswer, task.alternativeAnswer, task.stringAnswer)
-                        tasksImages[task.name ?? ""] = task.image
-                        tasksDescriptions[task.name ?? ""] = task.taskDescription
+                    if let testObject = currentTest.testObject as? TestObject {
+                        tasks = testObject.testTasks
+                        testAnswers = testObject.usersAnswers
+                        timeTillEnd = Int(currentTest.time)
+                        for task in tasks {
+                            wrightAnswers[task.name ?? ""] = (task.wrightAnswer, task.alternativeAnswer, task.stringAnswer)
+                            tasksImages[task.name ?? ""] = task.image
+                            tasksDescriptions[task.name ?? ""] = task.taskDescription
+                        }
                     }
                 }
                 
@@ -95,7 +96,13 @@ class DownloadedTestViewModel: TestViewModel {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
                 let trainer = result.first
-                (trainer?.tests?.first(where: { ($0 as! Test).name == name }) as! Test).time = Int64(timeTillEnd)
+                let isAnon = Auth.auth().currentUser == nil ? true : false
+                (trainer?.tests?.first(where: { ($0 as! Test).name == name }) as! Test).time = isAnon ? 14100 : Int64(timeTillEnd)
+                if isAnon {
+                    for task in tasks {
+                        testAnswers[task.name ?? ""] = ""
+                    }
+                }
                 (trainer?.tests?.first(where: { ($0 as! Test).name == name }) as! Test).testObject = TestObject(testTasks: tasks, usersAnswers: testAnswers)
                 
                 try context.save()
@@ -187,8 +194,8 @@ class DownloadedTestViewModel: TestViewModel {
     }
     
     func saveUsersProgress(with time: Int) {
-        saveProgressToCoreData(with: time)
         if let userId = Auth.auth().currentUser?.uid, !isTestCustom() {
+            saveProgressToCoreData(with: time)
             userReference.document(userId).collection("tests").document(name).setData(["answers":testAnswers,
                                                                                        "time":time])
         }
@@ -216,7 +223,7 @@ class DownloadedTestViewModel: TestViewModel {
     }
     
     func saveProgressToCoreData(with time: Int) {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -249,6 +256,10 @@ class DownloadedTestViewModel: TestViewModel {
                     completion(isReady)
                 }
             }
+        } else {
+            self.downloadPhotos { (isReady) in
+                completion(isReady)
+            }
         }
     }
     
@@ -278,6 +289,22 @@ class DownloadedTestViewModel: TestViewModel {
     
     func getFirstQuestionAnswer() -> String? {
         return testAnswers[tasks[0].name ?? ""]
+    }
+    
+    func getTimeString(from allSeconds: Int) -> String {
+        var hours = "\(allSeconds / 3600)"
+        if hours.count == 1 {
+            hours = "0" + hours
+        }
+        var minutes = "\((allSeconds % 3600) / 60)"
+        if minutes.count == 1 {
+            minutes = "0" + minutes
+        }
+        var seconds = "\((allSeconds % 3600) % 60)"
+        if seconds.count == 1 {
+            seconds = "0" + seconds
+        }
+        return "\(hours) : \(minutes) : \(seconds)"
     }
     
     func transportData(to viewModel: CPartTestViewModel, with time: Int) {

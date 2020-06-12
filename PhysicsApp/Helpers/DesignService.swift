@@ -43,6 +43,10 @@ class DesignService {
         button.layer.cornerRadius = 30
     }
     
+    static func designCloseButton(_ button: UIButton) {
+        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
+    
 //    static func getCellsLayout() -> UICollectionViewFlowLayout {
 //        let itemSize = UIScreen.main.bounds.width/2 - 2
 //        let layout = UICollectionViewFlowLayout()

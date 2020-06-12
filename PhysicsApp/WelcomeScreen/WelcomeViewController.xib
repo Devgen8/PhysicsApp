@@ -10,16 +10,21 @@
         <array key="BlackDiamond.ttf">
             <string>BlackDiamond</string>
         </array>
-        <array key="Montserrat-Bold.ttf">
+        <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
         <array key="Montserrat-ExtraBold.otf">
             <string>Montserrat-ExtraBold</string>
         </array>
+        <array key="Montserrat-Medium.ttf">
+            <string>Montserrat-Medium</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WelcomeViewController" customModule="PhysicsApp" customModuleProvider="target">
             <connections>
+                <outlet property="errorLabel" destination="Brg-Yb-abs" id="Esm-l8-G4X"/>
+                <outlet property="loaderView" destination="N2U-Vl-Q4L" id="Fe4-eS-GNq"/>
                 <outlet property="signInButton" destination="Pkp-kc-SLp" id="TAJ-U4-qHZ"/>
                 <outlet property="signUpButton" destination="1uW-nS-QtO" id="UGS-9z-TVp"/>
                 <outlet property="view" destination="iN0-l3-epB" id="P1C-br-XBy"/>
@@ -37,7 +42,7 @@
                         <constraint firstAttribute="height" constant="70" id="7RN-0N-0vH"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                    <state key="normal" title="ВОЙТИ">
+                    <state key="normal" title="РЕГИСТРАЦИЯ VK">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
@@ -51,7 +56,7 @@
                         <constraint firstAttribute="height" constant="70" id="Vik-ak-kxB"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                    <state key="normal" title="РЕГИСТРАЦИЯ">
+                    <state key="normal" title="АНОНИМНЫЙ ВХОД">
                         <color key="titleColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </state>
                     <connections>
@@ -106,23 +111,46 @@
                             </constraints>
                         </imageView>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="9vc-Kx-NdU"/>
+                    </constraints>
                 </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Brg-Yb-abs">
+                    <rect key="frame" x="30" y="526.5" width="354" height="135.5"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="17"/>
+                    <color key="textColor" red="0.69736534360000002" green="0.14242923260000001" blue="0.1254176199" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2U-Vl-Q4L" customClass="AnimationView" customModule="Lottie">
+                    <rect key="frame" x="147" y="388" width="120" height="120"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="Opl-Hf-6Al"/>
+                        <constraint firstAttribute="height" constant="120" id="PJz-zu-h05"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="EW0-79-GBc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="2hs-5F-bOH"/>
+                <constraint firstItem="N2U-Vl-Q4L" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6W4-F1-Gn6"/>
+                <constraint firstItem="Pkp-kc-SLp" firstAttribute="top" secondItem="Brg-Yb-abs" secondAttribute="bottom" id="DLp-at-QZA"/>
                 <constraint firstItem="1uW-nS-QtO" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="J8e-FN-cI1"/>
                 <constraint firstItem="G1Q-al-lad" firstAttribute="top" secondItem="EW0-79-GBc" secondAttribute="bottom" constant="5" id="Jzv-Pq-fwi"/>
                 <constraint firstItem="9qJ-JU-UiA" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="NU2-Jg-uTn"/>
+                <constraint firstItem="N2U-Vl-Q4L" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="NUv-rW-d9e"/>
                 <constraint firstItem="Pkp-kc-SLp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="PXX-l1-OuV"/>
                 <constraint firstItem="Pkp-kc-SLp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9qJ-JU-UiA" secondAttribute="bottom" constant="10" id="PjC-4h-OZ6"/>
+                <constraint firstItem="Brg-Yb-abs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="Qf0-pa-ONg"/>
                 <constraint firstAttribute="bottom" secondItem="lU6-pc-nSC" secondAttribute="bottom" constant="10" id="RT5-N6-FlY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Brg-Yb-abs" secondAttribute="trailing" constant="30" id="V7i-9e-AIx"/>
                 <constraint firstItem="1uW-nS-QtO" firstAttribute="top" secondItem="Pkp-kc-SLp" secondAttribute="bottom" constant="15" id="WUJ-VD-59i"/>
                 <constraint firstItem="Pkp-kc-SLp" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Yd0-Xl-OGf"/>
                 <constraint firstItem="EW0-79-GBc" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="cwi-Qj-AYS"/>
                 <constraint firstItem="9qJ-JU-UiA" firstAttribute="top" secondItem="G1Q-al-lad" secondAttribute="bottom" constant="5" id="ebD-c1-NYy"/>
                 <constraint firstItem="lU6-pc-nSC" firstAttribute="top" secondItem="1uW-nS-QtO" secondAttribute="bottom" constant="15" id="gCA-JD-QIZ"/>
                 <constraint firstItem="lU6-pc-nSC" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="hz8-WW-ZPL"/>
+                <constraint firstItem="Brg-Yb-abs" firstAttribute="top" secondItem="9qJ-JU-UiA" secondAttribute="bottom" id="isn-97-Fhu"/>
                 <constraint firstItem="G1Q-al-lad" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="jKE-sG-NMT"/>
                 <constraint firstItem="1uW-nS-QtO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="tW6-fd-67i"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Pkp-kc-SLp" secondAttribute="trailing" constant="30" id="vl7-nk-mcM"/>

@@ -21,6 +21,7 @@ class TestViewController: UIViewController {
     @IBOutlet weak var loaderView: AnimationView!
     @IBOutlet weak var lookAnswersButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     
     var viewModel: TestViewModel!
     var taskNumber = 0
@@ -28,6 +29,7 @@ class TestViewController: UIViewController {
     let timeDifference = 1.0
     var timer = Timer()
     var isClosing = false
+    var activeTextField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,7 @@ class TestViewController: UIViewController {
         createBlurEffect()
         prepareData()
         setAnimation()
+        addTextFieldsObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,14 +57,42 @@ class TestViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         viewModel.saveUsersProgress(with: Int(currentDuration))
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func addTextFieldsObservers() {
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardDidShow(notification: Notification) {
+        let info = notification.userInfo! as NSDictionary
+        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let keyboardY = view.frame.size.height - keyboardSize.height
+        let editingTextFieldY = activeTextField.frame.origin.y
+        if view.frame.origin.y >= 0 {
+            if editingTextFieldY > keyboardY - 60 {
+                UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+                    self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editingTextFieldY - (keyboardY - 80)), width: self.view.bounds.width, height: self.view.bounds.height)
+                }, completion: nil)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
     }
     
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: timeDifference, repeats: true) { [weak self] (_) in
             guard let `self` = self else { return }
             self.currentDuration -= self.timeDifference
-            let seconds = Int(self.currentDuration)
-            self.timeLabel.text = "\(seconds / 3600) : \((seconds % 3600) / 60) : \((seconds % 3600) % 60)"
+            let allSeconds = Int(self.currentDuration)
+            self.timeLabel.text = self.viewModel.getTimeString(from: allSeconds)
             if self.currentDuration <= 0 {
                 self.timer.invalidate()
                 self.presentCPartViewController()
@@ -95,6 +126,9 @@ class TestViewController: UIViewController {
     
     func designScreenElements() {
         DesignService.setWhiteBackground(for: view)
+        DesignService.designCloseButton(closeButton)
+        answerTextField.delegate = self
+        
         taskImageView.layer.cornerRadius = 20
         taskImageView.layer.borderWidth = 1
         taskImageView.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
@@ -195,5 +229,16 @@ extension TestViewController: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return viewModel.getTasksNumber()
+    }
+}
+
+extension TestViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
     }
 }

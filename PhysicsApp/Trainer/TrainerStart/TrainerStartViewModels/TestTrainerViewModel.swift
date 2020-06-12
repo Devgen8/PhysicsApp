@@ -218,6 +218,10 @@ class TestTrainerViewModel: TrainerViewModelProvider {
                 self.updateKeysInfo()
                 completion(true)
             }
+        } else {
+            self.saveTestsInCoreData()
+            self.updateKeysInfo()
+            completion(true)
         }
     }
     
