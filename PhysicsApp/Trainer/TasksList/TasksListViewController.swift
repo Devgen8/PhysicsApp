@@ -166,7 +166,7 @@ class TasksListViewController: UIViewController {
         viewModel.getTasks { [weak self] (dataIsReady) in
             guard let `self` = self else { return }
             if dataIsReady {
-                self.themeLabel.text = self.viewModel.theme
+                self.themeLabel.text = self.viewModel.theme?.uppercased()
                 DispatchQueue.main.async {
                     self.hideLodingScreen()
                     if self.viewModel.lookingForUnsolvedTasks != true {

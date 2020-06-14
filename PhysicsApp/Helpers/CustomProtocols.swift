@@ -94,3 +94,21 @@ protocol ProfileInfoUpdater {
 protocol SelectedThemesUpdater {
     func updateTheme(with theme: String)
 }
+
+protocol TrainerAdminViewModel {
+    func getTrainerData(completion: @escaping (Bool) -> ())
+    func updateWrightAnswer(with text: String)
+    func getTasksNumber() -> Int
+    func getTask(for index: Int) -> String
+    func updatePhotoData(with data: Data)
+    func updateTaskDescription(with data: Data)
+    func updateInverseState(to bool: Bool)
+    func updateStringState(to bool: Bool)
+    func uploadNewTaskToTrainer(completion: @escaping (Bool) -> ())
+    func uploadNewTaskToTest(_ testName: String, completion: @escaping (Bool) -> ())
+    func updateSelectedTask(with index: Int)
+    func updateSelectedTheme(with index: Int)
+    func getSelectedTheme() -> String
+    func updateTaskNumber(with number: String)
+    func searchTask(completion: @escaping (TaskModel?) -> ())
+}

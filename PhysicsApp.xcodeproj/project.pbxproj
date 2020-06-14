@@ -108,7 +108,7 @@
 		244ABB20242A9B1700066CB3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF9242A9B1600066CB3 /* SignUpViewController.swift */; };
 		244ABB21242A9B1700066CB3 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAFA242A9B1600066CB3 /* SignUpViewModel.swift */; };
 		244ABB22242A9B1700066CB3 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAFB242A9B1600066CB3 /* SignUpViewController.xib */; };
-		244ABB23242A9B1700066CB3 /* TrainerAdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAFC242A9B1700066CB3 /* TrainerAdminViewModel.swift */; };
+		244ABB23242A9B1700066CB3 /* TrainerAdminAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAFC242A9B1700066CB3 /* TrainerAdminAddViewModel.swift */; };
 		244ABB4D242C96E800066CB3 /* AwardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB4B242C96E800066CB3 /* AwardsViewController.swift */; };
 		244ABB4E242C96E800066CB3 /* AwardsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB4C242C96E800066CB3 /* AwardsViewController.xib */; };
 		244ABB50242C970600066CB3 /* AwardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB4F242C970500066CB3 /* AwardsViewModel.swift */; };
@@ -147,6 +147,11 @@
 		4825D07A24779B2300E938FF /* ChooseThemeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4825D07824779B2300E938FF /* ChooseThemeViewController.xib */; };
 		4825D07C247B924E00E938FF /* ThemeTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825D07B247B924E00E938FF /* ThemeTableViewCellModel.swift */; };
 		48271785243E0B2A003C6CF1 /* UserStatsCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */; };
+		483B8D532494A4170014093A /* AdminSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483B8D522494A4170014093A /* AdminSettingViewController.swift */; };
+		483B8D552494A4750014093A /* AdminSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483B8D542494A4750014093A /* AdminSettingViewModel.swift */; };
+		483B8D592494C7A60014093A /* TrainerAdminModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483B8D582494C7A60014093A /* TrainerAdminModel.swift */; };
+		483B8D5B2494D0E50014093A /* TrainerAdminEditTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483B8D5A2494D0E50014093A /* TrainerAdminEditTaskViewModel.swift */; };
+		483B8D5E2494D1A00014093A /* TrainerAdminEditTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483B8D5D2494D1A00014093A /* TrainerAdminEditTestViewModel.swift */; };
 		4842930E24470B5400BE8CB6 /* ThemesTrainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842930D24470B5400BE8CB6 /* ThemesTrainerViewModel.swift */; };
 		484293122447647500BE8CB6 /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293112447647500BE8CB6 /* TaskListModel.swift */; };
 		484293142448461100BE8CB6 /* TestTrainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484293132448461100BE8CB6 /* TestTrainerViewModel.swift */; };
@@ -323,7 +328,7 @@
 		244ABAF9242A9B1600066CB3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		244ABAFA242A9B1600066CB3 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		244ABAFB242A9B1600066CB3 /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
-		244ABAFC242A9B1700066CB3 /* TrainerAdminViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerAdminViewModel.swift; sourceTree = "<group>"; };
+		244ABAFC242A9B1700066CB3 /* TrainerAdminAddViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerAdminAddViewModel.swift; sourceTree = "<group>"; };
 		244ABB4B242C96E800066CB3 /* AwardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsViewController.swift; sourceTree = "<group>"; };
 		244ABB4C242C96E800066CB3 /* AwardsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AwardsViewController.xib; sourceTree = "<group>"; };
 		244ABB4F242C970500066CB3 /* AwardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsViewModel.swift; sourceTree = "<group>"; };
@@ -363,6 +368,11 @@
 		4825D07824779B2300E938FF /* ChooseThemeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseThemeViewController.xib; sourceTree = "<group>"; };
 		4825D07B247B924E00E938FF /* ThemeTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTableViewCellModel.swift; sourceTree = "<group>"; };
 		48271784243E0B2A003C6CF1 /* UserStatsCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsCounter.swift; sourceTree = "<group>"; };
+		483B8D522494A4170014093A /* AdminSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSettingViewController.swift; sourceTree = "<group>"; };
+		483B8D542494A4750014093A /* AdminSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSettingViewModel.swift; sourceTree = "<group>"; };
+		483B8D582494C7A60014093A /* TrainerAdminModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainerAdminModel.swift; sourceTree = "<group>"; };
+		483B8D5A2494D0E50014093A /* TrainerAdminEditTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainerAdminEditTaskViewModel.swift; sourceTree = "<group>"; };
+		483B8D5D2494D1A00014093A /* TrainerAdminEditTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainerAdminEditTestViewModel.swift; sourceTree = "<group>"; };
 		4842930D24470B5400BE8CB6 /* ThemesTrainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesTrainerViewModel.swift; sourceTree = "<group>"; };
 		484293112447647500BE8CB6 /* TaskListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModel.swift; sourceTree = "<group>"; };
 		484293132448461100BE8CB6 /* TestTrainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTrainerViewModel.swift; sourceTree = "<group>"; };
@@ -508,7 +518,9 @@
 				484293AC245AB89400BE8CB6 /* AdminStats */,
 				484293BF245B023800BE8CB6 /* TasksDetail */,
 				4842935424519F5A00BE8CB6 /* TrainerAdmin */,
+				483B8D572494BE910014093A /* ChooseThemes */,
 				484293D0245BF20E00BE8CB6 /* AdminMessages */,
+				483B8D562494AC880014093A /* AdminSetting */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -516,8 +528,8 @@
 		244ABA49242A9A6E00066CB3 /* MainAdmin */ = {
 			isa = PBXGroup;
 			children = (
-				244ABA4A242A9A6E00066CB3 /* MainAdminViewModel.swift */,
 				244ABA4C242A9A6E00066CB3 /* MainAdminViewController.swift */,
+				244ABA4A242A9A6E00066CB3 /* MainAdminViewModel.swift */,
 				244ABA4B242A9A6E00066CB3 /* MainAdminViewController.xib */,
 			);
 			path = MainAdmin;
@@ -778,6 +790,34 @@
 			path = Mixes;
 			sourceTree = "<group>";
 		};
+		483B8D562494AC880014093A /* AdminSetting */ = {
+			isa = PBXGroup;
+			children = (
+				483B8D522494A4170014093A /* AdminSettingViewController.swift */,
+				483B8D542494A4750014093A /* AdminSettingViewModel.swift */,
+			);
+			path = AdminSetting;
+			sourceTree = "<group>";
+		};
+		483B8D572494BE910014093A /* ChooseThemes */ = {
+			isa = PBXGroup;
+			children = (
+				4825D07724779B2300E938FF /* ChooseThemeViewController.swift */,
+				4825D07824779B2300E938FF /* ChooseThemeViewController.xib */,
+			);
+			path = ChooseThemes;
+			sourceTree = "<group>";
+		};
+		483B8D5C2494D1510014093A /* TrainerAdminViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				244ABAFC242A9B1700066CB3 /* TrainerAdminAddViewModel.swift */,
+				483B8D5A2494D0E50014093A /* TrainerAdminEditTaskViewModel.swift */,
+				483B8D5D2494D1A00014093A /* TrainerAdminEditTestViewModel.swift */,
+			);
+			path = TrainerAdminViewModels;
+			sourceTree = "<group>";
+		};
 		4842930F2447621200BE8CB6 /* FormSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -841,10 +881,9 @@
 			isa = PBXGroup;
 			children = (
 				244ABACE242A9B1500066CB3 /* TrainerAdminViewController.swift */,
-				244ABAFC242A9B1700066CB3 /* TrainerAdminViewModel.swift */,
+				483B8D5C2494D1510014093A /* TrainerAdminViewModels */,
+				483B8D582494C7A60014093A /* TrainerAdminModel.swift */,
 				244ABACD242A9B1400066CB3 /* TrainerAdminViewController.xib */,
-				4825D07724779B2300E938FF /* ChooseThemeViewController.swift */,
-				4825D07824779B2300E938FF /* ChooseThemeViewController.xib */,
 			);
 			path = TrainerAdmin;
 			sourceTree = "<group>";
@@ -1285,6 +1324,7 @@
 				48429318244855DD00BE8CB6 /* TestViewController.swift in Sources */,
 				4802C2E9243EF1330017B75B /* DayMixViewModel.swift in Sources */,
 				244ABB0C242A9B1700066CB3 /* TrainerViewController.swift in Sources */,
+				483B8D532494A4170014093A /* AdminSettingViewController.swift in Sources */,
 				244ABB64242E436500066CB3 /* AwardCompletedViewModel.swift in Sources */,
 				244ABB7D2438D61D00066CB3 /* AdminStatsTableViewCell.swift in Sources */,
 				484293BA245AC7F500BE8CB6 /* Admin+CoreDataProperties.swift in Sources */,
@@ -1297,6 +1337,7 @@
 				48BB6AAE246D708C0010F27D /* TestsHistoryViewController.swift in Sources */,
 				244ABAFD242A9B1700066CB3 /* ProfileViewController.swift in Sources */,
 				4842939A2458363B00BE8CB6 /* EgeTheme+CoreDataProperties.swift in Sources */,
+				483B8D592494C7A60014093A /* TrainerAdminModel.swift in Sources */,
 				48BB6AA8246D282F0010F27D /* TestsResults+CoreDataClass.swift in Sources */,
 				244ABB1E242A9B1700066CB3 /* SignInViewModel.swift in Sources */,
 				48BB6AC5247576870010F27D /* ThemeParser.swift in Sources */,
@@ -1343,7 +1384,7 @@
 				244ABB802438E29000066CB3 /* AdminStatsViewModel.swift in Sources */,
 				48271785243E0B2A003C6CF1 /* UserStatsCounter.swift in Sources */,
 				244ABB20242A9B1700066CB3 /* SignUpViewController.swift in Sources */,
-				244ABB23242A9B1700066CB3 /* TrainerAdminViewModel.swift in Sources */,
+				244ABB23242A9B1700066CB3 /* TrainerAdminAddViewModel.swift in Sources */,
 				244ABA51242A9ABB00066CB3 /* Animations.swift in Sources */,
 				244ABB1F242A9B1700066CB3 /* SignInViewController.swift in Sources */,
 				244ABB10242A9B1700066CB3 /* FormSheetViewController.swift in Sources */,
@@ -1367,6 +1408,7 @@
 				484E7FE924605E33002C5A76 /* TaskData+CoreDataClass.swift in Sources */,
 				48BB6AA3246C4D8A0010F27D /* CustomTestResultViewModel.swift in Sources */,
 				244ABB05242A9B1700066CB3 /* WelcomeViewController.swift in Sources */,
+				483B8D5E2494D1A00014093A /* TrainerAdminEditTestViewModel.swift in Sources */,
 				244ABB0A242A9B1700066CB3 /* TrainerViewModel.swift in Sources */,
 				48BB6AC3246DF0DD0010F27D /* User+CoreDataProperties.swift in Sources */,
 				244ABB56242CF2A500066CB3 /* AwardDetailViewModel.swift in Sources */,
@@ -1383,8 +1425,10 @@
 				48BB6AC2246DF0DD0010F27D /* User+CoreDataClass.swift in Sources */,
 				244ABB6D24325FCB00066CB3 /* UserStatsTableViewCell.swift in Sources */,
 				4812599924939FE900BB2A11 /* WelcomeModel.swift in Sources */,
+				483B8D552494A4750014093A /* AdminSettingViewModel.swift in Sources */,
 				48FAE9EB24877E0000044859 /* ShowAnswerTableViewCell.swift in Sources */,
 				48BB6AA02469458E0010F27D /* CustomTestViewModel.swift in Sources */,
+				483B8D5B2494D0E50014093A /* TrainerAdminEditTaskViewModel.swift in Sources */,
 				244ABB7424377D6F00066CB3 /* UserStatsViewModel.swift in Sources */,
 				48429395245835B300BE8CB6 /* EgeTask+CoreDataClass.swift in Sources */,
 				48BB6AB7246DD0460010F27D /* ProfileDataChangeViewController.swift in Sources */,

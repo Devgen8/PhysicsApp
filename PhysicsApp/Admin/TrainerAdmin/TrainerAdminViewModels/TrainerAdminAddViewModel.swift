@@ -11,7 +11,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
 
-class TrainerAdminViewModel {
+class TrainerAdminAddViewModel: TrainerAdminViewModel {
     
     let trainerReference = Firestore.firestore().collection("trainer")
     let testReference = Firestore.firestore().collection("tests")
@@ -146,6 +146,10 @@ class TrainerAdminViewModel {
         selectedTheme = themes[index]
     }
     
+    func getSelectedTheme() -> String {
+        return selectedTheme
+    }
+    
     func uploadTaskImage(path: String) {
         if let data = imageData {
             Storage.storage().reference().child(path).putData(data)
@@ -157,9 +161,18 @@ class TrainerAdminViewModel {
             Storage.storage().reference().child(path).putData(data)
         }
     }
+    
+    //we don't need this funcs here
+    func updateTaskNumber(with number: String) {
+        
+    }
+    
+    func searchTask(completion: @escaping (TaskModel?) -> ()) {
+        
+    }
 }
 
-extension TrainerAdminViewModel: SelectedThemesUpdater {
+extension TrainerAdminAddViewModel: SelectedThemesUpdater {
     func updateTheme(with theme: String) {
         selectedTheme = theme
     }
