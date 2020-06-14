@@ -47,7 +47,8 @@ class TestResultsViewController: UIViewController {
         if viewModel is TestsHistoryResultsViewModel {
             dismiss(animated: true)
         } else {
-            view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+            //view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+            presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)
         }
     }
 }

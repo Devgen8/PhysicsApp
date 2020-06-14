@@ -90,14 +90,14 @@ class AdminSettingViewController: UIViewController {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addButton)
         addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
-        addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+        addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         addButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         addButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
     @objc func addButtonTapped() {
-        let testAlertController = UIAlertController(title: "Новый админ", message: "Введите id из 8 цифр", preferredStyle: .alert)
+        let testAlertController = UIAlertController(title: "Новый админ", message: "Введите id пользователя", preferredStyle: .alert)
         testAlertController.addTextField { (textField) in
             textField.placeholder = "id админа"
             textField.keyboardType = .numberPad
@@ -133,7 +133,7 @@ class AdminSettingViewController: UIViewController {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
-        backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+        backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         backButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         backButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
@@ -146,7 +146,7 @@ class AdminSettingViewController: UIViewController {
     
     func createAdminLabel() {
         adminLabel = UILabel()
-        adminLabel.font = UIFont(name: "BlackDiamond", size: 45)
+        adminLabel.font = UIFont(name: "BlackDiamond", size: 40)
         adminLabel.text = "Администраторы"
         adminLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(adminLabel)

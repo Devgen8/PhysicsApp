@@ -20,7 +20,7 @@ class ProgressRingView {
     }
     
     func getTraceRing() -> CAShapeLayer {
-        let circularPath = UIBezierPath(arcCenter: CGPoint(x: 55, y: 55), radius: 45, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: 50, y: 50), radius: 40, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
         let trackLayer = CAShapeLayer()
         trackLayer.path = circularPath.cgPath
         
@@ -32,7 +32,7 @@ class ProgressRingView {
     }
     
     func getProgressRing(with progress: Float, color: UIColor, shadowColor: UIColor) -> CAShapeLayer {
-        let circularPath = UIBezierPath(arcCenter: CGPoint(x: 55, y: 55), radius: 45, startAngle: -CGFloat.pi / 2, endAngle: CGFloat(2 * (Float.pi * (progress - 0.25))), clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: 50, y: 50), radius: 40, startAngle: -CGFloat.pi / 2, endAngle: CGFloat(2 * (Float.pi * (progress - 0.25))), clockwise: true)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = circularPath.cgPath
         shapeLayer.strokeColor = color.cgColor

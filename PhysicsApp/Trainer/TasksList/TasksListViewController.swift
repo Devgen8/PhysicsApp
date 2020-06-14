@@ -49,9 +49,10 @@ class TasksListViewController: UIViewController {
     func createBlueBackground() {
         let blueBack = UIView()
         view.addSubview(blueBack)
+        let actualConstant: CGFloat = UIScreen.main.bounds.width >= 380 ? 20 : 10
         blueBack.translatesAutoresizingMaskIntoConstraints = false
-        blueBack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        blueBack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        blueBack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: actualConstant).isActive = true
+        blueBack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -actualConstant).isActive = true
         blueBack.topAnchor.constraint(equalTo: statsLabel.bottomAnchor, constant: 10).isActive = true
         blueBack.heightAnchor.constraint(equalToConstant: 180).isActive = true
         blueBack.backgroundColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
@@ -64,9 +65,10 @@ class TasksListViewController: UIViewController {
         tasksTableView.delegate = self
         tasksTableView.dataSource = self
         view.addSubview(tasksTableView)
+        let actualConstant: CGFloat = UIScreen.main.bounds.width >= 380 ? 20 : 10
         tasksTableView.translatesAutoresizingMaskIntoConstraints = false
-        tasksTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        tasksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        tasksTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: actualConstant).isActive = true
+        tasksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -actualConstant).isActive = true
         tasksTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         if viewModel.lookingForUnsolvedTasks != true {
             tasksTableView.topAnchor.constraint(equalTo: firstTimeRing.bottomAnchor, constant: 80).isActive = true

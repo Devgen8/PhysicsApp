@@ -38,7 +38,7 @@ class TrainerViewController: UIViewController {
             guard let `self` = self, isReady else { return }
             UIView.transition(with: self.notSolvedButton, duration: 0.5, options: .transitionFlipFromBottom, animations: nil, completion: nil)
             if self.viewModel is TestTrainerViewModel {
-                self.notSolvedButton.setTitle("СФОРМИРОВАТЬ ВАРИАНТ", for: .normal)
+                self.notSolvedButton.setTitle("НОВЫЙ ВАРИАНТ", for: .normal)
             } else {
                 self.notSolvedButton.setTitle("ЗАДАЧИ С ОШИБКОЙ (\(self.viewModel.getUnsolvedTasksCount()))", for: .normal)
             }
@@ -69,7 +69,7 @@ class TrainerViewController: UIViewController {
     }
     
     @IBAction func unsolvedTasksTapped(_ sender: UIButton) {
-        if notSolvedButton.title(for: .normal) == "СФОРМИРОВАТЬ ВАРИАНТ" {
+        if notSolvedButton.title(for: .normal) == "НОВЫЙ ВАРИАНТ" {
             routeForTests()
         } else {
             routeForTasks()

@@ -24,7 +24,6 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v4c-Yl-GtL">
                         <rect key="frame" x="29" y="39.5" width="350" height="200"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="200" id="2nJ-g9-h05"/>
                             <constraint firstAttribute="width" secondItem="v4c-Yl-GtL" secondAttribute="height" multiplier="7:4" id="YiX-q7-9Ip"/>
                         </constraints>
                     </imageView>
@@ -34,7 +33,7 @@
                         <color key="textColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество баллов:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hlf-fZ-Lzv">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество баллов:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Hlf-fZ-Lzv">
                         <rect key="frame" x="40" y="269.5" width="210" height="24.5"/>
                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
                         <color key="textColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -70,11 +69,14 @@
                     <constraint firstItem="Hlf-fZ-Lzv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="51e-xw-AeI"/>
                     <constraint firstItem="RX5-Zn-u1d" firstAttribute="top" secondItem="v4c-Yl-GtL" secondAttribute="bottom" constant="17.5" id="5l4-am-H4T"/>
                     <constraint firstItem="Hlf-fZ-Lzv" firstAttribute="top" secondItem="v4c-Yl-GtL" secondAttribute="bottom" constant="30" id="DxY-qr-HAZ"/>
+                    <constraint firstItem="v4c-Yl-GtL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="29" id="GFF-ne-4ds"/>
                     <constraint firstItem="c37-HL-pkI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="GFc-e7-mhT"/>
                     <constraint firstItem="v4c-Yl-GtL" firstAttribute="top" secondItem="c37-HL-pkI" secondAttribute="bottom" constant="5" id="IhV-Ay-Cyd"/>
                     <constraint firstItem="v4c-Yl-GtL" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="P38-kg-k0I"/>
                     <constraint firstItem="RX5-Zn-u1d" firstAttribute="leading" secondItem="IbU-Zn-Z7X" secondAttribute="trailing" constant="8" id="Waj-VN-DfA"/>
                     <constraint firstItem="IbU-Zn-Z7X" firstAttribute="top" secondItem="v4c-Yl-GtL" secondAttribute="bottom" constant="1.5" id="dDM-Lj-kuC"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="RX5-Zn-u1d" secondAttribute="trailing" constant="5" id="hqa-XH-SUh"/>
+                    <constraint firstAttribute="trailing" secondItem="v4c-Yl-GtL" secondAttribute="trailing" constant="29" id="np3-xf-AsK"/>
                     <constraint firstItem="c37-HL-pkI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="uw3-IM-pbS"/>
                 </constraints>
             </tableViewCellContentView>

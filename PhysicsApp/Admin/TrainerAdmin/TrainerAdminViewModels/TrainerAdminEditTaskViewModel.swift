@@ -14,7 +14,7 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
     
     let trainerReference = Firestore.firestore().collection("trainer")
     var tasks = [String]()
-    var taskNumber = "1"
+    var taskNumber = ""
     var themes = [String]()
     var selectedTask = ""
     var inverseState = false
@@ -29,6 +29,17 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
         selectedTask = tasks[0]
         themes = EGEInfo.egeSystemThemes
         completion(true)
+    }
+    
+    func clearOldData() {
+        taskNumber = ""
+        selectedTask = tasks.first ?? ""
+        inverseState = false
+        stringState = false
+        themesOfSearchedTask = [String]()
+        searchedTask = TaskModel()
+        doesTaskExist = false
+        wrightAnswer = ""
     }
 
     func updateWrightAnswer(with text: String) {
@@ -64,7 +75,7 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
     }
     
     func uploadNewTaskToTrainer(completion: @escaping (Bool) -> ()) {
-        if doesTaskExist {
+        if doesTaskExist, isAbleToUpload() {
             wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
             wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
             let newTheme = searchedTask.theme ?? ""
@@ -76,7 +87,19 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
             uploadTaskImage(path: "trainer/\(selectedTask)/task\(Int(taskNumber) ?? 1).png")
             uploadTaskDescription(path: "trainer/\(selectedTask)/task\(Int(taskNumber) ?? 1)description.png")
             completion(true)
+        } else {
+            completion(false)
         }
+    }
+    
+    func isAbleToUpload() -> Bool {
+        guard
+            searchedTask.image != nil, searchedTask.taskDescription != nil,
+            searchedTask.theme != "", searchedTask.theme != nil,
+            wrightAnswer != "", taskNumber != "" else {
+                return false
+        }
+        return true
     }
     
     func getKeyValuesForTask() -> [String : Any] {

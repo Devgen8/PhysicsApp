@@ -66,9 +66,8 @@ import VK_ios_sdk
     }
     
     func designScreenElements() {
-        guard Auth.auth().currentUser != nil else {
+        if Auth.auth().currentUser == nil {
             createDescriptionForUnAuth()
-            return
         }
         
         DesignService.setWhiteBackground(for: view)
@@ -99,41 +98,41 @@ import VK_ios_sdk
         textView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 30).isActive = true
         textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
-        textView.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        textView.heightAnchor.constraint(equalToConstant: 220).isActive = true
         textView.font = UIFont(name: "Montserrat-Regular", size: 18)
-        textView.text = "Привет! Зарегистрированным пользователям здесь доступна информация о своем профиле, а также история пробников! Зарегистрируйся через ВКонтакте и получи много крутых фишек, таких как:"
+        textView.text = "Привет! Зарегистрированным пользователям здесь доступна информация о своем профиле, а также история пробников! Зарегистрируйся через ВКонтакте и получи много крутых фишек, таких как cохранение прогресса, cтатистика по задачам, доступ к разделу задач с ошибками, сохранение ответов и времени в пробнике после выхода из приложения!"
         
-        // auth features
-        let features = ["Сохранение прогресса",
-                        "Статистика по задачам",
-                        "Доступ к разделу задач с ошибками",
-                        "Сохранение ответов и времени в пробнике после выхода из приложения"]
-        var stacksArray = [UIStackView]()
-        for feature in features {
-            let label = UILabel()
-            label.text = "●"
-            label.textColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.widthAnchor.constraint(equalToConstant: 15.5).isActive = true
-            let featureLabel = UILabel()
-            featureLabel.text = feature
-            featureLabel.font = UIFont(name: "Montserrat-Medium", size: 18)
-            featureLabel.textAlignment = .left
-            featureLabel.numberOfLines = 0
-            let hStack = UIStackView(arrangedSubviews: [label, featureLabel])
-            hStack.axis = .horizontal
-            hStack.spacing = 10
-            hStack.alignment = .top
-            stacksArray.append(hStack)
-        }
-        let vStack = UIStackView(arrangedSubviews: stacksArray)
-        vStack.axis = .vertical
-        vStack.spacing = 10
-        vStack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(vStack)
-        vStack.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 10).isActive = true
-        vStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-        vStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+//        // auth features
+//        let features = ["Сохранение прогресса",
+//                        "Статистика по задачам",
+//                        "Доступ к разделу задач с ошибками",
+//                        "Сохранение ответов и времени в пробнике после выхода из приложения"]
+//        var stacksArray = [UIStackView]()
+//        for feature in features {
+//            let label = UILabel()
+//            label.text = "●"
+//            label.textColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+//            label.translatesAutoresizingMaskIntoConstraints = false
+//            label.widthAnchor.constraint(equalToConstant: 15.5).isActive = true
+//            let featureLabel = UILabel()
+//            featureLabel.text = feature
+//            featureLabel.font = UIFont(name: "Montserrat-Medium", size: 18)
+//            featureLabel.textAlignment = .left
+//            featureLabel.numberOfLines = 0
+//            let hStack = UIStackView(arrangedSubviews: [label, featureLabel])
+//            hStack.axis = .horizontal
+//            hStack.spacing = 10
+//            hStack.alignment = .top
+//            stacksArray.append(hStack)
+//        }
+//        let vStack = UIStackView(arrangedSubviews: stacksArray)
+//        vStack.axis = .vertical
+//        vStack.spacing = 10
+//        vStack.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(vStack)
+//        vStack.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 10).isActive = true
+//        vStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+//        vStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         
         // change exit buttton text
         logOutButton.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)

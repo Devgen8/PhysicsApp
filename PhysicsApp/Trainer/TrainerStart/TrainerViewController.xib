@@ -36,16 +36,16 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dJ3-xI-jIk">
-                    <rect key="frame" x="35" y="197" width="344" height="532"/>
+                    <rect key="frame" x="20" y="197" width="374" height="532"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTS-oq-R7L">
-                    <rect key="frame" x="30" y="782" width="354" height="60"/>
+                    <rect key="frame" x="20" y="782" width="374" height="60"/>
                     <color key="backgroundColor" red="0.69736534360000002" green="0.14242923260000001" blue="0.1254176199" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="jyp-8Q-Hht"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="19"/>
                     <state key="normal" title="Задачи с ошибкой">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
@@ -60,8 +60,8 @@
                         <constraint firstAttribute="height" constant="31" id="6LF-Ak-ZhM"/>
                     </constraints>
                     <segments>
-                        <segment title="По заданиям"/>
-                        <segment title="По темам"/>
+                        <segment title="Задания"/>
+                        <segment title="Темы"/>
                         <segment title="Пробники"/>
                     </segments>
                     <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -109,12 +109,12 @@
                 <constraint firstItem="bLi-Ru-Gha" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="XOo-LA-Pow"/>
                 <constraint firstItem="roX-Zz-rQP" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="cO8-nt-jdn"/>
                 <constraint firstItem="0kh-Ym-EbC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cbY-2o-pA1"/>
-                <constraint firstItem="lTS-oq-R7L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="gdH-O9-QxA"/>
-                <constraint firstItem="dJ3-xI-jIk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="35" id="hsq-RI-NpD"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dJ3-xI-jIk" secondAttribute="trailing" constant="35" id="iFw-U2-BsK"/>
+                <constraint firstItem="lTS-oq-R7L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="gdH-O9-QxA"/>
+                <constraint firstItem="dJ3-xI-jIk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="hsq-RI-NpD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dJ3-xI-jIk" secondAttribute="trailing" constant="20" id="iFw-U2-BsK"/>
                 <constraint firstItem="roX-Zz-rQP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="m6l-Uv-SaA"/>
                 <constraint firstItem="8Ve-lf-hZU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oLe-O5-lcu"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lTS-oq-R7L" secondAttribute="trailing" constant="30" id="w03-X9-pwy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lTS-oq-R7L" secondAttribute="trailing" constant="20" id="w03-X9-pwy"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="-197.10144927536234" y="47.544642857142854"/>

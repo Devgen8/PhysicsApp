@@ -157,6 +157,9 @@ class TrainerAdminViewController: UIViewController {
             if isReady {
                 self.hideLodingScreen()
                 self.clearOldDataOnScreen()
+            } else {
+                self.hideLodingScreen()
+                self.presentNonActionAlert(title: "Не удалось загрузить", message: "Установлены не все обязательные параметры")
             }
         }
         if place == "Тренажер" {
@@ -175,9 +178,7 @@ class TrainerAdminViewController: UIViewController {
         wrightAnswerTextField.text = ""
         inverseSwitch.isOn = false
         stringSwitch.isOn = false
-        viewModel.updateStringState(to: false)
-        viewModel.updateInverseState(to: false)
-        viewModel.updateSelectedTheme(with: 0)
+        viewModel.clearOldData()
     }
     
     @IBAction func inverseChanged(_ sender: UISwitch) {
@@ -223,6 +224,7 @@ class TrainerAdminViewController: UIViewController {
                     self.viewModel.updateInverseState(to: false)
                 } else {
                     self.wrightAnswerTextField.text = "\(taskModel?.wrightAnswer ?? 0)"
+                    self.stringSwitch.isOn = false
                 }
                 if (taskModel?.alternativeAnswer) != nil {
                     self.inverseSwitch.isOn = true
@@ -230,16 +232,22 @@ class TrainerAdminViewController: UIViewController {
                     self.viewModel.updateStringState(to: false)
                     self.viewModel.updateInverseState(to: true)
                     self.wrightAnswerTextField.text = "\(Int(taskModel?.wrightAnswer ?? 0))"
+                } else {
+                    self.inverseSwitch.isOn = false
                 }
                 self.hideLodingScreen()
             } else {
                 self.hideLodingScreen()
-                let testAlertController = UIAlertController(title: "Не найдено", message: "Такого задания еще нет", preferredStyle: .alert)
-                let ok = UIAlertAction(title: "Понятно", style: .default, handler: nil)
-                testAlertController.addAction(ok)
-                self.present(testAlertController, animated: true)
+                self.presentNonActionAlert(title: "Не найдено", message: "Такого задания еще нет")
             }
         }
+    }
+    
+    func presentNonActionAlert(title: String, message: String) {
+        let testAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Понятно", style: .default, handler: nil)
+        testAlertController.addAction(ok)
+        self.present(testAlertController, animated: true)
     }
     
     @IBAction func modeChanged(_ sender: UISegmentedControl) {

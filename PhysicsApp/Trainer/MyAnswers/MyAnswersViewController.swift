@@ -76,7 +76,7 @@ extension MyAnswersViewController: UITableViewDataSource {
         let cell = Bundle.main.loadNibNamed("ShowAnswerTableViewCell", owner: self, options: nil)?.first as! ShowAnswerTableViewCell
         if let answer = tasksAnswers.first(where: { getTaskLocation(taskName: $0.key).0 == "Задание №\(indexPath.row + 1)" })?.value, answer != "" {
             cell.taskNameLabel.text = "Задание №\(indexPath.row + 1)"
-            cell.answerLabel.text = "Ваш ответ: \(answer)"
+            cell.answerLabel.text = answer
             cell.decorativeView.backgroundColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
             cell.taskNameLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             cell.answerLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)

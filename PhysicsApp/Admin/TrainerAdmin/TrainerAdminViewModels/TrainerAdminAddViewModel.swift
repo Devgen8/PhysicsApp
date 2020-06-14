@@ -34,9 +34,23 @@ class TrainerAdminAddViewModel: TrainerAdminViewModel {
         completion(true)
     }
     
+    func clearOldData() {
+        imageData = nil
+        descriptionImageData = nil
+        selectedTask = tasks.first
+        selectedTheme = ""
+        inverseState = false
+        stringState = false
+        wrightAnswer = ""
+    }
+    
     func uploadNewTaskToTest(_ testName: String, completion: @escaping (Bool) -> ()) {
         wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
         wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard testName != "", isAbleToUpload() else {
+            completion(false)
+            return
+        }
         testReference.document(testName).setData(["name":testName])
         let taskNumber = getSelectedTaskNumber()
         var newKeyValuePairs = self.getKeyValuesForTask()
@@ -61,6 +75,10 @@ class TrainerAdminAddViewModel: TrainerAdminViewModel {
     func uploadNewTaskToTrainer(completion: @escaping (Bool) -> ()) {
         wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
         wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard isAbleToUpload() else {
+            completion(false)
+            return
+        }
         getSelectedTaskInfo { (isReady) in
             if isReady {
                 self.trainerReference.document(self.selectedTask ?? "").updateData(["numberOfTasks" : self.tasksNumber + 1,
@@ -72,6 +90,15 @@ class TrainerAdminAddViewModel: TrainerAdminViewModel {
                 completion(true)
             }
         }
+    }
+    
+    func isAbleToUpload() -> Bool {
+        guard
+            imageData != nil, descriptionImageData != nil,
+            selectedTheme != "", wrightAnswer != "" else {
+                return false
+        }
+        return true
     }
     
     func getKeyValuesForTask() -> [String : Any] {

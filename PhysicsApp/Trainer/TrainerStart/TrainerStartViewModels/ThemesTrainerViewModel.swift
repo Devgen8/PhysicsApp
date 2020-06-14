@@ -22,14 +22,8 @@ class ThemesTrainerViewModel: TrainerViewModelProvider {
     var numberOfUnsolvedTasks = 0
     
     func getThemes(completion: @escaping (Bool) -> ()) {
-        if let lastUpdateDate = UserDefaults.standard.value(forKey: "themeTypeUpdateDate") as? Date,
-            let weeksDifference = Calendar.current.dateComponents([.weekOfMonth], from: Date(), to: lastUpdateDate).weekOfMonth {
-            let formater = DateFormatter()
-            let weekday = formater.weekdaySymbols[Calendar.current.component(.weekday, from: Date()) - 1]
-            formater.dateFormat = "dd-MM-yyyy"
-            let oldDate = formater.string(from: lastUpdateDate)
-            let todayDate = formater.string(from: Date())
-            if (weeksDifference >= 1 || weekday == "Monday") && oldDate != todayDate {
+        if let lastUpdateDate = UserDefaults.standard.value(forKey: "themeTypeUpdateDate") as? Date {
+            if DateWorker.checkForUpdate(from: lastUpdateDate) {
                 getThemesFromFirestore { (isReady) in
                     completion(isReady)
                 }

@@ -111,4 +111,5 @@ protocol TrainerAdminViewModel {
     func getSelectedTheme() -> String
     func updateTaskNumber(with number: String)
     func searchTask(completion: @escaping (TaskModel?) -> ())
+    func clearOldData()
 }

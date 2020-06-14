@@ -149,7 +149,7 @@ class DownloadedTestViewModel: TestViewModel {
         var count = 0
         for index in stride(from: 0, to: tasks.count, by: 1) {
             let imageRef = Storage.storage().reference().child("tests/\(name)/task\(index + 1).png")
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
+            imageRef.getData(maxSize: 1 * 2048 * 2048) { [weak self] data, error in
                 guard let `self` = self, error == nil else {
                     print("Error downloading images: \(String(describing: error?.localizedDescription))")
                     return
@@ -173,7 +173,7 @@ class DownloadedTestViewModel: TestViewModel {
         var count = 0
         for index in stride(from: 0, to: tasks.count, by: 1) {
             let imageRef = Storage.storage().reference().child("tests/\(name)/task\(index + 1)description.png")
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
+            imageRef.getData(maxSize: 1 * 2048 * 2048) { [weak self] data, error in
                 guard let `self` = self, error == nil else {
                     print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
                     return

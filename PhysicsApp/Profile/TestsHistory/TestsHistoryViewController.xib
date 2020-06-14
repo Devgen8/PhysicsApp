@@ -32,7 +32,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W4e-Qz-UYe">
-                    <rect key="frame" x="0.0" y="151" width="414" height="711"/>
+                    <rect key="frame" x="20" y="151" width="374" height="711"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqS-t2-ENO" customClass="AnimationView" customModule="Lottie">
@@ -57,13 +57,13 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="W4e-Qz-UYe" secondAttribute="trailing" id="2Z4-ww-5kB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="W4e-Qz-UYe" secondAttribute="trailing" constant="20" id="2Z4-ww-5kB"/>
                 <constraint firstItem="4US-Ke-Yxn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="6th-RB-jqT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FCL-Pv-JXd" secondAttribute="trailing" constant="10" id="7oq-Zm-ZTW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="W4e-Qz-UYe" secondAttribute="bottom" id="GHy-It-vna"/>
                 <constraint firstItem="W4e-Qz-UYe" firstAttribute="top" secondItem="4US-Ke-Yxn" secondAttribute="bottom" constant="40" id="HYf-bY-1JW"/>
                 <constraint firstItem="FCL-Pv-JXd" firstAttribute="leading" secondItem="4US-Ke-Yxn" secondAttribute="trailing" constant="5" id="Ibo-RQ-bPS"/>
-                <constraint firstItem="W4e-Qz-UYe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="b8z-5P-Ezo"/>
+                <constraint firstItem="W4e-Qz-UYe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="b8z-5P-Ezo"/>
                 <constraint firstItem="FCL-Pv-JXd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="kN8-hc-t0j"/>
                 <constraint firstItem="cqS-t2-ENO" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="m7l-3u-rqn"/>
                 <constraint firstItem="cqS-t2-ENO" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="rYe-eu-knL"/>

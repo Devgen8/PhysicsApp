@@ -13,7 +13,7 @@ import FirebaseStorage
 class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     
     let testReference = Firestore.firestore().collection("tests")
-    var taskNumber = "1"
+    var taskNumber = ""
     var searchedTask = TaskModel()
     var testName = ""
     var doesTaskExist = false
@@ -24,6 +24,16 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     
     func updateTaskNumber(with number: String) {
         taskNumber = number
+    }
+    
+    func clearOldData() {
+        taskNumber = ""
+        inverseState = false
+        stringState = false
+        searchedTask = TaskModel()
+        doesTaskExist = false
+        wrightAnswer = ""
+        testName = allTests.first ?? ""
     }
     
     func searchTask(completion: @escaping (TaskModel?) -> ()) {
@@ -108,7 +118,7 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
             completion(true)
         }
     }
-
+    
     func updateWrightAnswer(with text: String) {
         wrightAnswer = text
     }
@@ -138,14 +148,26 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     }
 
     func uploadNewTaskToTest(_ testName: String, completion: @escaping (Bool) -> ()) {
-        wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
-        wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
-        var newKeyValuePairs = self.getKeyValuesForTask()
-        newKeyValuePairs["serialNumber"] = taskNumber
-        testReference.document(self.testName).collection("tasks").document("task\(taskNumber)").setData(newKeyValuePairs)
-        uploadTaskImage(path: "tests/\(self.testName)/task\(taskNumber).png")
-        uploadTaskDescription(path: "tests/\(self.testName)/task\(taskNumber)description.png")
-        completion(true)
+        if doesTaskExist, isAbleToUpload() {
+            wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
+            wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
+            let newKeyValuePairs = self.getKeyValuesForTask()
+            testReference.document(self.testName).collection("tasks").document("task\(taskNumber)").setData(newKeyValuePairs)
+            uploadTaskImage(path: "tests/\(self.testName)/task\(taskNumber).png")
+            uploadTaskDescription(path: "tests/\(self.testName)/task\(taskNumber)description.png")
+            completion(true)
+        } else {
+            completion(false)
+        }
+    }
+    
+    func isAbleToUpload() -> Bool {
+        guard
+            searchedTask.image != nil, searchedTask.taskDescription != nil,
+            wrightAnswer != "", taskNumber != "", testName != "" else {
+                return false
+        }
+        return true
     }
     
     func uploadTaskImage(path: String) {
