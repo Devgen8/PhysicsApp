@@ -98,7 +98,7 @@ import VK_ios_sdk
         textView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 30).isActive = true
         textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
-        textView.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        textView.heightAnchor.constraint(equalToConstant: 280).isActive = true
         textView.font = UIFont(name: "Montserrat-Regular", size: 18)
         textView.text = "Привет! Зарегистрированным пользователям здесь доступна информация о своем профиле, а также история пробников! Зарегистрируйся через ВКонтакте и получи много крутых фишек, таких как cохранение прогресса, cтатистика по задачам, доступ к разделу задач с ошибками, сохранение ответов и времени в пробнике после выхода из приложения!"
         

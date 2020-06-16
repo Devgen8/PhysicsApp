@@ -36,7 +36,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQj-Rf-ppf" customClass="ProgressBarView" customModule="PhysicsApp" customModuleProvider="target">
-                    <rect key="frame" x="117" y="89" width="180" height="60"/>
+                    <rect key="frame" x="117" y="84" width="180" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="180" id="FGA-SE-8PP"/>
@@ -147,7 +147,7 @@
                 <constraint firstItem="sAE-B4-zge" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="WDM-7i-30w"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sAE-B4-zge" secondAttribute="trailing" constant="25" id="YyN-PH-Co1"/>
                 <constraint firstItem="DEW-pY-zUp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aKN-Pl-vnX"/>
-                <constraint firstItem="mQj-Rf-ppf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="45" id="eaT-zv-fMx"/>
+                <constraint firstItem="mQj-Rf-ppf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="eaT-zv-fMx"/>
                 <constraint firstItem="rAo-9w-73U" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="iqY-WI-Icp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AWN-Sh-0gg" secondAttribute="bottom" constant="5" id="mvU-rd-boG"/>
                 <constraint firstItem="UAd-j8-xg3" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="p7l-q6-mUB"/>

@@ -48,7 +48,7 @@
                     </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Зарегистрируйся в нашем приложение через ВКонтакте и ты получишь:" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xua-vl-xRe">
-                    <rect key="frame" x="30" y="151" width="354" height="75"/>
+                    <rect key="frame" x="30" y="141" width="354" height="75"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="75" id="YBz-ws-iyl"/>
@@ -57,8 +57,8 @@
                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="oSh-oG-wAh">
-                    <rect key="frame" x="30" y="241" width="354" height="258.5"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="oSh-oG-wAh">
+                    <rect key="frame" x="30" y="231" width="354" height="206.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="K2t-5c-qk1">
                             <rect key="frame" x="0.0" y="0.0" width="234" height="21"/>
@@ -81,7 +81,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TAD-By-0BG">
-                            <rect key="frame" x="0.0" y="49" width="211" height="21"/>
+                            <rect key="frame" x="0.0" y="36" width="211" height="21"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="●" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsL-Ds-ALB">
                                     <rect key="frame" x="0.0" y="0.0" width="15.5" height="21"/>
@@ -101,7 +101,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SED-Lu-OsN">
-                            <rect key="frame" x="0.0" y="98" width="354" height="62.5"/>
+                            <rect key="frame" x="0.0" y="72" width="354" height="62.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="●" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cy3-1z-qjL">
                                     <rect key="frame" x="0.0" y="0.0" width="15.5" height="20.5"/>
@@ -121,7 +121,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mE0-D4-eWu">
-                            <rect key="frame" x="0.0" y="188.5" width="231.5" height="21"/>
+                            <rect key="frame" x="0.0" y="149.5" width="231.5" height="21"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="●" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3b-ii-hWx">
                                     <rect key="frame" x="0.0" y="0.5" width="15.5" height="20.5"/>
@@ -138,7 +138,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ATC-p9-sp9">
-                            <rect key="frame" x="0.0" y="237.5" width="351.5" height="21"/>
+                            <rect key="frame" x="0.0" y="185.5" width="259" height="21"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="●" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4k-Zy-Pc6">
                                     <rect key="frame" x="0.0" y="0.0" width="15.5" height="21"/>
@@ -146,8 +146,8 @@
                                     <color key="textColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Доступ к разделу задач с ошибками" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmh-V2-lPP">
-                                    <rect key="frame" x="25.5" y="0.0" width="326" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Раздел задач с ошибками" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmh-V2-lPP">
+                                    <rect key="frame" x="25.5" y="0.0" width="233.5" height="21"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -160,12 +160,12 @@
                     </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2D-zG-kfR">
-                    <rect key="frame" x="30" y="539.5" width="354" height="60"/>
+                    <rect key="frame" x="30" y="467.5" width="354" height="60"/>
                     <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="pU8-X0-tip"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="19"/>
                     <state key="normal" title="ЗАРЕГИСТРИРОВАТЬСЯ">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
@@ -177,7 +177,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="cjT-7L-yfn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="1ch-83-CUA"/>
-                <constraint firstItem="Xua-vl-xRe" firstAttribute="top" secondItem="cjT-7L-yfn" secondAttribute="bottom" constant="40" id="6mg-DA-DjS"/>
+                <constraint firstItem="Xua-vl-xRe" firstAttribute="top" secondItem="cjT-7L-yfn" secondAttribute="bottom" constant="30" id="6mg-DA-DjS"/>
                 <constraint firstItem="cHi-Rq-G2M" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="AKr-nK-pRw"/>
                 <constraint firstItem="oSh-oG-wAh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="BEX-tm-1ln"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Xua-vl-xRe" secondAttribute="trailing" constant="30" id="FxJ-z6-2TG"/>
@@ -189,7 +189,7 @@
                 <constraint firstItem="oSh-oG-wAh" firstAttribute="top" secondItem="Xua-vl-xRe" secondAttribute="bottom" constant="15" id="n9W-MO-fU1"/>
                 <constraint firstItem="cHi-Rq-G2M" firstAttribute="leading" secondItem="cjT-7L-yfn" secondAttribute="trailing" constant="5" id="oEO-fa-69Q"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k2D-zG-kfR" secondAttribute="trailing" constant="30" id="wz3-Oe-mkx"/>
-                <constraint firstItem="k2D-zG-kfR" firstAttribute="top" secondItem="oSh-oG-wAh" secondAttribute="bottom" constant="40" id="yIO-kU-t1d"/>
+                <constraint firstItem="k2D-zG-kfR" firstAttribute="top" secondItem="oSh-oG-wAh" secondAttribute="bottom" constant="30" id="yIO-kU-t1d"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>

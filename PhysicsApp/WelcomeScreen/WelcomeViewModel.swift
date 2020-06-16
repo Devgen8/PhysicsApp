@@ -117,8 +117,37 @@ class WelcomeViewModel {
             if error != nil {
                 completion("Проверьте свое интернет соединение")
             } else {
+                self.updateTextFile()
                 completion(nil)
             }
+        }
+    }
+    
+    func updateTextFile() {
+        if Auth.auth().currentUser?.uid != nil {
+            let docRef = Storage.storage().reference().child("vkIds.txt")
+            docRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
+                guard error == nil else {
+                    if let errorDescription = error?.localizedDescription,
+                        errorDescription == "Object vkIds.txt does not exist." {
+                        self.uploadEditedFile(with: "")
+                    }
+                    return
+                }
+                if let data = data {
+                    self.uploadEditedFile(with: String(data: data, encoding: .utf8) ?? "")
+                }
+            }
+        }
+    }
+    
+    func uploadEditedFile(with previousInfo: String) {
+        let userId = VKSdk.accessToken()?.userId ?? ""
+        if previousInfo == "" {
+            Storage.storage().reference().child("vkIds.txt").putData(userId.data(using: .utf8) ?? Data())
+        } else {
+            let newInfo = previousInfo + "\n\(userId)"
+            Storage.storage().reference().child("vkIds.txt").putData(newInfo.data(using: .utf8) ?? Data())
         }
     }
 }

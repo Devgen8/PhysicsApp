@@ -137,6 +137,17 @@ extension TrainerViewController: UITableViewDataSource {
         let cell = Bundle.main.loadNibNamed("ThemeTableViewCell", owner: self, options: nil)?.first as! ThemeTableViewCell
         
         var cellName = viewModel.getTheme(for: indexPath.row)
+        if viewModel is ThemesTrainerViewModel {
+            let themeImage = UIImageView()
+            themeImage.translatesAutoresizingMaskIntoConstraints = false
+            cell.decorativeView.addSubview(themeImage)
+            themeImage.centerYAnchor.constraint(equalTo: cell.decorativeView.centerYAnchor).isActive = true
+            themeImage.widthAnchor.constraint(equalToConstant: 23).isActive = true
+            themeImage.heightAnchor.constraint(equalToConstant: 23).isActive = true
+            themeImage.leadingAnchor.constraint(equalTo: cell.decorativeView.leadingAnchor, constant: 1).isActive = true
+            themeImage.image = ThemeParser.getImageArray(forTaskThemes: [cellName]).first
+            cellName = cellName.uppercased()
+        }
         if viewModel is TestTrainerViewModel {
             let numberOfPoints = (viewModel as? TestTrainerViewModel)?.getTestPoints(for: indexPath.row) ?? 0
             if numberOfPoints != 0 {

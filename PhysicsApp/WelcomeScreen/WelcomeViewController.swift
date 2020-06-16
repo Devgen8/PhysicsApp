@@ -22,7 +22,6 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         designScreenElements()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

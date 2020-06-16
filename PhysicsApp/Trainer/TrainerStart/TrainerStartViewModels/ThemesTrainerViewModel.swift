@@ -170,7 +170,7 @@ class ThemesTrainerViewModel: TrainerViewModelProvider {
     }
     
     func getTheme(for index: Int) -> String {
-        return themes[index].uppercased()
+        return themes[index]
     }
     
     func getTasksProgress(for index: Int) -> (Float, Float) {

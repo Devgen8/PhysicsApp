@@ -48,7 +48,7 @@
                     <rect key="frame" x="0.0" y="37" width="414" height="976"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="81Y-uD-K7H" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="720"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Профиль" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="y9M-zr-Qnk">
                                     <rect key="frame" x="50" y="30" width="259" height="37"/>
@@ -181,48 +181,48 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="LDJ-qE-Mw5">
-                                    <rect key="frame" x="30" y="337.5" width="354" height="210"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdB-cu-iTR">
-                                            <rect key="frame" x="0.0" y="0.0" width="354" height="60"/>
-                                            <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
-                                            <state key="normal" title="ИСТОРИЯ ПРОБНИКОВ">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="testsHistoryTapped:" destination="-1" eventType="touchUpInside" id="dlP-Wh-pCG"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEu-m7-3UW">
-                                            <rect key="frame" x="0.0" y="75" width="354" height="60"/>
-                                            <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
-                                            <state key="normal" title="ТЕХ ПОДДЕРЖКА">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="supportTapped:" destination="-1" eventType="touchUpInside" id="Gge-LX-K03"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="veS-P2-Ge6">
-                                            <rect key="frame" x="0.0" y="150" width="354" height="60"/>
-                                            <color key="backgroundColor" red="0.69736534360000002" green="0.14242923260000001" blue="0.1254176199" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
-                                            <state key="normal" title="ВЫЙТИ">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="logOutTapped:" destination="-1" eventType="touchUpInside" id="Cf9-ze-FJt"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEu-m7-3UW">
+                                    <rect key="frame" x="30" y="412.5" width="354" height="60"/>
+                                    <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="210" id="1NG-IJ-zMG"/>
-                                        <constraint firstAttribute="width" secondItem="LDJ-qE-Mw5" secondAttribute="height" multiplier="59:35" id="Ucu-UB-5Xo"/>
+                                        <constraint firstAttribute="height" constant="60" id="LdV-gw-F6m"/>
                                     </constraints>
-                                </stackView>
+                                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
+                                    <state key="normal" title="ТЕХ ПОДДЕРЖКА">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="supportTapped:" destination="-1" eventType="touchUpInside" id="Gge-LX-K03"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="veS-P2-Ge6">
+                                    <rect key="frame" x="30" y="487.5" width="354" height="60"/>
+                                    <color key="backgroundColor" red="0.69736534360000002" green="0.14242923260000001" blue="0.1254176199" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="JgV-uP-IRI"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
+                                    <state key="normal" title="ВЫЙТИ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="logOutTapped:" destination="-1" eventType="touchUpInside" id="Cf9-ze-FJt"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdB-cu-iTR">
+                                    <rect key="frame" x="30" y="337.5" width="354" height="60"/>
+                                    <color key="backgroundColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="El4-Ax-o4o"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
+                                    <state key="normal" title="ИСТОРИЯ ПРОБНИКОВ">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="testsHistoryTapped:" destination="-1" eventType="touchUpInside" id="dlP-Wh-pCG"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
@@ -230,28 +230,34 @@
                                 <constraint firstItem="y9M-zr-Qnk" firstAttribute="leading" secondItem="81Y-uD-K7H" secondAttribute="leading" constant="50" id="0Uj-m8-H1V"/>
                                 <constraint firstItem="jng-h2-tlm" firstAttribute="leading" secondItem="y9M-zr-Qnk" secondAttribute="trailing" constant="5" id="1yp-D1-HrQ"/>
                                 <constraint firstItem="wAH-yf-AJS" firstAttribute="top" secondItem="nLp-i6-Ixt" secondAttribute="bottom" constant="20" id="4uz-Qx-TLt"/>
+                                <constraint firstItem="WEu-m7-3UW" firstAttribute="leading" secondItem="81Y-uD-K7H" secondAttribute="leading" constant="30" id="54a-w6-nK8"/>
+                                <constraint firstAttribute="trailing" secondItem="WEu-m7-3UW" secondAttribute="trailing" constant="30" id="87I-TN-Kj7"/>
                                 <constraint firstAttribute="trailing" secondItem="Qg1-BW-ahi" secondAttribute="trailing" constant="30" id="BBW-Py-tDH"/>
+                                <constraint firstItem="WEu-m7-3UW" firstAttribute="top" secondItem="bdB-cu-iTR" secondAttribute="bottom" constant="15" id="BX3-8r-VpA"/>
                                 <constraint firstItem="iiU-tQ-HT2" firstAttribute="top" secondItem="Qg1-BW-ahi" secondAttribute="bottom" constant="20" id="CrB-xX-6oI"/>
                                 <constraint firstItem="YbD-NC-9he" firstAttribute="top" secondItem="jng-h2-tlm" secondAttribute="bottom" constant="30" id="GdL-oh-Z0C"/>
                                 <constraint firstItem="y9M-zr-Qnk" firstAttribute="top" secondItem="81Y-uD-K7H" secondAttribute="top" constant="30" id="I9u-M3-dvr"/>
                                 <constraint firstItem="wAH-yf-AJS" firstAttribute="centerX" secondItem="81Y-uD-K7H" secondAttribute="centerX" id="Id0-FX-aQs"/>
-                                <constraint firstAttribute="trailing" secondItem="LDJ-qE-Mw5" secondAttribute="trailing" constant="30" id="LkD-Jk-kPE"/>
                                 <constraint firstItem="nLp-i6-Ixt" firstAttribute="centerX" secondItem="81Y-uD-K7H" secondAttribute="centerX" id="Ly6-y3-xtO"/>
                                 <constraint firstItem="iiU-tQ-HT2" firstAttribute="leading" secondItem="81Y-uD-K7H" secondAttribute="leading" constant="30" id="M1R-Sr-Rl5"/>
                                 <constraint firstItem="jr0-oG-Ey4" firstAttribute="top" secondItem="jng-h2-tlm" secondAttribute="bottom" constant="35" id="Pdx-lX-snW"/>
                                 <constraint firstItem="jng-h2-tlm" firstAttribute="top" secondItem="81Y-uD-K7H" secondAttribute="top" constant="13" id="Pxv-Th-H10"/>
                                 <constraint firstItem="4PS-Um-T7L" firstAttribute="top" secondItem="wAH-yf-AJS" secondAttribute="bottom" constant="5" id="SD0-ud-cJ0"/>
                                 <constraint firstItem="Qg1-BW-ahi" firstAttribute="leading" secondItem="81Y-uD-K7H" secondAttribute="leading" constant="30" id="SbH-hJ-VRa"/>
-                                <constraint firstItem="nLp-i6-Ixt" firstAttribute="top" secondItem="LDJ-qE-Mw5" secondAttribute="bottom" constant="20" id="VcI-79-XzH"/>
-                                <constraint firstItem="LDJ-qE-Mw5" firstAttribute="leading" secondItem="81Y-uD-K7H" secondAttribute="leading" constant="30" id="Vtj-0n-wEE"/>
-                                <constraint firstAttribute="height" constant="700" id="WgU-wz-jCc"/>
+                                <constraint firstAttribute="height" constant="720" id="WgU-wz-jCc"/>
                                 <constraint firstAttribute="trailing" secondItem="iiU-tQ-HT2" secondAttribute="trailing" constant="30" id="Wq5-Xc-auG"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wAH-yf-AJS" secondAttribute="trailing" constant="30" id="XT4-i2-rTa"/>
-                                <constraint firstItem="LDJ-qE-Mw5" firstAttribute="top" secondItem="iiU-tQ-HT2" secondAttribute="bottom" constant="20" id="aKc-y6-uUs"/>
+                                <constraint firstItem="bdB-cu-iTR" firstAttribute="top" secondItem="iiU-tQ-HT2" secondAttribute="bottom" constant="20" id="awl-Qb-BXw"/>
+                                <constraint firstItem="nLp-i6-Ixt" firstAttribute="top" secondItem="veS-P2-Ge6" secondAttribute="bottom" constant="20" id="csa-EQ-NKR"/>
                                 <constraint firstAttribute="trailing" secondItem="jng-h2-tlm" secondAttribute="trailing" constant="30" id="dZr-8Z-0IA"/>
                                 <constraint firstItem="Qg1-BW-ahi" firstAttribute="top" secondItem="YbD-NC-9he" secondAttribute="bottom" constant="20" id="f5A-sk-dVi"/>
                                 <constraint firstItem="4PS-Um-T7L" firstAttribute="centerX" secondItem="81Y-uD-K7H" secondAttribute="centerX" id="fGj-Cp-cCx"/>
+                                <constraint firstItem="veS-P2-Ge6" firstAttribute="top" secondItem="WEu-m7-3UW" secondAttribute="bottom" constant="15" id="fzq-9I-0RH"/>
+                                <constraint firstItem="bdB-cu-iTR" firstAttribute="leading" secondItem="81Y-uD-K7H" secondAttribute="leading" constant="30" id="lbR-1T-bN3"/>
+                                <constraint firstAttribute="trailing" secondItem="bdB-cu-iTR" secondAttribute="trailing" constant="30" id="oQW-aR-DWA"/>
+                                <constraint firstItem="veS-P2-Ge6" firstAttribute="leading" secondItem="81Y-uD-K7H" secondAttribute="leading" constant="30" id="uPY-Uo-gme"/>
                                 <constraint firstItem="jr0-oG-Ey4" firstAttribute="centerX" secondItem="81Y-uD-K7H" secondAttribute="centerX" id="urY-uS-gLS"/>
+                                <constraint firstAttribute="trailing" secondItem="veS-P2-Ge6" secondAttribute="trailing" constant="30" id="vmI-Q1-3Un"/>
                                 <constraint firstItem="wAH-yf-AJS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="81Y-uD-K7H" secondAttribute="leading" constant="30" id="xaw-oc-EPh"/>
                             </constraints>
                         </view>

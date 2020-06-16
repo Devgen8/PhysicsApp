@@ -206,10 +206,10 @@ extension TasksListViewController: UITableViewDataSource {
             cell.tickImage.image = #imageLiteral(resourceName: "close")
         }
         let themeImages = viewModel.getTaskThemeImages(taskName ?? "")
-        var index = 0
+        var index = cell.themesImages.count - 1
         for themeImage in themeImages {
             cell.themesImages[index].image = themeImage
-            index += 1
+            index -= 1
         }
         return cell
     }
