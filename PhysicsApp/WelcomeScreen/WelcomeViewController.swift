@@ -66,10 +66,6 @@ class WelcomeViewController: UIViewController {
     
     // vk authorization
     @IBAction func signInTapped(_ sender: UIButton) {
-//        let signInViewController = SignInViewController()
-//        signInViewController.modalPresentationStyle = .fullScreen
-//        present(signInViewController, animated: true)
-        
         let sdkInstance = VKSdk.initialize(withAppId: "7379630")
         sdkInstance?.register(self)
         sdkInstance?.uiDelegate = self
@@ -89,8 +85,6 @@ class WelcomeViewController: UIViewController {
     
     //anonimus auth
     @IBAction func signUpTapped(_ sender: UIButton) {
-//        let signUpViewController = SignUpViewController()
-//        signUpViewController.modalPresentationStyle = .fullScreen
         let trainerViewController = TrainerViewController()
         trainerViewController.modalPresentationStyle = .fullScreen
         present(trainerViewController, animated: true)

@@ -13,6 +13,20 @@ import FirebaseAuth
 
 class CustomTestResultViewModel: GeneralTestResultsViewModel {
     
+    //MARK: Fields
+    
+    private var openedCells = [Int]()
+    private var tasks = [TaskModel]()
+    private var tasksWithShuffle = [5,6,7,11,12,16,17,18,21]
+    private var wrightAnswerNumber = 0
+    private var semiWrightAnswerNumber = 0
+    private var answersCorrection = [Int]()
+    private var resultPoints = [Int]()
+    private var hundredSystemPoints = 0
+    private var testPoints = 0
+    private let usersReference = Firestore.firestore().collection("users")
+    private var everyTaskAnswer = [Int]()
+    
     var timeTillEnd = 0
     var wrightAnswers = [String : (Double?, Double?, String?)]()
     var userAnswers = [String : String]()
@@ -20,23 +34,8 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
     var testName = ""
     var cPartPoints = [Int]()
     var testAnswersUpdater: TestAnswersUpdater?
-    var openedCells = [Int]()
-    var tasks = [TaskModel]()
-    var tasksWithShuffle = [5,6,7,11,12,16,17,18,21]
-    var wrightAnswerNumber = 0
-    var semiWrightAnswerNumber = 0
-    var answersCorrection = [Int]()
-    var resultPoints = [Int]()
-    var hundredSystemPoints = 0
-    var testPoints = 0
-    let usersReference = Firestore.firestore().collection("users")
-    var everyTaskAnswer = [Int]()
     
-    func updateTestCompletion() {
-        var finishedTests = UserDefaults.standard.value(forKey: "finishedTests") as? [String] ?? []
-        finishedTests = finishedTests.filter({ $0 != testName })
-        UserDefaults.standard.set(finishedTests, forKey: "finishedTests")
-    }
+    //MARK: Interface
     
     func checkUserAnswers(completion: @escaping (Bool) -> ()) {
         updateTestCompletion()
@@ -123,7 +122,133 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
         completion(true)
     }
     
-    func updateTasksStatus() {
+    func updateTestDataAsDone() {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+            
+            do {
+                let result = try context.fetch(fechRequest)
+                let trainer = result.first
+                context.delete(trainer?.tests?.first(where: {($0 as! Test).name == testName}) as! NSManagedObject)
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func isCellOpened(index: Int) -> Bool {
+        return openedCells.contains(index)
+    }
+    
+    func closeCell(for index: Int) {
+        openedCells = openedCells.filter( { $0 != index } )
+    }
+    
+    func openCell(for index: Int) {
+        openedCells.append(index)
+    }
+    
+    func setTasks(_ newTasks: [TaskModel]) {
+        tasks = newTasks
+    }
+    
+    func getTestDurationString() -> String {
+        let allSeconds = 14100 - timeTillEnd
+        var hours = "\(allSeconds / 3600)"
+        if hours.count == 1 {
+            hours = "0" + hours
+        }
+        var minutes = "\((allSeconds % 3600) / 60)"
+        if minutes.count == 1 {
+            minutes = "0" + minutes
+        }
+        var seconds = "\((allSeconds % 3600) % 60)"
+        if seconds.count == 1 {
+            seconds = "0" + seconds
+        }
+        return "\(hours) : \(minutes) : \(seconds)"
+    }
+    
+    func getWrightAnswersNumberString() -> String {
+        return "\(wrightAnswerNumber)"
+    }
+    
+    func getImage(for taskName: String) -> UIImage? {
+        return taskImages[getParticulerTaskName(for: taskName)]
+    }
+    
+    func getDescription(for taskName: String) -> UIImage? {
+        return tasks.first(where: { getParticulerTaskName(for: taskName) == $0.name })?.taskDescription
+    }
+    
+    func getUsersAnswer(for taskName: String) -> String? {
+        return userAnswers[getParticulerTaskName(for: taskName)]
+    }
+    
+    func getParticulerTaskName(for name: String) -> String {
+        return tasks.first(where: { NamesParser.getTaskLocation(taskName: $0.name ?? "").0 == name })?.name ?? ""
+    }
+    
+    func getTaskCorrection(for index: Int) -> Int {
+        if answersCorrection.count <= index {
+            return 0
+        } else {
+            return answersCorrection[index]
+        }
+    }
+    
+    func getUsersFinalPoints() -> Int {
+        return hundredSystemPoints
+    }
+    
+    func getUserPoints(for taskNumber: Int) -> String {
+        if taskNumber < 26 {
+            if resultPoints.count <= taskNumber {
+                return ""
+            } else {
+                return "\(resultPoints[taskNumber])"
+            }
+        } else {
+            return "\(cPartPoints[taskNumber - 26])"
+        }
+    }
+    
+    func getColorPercentage() -> (Float, Float) {
+        let greenPercentage = Float(wrightAnswerNumber) / Float(32)
+        let yellowPercentage = Float(semiWrightAnswerNumber) / Float(32) + greenPercentage
+        return (greenPercentage, yellowPercentage)
+    }
+    
+    func getWrightAnswer(for index: Int) -> String {
+        let taskName = getParticulerTaskName(for: "Задание №\(index)")
+        if let (wrightAnswer, alternativeAnswer, stringAnswer) = wrightAnswers[taskName] {
+            if stringAnswer != nil {
+                return stringAnswer ?? "0"
+            }
+            if tasksWithShuffle.contains(index) {
+                if  alternativeAnswer != nil, alternativeAnswer != 0.0 {
+                    return "\(Int(wrightAnswer ?? 0.0)) или \(Int(alternativeAnswer ?? 0.0))"
+                } else {
+                    return "\(Int(wrightAnswer ?? 0.0))"
+                }
+            }
+            if wrightAnswer != nil {
+                return "\(wrightAnswer ?? 0)"
+            }
+        }
+        return "0"
+    }
+    
+    //MARK: Private section
+    
+    private func updateTestCompletion() {
+        var finishedTests = UserDefaults.standard.value(forKey: "finishedTests") as? [String] ?? []
+        finishedTests = finishedTests.filter({ $0 != testName })
+        UserDefaults.standard.set(finishedTests, forKey: "finishedTests")
+    }
+    
+    private func updateTasksStatus() {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<User> = User.fetchRequest()
@@ -193,7 +318,7 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
         }
     }
     
-    func addTask(_ taskName: String, to statusTasks: [String:[String]], category: String) -> [String:[String]] {
+    private func addTask(_ taskName: String, to statusTasks: [String:[String]], category: String) -> [String:[String]] {
         var newStatusTasks = statusTasks
         if let foundTasks = newStatusTasks[category] {
             if !foundTasks.contains(taskName) {
@@ -205,7 +330,7 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
         return newStatusTasks
     }
     
-    func deleteTask(_ taskName: String, to statusTasks: [String:[String]], category: String) -> [String:[String]] {
+    private func deleteTask(_ taskName: String, to statusTasks: [String:[String]], category: String) -> [String:[String]] {
         var newStatusTasks = statusTasks
         if newStatusTasks[category]?.contains(taskName) ?? false {
             newStatusTasks[category] = statusTasks[category]?.filter({ $0 != taskName })
@@ -213,8 +338,8 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
         return newStatusTasks
     }
     
-    func isTaskAlreadySeen(taskName: String, solvedTasks: [String:[String]], unsolvedTasks: [String:[String]]) -> Bool {
-        let (themeName, _) = getTaskLocation(taskName: taskName)
+    private func isTaskAlreadySeen(taskName: String, solvedTasks: [String:[String]], unsolvedTasks: [String:[String]]) -> Bool {
+        let (themeName, _) = NamesParser.getTaskLocation(taskName: taskName)
         if !(solvedTasks[themeName]?.contains(taskName) ?? false) && !(unsolvedTasks[themeName]?.contains(taskName) ?? false) {
             return false
         } else {
@@ -222,7 +347,9 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
         }
     }
     
-    func setTestDataInFirestore(solvedTasks: [String:[String]], unsolvedTasks: [String:[String]], firstTryTasks: [String]) {
+    // Firestore
+    
+    private func setTestDataInFirestore(solvedTasks: [String:[String]], unsolvedTasks: [String:[String]], firstTryTasks: [String]) {
         if let userId = Auth.auth().currentUser?.uid {
             usersReference.document(userId).updateData(["unsolvedTasks" : unsolvedTasks,
                                                      "solvedTasks" : solvedTasks,
@@ -250,7 +377,9 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
         }
     }
     
-    func saveTestResultsInCoreData() {
+    // Core Data
+    
+    private func saveTestResultsInCoreData() {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
@@ -282,7 +411,7 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
         }
     }
     
-    func getHundredSystemPoints() -> Int {
+    private func getHundredSystemPoints() -> Int {
         var primaryPoints = 0
         resultPoints.forEach({ primaryPoints += $0; everyTaskAnswer.append($0)})
         var index = 0
@@ -312,139 +441,5 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
         }
         testPoints = EGEInfo.hundredSystem[primaryPoints]
         return testPoints
-    }
-    
-    func updateTestDataAsDone() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
-            
-            do {
-                let result = try context.fetch(fechRequest)
-                let trainer = result.first
-                context.delete(trainer?.tests?.first(where: {($0 as! Test).name == testName}) as! NSManagedObject)
-                try context.save()
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func isCellOpened(index: Int) -> Bool {
-        return openedCells.contains(index)
-    }
-    
-    func closeCell(for index: Int) {
-        openedCells = openedCells.filter( { $0 != index } )
-    }
-    
-    func openCell(for index: Int) {
-        openedCells.append(index)
-    }
-    
-    func getTestDurationString() -> String {
-        let allSeconds = 14100 - timeTillEnd
-        var hours = "\(allSeconds / 3600)"
-        if hours.count == 1 {
-            hours = "0" + hours
-        }
-        var minutes = "\((allSeconds % 3600) / 60)"
-        if minutes.count == 1 {
-            minutes = "0" + minutes
-        }
-        var seconds = "\((allSeconds % 3600) % 60)"
-        if seconds.count == 1 {
-            seconds = "0" + seconds
-        }
-        return "\(hours) : \(minutes) : \(seconds)"
-    }
-    
-    func getWrightAnswersNumberString() -> String {
-        return "\(wrightAnswerNumber)"
-    }
-    
-    func getImage(for taskName: String) -> UIImage? {
-        return taskImages[getParticulerTaskName(for: taskName)]
-    }
-    
-    func getDescription(for taskName: String) -> UIImage? {
-        return tasks.first(where: { getParticulerTaskName(for: taskName) == $0.name })?.taskDescription
-    }
-    
-    func getUsersAnswer(for taskName: String) -> String? {
-        return userAnswers[getParticulerTaskName(for: taskName)]
-    }
-    
-    func getParticulerTaskName(for name: String) -> String {
-        return tasks.first(where: { getTaskLocation(taskName: $0.name ?? "").0 == name })?.name ?? ""
-    }
-    
-    func getTaskLocation(taskName: String) -> (String, String) {
-        var themeNameSet = [Character]()
-        var taskNumberSet = [Character]()
-        var isDotFound = false
-        for letter in taskName {
-            if letter == "." {
-                isDotFound = true
-                continue
-            }
-            if isDotFound {
-                taskNumberSet.append(letter)
-            } else {
-                themeNameSet.append(letter)
-            }
-        }
-        let themeName = String(themeNameSet)
-        let taskNumber = String(taskNumberSet)
-        return (themeName, taskNumber)
-    }
-    
-    func getTaskCorrection(for index: Int) -> Int {
-        if answersCorrection.count <= index {
-            return 0
-        } else {
-            return answersCorrection[index]
-        }
-    }
-    
-    func getUsersFinalPoints() -> Int {
-        return hundredSystemPoints
-    }
-    
-    func getUserPoints(for taskNumber: Int) -> String {
-        if taskNumber < 26 {
-            if resultPoints.count <= taskNumber {
-                return ""
-            } else {
-                return "\(resultPoints[taskNumber])"
-            }
-        } else {
-            return "\(cPartPoints[taskNumber - 26])"
-        }
-    }
-    
-    func getColorPercentage() -> (Float, Float) {
-        let greenPercentage = Float(wrightAnswerNumber) / Float(32)
-        let yellowPercentage = Float(semiWrightAnswerNumber) / Float(32) + greenPercentage
-        return (greenPercentage, yellowPercentage)
-    }
-    
-    func getWrightAnswer(for index: Int) -> String {
-        let taskName = getParticulerTaskName(for: "Задание №\(index)")
-        if let (wrightAnswer, alternativeAnswer, stringAnswer) = wrightAnswers[taskName] {
-            if stringAnswer != nil {
-                return stringAnswer ?? "0"
-            }
-            if tasksWithShuffle.contains(index) {
-                if  alternativeAnswer != nil, alternativeAnswer != 0.0 {
-                    return "\(Int(wrightAnswer ?? 0.0)) или \(Int(alternativeAnswer ?? 0.0))"
-                } else {
-                    return "\(Int(wrightAnswer ?? 0.0))"
-                }
-            }
-            if wrightAnswer != nil {
-                return "\(wrightAnswer ?? 0)"
-            }
-        }
-        return "0"
     }
 }

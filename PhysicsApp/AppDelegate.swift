@@ -15,19 +15,8 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-//        do {
-//            try Auth.auth().signOut()
-//        } catch {
-//
-//        }
-//        for index in stride(from: 1, through: 32, by: 1) {
-//            Firestore.firestore().collection("trainer").document("Задание №\(index)").setData(["name" : "Задание №\(index)",
-//                "themeNumber" : index])
-//        }
         return true
     }
     
@@ -35,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
         let vkSdkResult = VKSdk.processOpen(url, fromApplication: sourceApplication)
         return vkSdkResult
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return .portrait
     }
 
     // MARK: UISceneSession Lifecycle

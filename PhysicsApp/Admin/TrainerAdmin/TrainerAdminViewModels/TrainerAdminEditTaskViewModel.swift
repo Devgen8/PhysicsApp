@@ -12,17 +12,62 @@ import FirebaseStorage
 
 class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
     
-    let trainerReference = Firestore.firestore().collection("trainer")
-    var tasks = [String]()
-    var taskNumber = ""
-    var themes = [String]()
-    var selectedTask = ""
-    var inverseState = false
-    var stringState = false
-    var themesOfSearchedTask = [String]()
-    var searchedTask = TaskModel()
-    var doesTaskExist = false
-    var wrightAnswer = ""
+    //MARK: Fields
+    
+    private let trainerReference = Firestore.firestore().collection("trainer")
+    private var tasks = [String]()
+    private var taskNumber = ""
+    private var themes = [String]()
+    private var selectedTask = ""
+    private var inverseState = false
+    private var stringState = false
+    private var themesOfSearchedTask = [String]()
+    private var searchedTask = TaskModel()
+    private var doesTaskExist = false
+    private var wrightAnswer = ""
+    
+    //MARK: Interface
+    
+    func searchTask(completion: @escaping (TaskModel?) -> ()) {
+        searchedTask = TaskModel()
+        Firestore.firestore().collection("trainer").document(selectedTask).getDocument { [weak self] (document, error) in
+            guard let `self` = self, error == nil else {
+                print("Could not find this task")
+                completion(nil)
+                return
+            }
+            self.themesOfSearchedTask = document?.data()?["themes"] as? [String] ?? []
+            if self.themesOfSearchedTask.count < (Int(self.taskNumber) ?? 0) || (Int(self.taskNumber) ?? 0) <= 0 {
+                completion(nil)
+                return
+            }
+            self.searchedTask.theme = self.themesOfSearchedTask[(Int(self.taskNumber) ?? 1) - 1]
+            self.searchParticularTask { (task) in
+                if task != nil {
+                    self.doesTaskExist = true
+                }
+                completion(task)
+            }
+        }
+    }
+    
+    func uploadNewTaskToTrainer(completion: @escaping (Bool) -> ()) {
+        if doesTaskExist, isAbleToUpload() {
+            wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
+            wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
+            let newTheme = searchedTask.theme ?? ""
+            themesOfSearchedTask[(Int(taskNumber) ?? 1) - 1] = newTheme
+            trainerReference.document(selectedTask).updateData(["numberOfTasks" : themesOfSearchedTask.count,
+                                                                          "themes" : themesOfSearchedTask])
+            let newKeyValuePairs = getKeyValuesForTask()
+            trainerReference.document(selectedTask).collection("tasks").document("task\(Int(taskNumber) ?? 1)").setData(newKeyValuePairs)
+            uploadTaskImage(path: "trainer/\(selectedTask)/task\(Int(taskNumber) ?? 1).png")
+            uploadTaskDescription(path: "trainer/\(selectedTask)/task\(Int(taskNumber) ?? 1)description.png")
+            completion(true)
+        } else {
+            completion(false)
+        }
+    }
     
     func getTrainerData(completion: @escaping (Bool) -> ()) {
         tasks = EGEInfo.egeSystemTasks
@@ -74,25 +119,21 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
         taskNumber = number
     }
     
-    func uploadNewTaskToTrainer(completion: @escaping (Bool) -> ()) {
-        if doesTaskExist, isAbleToUpload() {
-            wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
-            wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
-            let newTheme = searchedTask.theme ?? ""
-            themesOfSearchedTask[(Int(taskNumber) ?? 1) - 1] = newTheme
-            trainerReference.document(selectedTask).updateData(["numberOfTasks" : themesOfSearchedTask.count,
-                                                                          "themes" : themesOfSearchedTask])
-            let newKeyValuePairs = getKeyValuesForTask()
-            trainerReference.document(selectedTask).collection("tasks").document("task\(Int(taskNumber) ?? 1)").setData(newKeyValuePairs)
-            uploadTaskImage(path: "trainer/\(selectedTask)/task\(Int(taskNumber) ?? 1).png")
-            uploadTaskDescription(path: "trainer/\(selectedTask)/task\(Int(taskNumber) ?? 1)description.png")
-            completion(true)
-        } else {
-            completion(false)
-        }
+    func updateSelectedTask(with index: Int) {
+        selectedTask = tasks[index]
+    }
+
+    func updateSelectedTheme(with index: Int) {
+        searchedTask.theme = themes[index]
+    }
+
+    func getSelectedTheme() -> String {
+        return searchedTask.theme ?? ""
     }
     
-    func isAbleToUpload() -> Bool {
+    //MARK: Private section
+    
+    private func isAbleToUpload() -> Bool {
         guard
             searchedTask.image != nil, searchedTask.taskDescription != nil,
             searchedTask.theme != "", searchedTask.theme != nil,
@@ -102,7 +143,7 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
         return true
     }
     
-    func getKeyValuesForTask() -> [String : Any] {
+    private func getKeyValuesForTask() -> [String : Any] {
         var taskData = [String : Any]()
         if stringState == true {
             taskData["stringAnswer"] = wrightAnswer
@@ -117,42 +158,9 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
         return taskData
     }
     
-    func uploadTaskImage(path: String) {
-        if let data = searchedTask.image?.pngData() {
-            Storage.storage().reference().child(path).putData(data)
-        }
-    }
+    // Firestore and Storage
     
-    func uploadTaskDescription(path: String) {
-        if let data = searchedTask.taskDescription?.pngData() {
-            Storage.storage().reference().child(path).putData(data)
-        }
-    }
-    
-    func searchTask(completion: @escaping (TaskModel?) -> ()) {
-        searchedTask = TaskModel()
-        Firestore.firestore().collection("trainer").document(selectedTask).getDocument { [weak self] (document, error) in
-            guard let `self` = self, error == nil else {
-                print("Could not find this task")
-                completion(nil)
-                return
-            }
-            self.themesOfSearchedTask = document?.data()?["themes"] as? [String] ?? []
-            if self.themesOfSearchedTask.count < (Int(self.taskNumber) ?? 0) || (Int(self.taskNumber) ?? 0) <= 0 {
-                completion(nil)
-                return
-            }
-            self.searchedTask.theme = self.themesOfSearchedTask[(Int(self.taskNumber) ?? 1) - 1]
-            self.searchParticularTask { (task) in
-                if task != nil {
-                    self.doesTaskExist = true
-                }
-                completion(task)
-            }
-        }
-    }
-    
-    func searchParticularTask(completion: @escaping (TaskModel?) -> ()) {
+    private func searchParticularTask(completion: @escaping (TaskModel?) -> ()) {
         Firestore.firestore().collection("trainer").document(selectedTask).collection("tasks").whereField("serialNumber", isEqualTo: Int(taskNumber) ?? 0).getDocuments { [weak self] (snapshot, error) in
             guard let `self` = self, error == nil, let document = snapshot?.documents.first else {
                 print("Could not find this task")
@@ -170,9 +178,9 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
         }
     }
     
-    func getTaskImage(completion: @escaping (TaskModel?) -> ()) {
+    private func getTaskImage(completion: @escaping (TaskModel?) -> ()) {
         let imageRef = Storage.storage().reference().child("trainer/\(selectedTask)/task\(taskNumber).png")
-        imageRef.getData(maxSize: 1 * 2048 * 2048) { [weak self] data, error in
+        imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
             guard let `self` = self, error == nil else {
                 print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
                 completion(nil)
@@ -187,9 +195,9 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
         }
     }
     
-    func getTaskDescription(completion: @escaping (TaskModel?) -> ()) {
+    private func getTaskDescription(completion: @escaping (TaskModel?) -> ()) {
         let imageRef = Storage.storage().reference().child("trainer/\(selectedTask)/task\(taskNumber)description.png")
-        imageRef.getData(maxSize: 1 * 2048 * 2048) { [weak self] data, error in
+        imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
             guard let `self` = self, error == nil else {
                 print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
                 completion(nil)
@@ -201,23 +209,22 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
             }
         }
     }
-
-    func updateSelectedTask(with index: Int) {
-        selectedTask = tasks[index]
-    }
-
-    func updateSelectedTheme(with index: Int) {
-        searchedTask.theme = themes[index]
-    }
-
-    func getSelectedTheme() -> String {
-        return searchedTask.theme ?? ""
+    
+    private func uploadTaskImage(path: String) {
+        if let data = searchedTask.image?.pngData() {
+            Storage.storage().reference().child(path).putData(data)
+        }
     }
     
-    // we don't need it here
-    func uploadNewTaskToTest(_ testName: String, completion: @escaping (Bool) -> ()) {
-        
+    private func uploadTaskDescription(path: String) {
+        if let data = searchedTask.taskDescription?.pngData() {
+            Storage.storage().reference().child(path).putData(data)
+        }
     }
+    
+    //MARK: Unused required methods
+    
+    func uploadNewTaskToTest(_ testName: String, completion: @escaping (Bool) -> ()) {}
 }
 
 extension TrainerAdminEditTaskViewModel: SelectedThemesUpdater {

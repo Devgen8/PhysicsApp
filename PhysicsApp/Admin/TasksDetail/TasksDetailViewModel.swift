@@ -12,15 +12,19 @@ import FirebaseStorage
 
 class TasksDetailViewModel {
     
-    let trainerReference = Firestore.firestore().collection("trainer")
-    var sortTypeName = ""
-    var tasks = [AdminStatsModel]()
-    var descending = true
-    var cellLabels = [String]()
-    var cellPercentage = [Int]()
+    //MARK: Fields
+    
+    private let trainerReference = Firestore.firestore().collection("trainer")
+    private var sortTypeName = ""
+    private var tasks = [AdminStatsModel]()
+    private var descending = true
+    private var cellLabels = [String]()
+    private var cellPercentage = [Int]()
+    
+    //MARK: Interface
     
     func getTasksData(for index: Int, completion: @escaping (String, Data) -> ()) {
-        let (taskName, taskNumber) = getTaskLocation(taskName: cellLabels[index])
+        let (taskName, taskNumber) = NamesParser.getTaskLocation(taskName: cellLabels[index])
         trainerReference.document(taskName).collection("tasks").document("task\(taskNumber)").getDocument { (document, error) in
             guard error == nil else {
                 print("Error reading task info: \(String(describing: error?.localizedDescription))")
@@ -39,38 +43,12 @@ class TasksDetailViewModel {
         }
     }
     
-    func downloadTaskPhoto(for taskName: String, completion: @escaping (Data) -> ()) {
-        let (taskName, taskNumber) = getTaskLocation(taskName: taskName)
-        let imageRef = Storage.storage().reference().child("trainer/\(taskName)/task\(taskNumber).png")
-        imageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
-            guard error == nil else {
-                print("Error downloading images: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            if let data = data {
-                completion(data)
-            }
-        }
+    func setSortType(_ newSortType: String) {
+        sortTypeName = newSortType
     }
     
-    func getTaskLocation(taskName: String) -> (String, String) {
-        var themeNameSet = [Character]()
-        var taskNumberSet = [Character]()
-        var isDotFound = false
-        for letter in taskName {
-            if letter == "." {
-                isDotFound = true
-                continue
-            }
-            if isDotFound {
-                taskNumberSet.append(letter)
-            } else {
-                themeNameSet.append(letter)
-            }
-        }
-        let themeName = String(themeNameSet)
-        let taskNumber = String(taskNumberSet)
-        return (themeName, taskNumber)
+    func setTasks(_ newTasks: [AdminStatsModel]) {
+        tasks = newTasks
     }
     
     func prepareDataForTableReload(completion: (Bool) -> ()) {
@@ -92,7 +70,31 @@ class TasksDetailViewModel {
         return cellPercentage[index]
     }
     
-    func fullfillAll() {
+    func changeDescending() {
+        descending = !descending
+    }
+    
+    func getSortTypeName() -> String {
+        return sortTypeName
+    }
+    
+    //MARK: Private section
+    
+    private func downloadTaskPhoto(for taskName: String, completion: @escaping (Data) -> ()) {
+        let (taskName, taskNumber) = NamesParser.getTaskLocation(taskName: taskName)
+        let imageRef = Storage.storage().reference().child("trainer/\(taskName)/task\(taskNumber).png")
+        imageRef.getData(maxSize: 2 * 2048 * 2048) { (data, error) in
+            guard error == nil else {
+                print("Error downloading images: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if let data = data {
+                completion(data)
+            }
+        }
+    }
+    
+    private func fullfillAll() {
         var tasksStats = [String:Int]()
         for task in tasks {
             if let taskName = task.name,
@@ -107,13 +109,5 @@ class TasksDetailViewModel {
             cellLabels.append(pair.key)
             cellPercentage.append(pair.value)
         }
-    }
-    
-    func changeDescending() {
-        descending = !descending
-    }
-    
-    func getSortTypeName() -> String {
-        return sortTypeName
     }
 }

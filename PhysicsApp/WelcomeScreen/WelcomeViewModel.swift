@@ -14,7 +14,11 @@ import FirebaseAuth
 
 class WelcomeViewModel {
     
-    var isNewUser = true
+    //MARK: Fields
+    
+    private var isNewUser = true
+    
+    //MARK: Interface
     
     func authUser(with result: VKAuthorizationResult, completion: @escaping (String?, Bool) -> ()) {
         checkUserAdminPermission(userId: result.token.userId) { [weak self] (isAdmin) in
@@ -57,12 +61,6 @@ class WelcomeViewModel {
         }
     }
     
-    func getUsersName(id: String, token: String, completion: @escaping (String?) -> ()) {
-        NetworkService.fetchRecipes(urlString: "https://api.vk.com/method/users.get?user_ids=\(id)&fields=bdate&access_token=\(token)&v=5.107") { (user) in
-            completion(user?.response?.first?.first_name)
-        }
-    }
-    
     func saveUsersDataInFirestore(_ result: VKAuthorizationResult) {
         if let userId = Auth.auth().currentUser?.uid, isNewUser {
             getUsersName(id: result.token.userId, token: result.token.accessToken) { (name) in
@@ -81,7 +79,17 @@ class WelcomeViewModel {
         }
     }
     
-    func getUsersPassword(from email: String) -> String {
+    //MARK: Private section
+    
+    // Firestore
+    
+    private func getUsersName(id: String, token: String, completion: @escaping (String?) -> ()) {
+        NetworkService.fetchData(urlString: "https://api.vk.com/method/users.get?user_ids=\(id)&fields=bdate&access_token=\(token)&v=5.107") { (user) in
+            completion(user?.response?.first?.first_name)
+        }
+    }
+    
+    private func getUsersPassword(from email: String) -> String {
         var letters = [Character]()
         for letter in email {
             if letter != "@" {
@@ -96,7 +104,7 @@ class WelcomeViewModel {
         return String(letters)
     }
     
-    func authorizeUser(email: String, password: String, completion: @escaping (String?) -> ()) {
+    private func authorizeUser(email: String, password: String, completion: @escaping (String?) -> ()) {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if error != nil {
                 completion(nil)
@@ -106,7 +114,7 @@ class WelcomeViewModel {
         }
     }
     
-    func createUser(email: String?,
+    private func createUser(email: String?,
                     completion: @escaping (String?) -> ()) {
         guard let email = email, email.trimmingCharacters(in: .whitespacesAndNewlines) != "" else {
             completion("Не удалось авторизоваться")
@@ -123,10 +131,10 @@ class WelcomeViewModel {
         }
     }
     
-    func updateTextFile() {
+    private func updateTextFile() {
         if Auth.auth().currentUser?.uid != nil {
             let docRef = Storage.storage().reference().child("vkIds.txt")
-            docRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
+            docRef.getData(maxSize: 4 * 2048 * 2048) { data, error in
                 guard error == nil else {
                     if let errorDescription = error?.localizedDescription,
                         errorDescription == "Object vkIds.txt does not exist." {
@@ -141,7 +149,7 @@ class WelcomeViewModel {
         }
     }
     
-    func uploadEditedFile(with previousInfo: String) {
+    private func uploadEditedFile(with previousInfo: String) {
         let userId = VKSdk.accessToken()?.userId ?? ""
         if previousInfo == "" {
             Storage.storage().reference().child("vkIds.txt").putData(userId.data(using: .utf8) ?? Data())

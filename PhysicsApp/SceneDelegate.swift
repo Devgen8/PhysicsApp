@@ -14,26 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = WelcomeViewController()
-        window?.makeKeyAndVisible()
-//        VKSdk.initialize(withAppId: "7378716")?.register(self)
-//        let scope = ["freinds", "email"]
-//        VKSdk.wakeUpSession(scope) { [weak self] (authState, error) in
-//            guard let `self` = self, error == nil else {
-//                print("Some problem took place in vk auth")
-//                return
-//            }
-//            switch authState {
-//            case .authorized: self.window?.rootViewController = TabBarViewController()
-//            @unknown default: self.window?.rootViewController = WelcomeViewController()
-//            }
-//            self.window?.makeKeyAndVisible()
-//        }
         if Auth.auth().currentUser != nil, let isAdmin = UserDefaults.standard.value(forKey: "isAdmin") as? Bool {
             if isAdmin {
                 window?.rootViewController = MainAdminViewController()
@@ -44,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             window?.rootViewController = WelcomeViewController()
         }
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -76,16 +61,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
-}
-
-extension SceneDelegate: VKSdkDelegate {
-    func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
-        print("vkSdkAccessAuthorizationFinished")
-    }
-    
-    func vkSdkUserAuthorizationFailed() {
-        print("vkSdkUserAuthorizationFailed")
-    }
-    
-    
 }

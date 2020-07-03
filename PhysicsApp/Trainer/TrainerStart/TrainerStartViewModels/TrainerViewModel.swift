@@ -13,15 +13,19 @@ import CoreData
 
 class TrainerViewModel: TrainerViewModelProvider {
     
-    let tasksReference = Firestore.firestore().collection("trainer")
-    let usersReference = Firestore.firestore().collection("users")
-    var unsolvedTasks = [String:[String]]()
-    var solvedTasks = [String:[String]]()
-    var firstTryTasks = [String]()
-    var themes = [String]()
-    var numberOfTasksIn = [String:Int]()
-    var isFirstTimeReading = false
-    var egeTasksThemes = [String:[String]]()
+    //MARK: Fields
+    
+    private let tasksReference = Firestore.firestore().collection("trainer")
+    private let usersReference = Firestore.firestore().collection("users")
+    private var unsolvedTasks = [String:[String]]()
+    private var solvedTasks = [String:[String]]()
+    private var firstTryTasks = [String]()
+    private var themes = [String]()
+    private var numberOfTasksIn = [String:Int]()
+    private var isFirstTimeReading = false
+    private var egeTasksThemes = [String:[String]]()
+    
+    //MARK: Interface
     
     func getThemes(completion: @escaping (Bool) -> ()) {
         if let lastUpdateDate = UserDefaults.standard.value(forKey: "taskTypeUpdateDate") as? Date {
@@ -42,13 +46,107 @@ class TrainerViewModel: TrainerViewModelProvider {
         }
     }
     
-    func updateKeysInfo() {
-        UserDefaults.standard.set(Date(), forKey: "taskTypeUpdateDate")
-        UserDefaults.standard.set(themes, forKey: "notUpdatedTasks")
-        UserDefaults.standard.set(themes, forKey: "notUpdatedUnsolvedTasks")
+    func transportDataTo(_ viewModel: TasksListViewModel, at index: Int) {
+        viewModel.setTheme(themes[index])
+        viewModel.setUnsolvedTasks(unsolvedTasks)
+        viewModel.unsolvedTaskUpdater = self
+        viewModel.setSortType(.tasks)
     }
     
-    func saveTasksInCoreData() {
+    func getTasksProgress(for index: Int) -> (Float, Float) {
+        if let numberOfTasks = numberOfTasksIn[themes[index]] {
+            let successProgress = Float(solvedTasks[themes[index]]?.count ?? 0) / Float(numberOfTasks)
+            let mistakesProgress = successProgress + Float(unsolvedTasks[themes[index]]?.count ?? 0) / Float(numberOfTasks)
+            return (successProgress, mistakesProgress)
+        }
+        return (0.0, 0.0)
+    }
+    
+    func getThemesCount() -> Int {
+        return themes.count
+    }
+    
+    func getTheme(for index: Int) -> String {
+        return themes[index]
+    }
+    
+    func getUnsolvedTasks() -> [String : [String]] {
+        return unsolvedTasks
+    }
+    
+    func getUnsolvedTasksCount() -> Int {
+        var tasksCount = 0
+        for theme in unsolvedTasks.keys {
+            tasksCount += unsolvedTasks[theme]?.count ?? 0
+        }
+        return tasksCount
+    }
+    
+    //MARK: Private section
+    
+    // Firestore
+    
+    private func getThemesFromFirestore(completion: @escaping (Bool) -> ()) {
+        tasksReference.order(by: "themeNumber", descending: false).getDocuments { [weak self] (snapshot, error) in
+            guard let `self` = self, error == nil, let documents = snapshot?.documents else {
+                completion(false)
+                return
+            }
+            var allThemes = [String]()
+            var tasksThemes = [String:[String]]()
+            for document in documents {
+                if let themeName = document.data()[Theme.name.rawValue] as? String {
+                    allThemes.append(themeName)
+                    tasksThemes[themeName] = document.data()["themes"] as? [String] ?? []
+                    if let numberOfTasks = document.data()["numberOfTasks"] as? Int {
+                        self.numberOfTasksIn[themeName] = numberOfTasks
+                    }
+                }
+            }
+            self.themes = allThemes
+            self.egeTasksThemes = tasksThemes
+            if self.isFirstTimeReading {
+                self.getUnsolvedTasks { (isReady) in
+                    completion(isReady)
+                }
+            } else {
+                self.updateKeysInfo()
+                self.saveTasksInCoreData()
+                self.getThemesFromCoreData { (isReady) in
+                    completion(isReady)
+                }
+            }
+        }
+    }
+    
+    private func getUnsolvedTasks(completion: @escaping (Bool) -> ()) {
+        if let userId = Auth.auth().currentUser?.uid {
+            usersReference.document(userId).getDocument { [weak self] (document, error) in
+                guard let `self` = self, error == nil, let document = document else {
+                    print("Error reading unsolved tasks: \(String(describing: error?.localizedDescription))")
+                    completion(false)
+                    return
+                }
+                let mistakeTasks = document.data()?["unsolvedTasks"] as? [String : [String]]
+                let wrightTasks = document.data()?["solvedTasks"] as? [String : [String]]
+                let firstTryTasks = document.data()?["firstTryTasks"] as? [String]
+                self.unsolvedTasks = mistakeTasks ?? [String:[String]]()
+                self.solvedTasks = wrightTasks ?? [String:[String]]()
+                self.firstTryTasks = firstTryTasks ?? [String]()
+                self.saveTasksInCoreData()
+                self.updateKeysInfo()
+                completion(true)
+            }
+        } else {
+            self.saveTasksInCoreData()
+            self.updateKeysInfo()
+            completion(true)
+        }
+    }
+    
+    // Core Data
+    
+    private func saveTasksInCoreData() {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 //filling trainer
@@ -91,7 +189,7 @@ class TrainerViewModel: TrainerViewModelProvider {
         }
     }
     
-    func getThemesFromCoreData(completion: @escaping (Bool) -> ()) {
+    private func getThemesFromCoreData(completion: @escaping (Bool) -> ()) {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
             let userFetchRequest: NSFetchRequest<User> = User.fetchRequest()
@@ -123,98 +221,10 @@ class TrainerViewModel: TrainerViewModelProvider {
         }
     }
     
-    func getThemesFromFirestore(completion: @escaping (Bool) -> ()) {
-        tasksReference.order(by: "themeNumber", descending: false).getDocuments { [weak self] (snapshot, error) in
-            guard let `self` = self, error == nil, let documents = snapshot?.documents else {
-                completion(false)
-                return
-            }
-            var allThemes = [String]()
-            var tasksThemes = [String:[String]]()
-            for document in documents {
-                if let themeName = document.data()[Theme.name.rawValue] as? String {
-                    allThemes.append(themeName)
-                    tasksThemes[themeName] = document.data()["themes"] as? [String] ?? []
-                    if let numberOfTasks = document.data()["numberOfTasks"] as? Int {
-                        self.numberOfTasksIn[themeName] = numberOfTasks
-                    }
-                }
-            }
-            self.themes = allThemes
-            self.egeTasksThemes = tasksThemes
-            if self.isFirstTimeReading {
-                self.getUnsolvedTasks { (isReady) in
-                    completion(isReady)
-                }
-            } else {
-                self.updateKeysInfo()
-                self.saveTasksInCoreData()
-                self.getThemesFromCoreData { (isReady) in
-                    completion(isReady)
-                }
-            }
-        }
-    }
-    
-    func getUnsolvedTasksCount() -> Int {
-        var tasksCount = 0
-        for theme in unsolvedTasks.keys {
-            tasksCount += unsolvedTasks[theme]?.count ?? 0
-        }
-        return tasksCount
-    }
-    
-    func getUnsolvedTasks(completion: @escaping (Bool) -> ()) {
-        if let userId = Auth.auth().currentUser?.uid {
-            usersReference.document(userId).getDocument { [weak self] (document, error) in
-                guard let `self` = self, error == nil, let document = document else {
-                    print("Error reading unsolved tasks: \(String(describing: error?.localizedDescription))")
-                    completion(false)
-                    return
-                }
-                let mistakeTasks = document.data()?["unsolvedTasks"] as? [String : [String]]
-                let wrightTasks = document.data()?["solvedTasks"] as? [String : [String]]
-                let firstTryTasks = document.data()?["firstTryTasks"] as? [String]
-                self.unsolvedTasks = mistakeTasks ?? [String:[String]]()
-                self.solvedTasks = wrightTasks ?? [String:[String]]()
-                self.firstTryTasks = firstTryTasks ?? [String]()
-                self.saveTasksInCoreData()
-                self.updateKeysInfo()
-                completion(true)
-            }
-        } else {
-            self.saveTasksInCoreData()
-            self.updateKeysInfo()
-            completion(true)
-        }
-    }
-    
-    func transportDataTo(_ viewModel: TasksListViewModel, at index: Int) {
-        viewModel.theme = themes[index]
-        viewModel.unsolvedTasks = unsolvedTasks
-        viewModel.unsolvedTaskUpdater = self
-        viewModel.sortType = .tasks
-    }
-    
-    func getTasksProgress(for index: Int) -> (Float, Float) {
-        if let numberOfTasks = numberOfTasksIn[themes[index]] {
-            let successProgress = Float(solvedTasks[themes[index]]?.count ?? 0) / Float(numberOfTasks)
-            let mistakesProgress = successProgress + Float(unsolvedTasks[themes[index]]?.count ?? 0) / Float(numberOfTasks)
-            return (successProgress, mistakesProgress)
-        }
-        return (0.0, 0.0)
-    }
-    
-    func getThemesCount() -> Int {
-        return themes.count
-    }
-    
-    func getTheme(for index: Int) -> String {
-        return themes[index]
-    }
-    
-    func getUnsolvedTasks() -> [String : [String]] {
-        return unsolvedTasks
+    private func updateKeysInfo() {
+        UserDefaults.standard.set(Date(), forKey: "taskTypeUpdateDate")
+        UserDefaults.standard.set(themes, forKey: "notUpdatedTasks")
+        UserDefaults.standard.set(themes, forKey: "notUpdatedUnsolvedTasks")
     }
 }
 

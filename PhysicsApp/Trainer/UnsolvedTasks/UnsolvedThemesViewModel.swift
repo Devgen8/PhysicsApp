@@ -10,11 +10,35 @@ import UIKit
 import CoreData
 
 class UnsolvedThemesViewModel {
+    
+    //MARK: Fields
+    
+    private var themesUnsolvedTasks = [String:[String]]()
+    private var sortType: TasksSortType?
+    private var themesKeys = [String]()
+    
     var unsolvedTasks = [String:[String]]()
-    var themesUnsolvedTasks = [String:[String]]()
     var unsolvedTasksUpdater: UnsolvedTaskUpdater?
-    var sortType: TasksSortType?
-    var themesKeys = [String]()
+    
+    //MARK: Interface
+    
+    func setThemesUnsolvedTasks(_ newThemes: [String:[String]]) {
+        themesUnsolvedTasks = newThemes
+    }
+    
+    func setSortType(_ newSortType: TasksSortType) {
+        sortType = newSortType
+    }
+    
+    func transportData(to viewModel: TasksListViewModel, from index: Int) {
+        viewModel.setTheme(themesKeys[index])
+        viewModel.setUnsolvedTasks(unsolvedTasks)
+        viewModel.setThemeUnsolvedTasks(themesUnsolvedTasks)
+        viewModel.setLookingForUnsolvedTasks(true)
+        viewModel.unsolvedTaskUpdater = self
+        viewModel.setSortType(sortType)
+        viewModel.setThemeTasks(themesUnsolvedTasks[themesKeys[index]] ?? [])
+    }
 }
 
 extension UnsolvedThemesViewModel: DataConstructer {
@@ -64,7 +88,7 @@ extension UnsolvedThemesViewModel: DataConstructer {
     }
     
     func getTaskPosition(taskName: String) -> Int {
-        let (themeName, _) = getTaskLocation(taskName: taskName)
+        let (themeName, _) = NamesParser.getTaskLocation(taskName: taskName)
         if let range = themeName.range(of: "№") {
             let numberString = String(themeName[range.upperBound...])
             return Int(numberString) ?? 0
@@ -84,26 +108,6 @@ extension UnsolvedThemesViewModel: DataConstructer {
             }
         }
         return ""
-    }
-    
-    func getTaskLocation(taskName: String) -> (String, String) {
-        var themeNameSet = [Character]()
-        var taskNumberSet = [Character]()
-        var isDotFound = false
-        for letter in taskName {
-            if letter == "." {
-                isDotFound = true
-                continue
-            }
-            if isDotFound {
-                taskNumberSet.append(letter)
-            } else {
-                themeNameSet.append(letter)
-            }
-        }
-        let themeName = String(themeNameSet)
-        let taskNumber = String(taskNumberSet)
-        return (themeName, taskNumber)
     }
 }
 
@@ -128,7 +132,7 @@ extension UnsolvedThemesViewModel: UnsolvedTaskUpdater {
                     for themeTasksPair in themesUnsolvedTasks {
                         let key = themeTasksPair.key
                         for taskName in themesUnsolvedTasks[key] ?? [] {
-                            let (taskNumber, _) = getTaskLocation(taskName: taskName)
+                            let (taskNumber, _) = NamesParser.getTaskLocation(taskName: taskName)
                             if realUnsolvedTasks[taskNumber]?.contains(taskName) ?? false {
                                 if newThemesUnsolvedTasks[key] == nil {
                                     newThemesUnsolvedTasks[key] = [taskName]

@@ -47,7 +47,7 @@
                         <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="opS-FI-lsI"/>
                     </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Зарегистрируйся в нашем приложение через ВКонтакте и ты получишь:" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xua-vl-xRe">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Зарегистрируйся в нашем приложение через ВКонтакте и ты получишь:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xua-vl-xRe">
                     <rect key="frame" x="30" y="141" width="354" height="75"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>

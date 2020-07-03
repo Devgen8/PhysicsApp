@@ -11,7 +11,11 @@ import FirebaseFirestore
 
 class AdminSettingViewModel {
     
+    //MARK: Fields
+    
     private var adminIds = [String]()
+    
+    //MARK: Interface
     
     func getAdminsList(completion: @escaping (Bool) -> ()) {
         Firestore.firestore().collection("admin").getDocuments { (snapshot, error) in

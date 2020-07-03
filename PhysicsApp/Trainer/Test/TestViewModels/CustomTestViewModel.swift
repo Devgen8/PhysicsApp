@@ -14,13 +14,18 @@ import FirebaseAuth
 
 class CustomTestViewModel: TestViewModel {
     
+    //MARK: Fields
+    
+    private var tasks = [TaskModel]()
+    private var wrightAnswers = [String:(Double?, Double?, String?)]()
+    private var timeTillEnd = 14100
+    private let trainerReference = Firestore.firestore().collection("trainer")
+    private let userReference = Firestore.firestore().collection("users")
+    
     var name = ""
     var testAnswers = [String : String]()
-    var tasks = [TaskModel]()
-    var wrightAnswers = [String:(Double?, Double?, String?)]()
-    var timeTillEnd = 14100
-    let trainerReference = Firestore.firestore().collection("trainer")
-    let userReference = Firestore.firestore().collection("users")
+    
+    //MARK: Interface
     
     func getTestTasks(completion: @escaping (Bool) -> ()) {
         tasks = []
@@ -62,7 +67,7 @@ class CustomTestViewModel: TestViewModel {
                                         self.tasks.append(newTask)
                                         if self.tasks.count == 32 {
                                             self.tasks = self.tasks.sorted(by: { self.getTaskPosition(taskName: $0.name ?? "") < self.getTaskPosition(taskName: $1.name ?? "") })
-                                            self.name = "Пробник \(dateFormater.string(from: Date()))"
+                                            self.name = "Мой пробник \(dateFormater.string(from: Date()))"
                                             self.createPlaceholdersForAnswers()
                                             self.fillInWrightAnswers()
                                             self.saveNewTestInCoreData()
@@ -80,7 +85,7 @@ class CustomTestViewModel: TestViewModel {
                 }
                 if tasks.count == 32 {
                     self.tasks = self.tasks.sorted(by: { self.getTaskPosition(taskName: $0.name ?? "") < self.getTaskPosition(taskName: $1.name ?? "") })
-                    self.name = "Пробник \(dateFormater.string(from: Date()))"
+                    self.name = "Мой пробник \(dateFormater.string(from: Date()))"
                     self.createPlaceholdersForAnswers()
                     self.fillInWrightAnswers()
                     self.saveNewTestInCoreData()
@@ -90,185 +95,6 @@ class CustomTestViewModel: TestViewModel {
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    func createPlaceholdersForAnswers() {
-        for task in tasks {
-            testAnswers[task.name ?? ""] = ""
-        }
-    }
-    
-    func fillInWrightAnswers() {
-        for task in tasks {
-            wrightAnswers[task.name ?? ""] = (task.wrightAnswer, task.alternativeAnswer, task.stringAnswer)
-        }
-    }
-    
-    func saveNewTestInCoreData() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            do {
-                let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
-                let result = try context.fetch(fechRequest)
-                let trainer = result.first
-                let newTest = Test(context: context)
-                let allTests = trainer?.tests?.mutableCopy() as! NSMutableSet
-                newTest.name = name
-                newTest.time = Int64(timeTillEnd)
-                newTest.testObject = TestObject(testTasks: tasks, usersAnswers: testAnswers)
-                allTests.add(newTest)
-                trainer?.tests = allTests
-                
-                try context.save()
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func getTaskPosition(taskName: String) -> Int {
-        let (themeName, _) = getTaskLocation(taskName: taskName)
-        if let range = themeName.range(of: "№") {
-            let numberString = String(themeName[range.upperBound...])
-            return Int(numberString) ?? 0
-        }
-        return 0
-    }
-    
-    func convertTasksDataToTask(_ taskData: TaskData) -> TaskModel {
-        let chosenTask = TaskModel()
-        chosenTask.name = taskData.name
-        chosenTask.alternativeAnswer = taskData.alternativeAnswer
-        chosenTask.wrightAnswer = taskData.wrightAnswer
-        chosenTask.serialNumber = Int(taskData.serialNumber)
-        chosenTask.stringAnswer = taskData.stringAnswer
-        chosenTask.image = UIImage(data: taskData.image ?? Data())
-        chosenTask.taskDescription = UIImage(data: taskData.taskDescription ?? Data())
-        return chosenTask
-    }
-    
-    func getTasksFromFirestore(number: Int, completion: @escaping (TaskModel) -> ()) {
-        trainerReference.document("Задание №\(number)").collection("tasks").getDocuments { (snapshot, error) in
-            guard error == nil else {
-                print("Error reading tasks: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            if let documents = snapshot?.documents {
-                var foundTasks = [TaskModel]()
-                for document in documents {
-                    let task = TaskModel()
-                    task.serialNumber = document.data()[Task.serialNumber.rawValue] as? Int
-                    task.wrightAnswer = document.data()[Task.wrightAnswer.rawValue] as? Double
-                    task.alternativeAnswer = document.data()[Task.alternativeAnswer.rawValue] as? Double
-                    task.stringAnswer = document.data()[Task.wrightAnswer.rawValue] as? String
-                    task.succeded = document.data()[Task.succeded.rawValue] as? Int
-                    task.failed = document.data()[Task.failed.rawValue] as? Int
-                    task.name = "Задание №\(number)" + "." + "\(task.serialNumber ?? 0)"
-                    foundTasks.append(task)
-                }
-                self.downloadPhotos(foundTasks) { (fullTasks) in
-                    completion(fullTasks[Int.random(in: 0..<fullTasks.count)])
-                }
-            }
-        }
-    }
-    
-    func downloadPhotos(_ foundTasks: [TaskModel], completion: @escaping ([TaskModel]) -> ()) {
-        var count = 0
-        for task in foundTasks {
-            let (themeName, taskNumber) = getTaskLocation(taskName: task.name ?? "")
-            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
-            imageRef.getData(maxSize: 1 * 2048 * 2048) { [weak self] data, error in
-                guard let `self` = self, error == nil else {
-                    print("Error downloading images: \(String(describing: error?.localizedDescription))")
-                    return
-                }
-                if let data = data, let image = UIImage(data: data) {
-                    foundTasks.first(where: { $0.name == task.name })?.image = image
-                    count += 1
-                }
-                if count == foundTasks.count {
-                    self.downloadDescription(foundTasks) { (foundTasks) in
-                        completion(foundTasks)
-                    }
-                }
-            }
-        }
-    }
-    
-    func downloadDescription(_ foundTasks: [TaskModel], completion: @escaping ([TaskModel]) -> ()) {
-        var count = 0
-        for task in foundTasks {
-            let (themeName, taskNumber) = getTaskLocation(taskName: task.name ?? "")
-            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
-            imageRef.getData(maxSize: 1 * 2048 * 2048) { [weak self] (data, error) in
-                guard let `self` = self, error == nil else {
-                    print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
-                    return
-                }
-                if let data = data, let image = UIImage(data: data) {
-                    foundTasks.first(where: { $0.name == task.name })?.taskDescription = image
-                    count += 1
-                }
-                if count == foundTasks.count {
-                    self.saveTasksToCoreData(foundTasks)
-                    completion(foundTasks)
-                }
-            }
-        }
-    }
-    
-    func saveTasksToCoreData(_ foundTasks: [TaskModel]) {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            do {
-                let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
-                let result = try context.fetch(fechRequest)
-                let trainer = result.first
-                let newTasks = NSMutableOrderedSet()
-                for task in foundTasks {
-                    let newTask = TaskData(context: context)
-                    if let alternativeAnswer = task.alternativeAnswer {
-                        newTask.alternativeAnswer = alternativeAnswer
-                    }
-                    if let wrightAnswer = task.wrightAnswer {
-                        newTask.wrightAnswer = wrightAnswer
-                    }
-                    if let serialNumber = task.serialNumber {
-                        newTask.serialNumber = Int16(serialNumber)
-                    }
-                    newTask.stringAnswer = task.stringAnswer
-                    newTask.image = task.image?.pngData()
-                    newTask.taskDescription = task.taskDescription?.pngData()
-                    newTask.name = task.name
-                    newTasks.add(newTask)
-                }
-                let (theme, _) = getTaskLocation(taskName: foundTasks[0].name ?? "")
-                (trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == theme}) as! EgeTask).tasks = newTasks
-                
-                try context.save()
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func getTaskLocation(taskName: String) -> (String, String) {
-        var themeNameSet = [Character]()
-        var taskNumberSet = [Character]()
-        var isDotFound = false
-        for letter in taskName {
-            if letter == "." {
-                isDotFound = true
-                continue
-            }
-            if isDotFound {
-                taskNumberSet.append(letter)
-            } else {
-                themeNameSet.append(letter)
-            }
-        }
-        let themeName = String(themeNameSet)
-        let taskNumber = String(taskNumberSet)
-        return (themeName, taskNumber)
     }
     
     func getTasksNumber() -> Int {
@@ -299,17 +125,17 @@ class CustomTestViewModel: TestViewModel {
     }
     
     func transportData(to viewModel: CPartTestViewModel, with time: Int) {
-        viewModel.timeTillEnd = time
-        viewModel.wrightAnswers = wrightAnswers
-        viewModel.testAnswers = testAnswers
+        viewModel.setTimeTillEnd(time)
+        viewModel.setwrightAnswers(wrightAnswers)
+        viewModel.setTestAnswers(testAnswers)
         var tasksImages = [String:UIImage]()
         for task in tasks {
             tasksImages[task.name ?? ""] = task.image
         }
-        viewModel.tasksImages = tasksImages
-        viewModel.name = name
+        viewModel.setTasksImages(tasksImages)
+        viewModel.setName(name)
         viewModel.testAnswersUpdater = self
-        viewModel.tasks = tasks
+        viewModel.setTasks(tasks)
     }
     
     func getPhotoForTask(_ index: Int) -> UIImage {
@@ -336,6 +162,16 @@ class CustomTestViewModel: TestViewModel {
         return index + 1
     }
     
+    func getMaxRatio() -> CGFloat {
+        var maxRatio: CGFloat = 0
+        for task in tasks {
+            if (task.image?.size.height ?? 0) / (task.image?.size.width ?? 1) > maxRatio {
+                maxRatio = (task.image?.size.height ?? 0) / (task.image?.size.width ?? 1)
+            }
+        }
+        return maxRatio
+    }
+    
     func getTimeString(from allSeconds: Int) -> String {
         var hours = "\(allSeconds / 3600)"
         if hours.count == 1 {
@@ -352,7 +188,172 @@ class CustomTestViewModel: TestViewModel {
         return "\(hours) : \(minutes) : \(seconds)"
     }
     
-    func deleteData() {
+    //MARK: Private section
+    
+    private func createPlaceholdersForAnswers() {
+        for task in tasks {
+            testAnswers[task.name ?? ""] = ""
+        }
+    }
+    
+    private func fillInWrightAnswers() {
+        for task in tasks {
+            wrightAnswers[task.name ?? ""] = (task.wrightAnswer, task.alternativeAnswer, task.stringAnswer)
+        }
+    }
+    
+    private func getTaskPosition(taskName: String) -> Int {
+        let (themeName, _) = NamesParser.getTaskLocation(taskName: taskName)
+        if let range = themeName.range(of: "№") {
+            let numberString = String(themeName[range.upperBound...])
+            return Int(numberString) ?? 0
+        }
+        return 0
+    }
+    
+    private func convertTasksDataToTask(_ taskData: TaskData) -> TaskModel {
+        let chosenTask = TaskModel()
+        chosenTask.name = taskData.name
+        chosenTask.alternativeAnswer = taskData.alternativeAnswer
+        chosenTask.wrightAnswer = taskData.wrightAnswer
+        chosenTask.serialNumber = Int(taskData.serialNumber)
+        chosenTask.stringAnswer = taskData.stringAnswer
+        chosenTask.image = UIImage(data: taskData.image ?? Data())
+        chosenTask.taskDescription = UIImage(data: taskData.taskDescription ?? Data())
+        return chosenTask
+    }
+    
+    // Firestore and Storage
+    
+    func getTasksFromFirestore(number: Int, completion: @escaping (TaskModel) -> ()) {
+        trainerReference.document("Задание №\(number)").collection("tasks").getDocuments { (snapshot, error) in
+            guard error == nil else {
+                print("Error reading tasks: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if let documents = snapshot?.documents {
+                var foundTasks = [TaskModel]()
+                for document in documents {
+                    let task = TaskModel()
+                    task.serialNumber = document.data()[Task.serialNumber.rawValue] as? Int
+                    task.wrightAnswer = document.data()[Task.wrightAnswer.rawValue] as? Double
+                    task.alternativeAnswer = document.data()[Task.alternativeAnswer.rawValue] as? Double
+                    task.stringAnswer = document.data()[Task.wrightAnswer.rawValue] as? String
+                    task.succeded = document.data()[Task.succeded.rawValue] as? Int
+                    task.failed = document.data()[Task.failed.rawValue] as? Int
+                    task.name = "Задание №\(number)" + "." + "\(task.serialNumber ?? 0)"
+                    foundTasks.append(task)
+                }
+                self.downloadPhotos(foundTasks) { (fullTasks) in
+                    completion(fullTasks[Int.random(in: 0..<fullTasks.count)])
+                }
+            }
+        }
+    }
+    
+    func downloadPhotos(_ foundTasks: [TaskModel], completion: @escaping ([TaskModel]) -> ()) {
+        var count = 0
+        for task in foundTasks {
+            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: task.name ?? "")
+            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
+            imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
+                guard let `self` = self, error == nil else {
+                    print("Error downloading images: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                if let data = data, let image = UIImage(data: data) {
+                    foundTasks.first(where: { $0.name == task.name })?.image = image
+                    count += 1
+                }
+                if count == foundTasks.count {
+                    self.downloadDescription(foundTasks) { (foundTasks) in
+                        completion(foundTasks)
+                    }
+                }
+            }
+        }
+    }
+    
+    func downloadDescription(_ foundTasks: [TaskModel], completion: @escaping ([TaskModel]) -> ()) {
+        var count = 0
+        for task in foundTasks {
+            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: task.name ?? "")
+            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
+            imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] (data, error) in
+                guard let `self` = self, error == nil else {
+                    print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                if let data = data, let image = UIImage(data: data) {
+                    foundTasks.first(where: { $0.name == task.name })?.taskDescription = image
+                    count += 1
+                }
+                if count == foundTasks.count {
+                    self.saveTasksToCoreData(foundTasks)
+                    completion(foundTasks)
+                }
+            }
+        }
+    }
+    
+    // Core Data
+    
+    private func saveNewTestInCoreData() {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+                let result = try context.fetch(fechRequest)
+                let trainer = result.first
+                let newTest = Test(context: context)
+                let allTests = trainer?.tests?.mutableCopy() as! NSMutableSet
+                newTest.name = name
+                newTest.time = Int64(timeTillEnd)
+                newTest.testObject = TestObject(testTasks: tasks, usersAnswers: testAnswers)
+                allTests.add(newTest)
+                trainer?.tests = allTests
+                
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func saveTasksToCoreData(_ foundTasks: [TaskModel]) {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+                let result = try context.fetch(fechRequest)
+                let trainer = result.first
+                let newTasks = NSMutableOrderedSet()
+                for task in foundTasks {
+                    let newTask = TaskData(context: context)
+                    if let alternativeAnswer = task.alternativeAnswer {
+                        newTask.alternativeAnswer = alternativeAnswer
+                    }
+                    if let wrightAnswer = task.wrightAnswer {
+                        newTask.wrightAnswer = wrightAnswer
+                    }
+                    if let serialNumber = task.serialNumber {
+                        newTask.serialNumber = Int16(serialNumber)
+                    }
+                    newTask.stringAnswer = task.stringAnswer
+                    newTask.image = task.image?.pngData()
+                    newTask.taskDescription = task.taskDescription?.pngData()
+                    newTask.name = task.name
+                    newTasks.add(newTask)
+                }
+                let (theme, _) = NamesParser.getTaskLocation(taskName: foundTasks[0].name ?? "")
+                (trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == theme}) as! EgeTask).tasks = newTasks
+                
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func deleteData() {
         var newAnswers = [String:String]()
         for index in 1...32 {
             newAnswers["Задание №\(index)"] = ""

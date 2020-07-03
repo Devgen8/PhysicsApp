@@ -137,18 +137,45 @@ class TrainerAdminViewController: UIViewController {
     }
     
     func presentTestAlert() {
-        let testAlertController = UIAlertController(title: "Загрузка в пробник", message: " Введите название пробника", preferredStyle: .alert)
+        let testAlertController = UIAlertController(title: "Загрузка в пробник", message: "Введите название пробника", preferredStyle: .alert)
         testAlertController.addTextField { (textField) in
             textField.placeholder = "Название пробника"
         }
         let upload = UIAlertAction(title: "Загрузить", style: .default) { (_) in
-            self.uploadTask(to: "Пробник", testAlertController.textFields?.first?.text ?? "")
+            if let testName = testAlertController.textFields?.first?.text {
+                if self.isAcceptable(testName) {
+                    self.uploadTask(to: "Пробник", testName)
+                } else {
+                    self.presentNonActionAlert(title: "Недопустимое название", message: "Название пробника не может начинаться на слово \"Мой\"")
+                }
+            }
         }
         let cancel = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
         testAlertController.addAction(upload)
         testAlertController.addAction(cancel)
         
         present(testAlertController, animated: true)
+    }
+    
+    func isAcceptable(_ name: String) -> Bool {
+        if name.count < 3 {
+            return true
+        } else {
+            var charsArray = [Character]()
+            var index = 0
+            for letter in name {
+                charsArray.append(letter)
+                index += 1
+                if index == 3 {
+                    break
+                }
+            }
+            if String(charsArray) == "Мой" {
+                return false
+            } else {
+                return true
+            }
+        }
     }
     
     func uploadTask(to place: String, _ test: String = "") {
@@ -332,7 +359,6 @@ class TrainerAdminViewController: UIViewController {
         imageTapped = "descriptionImageView"
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -340,7 +366,6 @@ class TrainerAdminViewController: UIViewController {
         imageTapped = "uploadImageView"
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
     }
 }
@@ -394,9 +419,7 @@ extension TrainerAdminViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var selectedImageFromPicker: UIImage?
         
-        if let editedImage = info[.editedImage] as? UIImage {
-            selectedImageFromPicker = editedImage
-        } else if let originalImage = info[.originalImage] as? UIImage {
+        if let originalImage = info[.originalImage] as? UIImage {
             selectedImageFromPicker = originalImage
         }
         

@@ -13,19 +13,25 @@ import FirebaseAuth
 import CoreData
 
 class TasksListViewModel {
-    var theme: String?
-    var tasks = [TaskModel]()
-    var usersSolvedTasks = [String:[String]]()
-    var unsolvedTasks = [String:[String]]()
-    var firstTryTasks = [String]()
-    let themeReference = Firestore.firestore().collection("trainer")
-    let userReference = Firestore.firestore().collection("users")
-    var lookingForUnsolvedTasks: Bool?
+    
+    //MARK: Fields
+    
+    private var theme: String?
+    private var tasks = [TaskModel]()
+    private var usersSolvedTasks = [String:[String]]()
+    private var unsolvedTasks = [String:[String]]()
+    private var firstTryTasks = [String]()
+    private let themeReference = Firestore.firestore().collection("trainer")
+    private let userReference = Firestore.firestore().collection("users")
+    private var lookingForUnsolvedTasks: Bool?
+    private var sortType: TasksSortType?
+    private var themeTasks = [String]()
+    private var themesUnsolvedTasks = [String:[String]]()
+    private var tasksThemes = [String:[String]]()
+    
     var unsolvedTaskUpdater: UnsolvedTaskUpdater?
-    var sortType: TasksSortType?
-    var themeTasks = [String]()
-    var themesUnsolvedTasks = [String:[String]]()
-    var tasksThemes = [String:[String]]()
+    
+    //MARK: Interface
     
     func getTasks(completion: @escaping (Bool) -> ()) {
         getUsersSolvedTasksFromCoreData()
@@ -106,7 +112,143 @@ class TasksListViewModel {
         }
     }
     
-    func getTasksThemes(completion: @escaping (Bool) -> ()) {
+    func checkIfTaskSolved(name: String) -> Bool {
+        if let sort = sortType {
+            if sort == .tasks {
+                return usersSolvedTasks[theme ?? ""]?.filter({ $0 == name }).count ?? 0 > 0
+            }
+            if sort == .themes {
+                for solvedArray in usersSolvedTasks.values {
+                    if solvedArray.contains(name) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+    
+    func getDoneTasksNumber() -> Int {
+        var doneTasksNumber = 0
+        for task in tasks {
+            if let taskName = task.name, (checkIfTaskSolved(name: taskName) || checkIfTaskUnsolved(name: taskName)) {
+                doneTasksNumber += 1
+            }
+        }
+        return doneTasksNumber
+    }
+    
+    func getFirstTryTasksNumber() -> Int {
+        var firstTryTasksNumber = 0
+        for task in tasks {
+            if let taskName = task.name, firstTryTasks.contains(taskName) {
+                firstTryTasksNumber += 1
+            }
+        }
+        return firstTryTasksNumber
+    }
+    
+    func getSolvedTasksNumber() -> Int {
+        var solvedTasksNumber = 0
+        for task in tasks {
+            if let taskName = task.name, checkIfTaskSolved(name: taskName) {
+                solvedTasksNumber += 1
+            }
+        }
+        return solvedTasksNumber
+    }
+    
+    func getTaskThemeImages(_ taskName: String) -> [UIImage] {
+        let (task, number) = NamesParser.getTaskLocation(taskName: taskName)
+        if let currentTaskThemes = tasksThemes[task], currentTaskThemes.count >= Int(number) ?? 1 {
+            let currentTheme = currentTaskThemes[(Int(number) ?? 1) - 1]
+            let allTaskThemes = ThemeParser.parseTaskThemes(currentTheme)
+            return ThemeParser.getImageArray(forTaskThemes: allTaskThemes)
+        }
+        return [UIImage]()
+    }
+    
+    func transportData(for viewModel: TaskViewModel, at index: Int) {
+        viewModel.setNumberOfTasks(tasks.count)
+        viewModel.setTaskNumber(index + 1)
+        viewModel.setTheme(theme)
+        viewModel.setTask(tasks[index])
+        viewModel.setUnsolvedTasks(unsolvedTasks)
+        viewModel.unsolvedTasksUpdater = self
+        viewModel.setSolvedTasks(usersSolvedTasks)
+        viewModel.setThemeUnsolvedTasks(themesUnsolvedTasks)
+    }
+    
+    func checkIfTaskUnsolved(name: String) -> Bool {
+        let (themeName, _) = NamesParser.getTaskLocation(taskName: name)
+        return unsolvedTasks[themeName]?.contains(name) ?? false
+    }
+    
+    func getTheme() -> String? {
+        return theme
+    }
+    
+    func setTheme(_ newTheme: String) {
+        theme = newTheme
+    }
+    
+    func getUnsolvedTasks() -> [String:[String]] {
+        return unsolvedTasks
+    }
+    
+    func setUnsolvedTasks(_ newTasks: [String:[String]]) {
+        unsolvedTasks = newTasks
+    }
+    
+    func getThemeUnsolvedTasks() -> [String:[String]] {
+        return themesUnsolvedTasks
+    }
+    
+    func setThemeUnsolvedTasks(_ newTasks: [String:[String]]) {
+        themesUnsolvedTasks = newTasks
+    }
+    
+    func isLookingForUnsolvedTasks() -> Bool? {
+        return lookingForUnsolvedTasks
+    }
+    
+    func setLookingForUnsolvedTasks(_ newFlag: Bool?) {
+        lookingForUnsolvedTasks = newFlag
+    }
+    
+    func getSortType() -> TasksSortType? {
+        return sortType
+    }
+    
+    func setSortType(_ newSortType: TasksSortType?) {
+        sortType = newSortType
+    }
+    
+    func getThemeTasks() -> [String] {
+        return themeTasks
+    }
+    
+    func setThemeTasks(_ newTasks: [String]) {
+        themeTasks = newTasks
+    }
+    
+    func setUserSolvedTasks(_ newTasks: [String:[String]]) {
+        usersSolvedTasks = newTasks
+    }
+    
+    func getTaskName(for index: Int) -> String? {
+        return tasks[index].name
+    }
+    
+    func getTasksNumber() -> Int {
+        return tasks.count
+    }
+    
+    //MARK: Private section
+    
+    // Core Data
+    
+    private func getTasksThemes(completion: @escaping (Bool) -> ()) {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
             
@@ -127,7 +269,7 @@ class TasksListViewModel {
         }
     }
     
-    func getUnsolvedTasksFromCoreData(completion: @escaping (Bool) -> ()) {
+    private func getUnsolvedTasksFromCoreData(completion: @escaping (Bool) -> ()) {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
             
@@ -175,7 +317,7 @@ class TasksListViewModel {
         }
     }
     
-    func saveToCoreDataUnsolvedTasksByTasks() {
+    private func saveToCoreDataUnsolvedTasksByTasks() {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
@@ -210,7 +352,7 @@ class TasksListViewModel {
         }
     }
     
-    func saveToCoreDataUnsolvedTasksByThemes() {
+    private func saveToCoreDataUnsolvedTasksByThemes() {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
@@ -245,7 +387,7 @@ class TasksListViewModel {
         }
     }
     
-    func updateAreUnsolvedTasksUpdatedKey() {
+    private func updateAreUnsolvedTasksUpdatedKey() {
         if let sort = sortType {
             if sort == .tasks {
                 if let notUpdatedTasks = UserDefaults.standard.value(forKey: "notUpdatedUnsolvedTasks") as? [String] {
@@ -262,7 +404,7 @@ class TasksListViewModel {
         }
     }
     
-    func getTasksByTasksFromCoreData(completion: @escaping (Bool) -> ()) {
+    private func getTasksByTasksFromCoreData(completion: @escaping (Bool) -> ()) {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
             
@@ -290,10 +432,10 @@ class TasksListViewModel {
         }
     }
     
-    func sortTasks() {
+    private func sortTasks() {
         tasks = tasks.sorted(by: {
-            let (firstTheme, firstNumber) = getTaskLocation(taskName: $0.name ?? "")
-            let (secondTheme, secondNumber) = getTaskLocation(taskName: $1.name ?? "")
+            let (firstTheme, firstNumber) = NamesParser.getTaskLocation(taskName: $0.name ?? "")
+            let (secondTheme, secondNumber) = NamesParser.getTaskLocation(taskName: $1.name ?? "")
             if getTaskPosition(taskName: firstTheme) == getTaskPosition(taskName: secondTheme) {
                 return Int(firstNumber) ?? 0 < Int(secondNumber) ?? 0
             } else {
@@ -302,7 +444,7 @@ class TasksListViewModel {
         })
     }
     
-    func getTasksByThemesFromCoreData(completion: @escaping (Bool) -> ()) {
+    private func getTasksByThemesFromCoreData(completion: @escaping (Bool) -> ()) {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
             
@@ -330,28 +472,8 @@ class TasksListViewModel {
         }
     }
     
-    func getTaskLocation(taskName: String) -> (String, String) {
-        var themeNameSet = [Character]()
-        var taskNumberSet = [Character]()
-        var isDotFound = false
-        for letter in taskName {
-            if letter == "." {
-                isDotFound = true
-                continue
-            }
-            if isDotFound {
-                taskNumberSet.append(letter)
-            } else {
-                themeNameSet.append(letter)
-            }
-        }
-        let themeName = String(themeNameSet)
-        let taskNumber = String(taskNumberSet)
-        return (themeName, taskNumber)
-    }
-    
-    func getTaskPosition(taskName: String) -> Int {
-        let (themeName, _) = getTaskLocation(taskName: taskName)
+    private func getTaskPosition(taskName: String) -> Int {
+        let (themeName, _) = NamesParser.getTaskLocation(taskName: taskName)
         if let range = themeName.range(of: "№") {
             let numberString = String(themeName[range.upperBound...])
             return Int(numberString) ?? 0
@@ -359,7 +481,7 @@ class TasksListViewModel {
         return 0
     }
     
-    func saveTasksToCoreDataForSolved() {
+    private func saveTasksToCoreDataForSolved() {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
@@ -399,7 +521,22 @@ class TasksListViewModel {
         }
     }
     
-    func updateKeysInfoForSolved() {
+    private func getUsersSolvedTasksFromCoreData() {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fechRequest: NSFetchRequest<User> = User.fetchRequest()
+                let result = try context.fetch(fechRequest)
+                if let user = result.first {
+                    usersSolvedTasks = (user.solvedTasks as! StatusTasks).solvedTasks
+                    firstTryTasks = (user.solvedTasks as! StatusTasks).firstTryTasks
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func updateKeysInfoForSolved() {
         if let sort = sortType {
             if sort == .tasks {
                 if let notUpdatedTasks = UserDefaults.standard.value(forKey: "notUpdatedTasks") as? [String] {
@@ -416,10 +553,12 @@ class TasksListViewModel {
         }
     }
     
-    func getTasksByThemes(completion: @escaping (Bool) -> ()) {
+    // Firestore
+    
+    private func getTasksByThemes(completion: @escaping (Bool) -> ()) {
         var goalTasks = [String:[Int]]()
         for task in themeTasks {
-            let (themeName, taskNumberString) = getTaskLocation(taskName: task)
+            let (themeName, taskNumberString) = NamesParser.getTaskLocation(taskName: task)
             if let taskNumber = Int(taskNumberString) {
                 if goalTasks[themeName] != nil {
                     goalTasks[themeName]?.append(taskNumber)
@@ -459,8 +598,8 @@ class TasksListViewModel {
                 }
                 if self.themeTasks.count == self.tasks.count {
                     self.tasks = self.tasks.sorted(by: {
-                        let (firstTheme, firstNumber) = self.getTaskLocation(taskName: $0.name ?? "")
-                        let (secondTheme, secondNumber) = self.getTaskLocation(taskName: $1.name ?? "")
+                        let (firstTheme, firstNumber) = NamesParser.getTaskLocation(taskName: $0.name ?? "")
+                        let (secondTheme, secondNumber) = NamesParser.getTaskLocation(taskName: $1.name ?? "")
                         if self.getTaskPosition(taskName: firstTheme) == self.getTaskPosition(taskName: secondTheme) {
                             return Int(firstNumber) ?? 0 < Int(secondNumber) ?? 0
                         } else {
@@ -475,7 +614,7 @@ class TasksListViewModel {
         }
     }
     
-    func getTasksByTasks(completion: @escaping (Bool) -> ()) {
+    private func getTasksByTasks(completion: @escaping (Bool) -> ()) {
         guard let theme = theme else {
             completion(false)
             return
@@ -511,38 +650,12 @@ class TasksListViewModel {
         }
     }
     
-    func getUsersSolvedTasksFromCoreData() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            do {
-                let fechRequest: NSFetchRequest<User> = User.fetchRequest()
-                let result = try context.fetch(fechRequest)
-                if let user = result.first {
-                    usersSolvedTasks = (user.solvedTasks as! StatusTasks).solvedTasks
-                    firstTryTasks = (user.solvedTasks as! StatusTasks).firstTryTasks
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-//    func getUsersStats() {
-//        if let userId = Auth.auth().currentUser?.uid {
-//            userReference.document(userId).getDocument { [weak self] (document, error) in
-//                guard let `self` = self, error == nil else { return }
-//                if let solvedTasks = document?.data()?["solvedTasks"] as? [String:[String]] {
-//                    self.usersSolvedTasks = solvedTasks
-//                }
-//            }
-//        }
-//    }
-    
-    func downloadPhotos(completion: @escaping (Bool) -> ()) {
+    private func downloadPhotos(completion: @escaping (Bool) -> ()) {
         var count = 0
         for index in stride(from: 0, to: tasks.count, by: 1) {
-            let (themeName, taskNumber) = getTaskLocation(taskName: tasks[index].name ?? "")
+            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: tasks[index].name ?? "")
             let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
+            imageRef.getData(maxSize: 2 * 1024 * 1024) { [weak self] data, error in
                 guard let `self` = self, error == nil else {
                     print("Error downloading images: \(String(describing: error?.localizedDescription))")
                     return
@@ -560,12 +673,12 @@ class TasksListViewModel {
         }
     }
     
-    func downloadDescription(completion: @escaping (Bool) -> ()) {
+    private func downloadDescription(completion: @escaping (Bool) -> ()) {
         var count = 0
         for index in stride(from: 0, to: tasks.count, by: 1) {
-            let (themeName, taskNumber) = getTaskLocation(taskName: tasks[index].name ?? "")
+            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: tasks[index].name ?? "")
             let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
-            imageRef.getData(maxSize: 1 * 2048 * 2048) { [weak self] data, error in
+            imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
                 guard let `self` = self, error == nil else {
                     print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
                     return
@@ -594,82 +707,6 @@ class TasksListViewModel {
             }
         }
     }
-    
-    func checkIfTaskSolved(name: String) -> Bool {
-        if let sort = sortType {
-            if sort == .tasks {
-                return usersSolvedTasks[theme ?? ""]?.filter({ $0 == name }).count ?? 0 > 0
-            }
-            if sort == .themes {
-                for solvedArray in usersSolvedTasks.values {
-                    if solvedArray.contains(name) {
-                        return true
-                    }
-                }
-            }
-        }
-        return false
-    }
-    
-    func checkIfTaskUnsolved(name: String) -> Bool {
-        let (themeName, _) = getTaskLocation(taskName: name)
-        return unsolvedTasks[themeName]?.contains(name) ?? false
-    }
-    
-    func getDoneTasksNumber() -> Int {
-        var doneTasksNumber = 0
-        for task in tasks {
-            if let taskName = task.name, (checkIfTaskSolved(name: taskName) || checkIfTaskUnsolved(name: taskName)) {
-                doneTasksNumber += 1
-            }
-        }
-        return doneTasksNumber
-    }
-    
-    func getTasksNumber() -> Int {
-        return tasks.count
-    }
-    
-    func getFirstTryTasksNumber() -> Int {
-        var firstTryTasksNumber = 0
-        for task in tasks {
-            if let taskName = task.name, firstTryTasks.contains(taskName) {
-                firstTryTasksNumber += 1
-            }
-        }
-        return firstTryTasksNumber
-    }
-    
-    func getSolvedTasksNumber() -> Int {
-        var solvedTasksNumber = 0
-        for task in tasks {
-            if let taskName = task.name, checkIfTaskSolved(name: taskName) {
-                solvedTasksNumber += 1
-            }
-        }
-        return solvedTasksNumber
-    }
-    
-    func getTaskThemeImages(_ taskName: String) -> [UIImage] {
-        let (task, number) = getTaskLocation(taskName: taskName)
-        if let currentTaskThemes = tasksThemes[task], currentTaskThemes.count >= Int(number) ?? 1 {
-            let currentTheme = currentTaskThemes[(Int(number) ?? 1) - 1]
-            let allTaskThemes = ThemeParser.parseTaskThemes(currentTheme)
-            return ThemeParser.getImageArray(forTaskThemes: allTaskThemes)
-        }
-        return [UIImage]()
-    }
-    
-    func transportData(for viewModel: TaskViewModel, at index: Int) {
-        viewModel.numberOfTasks = tasks.count
-        viewModel.taskNumber = index + 1
-        viewModel.theme = theme
-        viewModel.task = tasks[index]
-        viewModel.unsolvedTasks = unsolvedTasks
-        viewModel.unsolvedTasksUpdater = self
-        viewModel.solvedTasks = usersSolvedTasks
-        viewModel.themesUnsolvedTasks = themesUnsolvedTasks
-    }
 }
 
 extension TasksListViewModel: UnsolvedTaskUpdater {
@@ -688,7 +725,7 @@ extension TasksListViewModel: UnsolvedTaskUpdater {
             }
         }
         if let taskUpdater = unsolvedTaskUpdater as? UnsolvedThemesViewModel {
-            taskUpdater.themesUnsolvedTasks = themesUnsolvedTasks
+            taskUpdater.setThemesUnsolvedTasks(themesUnsolvedTasks)
         }
         unsolvedTaskUpdater?.updateUnsolvedTasks(with: unsolvedTasks, and: nil)
     }

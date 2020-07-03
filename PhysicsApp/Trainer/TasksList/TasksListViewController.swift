@@ -39,7 +39,7 @@ class TasksListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if !wasAnimation, viewModel.lookingForUnsolvedTasks != true {
+        if !wasAnimation, viewModel.isLookingForUnsolvedTasks() != true {
             animateCircularCharts()
         }
         wasAnimation = false
@@ -70,7 +70,7 @@ class TasksListViewController: UIViewController {
         tasksTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: actualConstant).isActive = true
         tasksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -actualConstant).isActive = true
         tasksTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        if viewModel.lookingForUnsolvedTasks != true {
+        if viewModel.isLookingForUnsolvedTasks() != true {
             tasksTableView.topAnchor.constraint(equalTo: firstTimeRing.bottomAnchor, constant: 80).isActive = true
             createBlueBackground()
         } else {
@@ -168,10 +168,10 @@ class TasksListViewController: UIViewController {
         viewModel.getTasks { [weak self] (dataIsReady) in
             guard let `self` = self else { return }
             if dataIsReady {
-                self.themeLabel.text = self.viewModel.theme?.uppercased()
+                self.themeLabel.text = self.viewModel.getTheme()?.uppercased()
                 DispatchQueue.main.async {
                     self.hideLodingScreen()
-                    if self.viewModel.lookingForUnsolvedTasks != true {
+                    if self.viewModel.isLookingForUnsolvedTasks() != true {
                         self.animateCircularCharts()
                     }
                     self.tasksTableView.reloadData()
@@ -181,28 +181,28 @@ class TasksListViewController: UIViewController {
     }
 
     @IBAction func backTapped(_ sender: UIButton) {
-        viewModel.unsolvedTaskUpdater?.updateUnsolvedTasks(with: viewModel.unsolvedTasks, and: nil)
+        viewModel.unsolvedTaskUpdater?.updateUnsolvedTasks(with: viewModel.getUnsolvedTasks(), and: nil)
         dismiss(animated: true)
     }
 }
 
 extension TasksListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.tasks.count
+        viewModel.getTasksNumber()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("ThemeTableViewCell", owner: self, options: nil)?.first as! ThemeTableViewCell
         cell.presentingVC = .taskList
         cell.createBorder()
-        let taskName = viewModel.tasks[indexPath.row].name
+        let taskName = viewModel.getTaskName(for: indexPath.row)
         cell.themeName.text = taskName
         let isTaskSolved = viewModel.checkIfTaskSolved(name: taskName ?? "")
-        if isTaskSolved, !(viewModel.lookingForUnsolvedTasks ?? false) {
+        if isTaskSolved, !(viewModel.isLookingForUnsolvedTasks() ?? false) {
             cell.tickImage.image = #imageLiteral(resourceName: "checked")
         }
         let isTaskUnsolved = viewModel.checkIfTaskUnsolved(name: taskName ?? "")
-        if isTaskUnsolved, !(viewModel.lookingForUnsolvedTasks ?? false) {
+        if isTaskUnsolved, !(viewModel.isLookingForUnsolvedTasks() ?? false) {
             cell.tickImage.image = #imageLiteral(resourceName: "close")
         }
         let themeImages = viewModel.getTaskThemeImages(taskName ?? "")

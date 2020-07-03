@@ -20,7 +20,6 @@ class TrainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         themesTableView.dataSource = self
         themesTableView.delegate = self
         
@@ -52,8 +51,9 @@ class TrainerViewController: UIViewController {
     
     func designScreenElements() {
         DesignService.setWhiteBackground(for: view)
-        //DesignService.designRedButton(notSolvedButton)
         notSolvedButton.layer.cornerRadius = 10
+        
+        // segmented control setup
         sortTypeSegmentedControl.layer.borderWidth = 2
         sortTypeSegmentedControl.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
         sortTypeSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 13) ?? UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)], for: .normal)
@@ -86,14 +86,14 @@ class TrainerViewController: UIViewController {
             }
             if let viewModel = viewModel as? ThemesTrainerViewModel {
                 unsolvedThemesViewController.viewModel.unsolvedTasksUpdater = viewModel
-                unsolvedThemesViewController.viewModel.themesUnsolvedTasks = viewModel.getUnsolvedTasks()
-                unsolvedThemesViewController.viewModel.unsolvedTasks = viewModel.unsolvedTasks
+                unsolvedThemesViewController.viewModel.setThemesUnsolvedTasks(viewModel.getUnsolvedTasks())
+                unsolvedThemesViewController.viewModel.unsolvedTasks = viewModel.getAllUnsolvedTasks()
             }
             if viewModel is TrainerViewModel {
-                unsolvedThemesViewController.viewModel.sortType = .tasks
+                unsolvedThemesViewController.viewModel.setSortType(.tasks)
             }
             if viewModel is ThemesTrainerViewModel {
-                unsolvedThemesViewController.viewModel.sortType = .themes
+                unsolvedThemesViewController.viewModel.setSortType(.themes)
             }
             unsolvedThemesViewController.modalPresentationStyle = .fullScreen
             present(unsolvedThemesViewController, animated: true)
@@ -145,6 +145,7 @@ extension TrainerViewController: UITableViewDataSource {
             themeImage.widthAnchor.constraint(equalToConstant: 23).isActive = true
             themeImage.heightAnchor.constraint(equalToConstant: 23).isActive = true
             themeImage.leadingAnchor.constraint(equalTo: cell.decorativeView.leadingAnchor, constant: 1).isActive = true
+            themeImage.contentMode = .scaleAspectFit
             themeImage.image = ThemeParser.getImageArray(forTaskThemes: [cellName]).first
             cellName = cellName.uppercased()
         }
@@ -174,7 +175,9 @@ extension TrainerViewController: UITableViewDelegate {
         if viewModel is TestTrainerViewModel {
             let testViewController = TestViewController()
             testViewController.viewModel = DownloadedTestViewModel()
-            testViewController.viewModel.name = (viewModel as! TestTrainerViewModel).tests[indexPath.row]
+            if let testViewModel = viewModel as? TestTrainerViewModel {
+                testViewController.viewModel.name = testViewModel.getTestName(for: indexPath.row)
+            }
             testViewController.modalPresentationStyle = .fullScreen
             present(testViewController, animated: true)
         } else {

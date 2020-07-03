@@ -19,7 +19,6 @@ class ImagePreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         imageScrollView = ImageScrollView(frame: view.bounds)
         view.addSubview(imageScrollView)
         setupImageScrollView()

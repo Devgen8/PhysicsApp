@@ -12,7 +12,11 @@ import FirebaseAuth
 
 class FormSheetViewModel {
     
+    //MARK: Fields
+    
     private var taskName: String?
+    
+    //MARK: Interface
     
     func getTaskName() -> String? {
         return taskName

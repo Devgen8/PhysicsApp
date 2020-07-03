@@ -12,24 +12,30 @@ import FirebaseAuth
 import CoreData
 
 class TestResultsViewModel: GeneralTestResultsViewModel {
+    
+    //MARK: Fields
+    
+    private var wrightAnswerNumber = 0
+    private var semiWrightAnswerNumber = 0
+    private var answersCorrection = [Int]()
+    private var openedCells = [Int]()
+    private var tasksWithShuffle = [5,6,7,11,12,16,17,18,21]
+    private var resultPoints = [Int]()
+    private var hundredSystemPoints = 0
+    private var testPoints = 0
+    private let usersReference = Firestore.firestore().collection("users")
+    private var everyTaskAnswer = [Int]()
+    
     var testName = ""
     var timeTillEnd = 0
-    var wrightAnswerNumber = 0
-    var semiWrightAnswerNumber = 0
     var wrightAnswers = [String:(Double?, Double?, String?)]()
     var userAnswers = [String:String]()
-    var answersCorrection = [Int]()
     var taskImages = [String:UIImage]()
-    var taskDescriptions = [String:UIImage]()
-    var openedCells = [Int]()
     var cPartPoints = [Int]()
-    var tasksWithShuffle = [5,6,7,11,12,16,17,18,21]
-    var resultPoints = [Int]()
-    var hundredSystemPoints = 0
-    var testPoints = 0
     var testAnswersUpdater: TestAnswersUpdater?
-    let usersReference = Firestore.firestore().collection("users")
-    var everyTaskAnswer = [Int]()
+    var taskDescriptions = [String:UIImage]()
+    
+    //MARK: Interface
     
     func isCellOpened(index: Int) -> Bool {
         return openedCells.contains(index)
@@ -100,6 +106,12 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
         }
     }
     
+    func getColorPercentage() -> (Float, Float) {
+        let greenPercentage = Float(wrightAnswerNumber) / Float(32)
+        let yellowPercentage = Float(semiWrightAnswerNumber) / Float(32) + greenPercentage
+        return (greenPercentage, yellowPercentage)
+    }
+    
     func getWrightAnswer(for index: Int) -> String {
         let taskName = "Задание №\(index)"
         if let (wrightAnswer, alternativeAnswer, stringAnswer) = wrightAnswers[taskName] {
@@ -118,12 +130,6 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
             }
         }
         return "0"
-    }
-    
-    func updateTestCompletion() {
-        var finishedTests = UserDefaults.standard.value(forKey: "finishedTests") as? [String] ?? []
-        finishedTests = finishedTests.filter({ $0 != testName })
-        UserDefaults.standard.set(finishedTests, forKey: "finishedTests")
     }
     
     func checkUserAnswers(completion: @escaping (Bool) -> ()) {
@@ -211,7 +217,57 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
         completion(true)
     }
     
-    func setTestDataInFirestore() {
+    func updateTestDataAsDone() {
+        testAnswersUpdater?.deleteTestsAnswers()
+        updateTestDataInCoreData()
+        if let userId = Auth.auth().currentUser?.uid {
+            Firestore.firestore().collection("users").document(userId).collection("stats").document(testName).setData(["name":testName,"doneTasks":wrightAnswerNumber, "points":testPoints, "semiDoneTasks":semiWrightAnswerNumber])
+        }
+    }
+    
+    //MARK: Private section
+    
+    private func getHundredSystemPoints() -> Int {
+        var primaryPoints = 0
+        resultPoints.forEach({ primaryPoints += $0; everyTaskAnswer.append($0) })
+        var index = 0
+        for rowNumber in 26..<26 + cPartPoints.count {
+            primaryPoints += cPartPoints[index]
+            everyTaskAnswer.append(cPartPoints[index])
+            if rowNumber + 1 == 28 {
+                answersCorrection.append(cPartPoints[1])
+                if cPartPoints[1] == 2 {
+                    wrightAnswerNumber += 1
+                }
+                if cPartPoints[1] == 1 {
+                    semiWrightAnswerNumber += 1
+                }
+            } else {
+                if cPartPoints[rowNumber - 26] == 3 {
+                    answersCorrection.append(2)
+                    wrightAnswerNumber += 1
+                } else if cPartPoints[rowNumber - 26] == 0 {
+                    answersCorrection.append(0)
+                } else {
+                    answersCorrection.append(1)
+                    semiWrightAnswerNumber += 1
+                }
+            }
+            index += 1
+        }
+        testPoints = EGEInfo.hundredSystem[primaryPoints]
+        return testPoints
+    }
+    
+    private func updateTestCompletion() {
+        var finishedTests = UserDefaults.standard.value(forKey: "finishedTests") as? [String] ?? []
+        finishedTests = finishedTests.filter({ $0 != testName })
+        UserDefaults.standard.set(finishedTests, forKey: "finishedTests")
+    }
+    
+    // Firestore
+    
+    private func setTestDataInFirestore() {
         if let userId = Auth.auth().currentUser?.uid {
             var tasksNames = [String]()
             var wrightAnswerStrings = [String]()
@@ -234,7 +290,9 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
         }
     }
     
-    func saveTestResultsInCoreData() {
+    // Core Data
+    
+    private func saveTestResultsInCoreData() {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
@@ -281,47 +339,7 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
         }
     }
     
-    func getHundredSystemPoints() -> Int {
-        var primaryPoints = 0
-        resultPoints.forEach({ primaryPoints += $0; everyTaskAnswer.append($0) })
-        var index = 0
-        for rowNumber in 26..<26 + cPartPoints.count {
-            primaryPoints += cPartPoints[index]
-            everyTaskAnswer.append(cPartPoints[index])
-            if rowNumber + 1 == 28 {
-                answersCorrection.append(cPartPoints[1])
-                if cPartPoints[1] == 2 {
-                    wrightAnswerNumber += 1
-                }
-                if cPartPoints[1] == 1 {
-                    semiWrightAnswerNumber += 1
-                }
-            } else {
-                if cPartPoints[rowNumber - 26] == 3 {
-                    answersCorrection.append(2)
-                    wrightAnswerNumber += 1
-                } else if cPartPoints[rowNumber - 26] == 0 {
-                    answersCorrection.append(0)
-                } else {
-                    answersCorrection.append(1)
-                    semiWrightAnswerNumber += 1
-                }
-            }
-            index += 1
-        }
-        testPoints = EGEInfo.hundredSystem[primaryPoints]
-        return testPoints
-    }
-    
-    func updateTestDataAsDone() {
-        testAnswersUpdater?.deleteTestsAnswers()
-        updateTestDataInCoreData()
-        if let userId = Auth.auth().currentUser?.uid {
-            Firestore.firestore().collection("users").document(userId).collection("stats").document(testName).setData(["name":testName,"doneTasks":wrightAnswerNumber, "points":testPoints, "semiDoneTasks":semiWrightAnswerNumber])
-        }
-    }
-    
-    func updateTestDataInCoreData() {
+    private func updateTestDataInCoreData() {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
@@ -336,11 +354,5 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    func getColorPercentage() -> (Float, Float) {
-        let greenPercentage = Float(wrightAnswerNumber) / Float(32)
-        let yellowPercentage = Float(semiWrightAnswerNumber) / Float(32) + greenPercentage
-        return (greenPercentage, yellowPercentage)
     }
 }

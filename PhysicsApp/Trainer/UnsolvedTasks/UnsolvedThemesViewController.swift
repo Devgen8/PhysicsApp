@@ -17,7 +17,6 @@ class UnsolvedThemesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         themesTableView.dataSource = self
         themesTableView.delegate = self
         designScreenElements()
@@ -49,8 +48,6 @@ extension UnsolvedThemesViewController: UITableViewDataSource {
         cell.createBorder()
         return cell
     }
-    
-    
 }
 
 extension UnsolvedThemesViewController: UITableViewDelegate {
@@ -60,14 +57,7 @@ extension UnsolvedThemesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tasksListViewController = TasksListViewController()
-        let themes = viewModel.themesKeys
-        tasksListViewController.viewModel.theme = themes[indexPath.row]
-        tasksListViewController.viewModel.unsolvedTasks = viewModel.unsolvedTasks
-        tasksListViewController.viewModel.themesUnsolvedTasks = viewModel.themesUnsolvedTasks
-        tasksListViewController.viewModel.lookingForUnsolvedTasks = true
-        tasksListViewController.viewModel.unsolvedTaskUpdater = viewModel
-        tasksListViewController.viewModel.sortType = viewModel.sortType
-        tasksListViewController.viewModel.themeTasks = viewModel.themesUnsolvedTasks[themes[indexPath.row]] ?? []
+        viewModel.transportData(to: tasksListViewController.viewModel, from: indexPath.row)
         tasksListViewController.modalPresentationStyle = .fullScreen
         Animations.swipeViewController(.fromRight, for: view)
         present(tasksListViewController, animated: true)

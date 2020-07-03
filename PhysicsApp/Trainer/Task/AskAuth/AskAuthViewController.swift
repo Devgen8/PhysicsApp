@@ -17,7 +17,6 @@ class AskAuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         designScreenElements()
     }
     
@@ -32,8 +31,7 @@ class AskAuthViewController: UIViewController {
     
     @IBAction func closeTapped(_ sender: UIButton) {
         updateKeyInfo()
-        //dismiss(animated: true)
-        dismiss(animated: false)
+        dismiss(animated: true)
     }
     
     @IBAction func authTapped(_ sender: UIButton) {

@@ -47,7 +47,6 @@ class TestResultsViewController: UIViewController {
         if viewModel is TestsHistoryResultsViewModel {
             dismiss(animated: true)
         } else {
-            //view.window!.rootViewController?.dismiss(animated: false, completion: nil)
             presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)
         }
     }
@@ -75,7 +74,13 @@ extension TestResultsViewController: UITableViewDelegate {
             return 200
         case 1:
             if viewModel.isCellOpened(index: indexPath.row) {
-                return 620
+                let taskName = "Задание №\(indexPath.row + 1)"
+                let taskImage = viewModel.getImage(for: taskName)
+                let descriptionImage = viewModel.getDescription(for: taskName)
+                let mainRatio = (taskImage?.size.height ?? 0) / (taskImage?.size.width ?? 1)
+                let descriptionRatio = (descriptionImage?.size.height ?? 0) / (descriptionImage?.size.width ?? 1)
+                let cellHeight = 180 + 25 + (UIScreen.main.bounds.width - 22) * (mainRatio + descriptionRatio) + 5 + 10
+                return cellHeight
             } else {
                 return 180
             }
@@ -141,8 +146,13 @@ extension TestResultsViewController: UITableViewDataSource {
         let cell = Bundle.main.loadNibNamed("TestResultTaskTableViewCell", owner: self, options: nil)?.first as! TestResultTaskTableViewCell
         let taskName = "Задание №\(index + 1)"
         cell.taskName.text = taskName
-        cell.taskImageView.image = viewModel.getImage(for: taskName)
-        cell.descriptionImageView.image = viewModel.getDescription(for: taskName)
+        let taskImage = viewModel.getImage(for: taskName)
+        let descriptionImage = viewModel.getDescription(for: taskName)
+        cell.taskImageView.image = taskImage
+        cell.descriptionImageView.image = descriptionImage
+        let mainRatio = (taskImage?.size.height ?? 0) / (taskImage?.size.width ?? 1)
+        let descriptionRatio = (descriptionImage?.size.height ?? 0) / (descriptionImage?.size.width ?? 1)
+        cell.setImages(mainRatio: mainRatio, descriptionRatio: descriptionRatio)
         cell.userPointsLabel.text = viewModel.getUserPoints(for: index)
         let userAnswer = viewModel.getUsersAnswer(for: taskName)
         if userAnswer == "" {
@@ -168,6 +178,16 @@ extension TestResultsViewController: UITableViewDataSource {
         }
         cell.correctionLabel.text = cellCorrectionText
         cell.correctionLabel.textColor = cellCorrectionColor
+        cell.imageOpener = self
         return cell
+    }
+}
+
+extension TestResultsViewController: ImageOpener {
+    func openImage(_ image: UIImage) {
+        let imagePreviewViewController = ImagePreviewViewController()
+        imagePreviewViewController.taskImage = image
+        imagePreviewViewController.modalPresentationStyle = .fullScreen
+        present(imagePreviewViewController, animated: true)
     }
 }

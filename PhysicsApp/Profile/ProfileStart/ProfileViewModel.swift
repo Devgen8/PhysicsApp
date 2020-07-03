@@ -14,9 +14,13 @@ import CoreData
 
 class ProfileViewModel {
     
-    let usersReference = Firestore.firestore().collection("users")
-    var user = UserProfile()
-    var userPhoto: UIImage?
+    //MARK: Fields
+    
+    private let usersReference = Firestore.firestore().collection("users")
+    private var user = UserProfile()
+    private var userPhoto: UIImage?
+    
+    //MARK: Interface
     
     func eraseUserDefaults() {
         UserDefaults.standard.set(nil, forKey: "isTestHistoryRead")
@@ -67,26 +71,41 @@ class ProfileViewModel {
         }
     }
     
-    func getUsersDataFromCoreData(completion: @escaping (UserProfile?) -> ()) {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            do {
-                let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-                let result = try context.fetch(fetchRequest)
-                let newUser = result.first ?? User(context: context)
-                var userData = UserProfile()
-                userData.name = newUser.name
-                userData.email = Auth.auth().currentUser?.email
-                userData.password = newUser.password
-                user = userData
-                
-                completion(userData)
-            } catch {
-                print(error.localizedDescription)
+    func logOut() {
+        do {
+           try Auth.auth().signOut()
+        } catch {
+            print("Error signing out")
+        }
+    }
+    
+    // Managing photos
+    
+    func getUsersPhoto(completion: @escaping (UIImage?) -> ()) {
+        if UserDefaults.standard.value(forKey: "isUserPhotoDownloaded") == nil {
+            getUsersPhotoFromStorage { (photo) in
+                completion(photo)
+            }
+        } else {
+            getUserPhotoFromCoreData { (photo) in
+                completion(photo)
             }
         }
     }
     
-    func getUsersDataFromFirestore(completion: @escaping (UserProfile?) -> ()) {
+    func updatePhotoData(with data: Data) {
+        userPhoto = UIImage(data: data)
+        savePhotoInCoreData()
+        if let userId = Auth.auth().currentUser?.uid {
+            Storage.storage().reference().child("users/\(userId)").putData(data)
+        }
+    }
+    
+    //MARK: Private section
+    
+    // Firestore and Storage
+    
+    private func getUsersDataFromFirestore(completion: @escaping (UserProfile?) -> ()) {
         if let userId = Auth.auth().currentUser?.uid {
             usersReference.document(userId).getDocument { [weak self] (document, error) in
                 guard error == nil else {
@@ -108,46 +127,10 @@ class ProfileViewModel {
         }
     }
     
-    func saveUsersDataInCoreData() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            do {
-                let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-                let result = try context.fetch(fetchRequest)
-                let newUser = result.first ?? User(context: context)
-                newUser.name = user.name
-                newUser.email = user.email
-                newUser.password = user.password
-                
-                try context.save()
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func updateKeys() {
-        UserDefaults.standard.set(true, forKey: "isUserInfoDownloaded")
-        if userPhoto != nil {
-            UserDefaults.standard.set(true, forKey: "isUserPhotoDownloaded")
-        }
-    }
-    
-    func getUsersPhoto(completion: @escaping (UIImage?) -> ()) {
-        if UserDefaults.standard.value(forKey: "isUserPhotoDownloaded") == nil {
-            getUsersPhotoFromStorage { (photo) in
-                completion(photo)
-            }
-        } else {
-            getUserPhotoFromCoreData { (photo) in
-                completion(photo)
-            }
-        }
-    }
-    
-    func getUsersPhotoFromStorage(completion: @escaping (UIImage?) -> ()) {
+    private func getUsersPhotoFromStorage(completion: @escaping (UIImage?) -> ()) {
         if let userId = Auth.auth().currentUser?.uid {
             let imageRef = Storage.storage().reference().child("users/\(userId)")
-            imageRef.getData(maxSize: 1 * 2048 * 2048) { data, error in
+            imageRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
                 guard error == nil else {
                     print("Error downloading user image: \(String(describing: error?.localizedDescription))")
                     completion(nil)
@@ -167,7 +150,45 @@ class ProfileViewModel {
         }
     }
     
-    func savePhotoInCoreData() {
+    // Core Data
+    
+    private func getUsersDataFromCoreData(completion: @escaping (UserProfile?) -> ()) {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+                let result = try context.fetch(fetchRequest)
+                let newUser = result.first ?? User(context: context)
+                var userData = UserProfile()
+                userData.name = newUser.name
+                userData.email = Auth.auth().currentUser?.email
+                userData.password = newUser.password
+                user = userData
+                
+                completion(userData)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func saveUsersDataInCoreData() {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+                let result = try context.fetch(fetchRequest)
+                let newUser = result.first ?? User(context: context)
+                newUser.name = user.name
+                newUser.email = user.email
+                newUser.password = user.password
+                
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func savePhotoInCoreData() {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
@@ -182,7 +203,7 @@ class ProfileViewModel {
         }
     }
     
-    func getUserPhotoFromCoreData(completion: @escaping (UIImage?) -> ()) {
+    private func getUserPhotoFromCoreData(completion: @escaping (UIImage?) -> ()) {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
@@ -197,53 +218,10 @@ class ProfileViewModel {
         }
     }
     
-//    func getUsersRating(completion: @escaping (Int?) -> ()) {
-//        usersReference.order(by: "rating", descending: true).getDocuments { [weak self] (snapshot, error) in
-//            guard error == nil, let documents = snapshot?.documents, let userId = Auth.auth().currentUser?.uid else {
-//                print("Error reading user rating: \(String(describing: error?.localizedDescription))")
-//                completion(nil)
-//                return
-//            }
-//            var rating = 1
-//            for document in documents {
-//                let uid = document.data()["uid"] as? String
-//                if uid == userId {
-//                    break
-//                }
-//                rating += 1
-//            }
-//            completion(rating)
-//            self?.user.rating = rating
-//        }
-//    }
-    
-    func logOut() {
-        do {
-           try Auth.auth().signOut()
-        } catch {
-            print("Error signing out")
+    private func updateKeys() {
+        UserDefaults.standard.set(true, forKey: "isUserInfoDownloaded")
+        if userPhoto != nil {
+            UserDefaults.standard.set(true, forKey: "isUserPhotoDownloaded")
         }
-    }
-    
-    func updatePhotoData(with data: Data) {
-        userPhoto = UIImage(data: data)
-        savePhotoInCoreData()
-        if let userId = Auth.auth().currentUser?.uid {
-            Storage.storage().reference().child("users/\(userId)").putData(data)
-        }
-    }
-    
-    func getHiddenPassword() -> String {
-        var password = ""
-        for _ in user.password ?? "" {
-            password += "•"
-        }
-        return password
-    }
-    
-    func transportData(to viewModel: ProfileDataChangeViewModel) {
-        viewModel.oldName = user.name ?? ""
-        viewModel.oldEmail = user.email ?? ""
-        viewModel.oldPassword = user.password ?? ""
     }
 }

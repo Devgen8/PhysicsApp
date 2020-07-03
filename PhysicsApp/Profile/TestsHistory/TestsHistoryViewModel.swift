@@ -13,17 +13,21 @@ import CoreData
 
 class TestsHistoryViewModel {
     
-    let usersReference = Firestore.firestore().collection("users")
-    var testsNames = [String]()
-    var answersCorrections = [String:[Int]]()
-    var points = [String:Int]()
-    var semiWrightAnswersNumbers = [String:Int]()
-    var wrightAnswersNumbers = [String:Int]()
-    var tasks = [String:[String]]()
-    var time = [String:Int]()
-    var userAnswers = [String:[String:String]]()
-    var wrightAnswers = [String:[String]]()
-    var primaryPoints = [String:[Int]]()
+    //MARK: Fields
+    
+    private let usersReference = Firestore.firestore().collection("users")
+    private var testsNames = [String]()
+    private var answersCorrections = [String:[Int]]()
+    private var points = [String:Int]()
+    private var semiWrightAnswersNumbers = [String:Int]()
+    private var wrightAnswersNumbers = [String:Int]()
+    private var tasks = [String:[String]]()
+    private var time = [String:Int]()
+    private var userAnswers = [String:[String:String]]()
+    private var wrightAnswers = [String:[String]]()
+    private var primaryPoints = [String:[Int]]()
+    
+    //MARK: Interface
     
     func getTests(completion: @escaping (Bool) -> ()) {
         if (UserDefaults.standard.value(forKey: "isTestHistoryRead") as? Bool) == nil {
@@ -37,7 +41,40 @@ class TestsHistoryViewModel {
         }
     }
     
-    func getHistoryFromFirestore(completion: @escaping (Bool) -> ()) {
+    func getTestsNumber() -> Int {
+        return testsNames.count
+    }
+    
+    func getTestName(for row: Int) -> String {
+        return "\(testsNames[row]) (\(points[testsNames[row]] ?? 0) б.)"
+    }
+    
+    func getTasksProgress(for row: Int) -> (Float, Float) {
+        let testName = testsNames[row]
+        let success = Float(Float(wrightAnswersNumbers[testName] ?? 0) / Float(32))
+        let semiSuccess = Float(Float(semiWrightAnswersNumbers[testName] ?? 0) / Float(32)) + success
+        return (success, semiSuccess)
+    }
+    
+    func transportData(to viewModel: TestsHistoryResultsViewModel, for index: Int) {
+        let name = testsNames[index]
+        viewModel.testName = name
+        viewModel.setAnswersCorrection(answersCorrections[name] ?? [])
+        viewModel.setPoints(points[name] ?? 0)
+        viewModel.setSemiWrightAnswers(semiWrightAnswersNumbers[name] ?? 0)
+        viewModel.setWrightAnswers(wrightAnswersNumbers[name] ?? 0)
+        viewModel.setTasks(tasks[name] ?? [])
+        viewModel.timeTillEnd = time[name] ?? 0
+        viewModel.userAnswers = userAnswers[name] ?? [:]
+        viewModel.setRealWrightAnswers(wrightAnswers[name] ?? [])
+        viewModel.setPrimaryPoints(primaryPoints[name] ?? [])
+    }
+    
+    //MARK: Private section
+    
+    // Firestore
+    
+    private func getHistoryFromFirestore(completion: @escaping (Bool) -> ()) {
         if let userId = Auth.auth().currentUser?.uid {
             usersReference.document(userId).collection("testsHistory").order(by: "date", descending: true).getDocuments { (snapshot, error) in
                 guard error == nil, let documents = snapshot?.documents else {
@@ -67,7 +104,9 @@ class TestsHistoryViewModel {
         }
     }
     
-    func saveTestsHistoryInCoreData() {
+    // Core Data
+    
+    private func saveTestsHistoryInCoreData() {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
@@ -97,7 +136,7 @@ class TestsHistoryViewModel {
         }
     }
     
-    func getHistoryFromCoreData(completion: @escaping (Bool) -> ()) {
+    private func getHistoryFromCoreData(completion: @escaping (Bool) -> ()) {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
@@ -130,36 +169,7 @@ class TestsHistoryViewModel {
         }
     }
     
-    func updateKey() {
+    private func updateKey() {
         UserDefaults.standard.set(true, forKey: "isTestHistoryRead")
-    }
-    
-    func getTestsNumber() -> Int {
-        return testsNames.count
-    }
-    
-    func getTestName(for row: Int) -> String {
-        return "\(testsNames[row]) (\(points[testsNames[row]] ?? 0) б.)"
-    }
-    
-    func getTasksProgress(for row: Int) -> (Float, Float) {
-        let testName = testsNames[row]
-        let success = Float(Float(wrightAnswersNumbers[testName] ?? 0) / Float(32))
-        let semiSuccess = Float(Float(semiWrightAnswersNumbers[testName] ?? 0) / Float(32)) + success
-        return (success, semiSuccess)
-    }
-    
-    func transportData(to viewModel: TestsHistoryResultsViewModel, for index: Int) {
-        let name = testsNames[index]
-        viewModel.testName = name
-        viewModel.answersCorrection = answersCorrections[name] ?? []
-        viewModel.points = points[name] ?? 0
-        viewModel.semiWrightAnswerNumber = semiWrightAnswersNumbers[name] ?? 0
-        viewModel.wrightAnswerNumber = wrightAnswersNumbers[name] ?? 0
-        viewModel.tasks = tasks[name] ?? []
-        viewModel.timeTillEnd = time[name] ?? 0
-        viewModel.userAnswers = userAnswers[name] ?? [:]
-        viewModel.realWrightAnswers = wrightAnswers[name] ?? []
-        viewModel.primaryPoints = primaryPoints[name] ?? []
     }
 }

@@ -10,10 +10,15 @@ import Foundation
 import FirebaseFirestore
 
 class AdminMessagesViewModel {
-    let messagesReference = Firestore.firestore().collection("messages")
-    var messages = [AdminMessageModel]()
-    var sortType = MessageSortTypes.profile
-    var sortedMessages = [AdminMessageModel]()
+    
+    //MARK: Fields
+    
+    private let messagesReference = Firestore.firestore().collection("messages")
+    private var messages = [AdminMessageModel]()
+    private var sortType = MessageSortTypes.profile
+    private var sortedMessages = [AdminMessageModel]()
+    
+    //MARK: Interface
     
     func getMessages(completion: @escaping (Bool) -> ()) {
         messagesReference.order(by: "date", descending: true).getDocuments { [weak self] (snapshot, error) in

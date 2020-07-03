@@ -72,7 +72,7 @@
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload (1)" translatesAutoresizingMaskIntoConstraints="NO" id="mVv-I8-tuz">
                                     <rect key="frame" x="30" y="295.5" width="354" height="202.5"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="mVv-I8-tuz" secondAttribute="height" multiplier="7:4" id="fkn-YJ-GFD"/>
                                     </constraints>
@@ -97,7 +97,7 @@
                                         <action selector="uploadTapped:" destination="-1" eventType="touchUpInside" id="hiy-VM-miO"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Прикрепи фото" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPQ-Mk-gL8">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Прикрепи фото (max 8 МБ)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPQ-Mk-gL8">
                                     <rect key="frame" x="20" y="261" width="374" height="24.5"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                     <nil key="textColor"/>
@@ -165,7 +165,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Прикрепи объяснение" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCQ-iQ-Tc8">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Прикрепи объяснение (max 8 МБ)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCQ-iQ-Tc8">
                                     <rect key="frame" x="20" y="508" width="374" height="24.5"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                     <nil key="textColor"/>
@@ -173,7 +173,7 @@
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload (1)" translatesAutoresizingMaskIntoConstraints="NO" id="slZ-9s-Fnk">
                                     <rect key="frame" x="30" y="542.5" width="354" height="202"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="slZ-9s-Fnk" secondAttribute="height" multiplier="7:4" id="FLG-c4-v6h"/>
                                     </constraints>
@@ -196,7 +196,7 @@
                                     <rect key="frame" x="10" y="85.5" width="394" height="32"/>
                                     <segments>
                                         <segment title="Добавить"/>
-                                        <segment title="Изм в тернажере"/>
+                                        <segment title="Изм в тренажере"/>
                                         <segment title="Изм в пробнике"/>
                                     </segments>
                                     <connections>
@@ -312,6 +312,6 @@
     <resources>
         <image name="left-arrow" width="512" height="512"/>
         <image name="search" width="512" height="512"/>
-        <image name="upload (1)" width="512" height="512"/>
+        <image name="upload (1)" width="3980" height="2274"/>
     </resources>
 </document>

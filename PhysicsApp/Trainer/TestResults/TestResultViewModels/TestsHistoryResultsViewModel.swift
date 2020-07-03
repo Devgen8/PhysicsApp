@@ -13,6 +13,18 @@ import FirebaseStorage
 
 class TestsHistoryResultsViewModel: GeneralTestResultsViewModel {
     
+    //MARK: Fields
+    
+    private var tasksImages = [String:UIImage]()
+    private var tasksDescriptions = [String:UIImage]()
+    private var realWrightAnswers = [String]()
+    private var tasks = [String]()
+    private var wrightAnswerNumber = 0
+    private var answersCorrection = [Int]()
+    private var points = 0
+    private var semiWrightAnswerNumber = 0
+    private var primaryPoints = [Int]()
+    
     var timeTillEnd = 0
     var wrightAnswers = [String : (Double?, Double?, String?)]()
     var userAnswers = [String : String]()
@@ -21,126 +33,13 @@ class TestsHistoryResultsViewModel: GeneralTestResultsViewModel {
     var cPartPoints = [Int]()
     var openedCells = [Int]()
     var testAnswersUpdater: TestAnswersUpdater?
-    var tasksImages = [String:UIImage]()
-    var tasksDescriptions = [String:UIImage]()
-    var realWrightAnswers = [String]()
-    var tasks = [String]()
-    var wrightAnswerNumber = 0
-    var answersCorrection = [Int]()
-    var points = 0
-    var semiWrightAnswerNumber = 0
-    var primaryPoints = [Int]()
+    
+    //MARK: Interface
     
     func checkUserAnswers(completion: @escaping (Bool) -> ()) {
         downloadPhotos { (isReady) in
             completion(isReady)
         }
-    }
-    
-    func isTestCustom() -> Bool {
-        if testName.count < 7 {
-            return false
-        } else {
-            var charsArray = [Character]()
-            var index = 0
-            for letter in testName {
-                charsArray.append(letter)
-                index += 1
-                if index == 7 {
-                    break
-                }
-            }
-            if String(charsArray) == "Пробник" {
-                return true
-            } else {
-                return false
-            }
-        }
-    }
-    
-    func downloadPhotos(completion: @escaping (Bool) -> ()) {
-        var count = 0
-        for taskName in tasks {
-            var imageRef = StorageReference()
-            if isTestCustom() {
-                let (themeName, taskNumber) = getTaskLocation(taskName: taskName)
-                imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
-            } else {
-                let taskNumber = getTaskPosition(taskName: taskName)
-                imageRef = Storage.storage().reference().child("tests/\(testName)/task\(taskNumber).png")
-            }
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
-                guard let `self` = self, error == nil else {
-                    print("Error downloading images: \(String(describing: error?.localizedDescription))")
-                    return
-                }
-                if let data = data, let image = UIImage(data: data) {
-                    self.tasksImages[taskName] = image
-                }
-                count += 1
-                if count == self.realWrightAnswers.count {
-                    self.downloadDesciptions { (isReady) in
-                        completion(isReady)
-                    }
-                }
-            }
-        }
-    }
-    
-    func downloadDesciptions(completion: @escaping (Bool) -> ()) {
-        var count = 0
-        for taskName in tasks {
-            var imageRef = StorageReference()
-            if isTestCustom() {
-                let (themeName, taskNumber) = getTaskLocation(taskName: taskName)
-                imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
-            } else {
-                let taskNumber = getTaskPosition(taskName: taskName)
-                imageRef = Storage.storage().reference().child("tests/\(testName)/task\(taskNumber)description.png")
-            }
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
-                guard let `self` = self, error == nil else {
-                    print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
-                    return
-                }
-                if let data = data, let image = UIImage(data: data) {
-                    self.tasksDescriptions[taskName] = image
-                }
-                count += 1
-                if count == self.realWrightAnswers.count {
-                    completion(true)
-                }
-            }
-        }
-    }
-    
-    func getTaskPosition(taskName: String) -> Int {
-        let (themeName, _) = getTaskLocation(taskName: taskName)
-        if let range = themeName.range(of: "№") {
-            let numberString = String(themeName[range.upperBound...])
-            return Int(numberString) ?? 0
-        }
-        return 0
-    }
-    
-    func getTaskLocation(taskName: String) -> (String, String) {
-        var themeNameSet = [Character]()
-        var taskNumberSet = [Character]()
-        var isDotFound = false
-        for letter in taskName {
-            if letter == "." {
-                isDotFound = true
-                continue
-            }
-            if isDotFound {
-                taskNumberSet.append(letter)
-            } else {
-                themeNameSet.append(letter)
-            }
-        }
-        let themeName = String(themeNameSet)
-        let taskNumber = String(taskNumberSet)
-        return (themeName, taskNumber)
     }
     
     func isCellOpened(index: Int) -> Bool {
@@ -153,6 +52,34 @@ class TestsHistoryResultsViewModel: GeneralTestResultsViewModel {
     
     func openCell(for index: Int) {
         openedCells.append(index)
+    }
+    
+    func setAnswersCorrection(_ newAnswers: [Int]) {
+        answersCorrection = newAnswers
+    }
+    
+    func setPoints(_ newPoints: Int) {
+        points = newPoints
+    }
+    
+    func setSemiWrightAnswers(_ newAnswers: Int) {
+        semiWrightAnswerNumber = newAnswers
+    }
+    
+    func setWrightAnswers(_ newAnswers: Int) {
+        wrightAnswerNumber = newAnswers
+    }
+    
+    func setTasks(_ newTasks: [String]) {
+        tasks = newTasks
+    }
+    
+    func setRealWrightAnswers(_ newAnswers: [String]) {
+        realWrightAnswers = newAnswers
+    }
+    
+    func setPrimaryPoints(_ newPoints: [Int]) {
+        primaryPoints = newPoints
     }
     
     func getTestDurationString() -> String {
@@ -213,8 +140,76 @@ class TestsHistoryResultsViewModel: GeneralTestResultsViewModel {
         return realWrightAnswers[index - 1]
     }
     
+    //MARK: Private section
     
-    // do not need these funcs for that view model
+    // Firestore and Storage
+    
+    private func downloadPhotos(completion: @escaping (Bool) -> ()) {
+        var count = 0
+        for taskName in tasks {
+            var imageRef = StorageReference()
+            if NamesParser.isTestCustom(testName) {
+                let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: taskName)
+                imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
+            } else {
+                let taskNumber = getTaskPosition(taskName: taskName)
+                imageRef = Storage.storage().reference().child("tests/\(testName)/task\(taskNumber).png")
+            }
+            imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
+                guard let `self` = self, error == nil else {
+                    print("Error downloading images: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                if let data = data, let image = UIImage(data: data) {
+                    self.tasksImages[taskName] = image
+                }
+                count += 1
+                if count == self.realWrightAnswers.count {
+                    self.downloadDesciptions { (isReady) in
+                        completion(isReady)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func downloadDesciptions(completion: @escaping (Bool) -> ()) {
+        var count = 0
+        for taskName in tasks {
+            var imageRef = StorageReference()
+            if NamesParser.isTestCustom(testName) {
+                let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: taskName)
+                imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
+            } else {
+                let taskNumber = getTaskPosition(taskName: taskName)
+                imageRef = Storage.storage().reference().child("tests/\(testName)/task\(taskNumber)description.png")
+            }
+            imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
+                guard let `self` = self, error == nil else {
+                    print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                if let data = data, let image = UIImage(data: data) {
+                    self.tasksDescriptions[taskName] = image
+                }
+                count += 1
+                if count == self.realWrightAnswers.count {
+                    completion(true)
+                }
+            }
+        }
+    }
+    
+    private func getTaskPosition(taskName: String) -> Int {
+        let (themeName, _) = NamesParser.getTaskLocation(taskName: taskName)
+        if let range = themeName.range(of: "№") {
+            let numberString = String(themeName[range.upperBound...])
+            return Int(numberString) ?? 0
+        }
+        return 0
+    }
+    
+    //MARK: Unused required method
     
     func updateTestDataAsDone() {
         

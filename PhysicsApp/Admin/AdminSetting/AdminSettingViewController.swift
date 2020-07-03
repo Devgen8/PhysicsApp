@@ -11,16 +11,15 @@ import Lottie
 
 class AdminSettingViewController: UIViewController {
     
-    var adminIdTableView: UITableView!
-    var adminLabel: UILabel!
-    var backButton: UIButton!
-    var addButton: UIButton!
-    var loaderView: AnimationView!
-    var viewModel = AdminSettingViewModel()
+    private var adminIdTableView: UITableView!
+    private var adminLabel: UILabel!
+    private var backButton: UIButton!
+    private var addButton: UIButton!
+    private var loaderView: AnimationView!
+    private var viewModel = AdminSettingViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         designScreenElements()
         prepareData()
     }

@@ -14,8 +14,3 @@ struct UserProfile {
     var password: String?
     var rating: Int?
 }
-
-struct Award {
-    var name: String?
-    var image: UIImage?
-}

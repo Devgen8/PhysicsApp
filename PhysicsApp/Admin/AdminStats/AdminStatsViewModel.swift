@@ -13,15 +13,19 @@ import FirebaseStorage
 
 class AdminStatsViewModel {
     
-    let adminStatsReference = Firestore.firestore().collection("adminStats")
-    let trainerReference = Firestore.firestore().collection("trainer")
-    var tasks = [AdminStatsModel]()
-    var tasksLevel = [String:[String]]()
-    var sort = AdminStatsSortType.task
-    var numberOfCells = 0
-    var cellLabels = [String]()
-    var cellPercantage = [Int]()
-    var descending = true
+    //MARK: Fields
+    
+    private let adminStatsReference = Firestore.firestore().collection("adminStats")
+    private let trainerReference = Firestore.firestore().collection("trainer")
+    private var tasks = [AdminStatsModel]()
+    private var tasksLevel = [String:[String]]()
+    private var sort = AdminStatsSortType.task
+    private var numberOfCells = 0
+    private var cellLabels = [String]()
+    private var cellPercantage = [Int]()
+    private var descending = true
+    
+    //MARK: Interface
     
     func getThemes(completion: @escaping (Bool) -> ()) {
         if let lastUpdateDate = UserDefaults.standard.value(forKey: "adminStatsUpdateDate") as? Date,
@@ -42,97 +46,22 @@ class AdminStatsViewModel {
         }
     }
     
-    func getThemesFromCoreData(completion: @escaping (Bool) -> ()) {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            do {
-                let fechRequest: NSFetchRequest<Admin> = Admin.fetchRequest()
-                let result = try context.fetch(fechRequest)
-                let admin = result.first
-                tasks = []
-                if let newTasks = admin?.tasks {
-                    for task in newTasks {
-                        var newTask = AdminStatsModel()
-                        newTask.failed = Int((task as! AdminStatTask).failed)
-                        newTask.succeded = Int((task as! AdminStatTask).succeded)
-                        newTask.name = (task as! AdminStatTask).name
-                        newTask.theme = (task as! AdminStatTask).theme
-                        tasks.append(newTask)
-                    }
-                } else {
-                    completion(false)
-                }
-                tasksLevel = (admin?.tasksLevels as! TasksLevelsObject).tasksLevels
-                completion(true)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func getThemesFromFirestore(completion: @escaping (Bool) -> ()) {
-        adminStatsReference.getDocuments { (snapshot, error) in
-            guard error == nil, let documents = snapshot?.documents else {
-                print("Error reading admin stats: \(String(describing: error?.localizedDescription))")
+    func getTasksData(for index: Int, completion: @escaping (String, Data) -> ()) {
+        let (taskName, taskNumber) = NamesParser.getTaskLocation(taskName: cellLabels[index])
+        trainerReference.document(taskName).collection("tasks").document("task\(taskNumber)").getDocument { (document, error) in
+            guard error == nil else {
+                print("Error reading task info: \(String(describing: error?.localizedDescription))")
+                completion("", Data())
                 return
             }
-            self.tasks = []
-            for document in documents {
-                var newTask = AdminStatsModel()
-                newTask.name = document.data()["name"] as? String
-                newTask.theme = document.data()["theme"] as? String
-                newTask.failed = document.data()["failed"] as? Int
-                newTask.succeded = document.data()["succeded"] as? Int
-                self.tasks.append(newTask)
-            }
-            self.getTasksLevel { (isReady) in
-                completion(isReady)
-            }
-        }
-    }
-    
-    func getTasksLevel(completion: @escaping (Bool) -> ()) {
-        var levels = [String:[String]]()
-        levels["Базовый"] = []
-        levels["Повышенный"] = []
-        levels["Высокий"] = []
-        EGEInfo.baseTasks.forEach({ levels["Базовый"]?.append("Задание №\($0)") })
-        EGEInfo.advancedTasks.forEach({ levels["Повышенный"]?.append("Задание №\($0)") })
-        EGEInfo.masterTasks.forEach({ levels["Высокий"]?.append("Задание №\($0)") })
-        self.tasksLevel = levels
-        self.saveTasksInCoreData()
-        self.updateKeysInfo()
-        completion(true)
-    }
-    
-    func updateKeysInfo() {
-        UserDefaults.standard.set(Date(), forKey: "adminStatsUpdateDate")
-    }
-    
-    func saveTasksInCoreData() {
-        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            do {
-                let fechRequest: NSFetchRequest<Admin> = Admin.fetchRequest()
-                let result = try context.fetch(fechRequest)
-                var admin: Admin?
-                if result.isEmpty {
-                    admin = Admin(context: context)
-                } else {
-                    admin = result.first
+            if let wrightAnswer = document?.data()?["wrightAnswer"] as? Double {
+                self.downloadTaskPhoto(for: self.cellLabels[index]) { (imageData) in
+                    completion("\(wrightAnswer)", imageData)
                 }
-                let newTasks = NSMutableSet()
-                for task in tasks {
-                    let adminStatTask = AdminStatTask(context: context)
-                    adminStatTask.failed = Int16(task.failed ?? 0)
-                    adminStatTask.succeded = Int16(task.succeded ?? 0)
-                    adminStatTask.name = task.name
-                    adminStatTask.theme = task.theme
-                    newTasks.add(adminStatTask)
+            } else if let stringAnswer = document?.data()?["stringAnswer"] as? String {
+                self.downloadTaskPhoto(for: self.cellLabels[index]) { (imageData) in
+                    completion(stringAnswer, imageData)
                 }
-                admin?.tasks = newTasks
-                admin?.tasksLevels = TasksLevelsObject(tasksLevels: tasksLevel)
-                try context.save()
-            } catch {
-                print(error.localizedDescription)
             }
         }
     }
@@ -165,30 +94,63 @@ class AdminStatsViewModel {
         completion(true)
     }
     
-    func getTasksData(for index: Int, completion: @escaping (String, Data) -> ()) {
-        let (taskName, taskNumber) = getTaskLocation(taskName: cellLabels[index])
-        trainerReference.document(taskName).collection("tasks").document("task\(taskNumber)").getDocument { (document, error) in
-            guard error == nil else {
-                print("Error reading task info: \(String(describing: error?.localizedDescription))")
-                completion("", Data())
+    func transportData(to viewModel: TasksDetailViewModel, for index: Int) {
+        viewModel.setSortType(sort.rawValue)
+        switch sort {
+        case .task:
+            viewModel.setTasks(prepareByTasksForTransportation(for: index))
+        case .theme:
+            viewModel.setTasks(prepareByThemesForTransportation(for: index))
+        case .difficulty:
+            viewModel.setTasks(prepareByDifficultyForTransportation(for: index))
+        default:
+            print("")
+        }
+    }
+    
+    //MARK: Private section
+    
+    private func getTasksLevel(completion: @escaping (Bool) -> ()) {
+        var levels = [String:[String]]()
+        levels["Базовый"] = []
+        levels["Повышенный"] = []
+        levels["Высокий"] = []
+        EGEInfo.baseTasks.forEach({ levels["Базовый"]?.append("Задание №\($0)") })
+        EGEInfo.advancedTasks.forEach({ levels["Повышенный"]?.append("Задание №\($0)") })
+        EGEInfo.masterTasks.forEach({ levels["Высокий"]?.append("Задание №\($0)") })
+        self.tasksLevel = levels
+        self.saveTasksInCoreData()
+        self.updateKeysInfo()
+        completion(true)
+    }
+    
+    // Firestore and Storage
+    
+    private func getThemesFromFirestore(completion: @escaping (Bool) -> ()) {
+        adminStatsReference.getDocuments { (snapshot, error) in
+            guard error == nil, let documents = snapshot?.documents else {
+                print("Error reading admin stats: \(String(describing: error?.localizedDescription))")
                 return
             }
-            if let wrightAnswer = document?.data()?["wrightAnswer"] as? Double {
-                self.downloadTaskPhoto(for: self.cellLabels[index]) { (imageData) in
-                    completion("\(wrightAnswer)", imageData)
-                }
-            } else if let stringAnswer = document?.data()?["stringAnswer"] as? String {
-                self.downloadTaskPhoto(for: self.cellLabels[index]) { (imageData) in
-                    completion(stringAnswer, imageData)
-                }
+            self.tasks = []
+            for document in documents {
+                var newTask = AdminStatsModel()
+                newTask.name = document.data()["name"] as? String
+                newTask.theme = document.data()["theme"] as? String
+                newTask.failed = document.data()["failed"] as? Int
+                newTask.succeded = document.data()["succeded"] as? Int
+                self.tasks.append(newTask)
+            }
+            self.getTasksLevel { (isReady) in
+                completion(isReady)
             }
         }
     }
     
-    func downloadTaskPhoto(for taskName: String, completion: @escaping (Data) -> ()) {
-        let (taskName, taskNumber) = getTaskLocation(taskName: taskName)
+    private func downloadTaskPhoto(for taskName: String, completion: @escaping (Data) -> ()) {
+        let (taskName, taskNumber) = NamesParser.getTaskLocation(taskName: taskName)
         let imageRef = Storage.storage().reference().child("trainer/\(taskName)/task\(taskNumber).png")
-        imageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+        imageRef.getData(maxSize: 2 * 2048 * 2048) { (data, error) in
             guard error == nil else {
                 print("Error downloading images: \(String(describing: error?.localizedDescription))")
                 return
@@ -199,7 +161,71 @@ class AdminStatsViewModel {
         }
     }
     
-    func fullfillCellParameters(forSort: AdminStatsSortType) {
+    // Core Data
+    
+    private func getThemesFromCoreData(completion: @escaping (Bool) -> ()) {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fechRequest: NSFetchRequest<Admin> = Admin.fetchRequest()
+                let result = try context.fetch(fechRequest)
+                let admin = result.first
+                tasks = []
+                if let newTasks = admin?.tasks {
+                    for task in newTasks {
+                        var newTask = AdminStatsModel()
+                        newTask.failed = Int((task as! AdminStatTask).failed)
+                        newTask.succeded = Int((task as! AdminStatTask).succeded)
+                        newTask.name = (task as! AdminStatTask).name
+                        newTask.theme = (task as! AdminStatTask).theme
+                        tasks.append(newTask)
+                    }
+                } else {
+                    completion(false)
+                }
+                tasksLevel = (admin?.tasksLevels as! TasksLevelsObject).tasksLevels
+                completion(true)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func updateKeysInfo() {
+        UserDefaults.standard.set(Date(), forKey: "adminStatsUpdateDate")
+    }
+    
+    private func saveTasksInCoreData() {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fechRequest: NSFetchRequest<Admin> = Admin.fetchRequest()
+                let result = try context.fetch(fechRequest)
+                var admin: Admin?
+                if result.isEmpty {
+                    admin = Admin(context: context)
+                } else {
+                    admin = result.first
+                }
+                let newTasks = NSMutableSet()
+                for task in tasks {
+                    let adminStatTask = AdminStatTask(context: context)
+                    adminStatTask.failed = Int16(task.failed ?? 0)
+                    adminStatTask.succeded = Int16(task.succeded ?? 0)
+                    adminStatTask.name = task.name
+                    adminStatTask.theme = task.theme
+                    newTasks.add(adminStatTask)
+                }
+                admin?.tasks = newTasks
+                admin?.tasksLevels = TasksLevelsObject(tasksLevels: tasksLevel)
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    // sort logic
+    
+    private func fullfillCellParameters(forSort: AdminStatsSortType) {
         switch sort {
         case .all:
             fullfillAll()
@@ -212,7 +238,7 @@ class AdminStatsViewModel {
         }
     }
     
-    func fullfillTasks() {
+    private func fullfillTasks() {
         var tasksStats = [String:Int]()
         var numberOfTasksInTheme = [String:Int]()
         for task in tasks {
@@ -220,7 +246,7 @@ class AdminStatsViewModel {
                 let failures = task.failed,
                 let successes = task.succeded {
                 let percentage = Int(Double(failures)/Double(failures + successes) * 100.0)
-                let (themeName, _) = getTaskLocation(taskName: taskName)
+                let (themeName, _) = NamesParser.getTaskLocation(taskName: taskName)
                 if tasksStats[themeName] == nil {
                     tasksStats[themeName] = percentage
                 } else {
@@ -243,7 +269,7 @@ class AdminStatsViewModel {
         }
     }
     
-    func fullfillThemes() {
+    private func fullfillThemes() {
         var tasksStats = [String:Int]()
         var numberOfTasksInTheme = [String:Int]()
         for task in tasks {
@@ -276,7 +302,7 @@ class AdminStatsViewModel {
         }
     }
     
-    func fullfillByDifficulty() {
+    private func fullfillByDifficulty() {
         var tasksStats = [String:Int]()
         var numberOfTasksInTheme = [String:Int]()
         for task in tasks {
@@ -284,7 +310,7 @@ class AdminStatsViewModel {
                 let successes = task.succeded {
                 var taskTheme = ""
                 for levelPair in tasksLevel {
-                    let (taskName, _) = getTaskLocation(taskName: task.name ?? "")
+                    let (taskName, _) = NamesParser.getTaskLocation(taskName: task.name ?? "")
                     if levelPair.value.contains(taskName) {
                         taskTheme = levelPair.key
                         break
@@ -313,7 +339,7 @@ class AdminStatsViewModel {
         }
     }
     
-    func fullfillAll() {
+    private func fullfillAll() {
         var tasksStats = [String:Int]()
         for task in tasks {
             if let taskName = task.name,
@@ -330,7 +356,7 @@ class AdminStatsViewModel {
         }
     }
     
-    func getThemesNumber(forSort sort: AdminStatsSortType) -> Int {
+    private func getThemesNumber(forSort sort: AdminStatsSortType) -> Int {
         switch sort {
         case .all:
             return tasks.count
@@ -343,12 +369,12 @@ class AdminStatsViewModel {
         }
     }
     
-    func getDifficultyCount() -> Int {
+    private func getDifficultyCount() -> Int {
         var tasksNames = [String]()
         for task in tasks {
             var taskTheme = ""
             for levelPair in tasksLevel {
-                let (taskName, _) = getTaskLocation(taskName: task.name ?? "")
+                let (taskName, _) = NamesParser.getTaskLocation(taskName: task.name ?? "")
                 if levelPair.value.contains(taskName) {
                     taskTheme = levelPair.key
                     break
@@ -361,10 +387,10 @@ class AdminStatsViewModel {
         return tasksNames.count
     }
         
-    func getTasksCount() -> Int {
+    private func getTasksCount() -> Int {
         var tasksNames = [String]()
         for task in tasks {
-            let (taskName, _) = getTaskLocation(taskName: task.name ?? "")
+            let (taskName, _) = NamesParser.getTaskLocation(taskName: task.name ?? "")
             if !tasksNames.contains(taskName) {
                 tasksNames.append(taskName)
             }
@@ -372,7 +398,7 @@ class AdminStatsViewModel {
         return tasksNames.count
     }
     
-    func getThemesCount() -> Int {
+    private func getThemesCount() -> Int {
         var themeNames = [String]()
         for task in tasks {
             let allTaskThemes = ThemeParser.parseTaskThemes(task.theme ?? "")
@@ -385,24 +411,10 @@ class AdminStatsViewModel {
         return themeNames.count
     }
     
-    func transportData(to viewModel: TasksDetailViewModel, for index: Int) {
-        viewModel.sortTypeName = sort.rawValue
-        switch sort {
-        case .task:
-            viewModel.tasks = prepareByTasksForTransportation(for: index)
-        case .theme:
-            viewModel.tasks = prepareByThemesForTransportation(for: index)
-        case .difficulty:
-            viewModel.tasks = prepareByDifficultyForTransportation(for: index)
-        default:
-            print("")
-        }
-    }
-    
-    func prepareByTasksForTransportation(for index: Int) -> [AdminStatsModel] {
+    private func prepareByTasksForTransportation(for index: Int) -> [AdminStatsModel] {
         var searchingTasks = [AdminStatsModel]()
         for task in tasks {
-            let (taskName, _) = getTaskLocation(taskName: task.name ?? "")
+            let (taskName, _) = NamesParser.getTaskLocation(taskName: task.name ?? "")
             if taskName == cellLabels[index] {
                 searchingTasks.append(task)
             }
@@ -410,7 +422,7 @@ class AdminStatsViewModel {
         return searchingTasks
     }
     
-    func prepareByThemesForTransportation(for index: Int) -> [AdminStatsModel] {
+    private func prepareByThemesForTransportation(for index: Int) -> [AdminStatsModel] {
         var searchingTasks = [AdminStatsModel]()
         for task in tasks {
             let allTaskThemes = ThemeParser.parseTaskThemes(task.theme ?? "")
@@ -423,34 +435,14 @@ class AdminStatsViewModel {
         return searchingTasks
     }
     
-    func prepareByDifficultyForTransportation(for index: Int) -> [AdminStatsModel] {
+    private func prepareByDifficultyForTransportation(for index: Int) -> [AdminStatsModel] {
         var searchingTasks = [AdminStatsModel]()
         for task in tasks {
-            let (taskName, _) = getTaskLocation(taskName: task.name ?? "")
+            let (taskName, _) = NamesParser.getTaskLocation(taskName: task.name ?? "")
             if tasksLevel[cellLabels[index]]?.contains(taskName) ?? false {
                 searchingTasks.append(task)
             }
         }
         return searchingTasks
-    }
-    
-    func getTaskLocation(taskName: String) -> (String, String) {
-        var themeNameSet = [Character]()
-        var taskNumberSet = [Character]()
-        var isDotFound = false
-        for letter in taskName {
-            if letter == "." {
-                isDotFound = true
-                continue
-            }
-            if isDotFound {
-                taskNumberSet.append(letter)
-            } else {
-                themeNameSet.append(letter)
-            }
-        }
-        let themeName = String(themeNameSet)
-        let taskNumber = String(taskNumberSet)
-        return (themeName, taskNumber)
     }
 }

@@ -58,6 +58,7 @@ protocol TestViewModel {
     func writeAnswerForTask(_ index: Int, with answer: String)
     func getNextTaskIndex(after index: Int) -> Int
     func getTimeString(from allSeconds: Int) -> String
+    func getMaxRatio() -> CGFloat
     var name: String { set get }
     var testAnswers: [String:String] { set get }
 }
@@ -112,4 +113,8 @@ protocol TrainerAdminViewModel {
     func updateTaskNumber(with number: String)
     func searchTask(completion: @escaping (TaskModel?) -> ())
     func clearOldData()
+}
+
+protocol ImageOpener {
+    func openImage(_ image: UIImage)
 }

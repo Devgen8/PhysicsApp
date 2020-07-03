@@ -14,19 +14,24 @@ import CoreData
 
 class TaskViewModel {
     
-    var theme: String?
-    let themeReference = Firestore.firestore().collection("trainer")
-    let usersReference = Firestore.firestore().collection("users")
-    let adminStatsReference = Firestore.firestore().collection("adminStats")
-    var task: TaskModel?
-    var taskNumber: Int?
-    var numberOfTasks:  Int?
-    var isTaskUnsolved: Bool?
-    var unsolvedTasks = [String:[String]]()
+    //MARK: Fields
+    
+    private var theme: String?
+    private let themeReference = Firestore.firestore().collection("trainer")
+    private let usersReference = Firestore.firestore().collection("users")
+    private let adminStatsReference = Firestore.firestore().collection("adminStats")
+    private var task: TaskModel?
+    private var taskNumber: Int?
+    private var numberOfTasks:  Int?
+    private var isTaskUnsolved: Bool?
+    private var unsolvedTasks = [String:[String]]()
+    private var solvedTasks = [String:[String]]()
+    private var themesUnsolvedTasks = [String:[String]]()
+    private var isFirstAnswer = true
+    
     var unsolvedTasksUpdater: UnsolvedTaskUpdater?
-    var solvedTasks = [String:[String]]()
-    var themesUnsolvedTasks = [String:[String]]()
-    var isFirstAnswer = true
+    
+    //MARK: Interface
     
     func checkAnswer(_ stringAnswer: String?) -> (Bool, String) {
         var isWright = false
@@ -75,37 +80,8 @@ class TaskViewModel {
         }
     }
     
-    func updateKeyInfo() {
-        if UserDefaults.standard.value(forKey: "isUserInformedAboutAuth") as? Bool == nil {
-            UserDefaults.standard.set(true, forKey: "isUserInformedAboutAuth")
-        }
-    }
-    
-    func updateStatistics() {
-        guard let theme = theme, let unsolvedTask = self.task?.name else {
-            print("Couldn't write unsolved tasks")
-            return
-        }
-        // stats for school
-        if !(solvedTasks[theme]?.contains(unsolvedTask) ?? false || unsolvedTasks[theme]?.contains(unsolvedTask) ?? false) {
-            if isFirstAnswer {
-                var change = 0
-                if isTaskUnsolved == true {
-                    change = -1
-                    isFirstAnswer = false
-                    updateTaskStats(with: change)
-                }
-                if isTaskUnsolved == false {
-                    change = 1
-                    isFirstAnswer = false
-                    updateTaskStats(with: change)
-                }
-            }
-        }
-    }
-    
     func updateTaskStatus() {
-        let (theme, _) = getTaskLocation(taskName: task?.name ?? "")
+        let (theme, _) = NamesParser.getTaskLocation(taskName: task?.name ?? "")
         guard Auth.auth().currentUser?.uid != nil, let unsolvedTask = self.task?.name else {
             print("Couldn't write unsolved tasks")
             return
@@ -204,7 +180,117 @@ class TaskViewModel {
         }
     }
     
-    func saveFirstTryTaskInCoreData() {
+    func updateParentUnsolvedTasks() {
+        if let tasksUpdater = unsolvedTasksUpdater as? TasksListViewModel {
+            tasksUpdater.setThemeUnsolvedTasks(themesUnsolvedTasks)
+        }
+        unsolvedTasksUpdater?.updateUnsolvedTasks(with: unsolvedTasks, and: solvedTasks)
+    }
+    
+    func getTaskName() -> String? {
+        return task?.name
+    }
+    
+    func getNumberOfTasks() -> Int? {
+        return numberOfTasks
+    }
+    
+    func setNumberOfTasks(_ newNumber: Int?) {
+        numberOfTasks = newNumber
+    }
+    
+    func getTaskNumber() -> Int? {
+        return taskNumber
+    }
+    
+    func setTaskNumber(_ newNumber: Int?) {
+        taskNumber = newNumber
+    }
+    
+    func getTheme() -> String? {
+        return theme
+    }
+    
+    func setTheme(_ newTheme: String?) {
+        theme = newTheme
+    }
+    
+    func getTask() -> TaskModel? {
+        return task
+    }
+    
+    func setTask(_ newTask: TaskModel?) {
+        task = newTask
+    }
+    
+    func setUnsolvedTasks(_ newTasks: [String:[String]]) {
+        unsolvedTasks = newTasks
+    }
+    
+    func setSolvedTasks(_ newTasks: [String:[String]]) {
+        solvedTasks = newTasks
+    }
+    
+    func setThemeUnsolvedTasks(_ newTasks: [String:[String]]) {
+        themesUnsolvedTasks = newTasks
+    }
+    
+    //MARK: Private section
+    
+    private func updateKeyInfo() {
+        if UserDefaults.standard.value(forKey: "isUserInformedAboutAuth") as? Bool == nil {
+            UserDefaults.standard.set(true, forKey: "isUserInformedAboutAuth")
+        }
+    }
+    
+    private func updateStatistics() {
+        guard let theme = theme, let unsolvedTask = self.task?.name else {
+            print("Couldn't write unsolved tasks")
+            return
+        }
+        // stats for school
+        if !(solvedTasks[theme]?.contains(unsolvedTask) ?? false || unsolvedTasks[theme]?.contains(unsolvedTask) ?? false) {
+            var completedTasks = UserDefaults.standard.value(forKey: "completedTasks") as? [String] ?? []
+            if !completedTasks.contains(unsolvedTask) {
+                var change = 0
+                if isTaskUnsolved == true {
+                    change = -1
+                    updateTaskStats(with: change)
+                }
+                if isTaskUnsolved == false {
+                    change = 1
+                    updateTaskStats(with: change)
+                }
+                completedTasks.append(unsolvedTask)
+                UserDefaults.standard.set(completedTasks, forKey: "completedTasks")
+            }
+        }
+    }
+    
+    private func putTaskUnsolved() {
+        if (Auth.auth().currentUser?.uid) != nil {
+            saveUnsolvedTasksToCoreData()
+        }
+    }
+    
+    // Firestore
+    
+    private func saveFirstTryTaskInFirestore(tasks: [String]) {
+        if let userId = Auth.auth().currentUser?.uid {
+            usersReference.document(userId).updateData(["firstTryTasks" : tasks])
+        }
+    }
+    
+    private func saveUnsolvedTasksToFirestore() {
+        if let userId = Auth.auth().currentUser?.uid {
+            usersReference.document(userId).updateData(["unsolvedTasks" : unsolvedTasks,
+                                                     "solvedTasks" : solvedTasks])
+        }
+    }
+    
+    // Core Data
+    
+    private func saveFirstTryTaskInCoreData() {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<User> = User.fetchRequest()
@@ -214,7 +300,7 @@ class TaskViewModel {
                     let coreDataUnsolved = (user.solvedTasks as! StatusTasks).unsolvedTasks
                     let coreDataSolved = (user.solvedTasks as! StatusTasks).solvedTasks
                     if let taskName = task?.name {
-                        let (taskNumber, _) = getTaskLocation(taskName: taskName)
+                        let (taskNumber, _) = NamesParser.getTaskLocation(taskName: taskName)
                         if !(coreDataUnsolved[taskNumber]?.contains(taskName) ?? false) && !(coreDataSolved[taskNumber]?.contains(taskName) ?? false) {
                             newFirstTryTasks.append(taskName)
                             saveFirstTryTaskInFirestore(tasks: newFirstTryTasks)
@@ -229,46 +315,7 @@ class TaskViewModel {
         }
     }
     
-    func saveFirstTryTaskInFirestore(tasks: [String]) {
-        if let userId = Auth.auth().currentUser?.uid {
-            usersReference.document(userId).updateData(["firstTryTasks" : tasks])
-        }
-    }
-    
-    func getTaskLocation(taskName: String) -> (String, String) {
-        var themeNameSet = [Character]()
-        var taskNumberSet = [Character]()
-        var isDotFound = false
-        for letter in taskName {
-            if letter == "." {
-                isDotFound = true
-                continue
-            }
-            if isDotFound {
-                taskNumberSet.append(letter)
-            } else {
-                themeNameSet.append(letter)
-            }
-        }
-        let themeName = String(themeNameSet)
-        let taskNumber = String(taskNumberSet)
-        return (themeName, taskNumber)
-    }
-    
-    func putTaskUnsolved() {
-        if (Auth.auth().currentUser?.uid) != nil {
-            saveUnsolvedTasksToCoreData()
-        }
-    }
-    
-    func saveUnsolvedTasksToFirestore() {
-        if let userId = Auth.auth().currentUser?.uid {
-            usersReference.document(userId).updateData(["unsolvedTasks" : unsolvedTasks,
-                                                     "solvedTasks" : solvedTasks])
-        }
-    }
-    
-    func saveUnsolvedTasksToCoreData() {
+    private func saveUnsolvedTasksToCoreData() {
         if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<User> = User.fetchRequest()
@@ -283,46 +330,5 @@ class TaskViewModel {
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    func updateParentUnsolvedTasks() {
-        if let tasksUpdater = unsolvedTasksUpdater as? TasksListViewModel {
-            tasksUpdater.themesUnsolvedTasks = themesUnsolvedTasks
-        }
-        unsolvedTasksUpdater?.updateUnsolvedTasks(with: unsolvedTasks, and: solvedTasks)
-    }
-    
-    func changeUsersRating() {
-        var change = 0
-        if solvedTasks[theme ?? ""]?.contains(task?.name ?? "") ?? false && isTaskUnsolved ?? false {
-            change = -1
-        }
-        if !(solvedTasks[theme ?? ""]?.contains(task?.name ?? "") ?? false) && !(isTaskUnsolved ?? true) {
-            change = 1
-        }
-        if change != 0 {
-            updateUsersRating(with: change)
-        }
-    }
-    
-    func getTaskName() -> String? {
-        return task?.name
-    }
-    
-    func updateUsersRating(with change: Int) {
-//        if let userId = Auth.auth().currentUser?.uid {
-//            usersReference.document(userId).getDocument { (document, error) in
-//                guard error == nil else {
-//                    print("Error reading user rating: \(String(describing: error?.localizedDescription))")
-//                    return
-//                }
-//                let rating = document?.data()?["rating"] as? Int
-//                var newRating = 0
-//                if let rating = rating {
-//                    newRating = rating + change
-//                }
-//                self.usersReference.document(userId).updateData(["rating" : newRating])
-//            }
-//        }
     }
 }

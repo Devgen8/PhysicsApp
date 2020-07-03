@@ -21,7 +21,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController" customModule="PhysicsApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController" customModule="EgeNewton" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="jng-h2-tlm" id="RVf-gc-FAW"/>
                 <outlet property="instagramButton" destination="90c-Yv-piq" id="vuI-TW-ebG"/>

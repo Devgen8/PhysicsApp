@@ -9,6 +9,8 @@
 import Foundation
 
 class DateWorker {
+    
+    // Checking the time of update
     static func checkForUpdate(from lastUpdateDate: Date) -> Bool {
         var needUpdate = false
         if let weeksDifference = Calendar.current.dateComponents([.weekOfMonth], from: Date(), to: lastUpdateDate).weekOfMonth {

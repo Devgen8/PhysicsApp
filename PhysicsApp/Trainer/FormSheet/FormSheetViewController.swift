@@ -20,7 +20,6 @@ class FormSheetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         designScreenElements()
         showMessageTheme()
         addTextViewObservers()

@@ -10,16 +10,50 @@ import UIKit
 import FirebaseAuth
 
 class CPartTestViewModel {
-    var tasks = [TaskModel]()
-    var cPartTasks = ["Задание №27", "Задание №28", "Задание №29", "Задание №30", "Задание №31", "Задание №32"]
-    var timeTillEnd = 0
-    var wrightAnswers = [String:(Double?, Double?, String?)]()
-    var testAnswers = [String:String]()
-    var tasksImages = [String:UIImage]()
-    var tasksDescriptions = [String:UIImage]()
-    var name = ""
-    var tasksPoints = [0,0,0,0,0,0]
+    
+    //MARK: Fields
+    
+    private var tasks = [TaskModel]()
+    private var cPartTasks = ["Задание №27", "Задание №28", "Задание №29", "Задание №30", "Задание №31", "Задание №32"]
+    private var timeTillEnd = 0
+    private var wrightAnswers = [String:(Double?, Double?, String?)]()
+    private var testAnswers = [String:String]()
+    private var tasksImages = [String:UIImage]()
+    private var tasksDescriptions = [String:UIImage]()
+    private var name = ""
+    private var tasksPoints = [0,0,0,0,0,0]
+    
     var testAnswersUpdater: TestAnswersUpdater?
+    
+    //MARK: Interface
+    
+    func setName(_ newName: String) {
+        name = newName
+    }
+    
+    func setTimeTillEnd(_ newTime: Int) {
+        timeTillEnd = newTime
+    }
+    
+    func setwrightAnswers(_ newAnswers: [String:(Double?, Double?, String?)]) {
+        wrightAnswers = newAnswers
+    }
+    
+    func setTestAnswers(_ newAnswers: [String:String]) {
+        testAnswers = newAnswers
+    }
+    
+    func setTasksImages(_ newImages: [String:UIImage]) {
+        tasksImages = newImages
+    }
+    
+    func setTasks(_ newTasks: [TaskModel]) {
+        tasks = newTasks
+    }
+    
+    func setTasksDescriptions(_ newDescriptions: [String:UIImage]) {
+        tasksDescriptions = newDescriptions
+    }
     
     func getNumberOfDescriptions() -> Int {
         return cPartTasks.count
@@ -29,55 +63,18 @@ class CPartTestViewModel {
         return cPartTasks[index]
     }
     
+    func getName() -> String {
+        return name
+    }
+    
     func getDescriptionImage(for index: Int) -> UIImage {
         return tasks.first(where: {
-            if isTestCustom() {
-                return getTaskLocation(taskName: $0.name ?? "").0 == cPartTasks[index]
+            if NamesParser.isTestCustom(name) {
+                return NamesParser.getTaskLocation(taskName: $0.name ?? "").0 == cPartTasks[index]
             } else {
                 return $0.name == cPartTasks[index]
             }
             })?.taskDescription ?? UIImage()
-    }
-    
-    func isTestCustom() -> Bool {
-        if name.count < 7 {
-            return false
-        } else {
-            var charsArray = [Character]()
-            var index = 0
-            for letter in name {
-                charsArray.append(letter)
-                index += 1
-                if index == 7 {
-                    break
-                }
-            }
-            if String(charsArray) == "Пробник" {
-                return true
-            } else {
-                return false
-            }
-        }
-    }
-    
-    func getTaskLocation(taskName: String) -> (String, String) {
-        var themeNameSet = [Character]()
-        var taskNumberSet = [Character]()
-        var isDotFound = false
-        for letter in taskName {
-            if letter == "." {
-                isDotFound = true
-                continue
-            }
-            if isDotFound {
-                taskNumberSet.append(letter)
-            } else {
-                themeNameSet.append(letter)
-            }
-        }
-        let themeName = String(themeNameSet)
-        let taskNumber = String(taskNumberSet)
-        return (themeName, taskNumber)
     }
     
     func transportData(to viewModel: GeneralTestResultsViewModel) {
@@ -89,7 +86,7 @@ class CPartTestViewModel {
             (viewModel as! CustomTestResultViewModel).testName = name
             (viewModel as! CustomTestResultViewModel).cPartPoints = tasksPoints
             (viewModel as! CustomTestResultViewModel).testAnswersUpdater = testAnswersUpdater
-            (viewModel as! CustomTestResultViewModel).tasks = tasks
+            (viewModel as! CustomTestResultViewModel).setTasks(tasks)
         }
         if viewModel is TestResultsViewModel {
             (viewModel as! TestResultsViewModel).timeTillEnd = timeTillEnd
