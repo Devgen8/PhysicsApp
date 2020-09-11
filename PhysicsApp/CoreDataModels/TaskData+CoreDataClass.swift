@@ -2,7 +2,7 @@
 //  TaskData+CoreDataClass.swift
 //  PhysicsApp
 //
-//  Created by Evgeny Kamaev on 18.06.2020.
+//  Created by Evgeny Kamaev on 04.08.2020.
 //  Copyright © 2020 Devgen. All rights reserved.
 //
 //

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -12,8 +12,9 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainerViewController" customModule="PhysicsApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainerViewController" customModule="Техноскул" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="PyY-MU-gsq" id="Lvu-WP-aWm"/>
                 <outlet property="loadingAnimationView" destination="8Ve-lf-hZU" id="vHg-fY-Hgw"/>
                 <outlet property="notSolvedButton" destination="lTS-oq-R7L" id="8JP-8c-07J"/>
                 <outlet property="sortTypeSegmentedControl" destination="kkb-4d-wf3" id="IkM-1C-1pD"/>
@@ -27,16 +28,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тренажер" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLi-Ru-Gha">
-                    <rect key="frame" x="124.5" y="109" width="165" height="37"/>
+                    <rect key="frame" x="124.5" y="114" width="165" height="37"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="FKg-g4-QNd"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dJ3-xI-jIk">
-                    <rect key="frame" x="20" y="197" width="374" height="532"/>
+                    <rect key="frame" x="20" y="202" width="374" height="527"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTS-oq-R7L">
@@ -54,8 +55,8 @@
                     </connections>
                 </button>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kkb-4d-wf3">
-                    <rect key="frame" x="20" y="161" width="374" height="32"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <rect key="frame" x="20" y="166" width="374" height="32"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="31" id="6LF-Ak-ZhM"/>
                     </constraints>
@@ -79,7 +80,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="roX-Zz-rQP">
-                    <rect key="frame" x="187" y="54" width="40" height="40"/>
+                    <rect key="frame" x="187" y="59" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="FZ6-2r-vex"/>
                         <constraint firstAttribute="height" constant="40" id="Z7D-gs-wRM"/>
@@ -93,9 +94,21 @@
                     <rect key="frame" x="0.0" y="750" width="414" height="2"/>
                     <color key="progressTintColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </progressView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyY-MU-gsq">
+                    <rect key="frame" x="329" y="44" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="5oY-dz-cMb"/>
+                        <constraint firstAttribute="width" constant="70" id="ENc-e9-5Mk"/>
+                    </constraints>
+                    <state key="normal" image="крестик экран 2"/>
+                    <connections>
+                        <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="cfF-ro-Itd"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PyY-MU-gsq" secondAttribute="trailing" constant="15" id="10X-2I-vp8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lTS-oq-R7L" secondAttribute="bottom" constant="20" id="20X-3e-2Yd"/>
                 <constraint firstItem="kkb-4d-wf3" firstAttribute="top" secondItem="bLi-Ru-Gha" secondAttribute="bottom" constant="15" id="2hY-zj-DzZ"/>
                 <constraint firstItem="lTS-oq-R7L" firstAttribute="top" secondItem="0kh-Ym-EbC" secondAttribute="bottom" constant="30" id="445-4G-HdE"/>
@@ -107,12 +120,13 @@
                 <constraint firstItem="bLi-Ru-Gha" firstAttribute="top" secondItem="roX-Zz-rQP" secondAttribute="bottom" constant="15" id="Tuz-BJ-Ovl"/>
                 <constraint firstItem="dJ3-xI-jIk" firstAttribute="top" secondItem="kkb-4d-wf3" secondAttribute="bottom" constant="5" id="U0A-mx-6kO"/>
                 <constraint firstItem="bLi-Ru-Gha" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="XOo-LA-Pow"/>
+                <constraint firstItem="PyY-MU-gsq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Z76-4u-w9J"/>
                 <constraint firstItem="roX-Zz-rQP" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="cO8-nt-jdn"/>
                 <constraint firstItem="0kh-Ym-EbC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cbY-2o-pA1"/>
                 <constraint firstItem="lTS-oq-R7L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="gdH-O9-QxA"/>
                 <constraint firstItem="dJ3-xI-jIk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="hsq-RI-NpD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dJ3-xI-jIk" secondAttribute="trailing" constant="20" id="iFw-U2-BsK"/>
-                <constraint firstItem="roX-Zz-rQP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="m6l-Uv-SaA"/>
+                <constraint firstItem="roX-Zz-rQP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="m6l-Uv-SaA"/>
                 <constraint firstItem="8Ve-lf-hZU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oLe-O5-lcu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lTS-oq-R7L" secondAttribute="trailing" constant="20" id="w03-X9-pwy"/>
             </constraints>
@@ -122,5 +136,6 @@
     </objects>
     <resources>
         <image name="account" width="512" height="512"/>
+        <image name="крестик экран 2" width="140" height="135"/>
     </resources>
 </document>

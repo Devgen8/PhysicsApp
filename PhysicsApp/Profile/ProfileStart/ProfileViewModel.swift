@@ -130,7 +130,7 @@ class ProfileViewModel {
     private func getUsersPhotoFromStorage(completion: @escaping (UIImage?) -> ()) {
         if let userId = Auth.auth().currentUser?.uid {
             let imageRef = Storage.storage().reference().child("users/\(userId)")
-            imageRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
+            imageRef.getData(maxSize: 4 * 2048 * 2048) { data, error in
                 guard error == nil else {
                     print("Error downloading user image: \(String(describing: error?.localizedDescription))")
                     completion(nil)

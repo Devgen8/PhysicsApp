@@ -177,6 +177,8 @@ class TasksListViewModel {
         viewModel.unsolvedTasksUpdater = self
         viewModel.setSolvedTasks(usersSolvedTasks)
         viewModel.setThemeUnsolvedTasks(themesUnsolvedTasks)
+        viewModel.setSortType(sortType)
+        viewModel.setAllTasks(tasks)
     }
     
     func checkIfTaskUnsolved(name: String) -> Bool {
@@ -302,7 +304,6 @@ class TasksListViewModel {
                             newTask.alternativeAnswer = (task as! TaskData).alternativeAnswer
                             newTask.wrightAnswer = (task as! TaskData).wrightAnswer
                             newTask.serialNumber = Int((task as! TaskData).serialNumber)
-                            newTask.stringAnswer = (task as! TaskData).stringAnswer
                             newTask.image = UIImage(data: (task as! TaskData).image ?? Data())
                             newTask.name = (task as! TaskData).name
                             newTask.taskDescription = UIImage(data: (task as! TaskData).taskDescription ?? Data())
@@ -336,7 +337,6 @@ class TasksListViewModel {
                         if let serialNumber = task.serialNumber {
                             newTask.serialNumber = Int16(serialNumber)
                         }
-                        newTask.stringAnswer = task.stringAnswer
                         newTask.image = task.image?.pngData()
                         newTask.name = task.name
                         newTask.taskDescription = task.taskDescription?.pngData()
@@ -371,7 +371,6 @@ class TasksListViewModel {
                         if let serialNumber = task.serialNumber {
                             newTask.serialNumber = Int16(serialNumber)
                         }
-                        newTask.stringAnswer = task.stringAnswer
                         newTask.image = task.image?.pngData()
                         newTask.name = task.name
                         newTask.taskDescription = task.taskDescription?.pngData()
@@ -418,7 +417,6 @@ class TasksListViewModel {
                         newTask.alternativeAnswer = (task as! TaskData).alternativeAnswer
                         newTask.wrightAnswer = (task as! TaskData).wrightAnswer
                         newTask.serialNumber = Int((task as! TaskData).serialNumber)
-                        newTask.stringAnswer = (task as! TaskData).stringAnswer
                         newTask.image = UIImage(data: (task as! TaskData).image ?? Data())
                         newTask.taskDescription = UIImage(data: (task as! TaskData).taskDescription ?? Data())
                         newTask.name = (task as! TaskData).name
@@ -458,7 +456,6 @@ class TasksListViewModel {
                         newTask.alternativeAnswer = (task as! TaskData).alternativeAnswer
                         newTask.wrightAnswer = (task as! TaskData).wrightAnswer
                         newTask.serialNumber = Int((task as! TaskData).serialNumber)
-                        newTask.stringAnswer = (task as! TaskData).stringAnswer
                         newTask.image = UIImage(data: (task as! TaskData).image ?? Data())
                         newTask.taskDescription = UIImage(data: (task as! TaskData).taskDescription ?? Data())
                         newTask.name = (task as! TaskData).name
@@ -499,7 +496,6 @@ class TasksListViewModel {
                     if let serialNumber = task.serialNumber {
                         newTask.serialNumber = Int16(serialNumber)
                     }
-                    newTask.stringAnswer = task.stringAnswer
                     newTask.image = task.image?.pngData()
                     newTask.taskDescription = task.taskDescription?.pngData()
                     newTask.name = task.name
@@ -576,25 +572,18 @@ class TasksListViewModel {
                     return
                 }
                 var lookingNumbers = goalTasks[dictKey]?.sorted(by: <)
-                var index = 1
                 for document in documents {
-                    var number = 0
-                    if lookingNumbers?.count != 0 {
-                        number = lookingNumbers?.first ?? 0
-                    }
-                    if index == number {
+                    if let serialNumber = document.data()[Task.serialNumber.rawValue] as? Int, lookingNumbers?.contains(serialNumber) ?? false {
                         let task = TaskModel()
-                        task.serialNumber = document.data()[Task.serialNumber.rawValue] as? Int
-                        task.wrightAnswer = document.data()[Task.wrightAnswer.rawValue] as? Double
-                        task.alternativeAnswer = document.data()[Task.alternativeAnswer.rawValue] as? Double
-                        task.stringAnswer = document.data()[Task.wrightAnswer.rawValue] as? String
+                        task.serialNumber = serialNumber
+                        task.wrightAnswer = document.data()[Task.wrightAnswer.rawValue] as? String
+                        task.alternativeAnswer = document.data()[Task.alternativeAnswer.rawValue] as? Bool
                         task.succeded = document.data()[Task.succeded.rawValue] as? Int
                         task.failed = document.data()[Task.failed.rawValue] as? Int
-                        task.name = dictKey + "." + "\(index)"
+                        task.name = dictKey + "." + "\(serialNumber)"
                         self.tasks.append(task)
-                        lookingNumbers?.remove(at: 0)
+                        lookingNumbers = lookingNumbers?.filter({ $0 != serialNumber })
                     }
-                    index += 1
                 }
                 if self.themeTasks.count == self.tasks.count {
                     self.tasks = self.tasks.sorted(by: {
@@ -606,9 +595,24 @@ class TasksListViewModel {
                             return self.getTaskPosition(taskName: firstTheme) < self.getTaskPosition(taskName: secondTheme)
                         }
                     })
-                    self.downloadPhotos { (isReady) in
-                        completion(isReady)
+                    if self.lookingForUnsolvedTasks != true {
+                        self.updateKeysInfoForSolved()
+                        self.saveTasksToCoreDataForSolved()
+                    } else {
+                        self.updateAreUnsolvedTasksUpdatedKey()
+                        if let sort = self.sortType {
+                            if sort == .tasks {
+                                self.saveToCoreDataUnsolvedTasksByTasks()
+                            }
+                            if sort == .themes {
+                                self.saveToCoreDataUnsolvedTasksByThemes()
+                            }
+                        }
                     }
+                    completion(true)
+//                    self.downloadPhotos { (isReady) in
+//                        completion(isReady)
+//                    }
                 }
             }
         }
@@ -629,9 +633,8 @@ class TasksListViewModel {
                 for document in documents {
                     let task = TaskModel()
                     task.serialNumber = document.data()[Task.serialNumber.rawValue] as? Int
-                    task.wrightAnswer = document.data()[Task.wrightAnswer.rawValue] as? Double
-                    task.alternativeAnswer = document.data()[Task.alternativeAnswer.rawValue] as? Double
-                    task.stringAnswer = document.data()[Task.wrightAnswer.rawValue] as? String
+                    task.wrightAnswer = document.data()[Task.wrightAnswer.rawValue] as? String
+                    task.alternativeAnswer = document.data()[Task.alternativeAnswer.rawValue] as? Bool
                     task.succeded = document.data()[Task.succeded.rawValue] as? Int
                     task.failed = document.data()[Task.failed.rawValue] as? Int
                     task.name = theme + "." + "\(task.serialNumber ?? 0)"
@@ -643,70 +646,85 @@ class TasksListViewModel {
                         self.tasks.append(task)
                     }
                 }
-                self.downloadPhotos { (isReady) in
-                    completion(isReady)
-                }
-            }
-        }
-    }
-    
-    private func downloadPhotos(completion: @escaping (Bool) -> ()) {
-        var count = 0
-        for index in stride(from: 0, to: tasks.count, by: 1) {
-            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: tasks[index].name ?? "")
-            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
-            imageRef.getData(maxSize: 2 * 1024 * 1024) { [weak self] data, error in
-                guard let `self` = self, error == nil else {
-                    print("Error downloading images: \(String(describing: error?.localizedDescription))")
-                    return
-                }
-                if let data = data, let image = UIImage(data: data) {
-                    self.tasks[index].image = image
-                    count += 1
-                }
-                if count == self.tasks.count {
-                    self.downloadDescription { (isReady) in
-                        completion(isReady)
-                    }
-                }
-            }
-        }
-    }
-    
-    private func downloadDescription(completion: @escaping (Bool) -> ()) {
-        var count = 0
-        for index in stride(from: 0, to: tasks.count, by: 1) {
-            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: tasks[index].name ?? "")
-            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
-            imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
-                guard let `self` = self, error == nil else {
-                    print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
-                    return
-                }
-                if let data = data, let image = UIImage(data: data) {
-                    self.tasks[index].taskDescription = image
-                    count += 1
-                }
-                if count == self.tasks.count {
-                    if self.lookingForUnsolvedTasks != true {
-                        self.updateKeysInfoForSolved()
-                        self.saveTasksToCoreDataForSolved()
-                    } else {
-                        self.updateAreUnsolvedTasksUpdatedKey()
-                        if let sort = self.sortType {
-                            if sort == .tasks {
-                                self.saveToCoreDataUnsolvedTasksByTasks()
-                            }
-                            if sort == .themes {
-                                self.saveToCoreDataUnsolvedTasksByThemes()
-                            }
+                if self.lookingForUnsolvedTasks != true {
+                    self.updateKeysInfoForSolved()
+                    self.saveTasksToCoreDataForSolved()
+                } else {
+                    self.updateAreUnsolvedTasksUpdatedKey()
+                    if let sort = self.sortType {
+                        if sort == .tasks {
+                            self.saveToCoreDataUnsolvedTasksByTasks()
+                        }
+                        if sort == .themes {
+                            self.saveToCoreDataUnsolvedTasksByThemes()
                         }
                     }
-                    completion(true)
                 }
+                completion(true)
+                // self.downloadPhotos { (isReady) in
+                //     completion(isReady)
+                // }
             }
         }
     }
+    
+//    private func downloadPhotos(completion: @escaping (Bool) -> ()) {
+//        var count = 0
+//        for index in stride(from: 0, to: tasks.count, by: 1) {
+//            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: tasks[index].name ?? "")
+//            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
+//            imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
+//                guard let `self` = self, error == nil else {
+//                    print("Error downloading images: \(String(describing: error?.localizedDescription))")
+//                    return
+//                }
+//                if let data = data, let image = UIImage(data: data) {
+//                    self.tasks[index].image = image
+//                    count += 1
+//                }
+//                if count == self.tasks.count {
+//                    self.downloadDescription { (isReady) in
+//                        completion(isReady)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    private func downloadDescription(completion: @escaping (Bool) -> ()) {
+//        var count = 0
+//        for index in stride(from: 0, to: tasks.count, by: 1) {
+//            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: tasks[index].name ?? "")
+//            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
+//            imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
+//                guard let `self` = self, error == nil else {
+//                    print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
+//                    return
+//                }
+//                if let data = data, let image = UIImage(data: data) {
+//                    self.tasks[index].taskDescription = image
+//                    count += 1
+//                }
+//                if count == self.tasks.count {
+//                    if self.lookingForUnsolvedTasks != true {
+//                        self.updateKeysInfoForSolved()
+//                        self.saveTasksToCoreDataForSolved()
+//                    } else {
+//                        self.updateAreUnsolvedTasksUpdatedKey()
+//                        if let sort = self.sortType {
+//                            if sort == .tasks {
+//                                self.saveToCoreDataUnsolvedTasksByTasks()
+//                            }
+//                            if sort == .themes {
+//                                self.saveToCoreDataUnsolvedTasksByThemes()
+//                            }
+//                        }
+//                    }
+//                    completion(true)
+//                }
+//            }
+//        }
+//    }
 }
 
 extension TasksListViewModel: UnsolvedTaskUpdater {

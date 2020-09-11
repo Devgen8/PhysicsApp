@@ -24,7 +24,6 @@ class TrainerAdminAddViewModel: TrainerAdminViewModel {
     private var selectedTask: String?
     private var selectedTheme = ""
     private var inverseState = false
-    private var stringState = false
     private var tasksNumber = 0
     private var taskThemes = [String]()
     private var wrightAnswer = ""
@@ -41,15 +40,12 @@ class TrainerAdminAddViewModel: TrainerAdminViewModel {
     func clearOldData() {
         imageData = nil
         descriptionImageData = nil
-        selectedTask = tasks.first
         selectedTheme = ""
         inverseState = false
-        stringState = false
         wrightAnswer = ""
     }
     
     func uploadNewTaskToTest(_ testName: String, completion: @escaping (Bool) -> ()) {
-        wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
         wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
         guard testName != "", isAbleToUpload() else {
             completion(false)
@@ -66,7 +62,6 @@ class TrainerAdminAddViewModel: TrainerAdminViewModel {
     }
     
     func uploadNewTaskToTrainer(completion: @escaping (Bool) -> ()) {
-        wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
         wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
         guard isAbleToUpload() else {
             completion(false)
@@ -113,10 +108,6 @@ class TrainerAdminAddViewModel: TrainerAdminViewModel {
         inverseState = bool
     }
     
-    func updateStringState(to bool: Bool) {
-        stringState = bool
-    }
-    
     func updateWrightAnswer(with text: String) {
         wrightAnswer = text
     }
@@ -157,14 +148,9 @@ class TrainerAdminAddViewModel: TrainerAdminViewModel {
     
     private func getKeyValuesForTask() -> [String : Any] {
         var taskData = [String : Any]()
-        if stringState == true {
-            taskData["stringAnswer"] = wrightAnswer
-        } else {
-            taskData["wrightAnswer"] = Double(wrightAnswer)
-            if inverseState == true {
-                let charactersArray = [Character](wrightAnswer)
-                taskData["alternativeAnswer"] = Double(String([charactersArray[1], charactersArray[0]]))
-            }
+        taskData["wrightAnswer"] = wrightAnswer
+        if inverseState == true {
+            taskData["alternativeAnswer"] = true
         }
         taskData["serialNumber"] = tasksNumber + 1
         return taskData

@@ -25,6 +25,7 @@ import VK_ios_sdk
     @IBOutlet weak var vkButton: UIButton!
     @IBOutlet weak var youtubeButton: UIButton!
     @IBOutlet weak var telegramButton: UIButton!
+    @IBOutlet weak var tiktokButton: UIButton!
     
     var viewModel = ProfileViewModel()
     
@@ -82,9 +83,11 @@ import VK_ios_sdk
         textView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 30).isActive = true
         textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
-        textView.heightAnchor.constraint(equalToConstant: 280).isActive = true
+        textView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        textView.backgroundColor = .white
+        textView.textColor = .black
         textView.font = UIFont(name: "Montserrat-Regular", size: 18)
-        textView.text = "Привет! Зарегистрированным пользователям здесь доступна информация о своем профиле, а также история пробников! Зарегистрируйся через ВКонтакте и получи много крутых фишек, таких как cохранение прогресса, cтатистика по задачам, доступ к разделу задач с ошибками, сохранение ответов и времени в пробнике после выхода из приложения!"
+        textView.text = "Привет! Зарегистрированным пользователям здесь доступна информация о своем профиле, а также история пробников!\n\nЗарегистрируйся через ВКонтакте и получи много крутых фишек, таких как cохранение прогресса, cтатистика по задачам, доступ к разделу задач с ошибками, сохранение ответов и времени в пробнике после выхода из приложения!"
         
         // Button text changing
         logOutButton.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
@@ -109,20 +112,22 @@ import VK_ios_sdk
     @IBAction func socialNetworkTapped(_ sender: UIButton) {
         var urlString = ""
         switch sender {
-        case instagramButton: urlString = "instagram://user?username=ege.newton"
+        case instagramButton: urlString = "instagram://user?username=egenewton"
         case vkButton: urlString = "vk://vk.com/ege_newton"
         case youtubeButton: urlString = "youtube://youtube.com/channel/UCOX_zZTKMv7Y6mrBKeTSsyw"
         case telegramButton: urlString = "tg://resolve?domain=egenewton"
+        case tiktokButton: urlString = "tiktok://vm.tiktok.com/ZSPNPrwK"
         default: break
         }
         if let appURL = URL(string: urlString), UIApplication.shared.canOpenURL(appURL) {
             UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
         } else {
             switch sender {
-            case instagramButton: urlString = "https://instagram.com/ege.newton"
+            case instagramButton: urlString = "https://instagram.com/egenewton"
             case vkButton: urlString = "https://vk.com/ege_newton"
             case youtubeButton: urlString = "https://www.youtube.com/channel/UCOX_zZTKMv7Y6mrBKeTSsyw"
             case telegramButton: urlString = "https://t.me/egenewton"
+            case tiktokButton: urlString = "https://vm.tiktok.com/ZSPNPrwK"
             default: break
             }
             if let safariURL = URL(string: urlString) {

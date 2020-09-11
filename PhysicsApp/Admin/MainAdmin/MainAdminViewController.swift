@@ -15,6 +15,7 @@ class MainAdminViewController: UIViewController {
     @IBOutlet weak var messagesButton: UIButton!
     @IBOutlet weak var quitButton: UIButton!
     @IBOutlet weak var adminSettingButton: UIButton!
+    @IBOutlet weak var advertsButton: UIButton!
     
     var viewModel = MainAdminViewModel()
     
@@ -33,6 +34,8 @@ class MainAdminViewController: UIViewController {
         messagesButton.layer.cornerRadius = 10
         adminSettingButton.backgroundColor = .white
         adminSettingButton.layer.cornerRadius = 10
+        advertsButton.backgroundColor = .white
+        advertsButton.layer.cornerRadius = 10
         DesignService.designWhiteButton(quitButton)
     }
     
@@ -42,6 +45,7 @@ class MainAdminViewController: UIViewController {
         Animations.swipeViewController(.fromRight, for: view)
         present(trainerAdminViewController, animated: true)
     }
+    
     @IBAction func statsTapped(_ sender: UIButton) {
         let adminStatsViewController = AdminStatsViewController()
         adminStatsViewController.modalPresentationStyle = .fullScreen
@@ -68,5 +72,12 @@ class MainAdminViewController: UIViewController {
         let adminSettingViewController = AdminSettingViewController()
         adminSettingViewController.modalPresentationStyle = .fullScreen
         present(adminSettingViewController, animated: false)
+    }
+    
+    @IBAction func advertsTapped(_ sender: UIButton) {
+        let advertsListViewController = AdvertsListViewController()
+        advertsListViewController.modalPresentationStyle = .fullScreen
+        Animations.swipeViewController(.fromRight, for: view)
+        present(advertsListViewController, animated: true)
     }
 }

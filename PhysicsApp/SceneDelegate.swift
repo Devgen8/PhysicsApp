@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window?.rootViewController = MainAdminViewController()
             } else {
                 UserStatsCounter.shared.calculateSrEGE()
-                window?.rootViewController = TrainerViewController()
+                window?.rootViewController = ChooseSubjectViewController()
             }
         } else {
             window?.rootViewController = WelcomeViewController()
@@ -31,6 +31,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
     }
 
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            // Handle URL
+            VKSdk.processOpen(url, fromApplication: nil)
+        }
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

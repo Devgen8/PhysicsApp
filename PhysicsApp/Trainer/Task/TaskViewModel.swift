@@ -28,20 +28,86 @@ class TaskViewModel {
     private var solvedTasks = [String:[String]]()
     private var themesUnsolvedTasks = [String:[String]]()
     private var isFirstAnswer = true
+    private var sortType: TasksSortType?
+    private var allTasks = [TaskModel]()
     
     var unsolvedTasksUpdater: UnsolvedTaskUpdater?
     
     //MARK: Interface
     
+    func checkImagesExist(completion: @escaping (Bool)->()) {
+        if task?.taskDescription != nil && task?.image != nil {
+            completion(true)
+        } else {
+            downloadPhotos { (isReady) in
+                completion(isReady)
+            }
+        }
+    }
+    
+    private func saveImagesToCoreData() {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+                let result = try context.fetch(fechRequest)
+                let trainer = result.first
+                if let sort = sortType {
+                    if sort == .tasks {
+                        ((trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == theme}) as! EgeTask).tasks?.first(where: {(($0 as! TaskData).name == task?.name)}) as! TaskData).taskDescription = task?.taskDescription?.pngData()
+                        ((trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == theme}) as! EgeTask).tasks?.first(where: {(($0 as! TaskData).name == task?.name)}) as! TaskData).image = task?.image?.pngData()
+                    }
+                    if sort == .themes {
+                        ((trainer?.egeThemes?.first(where: { ($0 as! EgeTheme).name == theme}) as! EgeTheme).tasks?.first(where: {(($0 as! TaskData).name == task?.name)}) as! TaskData).taskDescription = task?.taskDescription?.pngData()
+                        ((trainer?.egeThemes?.first(where: { ($0 as! EgeTheme).name == theme}) as! EgeTheme).tasks?.first(where: {(($0 as! TaskData).name == task?.name)}) as! TaskData).image = task?.image?.pngData()
+                    }
+                }
+                
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func downloadPhotos(completion: @escaping (Bool) -> ()) {
+        let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: task?.name ?? "")
+        let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
+        imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
+            guard let `self` = self, error == nil else {
+                print("Error downloading images: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if let data = data, let image = UIImage(data: data) {
+                self.task?.image = image
+                self.downloadDescription { (isReady) in
+                    completion(isReady)
+                }
+            }
+        }
+    }
+    
+    private func downloadDescription(completion: @escaping (Bool) -> ()) {
+        let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: task?.name ?? "")
+        let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
+        imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
+            guard let `self` = self, error == nil else {
+                print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if let data = data, let image = UIImage(data: data) {
+                self.task?.taskDescription = image
+                self.saveImagesToCoreData()
+                completion(true)
+            }
+        }
+    }
+    
     func checkAnswer(_ stringAnswer: String?) -> (Bool, String) {
         var isWright = false
-        var defaultStringAnswer = stringAnswer?.replacingOccurrences(of: ",", with: ".")
-        defaultStringAnswer = defaultStringAnswer?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let wrightAnswer = task?.wrightAnswer, let userAnswer = Double(defaultStringAnswer ?? "") {
-            if (task?.alternativeAnswer) != nil {
+        if let wrightAnswer = task?.wrightAnswer, let userAnswer = stringAnswer {
+            if (task?.alternativeAnswer) == true {
                 // wrightAnswer
-                let stringWrightAnswer = "\(wrightAnswer)"
-                let charsArray = [Character](stringWrightAnswer)
+                let charsArray = [Character](wrightAnswer)
                 var wrightCount = 0
                 var wrightSum = 0
                 for letter in charsArray {
@@ -50,8 +116,7 @@ class TaskViewModel {
                 }
                 
                 // usersAnswer
-                let stringUsersAnswer = "\(userAnswer)"
-                let charsUsersArray = [Character](stringUsersAnswer)
+                let charsUsersArray = [Character](userAnswer)
                 var usersCount = 0
                 var usersSum = 0
                 for letter in charsUsersArray {
@@ -64,9 +129,6 @@ class TaskViewModel {
             } else {
                 isWright = wrightAnswer == userAnswer
             }
-        }
-        if let wrightAnswer = task?.stringAnswer, let userAnswer = defaultStringAnswer {
-            isWright = wrightAnswer == userAnswer
         }
         updateKeyInfo()
         if isWright {
@@ -187,6 +249,20 @@ class TaskViewModel {
         unsolvedTasksUpdater?.updateUnsolvedTasks(with: unsolvedTasks, and: solvedTasks)
     }
     
+    func savePreviousTask() {
+        allTasks[(taskNumber ?? 1) - 1] = task ?? TaskModel()
+    }
+    
+    func changeTaskNumber(on value: Int) {
+        if taskNumber != nil {
+            taskNumber! += value
+        }
+    }
+    
+    func changeCurrentTask() {
+        task = allTasks[(taskNumber ?? 1) - 1]
+    }
+    
     func getTaskName() -> String? {
         return task?.name
     }
@@ -233,6 +309,23 @@ class TaskViewModel {
     
     func setThemeUnsolvedTasks(_ newTasks: [String:[String]]) {
         themesUnsolvedTasks = newTasks
+    }
+    
+    func setSortType(_ type: TasksSortType?) {
+        sortType = type
+    }
+    
+    func setAllTasks(_ newTasks: [TaskModel]) {
+        allTasks = newTasks
+    }
+    
+    func getAllTasksNumber() -> Int {
+        return allTasks.count
+    }
+    
+    func clearOldData() {
+        isTaskUnsolved = nil
+        isFirstAnswer = true
     }
     
     //MARK: Private section

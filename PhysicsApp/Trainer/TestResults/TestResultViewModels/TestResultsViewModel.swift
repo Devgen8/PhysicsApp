@@ -28,7 +28,7 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
     
     var testName = ""
     var timeTillEnd = 0
-    var wrightAnswers = [String:(Double?, Double?, String?)]()
+    var wrightAnswers = [String:(String?, Bool?)]()
     var userAnswers = [String:String]()
     var taskImages = [String:UIImage]()
     var cPartPoints = [Int]()
@@ -114,20 +114,17 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
     
     func getWrightAnswer(for index: Int) -> String {
         let taskName = "Задание №\(index)"
-        if let (wrightAnswer, alternativeAnswer, stringAnswer) = wrightAnswers[taskName] {
-            if stringAnswer != nil {
-                return stringAnswer ?? "0"
-            }
+        if let (wrightAnswer, alternativeAnswer) = wrightAnswers[taskName] {
             if tasksWithShuffle.contains(index) {
-                if  alternativeAnswer != nil, alternativeAnswer != 0.0 {
-                    return "\(Int(wrightAnswer ?? 0.0)) или \(Int(alternativeAnswer ?? 0.0))"
-                } else {
-                    return "\(Int(wrightAnswer ?? 0.0))"
+                if alternativeAnswer == true {
+                    var alterAnswerChars = [Character](wrightAnswer ?? "")
+                    let buf = alterAnswerChars[0]
+                    alterAnswerChars[0] = alterAnswerChars[1]
+                    alterAnswerChars[1] = buf
+                    return "\(wrightAnswer ?? "") или \(String(alterAnswerChars))"
                 }
             }
-            if wrightAnswer != nil {
-                return "\(wrightAnswer ?? 0)"
-            }
+            return wrightAnswer ?? ""
         }
         return "0"
     }
@@ -137,15 +134,14 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
         for index in 1...26 {
             let taskName = "Задание №\(index)"
             var isWright = 0
-            if let (wrightAnswer, alternativeAnswer, stringAnswer) = wrightAnswers[taskName] {
-                let defaultStringAnswer = userAnswers[taskName]?.replacingOccurrences(of: ",", with: ".")
-                if let wrightAnswer = wrightAnswer, let userAnswer = Double(defaultStringAnswer ?? "") {
+            if let (wrightAnswer, alternativeAnswer) = wrightAnswers[taskName] {
+                if let wrightAnswer = wrightAnswer, let userAnswer = userAnswers[taskName] {
                     if index == 24 {
-                        let userAnswerLetters = [Character]("\(Int(userAnswer))")
-                        let wrightAnswerLetters = [Character]("\(Int(wrightAnswer))")
+                        let userAnswerLetters = [Character](userAnswer)
+                        let wrightAnswerLetters = [Character](wrightAnswer)
                         var mistakes = 0
                         for letterIndex in 0..<wrightAnswerLetters.count {
-                            if alternativeAnswer != nil, alternativeAnswer != 0.0 {
+                            if alternativeAnswer == true {
                                 if !userAnswerLetters.contains(wrightAnswerLetters[letterIndex]) {
                                     mistakes += 1
                                 }
@@ -165,14 +161,14 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
                         }
                     } else {
                         if tasksWithShuffle.contains(index) {
-                            let userAnswerLetters = [Character]("\(Int(userAnswer))")
-                            let wrightAnswerLetters = [Character]("\(Int(wrightAnswer))")
+                            let userAnswerLetters = [Character](userAnswer)
+                            let wrightAnswerLetters = [Character](wrightAnswer)
                             if userAnswerLetters.count - wrightAnswerLetters.count > 0 {
                                 isWright = 0
                             } else {
                                 var mistakes = wrightAnswerLetters.count - userAnswerLetters.count
                                 for letterIndex in 0..<wrightAnswerLetters.count {
-                                    if alternativeAnswer != nil, alternativeAnswer != 0.0 {
+                                    if alternativeAnswer == true {
                                         if !userAnswerLetters.contains(wrightAnswerLetters[letterIndex]) {
                                             mistakes += 1
                                         }
@@ -194,9 +190,6 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
                             isWright = wrightAnswer == userAnswer ? 2 : 0
                         }
                     }
-                }
-                if let wrightAnswer = stringAnswer, let userAnswer = defaultStringAnswer {
-                    isWright = wrightAnswer == userAnswer ? 2 : 0
                 }
                 answersCorrection.append(isWright)
                 if isWright == 2 {

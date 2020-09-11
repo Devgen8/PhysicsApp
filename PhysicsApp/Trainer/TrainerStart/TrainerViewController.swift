@@ -15,6 +15,7 @@ class TrainerViewController: UIViewController {
     @IBOutlet weak var themesTableView: UITableView!
     @IBOutlet weak var notSolvedButton: UIButton!
     @IBOutlet weak var sortTypeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var closeButton: UIButton!
     
     var viewModel: TrainerViewModelProvider = TrainerViewModel()
     
@@ -50,8 +51,9 @@ class TrainerViewController: UIViewController {
     }
     
     func designScreenElements() {
-        DesignService.setWhiteBackground(for: view)
+        //DesignService.setWhiteBackground(for: view)
         notSolvedButton.layer.cornerRadius = 10
+        DesignService.designCloseButton(closeButton)
         
         // segmented control setup
         sortTypeSegmentedControl.layer.borderWidth = 2
@@ -62,7 +64,7 @@ class TrainerViewController: UIViewController {
     }
     
     func setAnimation() {
-        loadingAnimationView.animation = Animation.named("17694-cube-grid")
+        loadingAnimationView.animation = Animation.named("lf30_editor_cg3gHF")
         loadingAnimationView.loopMode = .loop
         loadingAnimationView.isHidden = false
         loadingAnimationView.play()
@@ -107,10 +109,10 @@ class TrainerViewController: UIViewController {
     }
     
     func routeForTests() {
-        let testViewController = TestViewController()
-        testViewController.viewModel = CustomTestViewModel()
-        testViewController.modalPresentationStyle = .fullScreen
-        present(testViewController, animated: true)
+        let preTestViewController = PreTestViewController()
+        preTestViewController.viewModel = PreCustomTestViewModel()
+        preTestViewController.modalPresentationStyle = .fullScreen
+        present(preTestViewController, animated: true)
     }
     
     @IBAction func sortTypeChanged(_ sender: UISegmentedControl) {
@@ -125,6 +127,10 @@ class TrainerViewController: UIViewController {
             viewModel = TestTrainerViewModel()
             prepareData()
         }
+    }
+    
+    @IBAction func closeTapped(_ sender: UIButton) {
+        dismiss(animated: true)
     }
 }
 
@@ -149,6 +155,7 @@ extension TrainerViewController: UITableViewDataSource {
             themeImage.image = ThemeParser.getImageArray(forTaskThemes: [cellName]).first
             cellName = cellName.uppercased()
         }
+        cell.presentingVC = .trainerStart
         if viewModel is TestTrainerViewModel {
             let numberOfPoints = (viewModel as? TestTrainerViewModel)?.getTestPoints(for: indexPath.row) ?? 0
             if numberOfPoints != 0 {
@@ -161,7 +168,6 @@ extension TrainerViewController: UITableViewDataSource {
             cell.setupStatsLines(mistakesProgress: mistake, successProgress: success, fullWidth: tableView.frame.size.width - 6)
         }
         cell.themeName.text = cellName
-        cell.presentingVC = .trainerStart
         return cell
     }
 }
@@ -171,15 +177,51 @@ extension TrainerViewController: UITableViewDelegate {
         return 80
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard viewModel is TestTrainerViewModel, NamesParser.isTestCustom(viewModel.getTheme(for: indexPath.row)) else {
+            return
+        }
+        if editingStyle == .delete {
+            (viewModel as! TestTrainerViewModel).deleteTest(viewModel.getTheme(for: indexPath.row))
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = deleteAction(at: indexPath)
+        return  UISwipeActionsConfiguration(actions: [delete])
+    }
+    
+    func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+            (self.viewModel as! TestTrainerViewModel).deleteTest(self.viewModel.getTheme(for: indexPath.row))
+            self.themesTableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        action.image = UIGraphicsImageRenderer(size: CGSize(width: 30, height: 30)).image { _ in
+            #imageLiteral(resourceName: "bin").draw(in: CGRect(x: 0, y: 0, width: 30, height: 30))
+        }
+        action.backgroundColor = #colorLiteral(red: 0.7611784935, green: 0, blue: 0.06764990836, alpha: 1)
+        
+        return action
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if viewModel is TestTrainerViewModel {
+            return NamesParser.isTestCustom(viewModel.getTheme(for: indexPath.row))
+        } else {
+           return false
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if viewModel is TestTrainerViewModel {
-            let testViewController = TestViewController()
-            testViewController.viewModel = DownloadedTestViewModel()
+            let preTestViewController = PreTestViewController()
+            preTestViewController.viewModel = PreDownloadedTestViewModel()
             if let testViewModel = viewModel as? TestTrainerViewModel {
-                testViewController.viewModel.name = testViewModel.getTestName(for: indexPath.row)
+                preTestViewController.viewModel.name = testViewModel.getTestName(for: indexPath.row)
             }
-            testViewController.modalPresentationStyle = .fullScreen
-            present(testViewController, animated: true)
+            preTestViewController.modalPresentationStyle = .fullScreen
+            present(preTestViewController, animated: true)
         } else {
             let taskViewController = TasksListViewController()
             if let viewModel = viewModel as? TrainerViewModel {

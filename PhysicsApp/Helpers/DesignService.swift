@@ -50,6 +50,13 @@ class DesignService {
         button.layer.borderColor = #colorLiteral(red: 0.7611784935, green: 0, blue: 0.06764990836, alpha: 1)
     }
     
+    static func designGrayButton(_ button: UIButton) {
+        button.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1
+        button.layer.borderColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+    }
+    
     static func designCloseButton(_ button: UIButton) {
         button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         button.setImage(#imageLiteral(resourceName: "крестик экран 2"), for: .normal)

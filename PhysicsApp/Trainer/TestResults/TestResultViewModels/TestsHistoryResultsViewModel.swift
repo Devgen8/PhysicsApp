@@ -26,7 +26,7 @@ class TestsHistoryResultsViewModel: GeneralTestResultsViewModel {
     private var primaryPoints = [Int]()
     
     var timeTillEnd = 0
-    var wrightAnswers = [String : (Double?, Double?, String?)]()
+    var wrightAnswers = [String : (String?, Bool?)]()
     var userAnswers = [String : String]()
     var taskImages = [String : UIImage]()
     var testName = ""
@@ -140,6 +140,10 @@ class TestsHistoryResultsViewModel: GeneralTestResultsViewModel {
         return realWrightAnswers[index - 1]
     }
     
+    func getCompletion() -> Float {
+        return Float(tasksImages.count + tasksDescriptions.count) / Float(EGEInfo.egeSystemTasks.count)
+    }
+    
     //MARK: Private section
     
     // Firestore and Storage
@@ -147,55 +151,108 @@ class TestsHistoryResultsViewModel: GeneralTestResultsViewModel {
     private func downloadPhotos(completion: @escaping (Bool) -> ()) {
         var count = 0
         for taskName in tasks {
-            var imageRef = StorageReference()
             if NamesParser.isTestCustom(testName) {
-                let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: taskName)
-                imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
+                if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                    do {
+                        let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+                        let result = try context.fetch(fechRequest)
+                        let trainer = result.first
+                        let (themeName, _) = NamesParser.getTaskLocation(taskName: taskName)
+                        let taskData = ((trainer?.egeTasks?.first(where: { ($0 as! EgeTask).name == themeName}) as! EgeTask).tasks?.first(where: {(($0 as! TaskData).name == taskName)}) as? TaskData)
+                        if let taskImageData = taskData?.image {
+                            tasksImages[taskName] = UIImage(data: taskImageData)
+                            tasksDescriptions[taskName] = UIImage(data: taskData?.taskDescription ?? Data())
+                            count += 1
+                            if count == self.realWrightAnswers.count {
+                                completion(true)
+                            }
+                        } else {
+                            downloadImage(taskName) { (isReady) in
+                                count += 1
+                                if isReady && count == self.realWrightAnswers.count {
+                                    completion(true)
+                                }
+                            }
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
             } else {
-                let taskNumber = getTaskPosition(taskName: taskName)
-                imageRef = Storage.storage().reference().child("tests/\(testName)/task\(taskNumber).png")
-            }
-            imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
-                guard let `self` = self, error == nil else {
-                    print("Error downloading images: \(String(describing: error?.localizedDescription))")
-                    return
-                }
-                if let data = data, let image = UIImage(data: data) {
-                    self.tasksImages[taskName] = image
-                }
-                count += 1
-                if count == self.realWrightAnswers.count {
-                    self.downloadDesciptions { (isReady) in
-                        completion(isReady)
+                if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                    let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+                    
+                    do {
+                        let result = try context.fetch(fechRequest)
+                        let trainer = result.first
+                        if let currentTest = trainer?.tests?.first(where: { ($0 as! Test).name == testName }) as? Test {
+                            if let testObject = currentTest.testObject as? TestObject {
+                                let taskData = testObject.testTasks.first(where: { $0.name == taskName })
+                                if let taskImageData = taskData?.image {
+                                    tasksImages[taskName] = taskImageData
+                                    tasksDescriptions[taskName] = taskData?.taskDescription ?? UIImage()
+                                    count += 1
+                                    if count == self.realWrightAnswers.count {
+                                        completion(true)
+                                    }
+                                } else {
+                                    downloadImage(taskName) { (isReady) in
+                                        count += 1
+                                        if isReady && count == self.realWrightAnswers.count {
+                                            completion(true)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } catch {
+                        print(error.localizedDescription)
                     }
                 }
             }
         }
     }
     
-    private func downloadDesciptions(completion: @escaping (Bool) -> ()) {
-        var count = 0
-        for taskName in tasks {
-            var imageRef = StorageReference()
-            if NamesParser.isTestCustom(testName) {
-                let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: taskName)
-                imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
-            } else {
-                let taskNumber = getTaskPosition(taskName: taskName)
-                imageRef = Storage.storage().reference().child("tests/\(testName)/task\(taskNumber)description.png")
+    private func downloadImage(_ taskName: String, completion: @escaping (Bool) -> ()) {
+        var imageRef = StorageReference()
+        if NamesParser.isTestCustom(testName) {
+            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: taskName)
+            imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
+        } else {
+            let taskNumber = getTaskPosition(taskName: taskName)
+            imageRef = Storage.storage().reference().child("tests/\(testName)/task\(taskNumber).png")
+        }
+        imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
+            guard let `self` = self, error == nil else {
+                print("Error downloading images: \(String(describing: error?.localizedDescription))")
+                return
             }
-            imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
-                guard let `self` = self, error == nil else {
-                    print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
-                    return
+            if let data = data, let image = UIImage(data: data) {
+                self.tasksImages[taskName] = image
+                self.downloadDesciptions(taskName) { (isReady) in
+                    completion(isReady)
                 }
-                if let data = data, let image = UIImage(data: data) {
-                    self.tasksDescriptions[taskName] = image
-                }
-                count += 1
-                if count == self.realWrightAnswers.count {
-                    completion(true)
-                }
+            }
+        }
+    }
+    
+    private func downloadDesciptions(_ taskName: String, completion: @escaping (Bool) -> ()) {
+        var imageRef = StorageReference()
+        if NamesParser.isTestCustom(testName) {
+            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: taskName)
+            imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
+        } else {
+            let taskNumber = getTaskPosition(taskName: taskName)
+            imageRef = Storage.storage().reference().child("tests/\(testName)/task\(taskNumber)description.png")
+        }
+        imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
+            guard let `self` = self, error == nil else {
+                print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if let data = data, let image = UIImage(data: data) {
+                self.tasksDescriptions[taskName] = image
+                completion(true)
             }
         }
     }

@@ -28,7 +28,7 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
     private var everyTaskAnswer = [Int]()
     
     var timeTillEnd = 0
-    var wrightAnswers = [String : (Double?, Double?, String?)]()
+    var wrightAnswers = [String : (String?, Bool?)]()
     var userAnswers = [String : String]()
     var taskImages = [String : UIImage]()
     var testName = ""
@@ -42,15 +42,14 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
         for index in 1...26 {
             let taskName = tasks[index - 1].name ?? ""
             var isWright = 0
-            if let (wrightAnswer, alternativeAnswer, stringAnswer) = wrightAnswers[taskName] {
-                let defaultStringAnswer = userAnswers[taskName]?.replacingOccurrences(of: ",", with: ".")
-                if let wrightAnswer = wrightAnswer, let userAnswer = Double(defaultStringAnswer ?? "") {
+            if let (wrightAnswer, alternativeAnswer) = wrightAnswers[taskName] {
+                if let wrightAnswer = wrightAnswer, let userAnswer = userAnswers[taskName] {
                     if index == 24 {
-                        let userAnswerLetters = [Character]("\(Int(userAnswer))")
-                        let wrightAnswerLetters = [Character]("\(Int(wrightAnswer))")
+                        let userAnswerLetters = [Character](userAnswer)
+                        let wrightAnswerLetters = [Character](wrightAnswer)
                         var mistakes = 0
                         for letterIndex in 0..<wrightAnswerLetters.count {
-                            if alternativeAnswer != nil, alternativeAnswer != 0.0 {
+                            if alternativeAnswer == true {
                                 if !userAnswerLetters.contains(wrightAnswerLetters[letterIndex]) {
                                     mistakes += 1
                                 }
@@ -70,14 +69,14 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
                         }
                     } else {
                         if tasksWithShuffle.contains(index) {
-                            let userAnswerLetters = [Character]("\(Int(userAnswer))")
-                            let wrightAnswerLetters = [Character]("\(Int(wrightAnswer))")
+                            let userAnswerLetters = [Character](userAnswer)
+                            let wrightAnswerLetters = [Character](wrightAnswer)
                             if userAnswerLetters.count - wrightAnswerLetters.count > 0 {
                                 isWright = 0
                             } else {
                                 var mistakes = wrightAnswerLetters.count - userAnswerLetters.count
                                 for letterIndex in 0..<wrightAnswerLetters.count {
-                                    if alternativeAnswer != nil, alternativeAnswer != 0.0 {
+                                    if alternativeAnswer == true {
                                         if !userAnswerLetters.contains(wrightAnswerLetters[letterIndex]) {
                                             mistakes += 1
                                         }
@@ -99,9 +98,6 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
                             isWright = wrightAnswer == userAnswer ? 2 : 0
                         }
                     }
-                }
-                if let wrightAnswer = stringAnswer, let userAnswer = defaultStringAnswer {
-                    isWright = wrightAnswer == userAnswer ? 2 : 0
                 }
                 answersCorrection.append(isWright)
                 if isWright == 2 {
@@ -222,20 +218,17 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
     
     func getWrightAnswer(for index: Int) -> String {
         let taskName = getParticulerTaskName(for: "Задание №\(index)")
-        if let (wrightAnswer, alternativeAnswer, stringAnswer) = wrightAnswers[taskName] {
-            if stringAnswer != nil {
-                return stringAnswer ?? "0"
-            }
+        if let (wrightAnswer, alternativeAnswer) = wrightAnswers[taskName] {
             if tasksWithShuffle.contains(index) {
-                if  alternativeAnswer != nil, alternativeAnswer != 0.0 {
-                    return "\(Int(wrightAnswer ?? 0.0)) или \(Int(alternativeAnswer ?? 0.0))"
-                } else {
-                    return "\(Int(wrightAnswer ?? 0.0))"
+                if alternativeAnswer == true {
+                    var alterAnswerChars = [Character](wrightAnswer ?? "")
+                    let buf = alterAnswerChars[0]
+                    alterAnswerChars[0] = alterAnswerChars[1]
+                    alterAnswerChars[1] = buf
+                    return "\(wrightAnswer ?? "") или \(String(alterAnswerChars))"
                 }
             }
-            if wrightAnswer != nil {
-                return "\(wrightAnswer ?? 0)"
-            }
+            return wrightAnswer ?? ""
         }
         return "0"
     }
@@ -260,36 +253,19 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
                 var taskIndex = 1
                 for task in tasks {
                     if taskIndex > 26 {
-                        if let stringAnswer = task.stringAnswer {
-                            if stringAnswer == userAnswers["Задание №\(taskIndex)"] {
-                                if !isTaskAlreadySeen(taskName: task.name ?? "", solvedTasks: coreDataSolved, unsolvedTasks: coreDataUnsolved) {
-                                    newFirstTryTasks.append(task.name ?? "")
-                                    coreDataSolved = addTask(task.name ?? "", to: coreDataSolved, category: "Задание №\(taskIndex)")
-                                } else {
-                                    coreDataUnsolved = deleteTask(task.name ?? "", to: coreDataUnsolved, category: "Задание №\(taskIndex)")
-                                    coreDataSolved = addTask(task.name ?? "", to: coreDataSolved, category: "Задание №\(taskIndex)")
-                                }
+                        if task.wrightAnswer == userAnswers["Задание №\(taskIndex)"] {
+                            if !isTaskAlreadySeen(taskName: task.name ?? "", solvedTasks: coreDataSolved, unsolvedTasks: coreDataUnsolved) {
+                                newFirstTryTasks.append(task.name ?? "")
+                                coreDataSolved = addTask(task.name ?? "", to: coreDataSolved, category: "Задание №\(taskIndex)")
                             } else {
-                                if isTaskAlreadySeen(taskName: task.name ?? "", solvedTasks: coreDataSolved, unsolvedTasks: coreDataUnsolved) {
-                                    coreDataSolved = deleteTask(task.name ?? "", to: coreDataSolved, category: "Задание №\(taskIndex)")
-                                }
-                                coreDataUnsolved = addTask(task.name ?? "", to: coreDataUnsolved, category: "Задание №\(taskIndex)")
+                                coreDataUnsolved = deleteTask(task.name ?? "", to: coreDataUnsolved, category: "Задание №\(taskIndex)")
+                                coreDataSolved = addTask(task.name ?? "", to: coreDataSolved, category: "Задание №\(taskIndex)")
                             }
                         } else {
-                            if task.wrightAnswer == Double(userAnswers["Задание №\(taskIndex)"] ?? "") {
-                                if !isTaskAlreadySeen(taskName: task.name ?? "", solvedTasks: coreDataSolved, unsolvedTasks: coreDataUnsolved) {
-                                    newFirstTryTasks.append(task.name ?? "")
-                                    coreDataSolved = addTask(task.name ?? "", to: coreDataSolved, category: "Задание №\(taskIndex)")
-                                } else {
-                                    coreDataUnsolved = deleteTask(task.name ?? "", to: coreDataUnsolved, category: "Задание №\(taskIndex)")
-                                    coreDataSolved = addTask(task.name ?? "", to: coreDataSolved, category: "Задание №\(taskIndex)")
-                                }
-                            } else {
-                                if isTaskAlreadySeen(taskName: task.name ?? "", solvedTasks: coreDataSolved, unsolvedTasks: coreDataUnsolved) {
-                                    coreDataSolved = deleteTask(task.name ?? "", to: coreDataSolved, category: "Задание №\(taskIndex)")
-                                }
-                                coreDataUnsolved = addTask(task.name ?? "", to: coreDataUnsolved, category: "Задание №\(taskIndex)")
+                            if isTaskAlreadySeen(taskName: task.name ?? "", solvedTasks: coreDataSolved, unsolvedTasks: coreDataUnsolved) {
+                                coreDataSolved = deleteTask(task.name ?? "", to: coreDataSolved, category: "Задание №\(taskIndex)")
                             }
+                            coreDataUnsolved = addTask(task.name ?? "", to: coreDataUnsolved, category: "Задание №\(taskIndex)")
                         }
                     } else {
                         if answersCorrection[taskIndex - 1] == 2 {

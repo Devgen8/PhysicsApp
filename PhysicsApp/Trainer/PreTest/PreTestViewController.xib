@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PreTestViewController" customModule="Техноскул" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="1wF-OC-fiK" id="B1W-u9-2h6"/>
+                <outlet property="startButton" destination="xQN-aK-zBR" id="wIZ-2N-9rq"/>
+                <outlet property="tasksTillEndLabel" destination="hHp-Bp-e5m" id="cmB-P9-mLb"/>
+                <outlet property="testStatusLabel" destination="oKJ-fd-wZZ" id="ILp-YY-803"/>
+                <outlet property="timeTillEndLabel" destination="dB5-bu-FOy" id="Du2-dD-mCy"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="70" translatesAutoresizingMaskIntoConstraints="NO" id="CKr-yw-x7g">
+                    <rect key="frame" x="92" y="276" width="230" height="354.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Твой пробник собран!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKJ-fd-wZZ">
+                            <rect key="frame" x="0.0" y="0.0" width="230" height="63.5"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="26"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="CJp-DK-VSx">
+                            <rect key="frame" x="0.0" y="133.5" width="230" height="91"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-32 задачи" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHp-Bp-e5m">
+                                    <rect key="frame" x="0.0" y="0.0" width="230" height="24.5"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-3 часа 55 минут" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dB5-bu-FOy">
+                                    <rect key="frame" x="0.0" y="66.5" width="230" height="24.5"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="dB5-bu-FOy" secondAttribute="trailing" id="TPl-Hn-mGI"/>
+                                <constraint firstAttribute="trailing" secondItem="hHp-Bp-e5m" secondAttribute="trailing" id="hGr-bC-GXa"/>
+                            </constraints>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQN-aK-zBR">
+                            <rect key="frame" x="0.0" y="294.5" width="230" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="caC-1P-0cl"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="22"/>
+                            <state key="normal" title="НАЧАТЬ">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="startTapped:" destination="-1" eventType="touchUpInside" id="U1B-J8-jQY"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="230" id="FYE-B7-SWu"/>
+                    </constraints>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wF-OC-fiK">
+                    <rect key="frame" x="314" y="57" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="VqN-GA-m0Q"/>
+                        <constraint firstAttribute="width" constant="70" id="frQ-pt-xdf"/>
+                    </constraints>
+                    <state key="normal" image="крестик экран 2"/>
+                    <connections>
+                        <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="HiA-AY-UJC"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="CKr-yw-x7g" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="KgU-40-xOH"/>
+                <constraint firstItem="1wF-OC-fiK" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="eDy-0N-z34"/>
+                <constraint firstItem="CKr-yw-x7g" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="gJt-Fp-c1h"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1wF-OC-fiK" secondAttribute="trailing" constant="30" id="nu7-By-Lfy"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="127"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="крестик экран 2" width="140" height="135"/>
+    </resources>
+</document>

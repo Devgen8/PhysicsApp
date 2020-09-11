@@ -137,11 +137,12 @@ class TasksListViewController: UIViewController {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.tag = 100
+        blurEffectView.backgroundColor = .white
         view.addSubview(blurEffectView)
     }
     
     func setAnimation() {
-        loaderView.animation = Animation.named("17694-cube-grid")
+        loaderView.animation = Animation.named("lf30_editor_cg3gHF")
         loaderView.loopMode = .loop
         loaderView.isHidden = false
         view.bringSubviewToFront(loaderView)
@@ -158,8 +159,26 @@ class TasksListViewController: UIViewController {
         view.viewWithTag(100)?.removeFromSuperview()
     }
     
+//    func addLoaderPhrase() {
+//        let phrase = UILabel()
+//        phrase.font = UIFont(name: "Montserrat-Medium", size: 18)
+//        phrase.textColor = .black
+//        phrase.textAlignment = .center
+//        phrase.numberOfLines = 0
+//        view.addSubview(phrase)
+//        phrase.tag = 30
+//        phrase.translatesAutoresizingMaskIntoConstraints = false
+//        phrase.minimumScaleFactor = 0.5
+//        phrase.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+//        phrase.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+//        phrase.topAnchor.constraint(equalTo: loaderView.bottomAnchor, constant: 10).isActive = true
+//        phrase.sizeToFit()
+//        phrase.text = "Загружаем самые крутые задачи для тебя 😊"
+//        view.bringSubviewToFront(phrase)
+//    }
+    
     func designScreenElements() {
-        DesignService.setWhiteBackground(for: view)
+        //DesignService.setWhiteBackground(for: view)
         DesignService.designCloseButton(closeButton)
     }
     

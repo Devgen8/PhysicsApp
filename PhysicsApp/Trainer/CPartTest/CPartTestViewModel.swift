@@ -16,7 +16,7 @@ class CPartTestViewModel {
     private var tasks = [TaskModel]()
     private var cPartTasks = ["Задание №27", "Задание №28", "Задание №29", "Задание №30", "Задание №31", "Задание №32"]
     private var timeTillEnd = 0
-    private var wrightAnswers = [String:(Double?, Double?, String?)]()
+    private var wrightAnswers = [String:(String?, Bool?)]()
     private var testAnswers = [String:String]()
     private var tasksImages = [String:UIImage]()
     private var tasksDescriptions = [String:UIImage]()
@@ -35,7 +35,7 @@ class CPartTestViewModel {
         timeTillEnd = newTime
     }
     
-    func setwrightAnswers(_ newAnswers: [String:(Double?, Double?, String?)]) {
+    func setwrightAnswers(_ newAnswers: [String:(String?, Bool?)]) {
         wrightAnswers = newAnswers
     }
     

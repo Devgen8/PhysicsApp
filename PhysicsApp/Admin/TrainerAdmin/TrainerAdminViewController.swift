@@ -16,13 +16,21 @@ class TrainerAdminViewController: UIViewController {
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var taskPickerView: UIPickerView!
     @IBOutlet weak var inverseSwitch: UISwitch!
-    @IBOutlet weak var stringSwitch: UISwitch!
     @IBOutlet weak var descriptionImageView: UIImageView!
     @IBOutlet weak var chooseThemeButton: UIButton!
     @IBOutlet weak var taskNumberTextField: UITextField!
     @IBOutlet weak var dotOrNLabel: UILabel!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var scrollableContentView: UIView!
+    @IBOutlet weak var taskImagesButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var containerViewConstraint: NSLayoutConstraint!
+    
+    private var lastOffset: CGPoint!
+    private var keyboardHeight: CGFloat!
+    private var contentSizeHeight: CGFloat!
+    private var isKeyboardHidden = true
     
     var loaderView: AnimationView!
     var viewModel: TrainerAdminViewModel = TrainerAdminAddViewModel()
@@ -37,6 +45,10 @@ class TrainerAdminViewController: UIViewController {
         
         designScreenElements()
         prepareData()
+        addKeyboardDismissGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         addTextFieldsObservers()
     }
     
@@ -52,24 +64,55 @@ class TrainerAdminViewController: UIViewController {
         center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    func addKeyboardDismissGesture() {
+        self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(returnTextView(gesture:))))
+    }
+    
+    @objc func returnTextView(gesture: UIGestureRecognizer) {
+        activeTextField.resignFirstResponder()
+    }
+    
     @objc func keyboardDidShow(notification: Notification) {
-        let info = notification.userInfo! as NSDictionary
-        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        let keyboardY = view.frame.size.height - keyboardSize.height
-        let editingTextFieldY = activeTextField.frame.origin.y
-        if view.frame.origin.y >= 0 {
-            if editingTextFieldY > keyboardY - 60 {
-                UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
-                    self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editingTextFieldY - (keyboardY - 80)), width: self.view.bounds.width, height: self.view.bounds.height)
-                }, completion: nil)
-            }
+        if !isKeyboardHidden, activeTextField != wrightAnswerTextField {
+            return
         }
+        
+        isKeyboardHidden = false
+        
+        if keyboardHeight == nil, let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height - 60
+        }
+        
+        // so increase contentView's height by keyboard height
+        UIView.animate(withDuration: 0.3, animations: {
+            self.scrollView.contentSize.height += self.keyboardHeight
+        })
+        
+        // move if keyboard hide input field
+        let distanceToBottom = self.scrollView.frame.size.height - (activeTextField.frame.origin.y) - (activeTextField.frame.size.height)
+        let collapseSpace = keyboardHeight - distanceToBottom
+
+        if collapseSpace < 0 {
+            // no collapse
+            return
+        }
+
+        // set new offset for scroll view
+        UIView.animate(withDuration: 0.3, animations: {
+            // scroll to the position above keyboard 10 points
+            self.scrollView.contentOffset = CGPoint(x: self.lastOffset.x, y: self.lastOffset.y + collapseSpace - 10)
+        })
     }
     
     @objc func keyboardWillHide(notification: Notification) {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
+        UIView.animate(withDuration: 0.3) {
+            self.scrollView.contentSize.height -= self.keyboardHeight
+            self.scrollView.contentOffset = self.lastOffset
+            self.isKeyboardHidden = true
+        }
     }
     
     func prepareData() {
@@ -87,13 +130,14 @@ class TrainerAdminViewController: UIViewController {
         DesignService.setAdminGradient(for: view)
         DesignService.designWhiteButton(uploadButton)
         DesignService.designWhiteButton(chooseThemeButton)
+        DesignService.designWhiteButton(taskImagesButton)
         setUpUsersImage()
         setupDescriptionImage()
         searchButton.layer.cornerRadius = 0.5 * searchButton.frame.height
         searchButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        taskNumberTextField.keyboardType = .numberPad
         createLoaderView()
         wrightAnswerTextField.delegate = self
+        taskNumberTextField.delegate = self
     }
     
     func createLoaderView() {
@@ -118,12 +162,16 @@ class TrainerAdminViewController: UIViewController {
             let trainerButton = UIAlertAction(title: "Тренажер", style: .default) { (_) in
                 self.uploadTask(to: "Тренажер")
             }
-            let testButton = UIAlertAction(title: "Пробник", style: .default) { (_) in
+            let testButton = UIAlertAction(title: "Новый пробник", style: .default) { (_) in
                 self.presentTestAlert()
+            }
+            let pickerButton = UIAlertAction(title: "Пробники", style: .default) { (_) in
+                self.presentPickerAlertController()
             }
             let cancelButton = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
             alertController.addAction(trainerButton)
             alertController.addAction(testButton)
+            alertController.addAction(pickerButton)
             alertController.addAction(cancelButton)
             
             present(alertController, animated: true)
@@ -134,6 +182,14 @@ class TrainerAdminViewController: UIViewController {
         if mode == .editTest {
             uploadTask(to: "Пробник", "")
         }
+    }
+    
+    func presentPickerAlertController() {
+        let chooseTestsNameViewController = ChooseTestsNameViewController()
+        chooseTestsNameViewController.modalPresentationStyle = .fullScreen
+        chooseTestsNameViewController.testNameUpdater = self
+        Animations.swipeViewController(.fromRight, for: view)
+        present(chooseTestsNameViewController, animated: false)
     }
     
     func presentTestAlert() {
@@ -199,32 +255,18 @@ class TrainerAdminViewController: UIViewController {
     
     func clearOldDataOnScreen() {
         hideLodingScreen()
-        taskPickerView.selectRow(0, inComponent: 0, animated: true)
         uploadImageView.image = #imageLiteral(resourceName: "upload (1)")
         descriptionImageView.image = #imageLiteral(resourceName: "upload (1)")
         wrightAnswerTextField.text = ""
         inverseSwitch.isOn = false
-        stringSwitch.isOn = false
         viewModel.clearOldData()
     }
     
     @IBAction func inverseChanged(_ sender: UISwitch) {
         let state = sender.isOn
         viewModel.updateInverseState(to: state)
-        if state == true {
-            viewModel.updateStringState(to: false)
-            stringSwitch.isOn = false
-        }
     }
     
-    @IBAction func stringChanged(_ sender: UISwitch) {
-        let state = sender.isOn
-        viewModel.updateStringState(to: sender.isOn)
-        if state == true {
-            viewModel.updateInverseState(to: false)
-            inverseSwitch.isOn = false
-        }
-    }
     @IBAction func chooseThemeTapped(_ sender: UIButton) {
         let chooseThemeViewController = ChooseThemeViewController()
         if let viewModel = viewModel as? SelectedThemesUpdater {
@@ -243,24 +285,12 @@ class TrainerAdminViewController: UIViewController {
             if taskModel != nil {
                 self.uploadImageView.image = taskModel?.image
                 self.descriptionImageView.image = taskModel?.taskDescription
-                if let stringAnswer = taskModel?.stringAnswer {
-                    self.wrightAnswerTextField.text = stringAnswer
-                    self.inverseSwitch.isOn = false
-                    self.stringSwitch.isOn = true
-                    self.viewModel.updateStringState(to: true)
-                    self.viewModel.updateInverseState(to: false)
-                } else {
-                    self.wrightAnswerTextField.text = "\(taskModel?.wrightAnswer ?? 0)"
-                    self.stringSwitch.isOn = false
-                }
-                if (taskModel?.alternativeAnswer) != nil {
+                self.wrightAnswerTextField.text = taskModel?.wrightAnswer ?? ""
+                self.inverseSwitch.isOn = false
+                self.viewModel.updateInverseState(to: false)
+                if (taskModel?.alternativeAnswer) == true {
                     self.inverseSwitch.isOn = true
-                    self.stringSwitch.isOn = false
-                    self.viewModel.updateStringState(to: false)
                     self.viewModel.updateInverseState(to: true)
-                    self.wrightAnswerTextField.text = "\(Int(taskModel?.wrightAnswer ?? 0))"
-                } else {
-                    self.inverseSwitch.isOn = false
                 }
                 self.hideLodingScreen()
             } else {
@@ -268,6 +298,20 @@ class TrainerAdminViewController: UIViewController {
                 self.presentNonActionAlert(title: "Не найдено", message: "Такого задания еще нет")
             }
         }
+    }
+    @IBAction func taskImagesTapped(_ sender: UIButton) {
+        let taskImagesViewController = TaskImagesViewController()
+        if viewModel is TrainerAdminEditTaskViewModel {
+            taskImagesViewController.viewModel.setCurrentMode(.editTask)
+        }
+        if viewModel is TrainerAdminEditTestViewModel {
+            taskImagesViewController.viewModel.setCurrentMode(.editTest)
+        }
+        let row = taskPickerView.selectedRow(inComponent: 0)
+        taskImagesViewController.viewModel.setTaskName(viewModel.getTask(for: row))
+        taskImagesViewController.viewModel.setTaskDownloader(self)
+        taskImagesViewController.modalPresentationStyle = .fullScreen
+        present(taskImagesViewController, animated: true)
     }
     
     func presentNonActionAlert(title: String, message: String) {
@@ -295,24 +339,28 @@ class TrainerAdminViewController: UIViewController {
     }
     
     func changeScreenElementsConfiguration() {
+        taskPickerView.selectRow(0, inComponent: 0, animated: true)
         switch mode {
         case .add:
             searchButton.isHidden = true
             taskNumberTextField.isHidden = true
             dotOrNLabel.isHidden = true
             chooseThemeButton.isHidden = false
+            taskImagesButton.isHidden = true
         case .editTask:
             searchButton.isHidden = false
             taskNumberTextField.isHidden = false
             dotOrNLabel.isHidden = false
             dotOrNLabel.text = "."
             chooseThemeButton.isHidden = false
+            taskImagesButton.isHidden = false
         case .editTest:
             searchButton.isHidden = false
             taskNumberTextField.isHidden = false
             dotOrNLabel.isHidden = false
             dotOrNLabel.text = "№"
             chooseThemeButton.isHidden = true
+            taskImagesButton.isHidden = false
         }
     }
     
@@ -322,11 +370,12 @@ class TrainerAdminViewController: UIViewController {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.tag = 100
+        blurEffectView.backgroundColor = .white
         view.addSubview(blurEffectView)
     }
     
     func setAnimation() {
-        loaderView.animation = Animation.named("17694-cube-grid")
+        loaderView.animation = Animation.named("lf30_editor_cg3gHF")
         loaderView.loopMode = .loop
         loaderView.isHidden = false
         view.bringSubviewToFront(loaderView)
@@ -450,5 +499,40 @@ extension TrainerAdminViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
+        lastOffset = self.scrollView.contentOffset
+    }
+}
+
+extension TrainerAdminViewController: TaskDownloader {
+    func updateTaskModel(themes: [String], model: TaskModel) {
+        var (_, number) = NamesParser.getTaskLocation(taskName: model.name ?? "")
+        if viewModel is TrainerAdminEditTestViewModel {
+            number = "\(model.serialNumber ?? 1)"
+            (viewModel as! TrainerAdminEditTestViewModel).setSearchedTask(model)
+            (viewModel as! TrainerAdminEditTestViewModel).updateTaskExistension(true)
+        }
+        viewModel.updateTaskNumber(with: number)
+        taskNumberTextField.text = number
+        if viewModel is TrainerAdminEditTaskViewModel {
+            (viewModel as! TrainerAdminEditTaskViewModel).updateSearchedTask(model)
+            (viewModel as! TrainerAdminEditTaskViewModel).updateTaskExistension(true)
+            (viewModel as! TrainerAdminEditTaskViewModel).updateThemes(themes)
+        }
+        uploadImageView.image = model.image
+        self.descriptionImageView.image = model.taskDescription
+        self.wrightAnswerTextField.text = model.wrightAnswer ?? ""
+        self.inverseSwitch.isOn = false
+        self.viewModel.updateInverseState(to: false)
+        if (model.alternativeAnswer) == true {
+            self.inverseSwitch.isOn = true
+            self.viewModel.updateInverseState(to: true)
+        }
+        self.hideLodingScreen()
+    }
+}
+
+extension TrainerAdminViewController: TestNameUpdater {
+    func setSelectedTestName(_ newTestName: String) {
+        uploadTask(to: "Пробник", newTestName)
     }
 }

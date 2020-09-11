@@ -46,11 +46,12 @@ class TestsHistoryViewController: UIViewController {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.tag = 100
+        blurEffectView.backgroundColor = .white
         view.addSubview(blurEffectView)
     }
     
     func setAnimation() {
-        loaderView.animation = Animation.named("17694-cube-grid")
+        loaderView.animation = Animation.named("lf30_editor_cg3gHF")
         loaderView.loopMode = .loop
         loaderView.isHidden = false
         view.bringSubviewToFront(loaderView)

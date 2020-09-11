@@ -43,11 +43,12 @@ class WelcomeViewController: UIViewController {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.tag = 100
+        blurEffectView.backgroundColor = .white
         view.addSubview(blurEffectView)
     }
     
     func setAnimation() {
-        loaderView.animation = Animation.named("17694-cube-grid")
+        loaderView.animation = Animation.named("lf30_editor_cg3gHF")
         loaderView.loopMode = .loop
         view.bringSubviewToFront(loaderView)
         loaderView.play()
@@ -71,11 +72,16 @@ class WelcomeViewController: UIViewController {
         sdkInstance?.uiDelegate = self
         let scope = ["email", "photos",]
         VKSdk.wakeUpSession(scope, complete: { (state, error) in
-            if state == .authorized && error == nil && VKSdk.accessToken() != nil {
-                VKSdk.authorize(scope, with: .disableSafariController)
-            } else if state == .initialized {
-                VKSdk.authorize(scope, with: .disableSafariController)
-            } else {
+            VKSdk.forceLogout()
+            VKSdk.authorize(scope, with: .disableSafariController)
+//            let newone = state
+//            if state == .authorized && error == nil && VKSdk.accessToken() != nil {
+//                VKSdk.forceLogout()
+//                VKSdk.authorize(scope, with: .disableSafariController)
+//            } else if state == .initialized {
+//                VKSdk.authorize(scope, with: .disableSafariController)
+//            } else {
+            if error != nil {
                 if error != nil {
                     print(error!)
                 }
@@ -85,9 +91,9 @@ class WelcomeViewController: UIViewController {
     
     //anonimus auth
     @IBAction func signUpTapped(_ sender: UIButton) {
-        let trainerViewController = TrainerViewController()
-        trainerViewController.modalPresentationStyle = .fullScreen
-        present(trainerViewController, animated: true)
+        let chooseSubjectViewController = ChooseSubjectViewController()
+        chooseSubjectViewController.modalPresentationStyle = .fullScreen
+        present(chooseSubjectViewController, animated: true)
     }
     
     func showError(_ error: String) {
@@ -110,7 +116,7 @@ extension WelcomeViewController: VKSdkDelegate {
                 if isAdmin {
                     rootViewController = MainAdminViewController()
                 } else {
-                    rootViewController = TrainerViewController()
+                    rootViewController = ChooseSubjectViewController()
                     self.viewModel.saveUsersDataInFirestore(result)
                 }
                 rootViewController.modalPresentationStyle = .fullScreen

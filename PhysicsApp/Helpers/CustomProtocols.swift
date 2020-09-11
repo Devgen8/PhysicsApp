@@ -59,13 +59,22 @@ protocol TestViewModel {
     func getNextTaskIndex(after index: Int) -> Int
     func getTimeString(from allSeconds: Int) -> String
     func getMaxRatio() -> CGFloat
+    func getTestName() -> String
+    func setTasks(_ newTasks: [TaskModel])
+    func setTimeTillEnd(_ newTime: Int)
+    func setWrightAnswers(_ newWrightAnswers: [String:(String?, Bool?)])
+    func setTaskImages(_ newTaskImages: [String:UIImage])
+    func setTaskDescriptions(_ newTaskDescriptions: [String:UIImage])
+    func setTestName(_ newName: String)
+    func setTestAnswers(_ newTestAnswers: [String:String])
+    func getCompletion() -> Float
     var name: String { set get }
     var testAnswers: [String:String] { set get }
 }
 
 protocol GeneralTestResultsViewModel {
     var timeTillEnd: Int { get set }
-    var wrightAnswers: [String:(Double?, Double?, String?)] { get set }
+    var wrightAnswers: [String:(String?, Bool?)] { get set }
     var userAnswers: [String:String] { get set }
     var taskImages: [String:UIImage] { get set }
     var testName: String { get set }
@@ -104,7 +113,6 @@ protocol TrainerAdminViewModel {
     func updatePhotoData(with data: Data)
     func updateTaskDescription(with data: Data)
     func updateInverseState(to bool: Bool)
-    func updateStringState(to bool: Bool)
     func uploadNewTaskToTrainer(completion: @escaping (Bool) -> ())
     func uploadNewTaskToTest(_ testName: String, completion: @escaping (Bool) -> ())
     func updateSelectedTask(with index: Int)
@@ -117,4 +125,16 @@ protocol TrainerAdminViewModel {
 
 protocol ImageOpener {
     func openImage(_ image: UIImage)
+}
+
+protocol TaskDownloader {
+    func updateTaskModel(themes: [String], model: TaskModel)
+}
+
+protocol AdvertUpdater {
+    func updateAdverts(mode: EditingMode, advertData: Advert, oldName: String?)
+}
+
+protocol TestNameUpdater {
+    func setSelectedTestName(_ newTestName: String)
 }

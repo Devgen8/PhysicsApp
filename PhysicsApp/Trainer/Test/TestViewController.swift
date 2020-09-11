@@ -39,6 +39,11 @@ class TestViewController: UIViewController {
     private var timer = Timer()
     private var activeTextField = UITextField()
     
+    private var lastOffset: CGPoint!
+    private var keyboardHeight: CGFloat!
+    private var contentSizeHeight: CGFloat!
+    private var isKeyboardHidden = true
+    
     var viewModel: TestViewModel!
     var isClosing = false
     
@@ -53,6 +58,7 @@ class TestViewController: UIViewController {
     lazy var containerView: UIView = {
         let container = UIView()
         container.frame.size = CGSize(width: view.frame.width, height: screenHeight)
+        container.backgroundColor = .white
         return container
     }()
     
@@ -62,12 +68,13 @@ class TestViewController: UIViewController {
         taskPicker.dataSource = self
         view.backgroundColor = .white
         createBlurEffect()
-        prepareData()
         setAnimation()
-        addTextFieldsObservers()
+        prepareData()
+        addKeyboardDismissGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        addTextFieldsObservers()
         if viewModel.isTestFinished() {
             presentCPartViewController()
         }
@@ -92,24 +99,57 @@ class TestViewController: UIViewController {
         center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    func addKeyboardDismissGesture() {
+        self.containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(returnTextView(gesture:))))
+    }
+    
+    @objc func returnTextView(gesture: UIGestureRecognizer) {
+        activeTextField.resignFirstResponder()
+    }
+    
     @objc func keyboardDidShow(notification: Notification) {
-        let info = notification.userInfo! as NSDictionary
-        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        let keyboardY = view.frame.size.height - keyboardSize.height
-        let editingTextFieldY = activeTextField.frame.origin.y
-        if view.frame.origin.y >= 0 {
-            if editingTextFieldY > keyboardY - 60 {
-                UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
-                    self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editingTextFieldY - (keyboardY - 80)), width: self.view.bounds.width, height: self.view.bounds.height)
-                }, completion: nil)
-            }
+        if !isKeyboardHidden {
+            return
         }
+        
+        isKeyboardHidden = false
+        
+        if keyboardHeight == nil, let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+        }
+        
+        // so increase contentView's height by keyboard height
+        UIView.animate(withDuration: 0.3, animations: {
+            self.containerView.frame.size.height += self.keyboardHeight
+            self.scrollView.contentSize.height += self.keyboardHeight
+        })
+        
+        // move if keyboard hide input field
+        let distanceToBottom = self.scrollView.frame.size.height - (activeTextField.frame.origin.y) - (activeTextField.frame.size.height)
+        let collapseSpace = keyboardHeight - distanceToBottom
+
+        if collapseSpace < 0 {
+            // no collapse
+            return
+        }
+
+        // set new offset for scroll view
+        UIView.animate(withDuration: 0.3, animations: {
+            // scroll to the position above keyboard 10 points
+            self.scrollView.contentOffset = CGPoint(x: self.lastOffset.x, y: self.lastOffset.y + collapseSpace + 10)
+        })
     }
     
     @objc func keyboardWillHide(notification: Notification) {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
+        UIView.animate(withDuration: 0.3) {
+            self.containerView.frame.size.height -= self.keyboardHeight
+            self.scrollView.contentSize.height -= self.keyboardHeight
+            self.scrollView.contentOffset = self.lastOffset
+            self.isKeyboardHidden = true
+        }
     }
     
     // Window appearance
@@ -128,7 +168,8 @@ class TestViewController: UIViewController {
         designMyAnswersButton()
         designFinishButton()
         
-        DesignService.setWhiteBackground(for: containerView)
+        //DesignService.setWhiteBackground(for: containerView)
+        view.backgroundColor = .white
         answerTextField.delegate = self
     }
     
@@ -152,6 +193,7 @@ class TestViewController: UIViewController {
     }
     
     func designTimeLabel() {
+        timeLabel.textColor = .black
         timeLabel.font = UIFont(name: "Montserrat-Regular", size: 20)
         timeLabel.adjustsFontSizeToFitWidth = true
         view.addSubview(timeLabel)
@@ -198,6 +240,15 @@ class TestViewController: UIViewController {
         findScreenHeight(maxRatio: propotion)
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: screenHeight)
         containerView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: screenHeight)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(imagePanned(_:)))
+        taskImageView.addGestureRecognizer(panGesture)
+    }
+    
+    @objc func imagePanned(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: scrollView)
+        if scrollView.contentOffset.y - (translation.y / 5) >= 0 && scrollView.contentOffset.y - (translation.y / 5) <= scrollView.contentSize.height - scrollView.bounds.size.height {
+            scrollView.contentOffset.y -= translation.y / 5
+        }
     }
     
     @objc func imageTapped() {
@@ -221,6 +272,7 @@ class TestViewController: UIViewController {
         answerTextField.layer.borderWidth = 1
         answerTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
         answerTextField.font = UIFont(name: "Montserrat-Regular", size: 20)
+        answerTextField.textColor = .black
     }
     
     func designAnswerButton() {
@@ -239,6 +291,9 @@ class TestViewController: UIViewController {
     }
     
     @objc func answerTapped() {
+        // hide keyboard
+        activeTextField.resignFirstResponder()
+        
         if answerButton.title(for: .normal) == "ОТВЕТИТЬ" {
             viewModel.writeAnswerForTask(taskNumber, with: answerTextField.text ?? "")
             taskNumber = viewModel.getNextTaskIndex(after: taskNumber)
@@ -256,7 +311,7 @@ class TestViewController: UIViewController {
         lookAnswersButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25).isActive = true
         lookAnswersButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -25).isActive = true
         lookAnswersButton.heightAnchor.constraint(equalToConstant: buttonHeight).isActive = true
-        lookAnswersButton.setTitle("МОИ ОТВЕТЫ", for: .normal)
+        lookAnswersButton.setTitle("ЗАДАНИЯ", for: .normal)
         lookAnswersButton.titleLabel?.font = UIFont(name: "Montserrat-Bold", size: 20)
         lookAnswersButton.backgroundColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
         lookAnswersButton.setTitleColor(.white, for: .normal)
@@ -305,6 +360,7 @@ class TestViewController: UIViewController {
     }
     
     func prepareData() {
+        addLoaderPhrase()
         viewModel.getTestTasks { (isReady) in
             if isReady {
                 DispatchQueue.main.async {
@@ -323,6 +379,7 @@ class TestViewController: UIViewController {
                     self.taskImageView.image = firstImage
                     self.loaderView.isHidden = true
                     self.view.viewWithTag(100)?.removeFromSuperview()
+                    self.view.viewWithTag(30)?.removeFromSuperview()
                     self.taskPicker.reloadComponent(0)
                     self.currentDuration = self.viewModel.getTimeTillEnd()
                     self.answerTextField.text = self.viewModel.getFirstQuestionAnswer()
@@ -332,10 +389,27 @@ class TestViewController: UIViewController {
         }
     }
     
+    func addLoaderPhrase() {
+        let phrase = UILabel()
+        phrase.font = UIFont(name: "Montserrat-Medium", size: 18)
+        phrase.textColor = .black
+        phrase.textAlignment = .center
+        phrase.numberOfLines = 0
+        view.addSubview(phrase)
+        phrase.tag = 30
+        phrase.translatesAutoresizingMaskIntoConstraints = false
+        phrase.minimumScaleFactor = 0.5
+        phrase.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        phrase.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        phrase.topAnchor.constraint(equalTo: loaderView.bottomAnchor, constant: 10).isActive = true
+        phrase.sizeToFit()
+        phrase.text = "Подожди чуть-чуть 🙏🏻\nВпереди что-то крутое 😍"
+        view.bringSubviewToFront(phrase)
+    }
+    
     func presentCPartViewController() {
         let cPartTestViewController = CPartTestViewController()
         viewModel.transportData(to: cPartTestViewController.viewModel, with: Int(currentDuration))
-        currentDuration = 14100
         cPartTestViewController.modalPresentationStyle = .fullScreen
         present(cPartTestViewController, animated: true)
     }
@@ -346,11 +420,12 @@ class TestViewController: UIViewController {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.tag = 100
+        blurEffectView.backgroundColor = .white
         view.addSubview(blurEffectView)
     }
     
     func setAnimation() {
-        loaderView.animation = Animation.named("17694-cube-grid")
+        loaderView.animation = Animation.named("lf30_editor_cg3gHF")
         loaderView.loopMode = .loop
         view.addSubview(loaderView)
         loaderView.translatesAutoresizingMaskIntoConstraints = false
@@ -424,5 +499,6 @@ extension TestViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
+        lastOffset = self.scrollView.contentOffset
     }
 }

@@ -13,9 +13,8 @@ public class TaskModel:NSObject, NSCoding {
     var serialNumber: Int?
     var image: UIImage?
     var taskDescription: UIImage?
-    var wrightAnswer: Double?
-    var alternativeAnswer: Double?
-    var stringAnswer: String?
+    var wrightAnswer: String?
+    var alternativeAnswer: Bool?
     var succeded: Int?
     var failed: Int?
     var theme: String?
@@ -26,7 +25,6 @@ public class TaskModel:NSObject, NSCoding {
         coder.encode(image?.pngData(), forKey: "image")
         coder.encode(wrightAnswer, forKey: "wrightAnswer")
         coder.encode(alternativeAnswer, forKey: "alternativeAnswer")
-        coder.encode(stringAnswer, forKey: "stringAnswer")
         coder.encode(succeded, forKey: "succeded")
         coder.encode(failed, forKey: "failed")
         coder.encode(theme, forKey: "theme")
@@ -41,9 +39,8 @@ public class TaskModel:NSObject, NSCoding {
          serialNumber: Int?,
          image: Data?,
          taskDescription: Data?,
-         wrightAnswer: Double?,
-         alternativeAnswer: Double?,
-         stringAnswer: String?,
+         wrightAnswer: String?,
+         alternativeAnswer: Bool?,
          succeded: Int?,
          failed: Int?,
          theme: String?) {
@@ -53,7 +50,6 @@ public class TaskModel:NSObject, NSCoding {
         self.taskDescription = UIImage(data: taskDescription ?? Data())
         self.wrightAnswer = wrightAnswer
         self.alternativeAnswer = alternativeAnswer
-        self.stringAnswer = stringAnswer
         self.succeded = succeded
         self.failed = failed
         self.theme = theme
@@ -64,9 +60,8 @@ public class TaskModel:NSObject, NSCoding {
         let decodedSerialNumber = coder.decodeObject(forKey: "serialNumber") as? Int
         let decodedImage = coder.decodeObject(forKey: "image") as? Data
         let decodedTaskDescription = coder.decodeObject(forKey: "taskDescription") as? Data
-        let decodedWrightanswer = coder.decodeObject(forKey: "wrightAnswer") as? Double
-        let decodedAlternativeAnswer = coder.decodeObject(forKey: "alternativeAnswer") as? Double
-        let decodedStringAnswer = coder.decodeObject(forKey: "stringAnswer") as? String
+        let decodedWrightanswer = coder.decodeObject(forKey: "wrightAnswer") as? String
+        let decodedAlternativeAnswer = coder.decodeObject(forKey: "alternativeAnswer") as? Bool
         let decodedSucceded = coder.decodeObject(forKey: "succeded") as? Int
         let decodedFailed = coder.decodeObject(forKey: "failed") as? Int
         let decodedTheme = coder.decodeObject(forKey: "serialNumber") as? String
@@ -77,7 +72,6 @@ public class TaskModel:NSObject, NSCoding {
         taskDescription: decodedTaskDescription,
         wrightAnswer: decodedWrightanswer,
         alternativeAnswer: decodedAlternativeAnswer,
-        stringAnswer: decodedStringAnswer,
         succeded: decodedSucceded,
         failed: decodedFailed,
         theme: decodedTheme)

@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import Lottie
 
 class TaskViewController: UIViewController {
     
@@ -25,13 +26,25 @@ class TaskViewController: UIViewController {
     private var screenHeight:CGFloat = 0
     private var progressBar = UIProgressView()
     private var questionLabel = UILabel()
+    private var loaderView = AnimationView()
+    private var nextButton = UIButton()
+    private var backButton = UIButton()
+    
+    private var lastOffset: CGPoint!
+    private var keyboardHeight: CGFloat!
+    private var contentSizeHeight: CGFloat!
+    private var isKeyboardHidden = true
     
     var viewModel = TaskViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        designScreenElements()
+        
         getCurrentTask()
+        addKeyboardDismissGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         addTextFieldsObservers()
     }
     
@@ -49,39 +62,116 @@ class TaskViewController: UIViewController {
         center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    func addKeyboardDismissGesture() {
+        self.containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(returnTextView(gesture:))))
+    }
+    
+    @objc func returnTextView(gesture: UIGestureRecognizer) {
+        activeTextField.resignFirstResponder()
+    }
+    
     @objc func keyboardDidShow(notification: Notification) {
-        let info = notification.userInfo! as NSDictionary
-        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        let keyboardY = view.frame.size.height - keyboardSize.height
-        let editingTextFieldY = activeTextField.frame.origin.y
-        if view.frame.origin.y >= 0 {
-            if editingTextFieldY > keyboardY - 60 {
-                UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
-                    self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editingTextFieldY - (keyboardY - 80)), width: self.view.bounds.width, height: self.view.bounds.height)
-                }, completion: nil)
-            }
+        
+        if !isKeyboardHidden {
+            return
         }
+        
+        isKeyboardHidden = false
+        
+        if keyboardHeight == nil, let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+        }
+        
+        // so increase contentView's height by keyboard height
+        UIView.animate(withDuration: 0.3, animations: {
+            self.containerView.frame.size.height += self.keyboardHeight
+            self.scrollView.contentSize.height += self.keyboardHeight
+        })
+        
+        // move if keyboard hide input field
+        let distanceToBottom = self.scrollView.frame.size.height - (activeTextField.frame.origin.y) - (activeTextField.frame.size.height)
+        let collapseSpace = keyboardHeight - distanceToBottom
+
+        if collapseSpace < 0 {
+            // no collapse
+            return
+        }
+
+        // set new offset for scroll view
+        UIView.animate(withDuration: 0.3, animations: {
+            // scroll to the position above keyboard 10 points
+            self.scrollView.contentOffset = CGPoint(x: self.lastOffset.x, y: self.lastOffset.y + collapseSpace + 10)
+        })
     }
     
     @objc func keyboardWillHide(notification: Notification) {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
+        UIView.animate(withDuration: 0.3) {
+            self.containerView.frame.size.height -= self.keyboardHeight
+            self.scrollView.contentSize.height -= self.keyboardHeight
+            self.scrollView.contentOffset = self.lastOffset
+            self.isKeyboardHidden = true
+        }
     }
     
     func getCurrentTask() {
-        themeLabel.text = viewModel.getTheme()
-        taskNumberLabel.text = "Задача \(viewModel.getTaskNumber() ?? 1) из \(viewModel.getNumberOfTasks() ?? 10)"
-        taskImage.image = viewModel.getTask()?.image
-        descriptionImageView.image = viewModel.getTask()?.taskDescription
+        showLoadingScreen()
+        viewModel.checkImagesExist { (isReady) in
+            if isReady {
+                self.backButton.isHidden = self.viewModel.getTaskNumber() == 1 ? true : false
+                self.nextButton.isHidden = self.viewModel.getTaskNumber() == self.viewModel.getAllTasksNumber() ? true : false
+                self.themeLabel.text = self.viewModel.getTheme()
+                self.taskNumberLabel.text = "Задача \(self.viewModel.getTaskNumber() ?? 1) из \(self.viewModel.getNumberOfTasks() ?? 10)"
+                self.designScreenElements()
+                self.taskImage.image = self.viewModel.getTask()?.image
+                self.descriptionImageView.image = self.viewModel.getTask()?.taskDescription
+                self.hideLodingScreen()
+            }
+        }
     }
     
     // Screen appearance
     
+    func createBlurEffect() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.tag = 50
+        blurEffectView.backgroundColor = .white
+        view.addSubview(blurEffectView)
+    }
+    
+    func setAnimation() {
+        loaderView.animation = Animation.named("lf30_editor_cg3gHF")
+        loaderView.loopMode = .loop
+        loaderView.isHidden = false
+        view.addSubview(loaderView)
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loaderView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        loaderView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        loaderView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        view.bringSubviewToFront(loaderView)
+        loaderView.play()
+    }
+    
+    func showLoadingScreen() {
+        createBlurEffect()
+        setAnimation()
+    }
+    
+    func hideLodingScreen() {
+        loaderView.isHidden = true
+        view.viewWithTag(50)?.removeFromSuperview()
+    }
+    
     func findScreenHeight() {
         let taskImageRatio = (viewModel.getTask()?.image?.size.height ?? 0) / (viewModel.getTask()?.image?.size.width ?? 1)
         let taskImageHeight = (UIScreen.main.bounds.width - 50) * taskImageRatio
-        screenHeight = 25 + 40 + 35 + 25 + 10 + taskImageHeight + 20 + 60 + 10 + 30 + 20 + 60 + 25 + 25 + 40 + 10 + 60
+        screenHeight = 25 + 40 + 35 + 25 + 15 + taskImageHeight + 20 + 60 + 10 + 30 + 20 + 60 + 25 + 25 + 40 + 10 + 60
     }
     
     lazy var scrollView: UIScrollView = {
@@ -124,19 +214,81 @@ class TaskViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    func designMovingButtons() {
+        let buttonsWidth: CGFloat = 45
+        let buttonsHeight: CGFloat = 35
+        
+        view.addSubview(backButton)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25).isActive = true
+        backButton.topAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: 30).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: buttonsWidth).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: buttonsHeight).isActive = true
+        
+        backButton.setTitle("◀︎◀︎", for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "Montserrat-Bold", size: 20)
+        backButton.backgroundColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        backButton.setTitleColor(.white, for: .normal)
+        backButton.addTarget(self, action: #selector(backTapped(_:)), for: .touchUpInside)
+        
+        view.addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -25).isActive = true
+        nextButton.topAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: 30).isActive = true
+        nextButton.widthAnchor.constraint(equalToConstant: buttonsWidth).isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: buttonsHeight).isActive = true
+        
+        nextButton.setTitle("▶︎▶︎", for: .normal)
+        nextButton.titleLabel?.font = UIFont(name: "Montserrat-Bold", size: 20)
+        nextButton.backgroundColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
+        nextButton.setTitleColor(.white, for: .normal)
+        nextButton.addTarget(self, action: #selector(nextTapped(_:)), for: .touchUpInside)
+    }
+    
+    @objc func backTapped(_ sender: UIButton) {
+        viewModel.updateTaskStatus()
+        viewModel.updateParentUnsolvedTasks()
+        clearOldData()
+        viewModel.savePreviousTask()
+        viewModel.changeTaskNumber(on: -1)
+        viewModel.changeCurrentTask()
+        getCurrentTask()
+    }
+    
+    @objc func nextTapped(_ sender: UIButton) {
+        viewModel.updateTaskStatus()
+        viewModel.updateParentUnsolvedTasks()
+        clearOldData()
+        viewModel.savePreviousTask()
+        viewModel.changeTaskNumber(on: 1)
+        viewModel.changeCurrentTask()
+        getCurrentTask()
+    }
+    
+    func clearOldData() {
+        canNotSolveButton.alpha = 1
+        canNotSolveButton.isHidden = false
+        answerTextField.text = ""
+        resultLabel.alpha = 0
+        viewModel.clearOldData()
+    }
+    
     func designTaskNumberLabel() {
         taskNumberLabel.font = UIFont(name: "Montserrat-Medium", size: 20)
+        taskNumberLabel.textAlignment = .center
         view.addSubview(taskNumberLabel)
         taskNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskNumberLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 50).isActive = true
-        taskNumberLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -5).isActive = true
+        taskNumberLabel.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 5).isActive = true
+        taskNumberLabel.trailingAnchor.constraint(equalTo: nextButton.trailingAnchor, constant: -5).isActive = true
         taskNumberLabel.topAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: 35).isActive = true
     }
     
     func designTaskImage(with propotion: CGFloat) {
+        taskImage.removeFromSuperview()
+        taskImage = UIImageView()
         view.addSubview(taskImage)
         taskImage.translatesAutoresizingMaskIntoConstraints = false
-        taskImage.topAnchor.constraint(equalTo: taskNumberLabel.bottomAnchor, constant: 10).isActive = true
+        taskImage.topAnchor.constraint(equalTo: taskNumberLabel.bottomAnchor, constant: 15).isActive = true
         taskImage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25).isActive = true
         taskImage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -25).isActive = true
         taskImage.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 50) * propotion).isActive = true
@@ -144,6 +296,15 @@ class TaskViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
         taskImage.isUserInteractionEnabled = true
         taskImage.addGestureRecognizer(tapGesture)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(imagePanned(_:)))
+        taskImage.addGestureRecognizer(panGesture)
+    }
+    
+    @objc func imagePanned(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: scrollView)
+        if scrollView.contentOffset.y - (translation.y / 5) >= 0 && scrollView.contentOffset.y - (translation.y / 5) <= scrollView.contentSize.height - scrollView.bounds.size.height {
+            scrollView.contentOffset.y -= translation.y / 5
+        }
     }
     
     @objc func imageTapped(_ sender: UITapGestureRecognizer) {
@@ -201,6 +362,8 @@ class TaskViewController: UIViewController {
         UIView.animate(withDuration: 1.5) {
             self.descriptionImageView.alpha = 1
         }
+        // hide keyboard
+        activeTextField.resignFirstResponder()
     }
     
     func designResultLabel() {
@@ -239,6 +402,8 @@ class TaskViewController: UIViewController {
     }
     
     func designDescriptionImageView(with propotion: CGFloat) {
+        descriptionImageView.removeFromSuperview()
+        descriptionImageView = UIImageView()
         view.addSubview(descriptionImageView)
         descriptionImageView.translatesAutoresizingMaskIntoConstraints = false
         descriptionImageView.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 10).isActive = true
@@ -249,6 +414,8 @@ class TaskViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(desriptionTapped(_:)))
         descriptionImageView.isUserInteractionEnabled = true
         descriptionImageView.addGestureRecognizer(tapGesture)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(imagePanned(_:)))
+        descriptionImageView.addGestureRecognizer(panGesture)
     }
     
     @objc func desriptionTapped(_ sender: UITapGestureRecognizer) {
@@ -332,6 +499,7 @@ class TaskViewController: UIViewController {
         
         designThemeLabel()
         designCloseButton()
+        designMovingButtons()
         designTaskNumberLabel()
         var propotion = (viewModel.getTask()?.image?.size.height ?? 0) / (viewModel.getTask()?.image?.size.width ?? 1)
         designTaskImage(with: propotion)
@@ -355,6 +523,8 @@ class TaskViewController: UIViewController {
         answerTextField.layer.borderWidth = 1
         answerTextField.layer.borderColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
         DesignService.designBlueButton(checkButton)
+        DesignService.designBlueButton(backButton)
+        DesignService.designBlueButton(nextButton)
         checkButton.layer.cornerRadius = 15
         writeButton.layer.cornerRadius = 15
         descriptionImageView.alpha = 0
@@ -372,5 +542,6 @@ extension TaskViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
+        lastOffset = self.scrollView.contentOffset
     }
 }

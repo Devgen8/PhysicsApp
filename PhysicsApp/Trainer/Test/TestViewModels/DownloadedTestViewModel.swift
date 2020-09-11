@@ -19,9 +19,10 @@ class DownloadedTestViewModel: TestViewModel {
     private var tasks = [TaskModel]()
     private let userReference = Firestore.firestore().collection("users")
     private var timeTillEnd = 14100
-    private var wrightAnswers = [String:(Double?, Double?, String?)]()
+    private var wrightAnswers = [String:(String?, Bool?)]()
     private var tasksImages = [String:UIImage]()
     private var tasksDescriptions = [String:UIImage]()
+    private var isTestCleared = false
     
     var name = ""
     var testAnswers = [String:String]()
@@ -29,16 +30,17 @@ class DownloadedTestViewModel: TestViewModel {
     //MARK: Interface
     
     func getTestTasks(completion: @escaping (Bool) -> ()) {
-        if let notUpdatedTests = UserDefaults.standard.value(forKey: "notUpdatedTests") as? [String],
-            notUpdatedTests.contains(name) {
-            getTasksFromFirestore { (_) in
-                completion(!self.isTestFinished())
-            }
-        } else {
-            getTasksFromCoreData { (_) in
-                completion(!self.isTestFinished())
-            }
-        }
+        completion(true)
+//        if let notUpdatedTests = UserDefaults.standard.value(forKey: "notUpdatedTests") as? [String],
+//            notUpdatedTests.contains(name) {
+//            getTasksFromFirestore { (_) in
+//                completion(!self.isTestFinished())
+//            }
+//        } else {
+//            getTasksFromCoreData { (_) in
+//                completion(!self.isTestFinished())
+//            }
+//        }
     }
     
     func isTestFinished() -> Bool {
@@ -47,11 +49,15 @@ class DownloadedTestViewModel: TestViewModel {
     }
     
     func saveUsersProgress(with time: Int) {
+        saveProgressToCoreData(with: isTestCleared ? 14100 : time)
         if let userId = Auth.auth().currentUser?.uid, !NamesParser.isTestCustom(name) {
-            saveProgressToCoreData(with: time)
             userReference.document(userId).collection("tests").document(name).setData(["answers":testAnswers,
                                                                                        "time":time])
         }
+    }
+    
+    func getTestName() -> String {
+        return name
     }
     
     func getPhotoForTask(_ index: Int) -> UIImage {
@@ -108,6 +114,34 @@ class DownloadedTestViewModel: TestViewModel {
         return "\(hours) : \(minutes) : \(seconds)"
     }
     
+    func setTasks(_ newTasks: [TaskModel]) {
+        tasks = newTasks
+    }
+    
+    func setTimeTillEnd(_ newTime: Int) {
+        timeTillEnd = newTime
+    }
+    
+    func setWrightAnswers(_ newWrightAnswers: [String:(String?, Bool?)]) {
+        wrightAnswers = newWrightAnswers
+    }
+    
+    func setTaskImages(_ newTaskImages: [String:UIImage]) {
+        tasksImages = newTaskImages
+    }
+    
+    func setTaskDescriptions(_ newTaskDescriptions: [String:UIImage]) {
+        tasksDescriptions = newTaskDescriptions
+    }
+    
+    func setTestName(_ newName: String) {
+        name = newName
+    }
+    
+    func setTestAnswers(_ newTestAnswers: [String:String]) {
+        testAnswers = newTestAnswers
+    }
+    
     func transportData(to viewModel: CPartTestViewModel, with time: Int) {
         viewModel.setTimeTillEnd(time)
         viewModel.setwrightAnswers(wrightAnswers)
@@ -133,14 +167,13 @@ class DownloadedTestViewModel: TestViewModel {
             for document in documents {
                 let task = TaskModel()
                 task.serialNumber = document.data()[Task.serialNumber.rawValue] as? Int
-                task.wrightAnswer = document.data()[Task.wrightAnswer.rawValue] as? Double
-                task.alternativeAnswer = document.data()[Task.alternativeAnswer.rawValue] as? Double
-                task.stringAnswer = document.data()[Task.wrightAnswer.rawValue] as? String
+                task.wrightAnswer = document.data()[Task.wrightAnswer.rawValue] as? String
+                task.alternativeAnswer = document.data()[Task.alternativeAnswer.rawValue] as? Bool
                 task.succeded = document.data()[Task.succeded.rawValue] as? Int
                 task.failed = document.data()[Task.failed.rawValue] as? Int
                 task.name = "Задание №\(task.serialNumber ?? 1)"
                 self.testAnswers[task.name ?? ""] = ""
-                self.wrightAnswers[task.name ?? ""] = (task.wrightAnswer, task.alternativeAnswer, task.stringAnswer)
+                self.wrightAnswers[task.name ?? ""] = (task.wrightAnswer, task.alternativeAnswer)
                 self.tasks.append(task)
             }
             self.getUsersProgress { (isReady) in
@@ -176,7 +209,7 @@ class DownloadedTestViewModel: TestViewModel {
         var count = 0
         for index in stride(from: 0, to: tasks.count, by: 1) {
             let imageRef = Storage.storage().reference().child("tests/\(name)/task\(index + 1).png")
-            imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
+            imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
                 guard let `self` = self, error == nil else {
                     print("Error downloading images: \(String(describing: error?.localizedDescription))")
                     return
@@ -200,7 +233,7 @@ class DownloadedTestViewModel: TestViewModel {
         var count = 0
         for index in stride(from: 0, to: tasks.count, by: 1) {
             let imageRef = Storage.storage().reference().child("tests/\(name)/task\(index + 1)description.png")
-            imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
+            imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
                 guard let `self` = self, error == nil else {
                     print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
                     return
@@ -235,7 +268,7 @@ class DownloadedTestViewModel: TestViewModel {
                         testAnswers = testObject.usersAnswers
                         timeTillEnd = Int(currentTest.time)
                         for task in tasks {
-                            wrightAnswers[task.name ?? ""] = (task.wrightAnswer, task.alternativeAnswer, task.stringAnswer)
+                            wrightAnswers[task.name ?? ""] = (task.wrightAnswer, task.alternativeAnswer)
                             tasksImages[task.name ?? ""] = task.image
                             tasksDescriptions[task.name ?? ""] = task.taskDescription
                         }
@@ -305,7 +338,11 @@ class DownloadedTestViewModel: TestViewModel {
         }
         testAnswers = newAnswers
         timeTillEnd = 14100
+        isTestCleared = true
     }
+    
+    // unused methods
+    func getCompletion() -> Float { return 0 }
 }
 
 extension DownloadedTestViewModel: TestAnswersUpdater {

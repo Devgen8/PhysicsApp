@@ -69,6 +69,22 @@ class TestTrainerViewModel: TrainerViewModelProvider {
         return testsPoints[testName] ?? 0
     }
     
+    func deleteTest(_ deletingTestName: String) {
+        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
+            
+            do {
+                let result = try context.fetch(fechRequest)
+                let trainer = result.first
+                context.delete(trainer?.tests?.first(where: {($0 as! Test).name == deletingTestName}) as! NSManagedObject)
+                tests = tests.filter({ $0 != deletingTestName })
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     //MARK: Private section
     
     private func getEgeData(completion: @escaping (Bool) -> ()) {
@@ -135,6 +151,11 @@ class TestTrainerViewModel: TrainerViewModelProvider {
                         completion(isReady)
                     }
                 }
+            }
+        }
+        if tests == [] {
+            self.getEgeData { (isReady) in
+                completion(isReady)
             }
         }
     }

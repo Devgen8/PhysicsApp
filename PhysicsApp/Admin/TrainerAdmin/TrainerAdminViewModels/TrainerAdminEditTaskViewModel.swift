@@ -20,7 +20,6 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
     private var themes = [String]()
     private var selectedTask = ""
     private var inverseState = false
-    private var stringState = false
     private var themesOfSearchedTask = [String]()
     private var searchedTask = TaskModel()
     private var doesTaskExist = false
@@ -53,7 +52,6 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
     
     func uploadNewTaskToTrainer(completion: @escaping (Bool) -> ()) {
         if doesTaskExist, isAbleToUpload() {
-            wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
             wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
             let newTheme = searchedTask.theme ?? ""
             themesOfSearchedTask[(Int(taskNumber) ?? 1) - 1] = newTheme
@@ -78,9 +76,7 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
     
     func clearOldData() {
         taskNumber = ""
-        selectedTask = tasks.first ?? ""
         inverseState = false
-        stringState = false
         themesOfSearchedTask = [String]()
         searchedTask = TaskModel()
         doesTaskExist = false
@@ -110,10 +106,6 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
     func updateInverseState(to bool: Bool) {
         inverseState = bool
     }
-
-    func updateStringState(to bool: Bool) {
-        stringState = bool
-    }
     
     func updateTaskNumber(with number: String) {
         taskNumber = number
@@ -131,6 +123,18 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
         return searchedTask.theme ?? ""
     }
     
+    func updateSearchedTask(_ model: TaskModel) {
+        searchedTask = model
+    }
+    
+    func updateTaskExistension(_ bool: Bool) {
+        doesTaskExist = bool
+    }
+    
+    func updateThemes(_ newThemes: [String]) {
+        themesOfSearchedTask = newThemes
+    }
+    
     //MARK: Private section
     
     private func isAbleToUpload() -> Bool {
@@ -145,14 +149,9 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
     
     private func getKeyValuesForTask() -> [String : Any] {
         var taskData = [String : Any]()
-        if stringState == true {
-            taskData["stringAnswer"] = wrightAnswer
-        } else {
-            taskData["wrightAnswer"] = Double(wrightAnswer)
-            if inverseState == true {
-                let charactersArray = [Character](wrightAnswer)
-                taskData["alternativeAnswer"] = Double(String([charactersArray[1], charactersArray[0]]))
-            }
+        taskData["wrightAnswer"] = wrightAnswer
+        if inverseState == true {
+            taskData["alternativeAnswer"] = true
         }
         taskData["serialNumber"] = Int(taskNumber) ?? 1
         return taskData
@@ -168,10 +167,9 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
                 return
             }
             self.searchedTask.name = self.selectedTask + "." + self.taskNumber
-            self.searchedTask.alternativeAnswer = document.data()["alternativeAnswer"] as? Double
+            self.searchedTask.alternativeAnswer = document.data()["alternativeAnswer"] as? Bool
             self.searchedTask.serialNumber = Int(self.taskNumber)
-            self.searchedTask.stringAnswer = document.data()["stringAnswer"] as? String
-            self.searchedTask.wrightAnswer = document.data()["wrightAnswer"] as? Double
+            self.searchedTask.wrightAnswer = document.data()["wrightAnswer"] as? String
             self.getTaskImage { (task) in
                 completion(task)
             }
@@ -180,7 +178,7 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
     
     private func getTaskImage(completion: @escaping (TaskModel?) -> ()) {
         let imageRef = Storage.storage().reference().child("trainer/\(selectedTask)/task\(taskNumber).png")
-        imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
+        imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
             guard let `self` = self, error == nil else {
                 print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
                 completion(nil)
@@ -197,7 +195,7 @@ class TrainerAdminEditTaskViewModel: TrainerAdminViewModel {
     
     private func getTaskDescription(completion: @escaping (TaskModel?) -> ()) {
         let imageRef = Storage.storage().reference().child("trainer/\(selectedTask)/task\(taskNumber)description.png")
-        imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
+        imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
             guard let `self` = self, error == nil else {
                 print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
                 completion(nil)

@@ -31,13 +31,9 @@ class TasksDetailViewModel {
                 completion("", Data())
                 return
             }
-            if let wrightAnswer = document?.data()?["wrightAnswer"] as? Double {
+            if let wrightAnswer = document?.data()?["wrightAnswer"] as? String {
                 self.downloadTaskPhoto(for: self.cellLabels[index]) { (imageData) in
                     completion("\(wrightAnswer)", imageData)
-                }
-            } else if let stringAnswer = document?.data()?["stringAnswer"] as? String {
-                self.downloadTaskPhoto(for: self.cellLabels[index]) { (imageData) in
-                    completion(stringAnswer, imageData)
                 }
             }
         }
@@ -83,7 +79,7 @@ class TasksDetailViewModel {
     private func downloadTaskPhoto(for taskName: String, completion: @escaping (Data) -> ()) {
         let (taskName, taskNumber) = NamesParser.getTaskLocation(taskName: taskName)
         let imageRef = Storage.storage().reference().child("trainer/\(taskName)/task\(taskNumber).png")
-        imageRef.getData(maxSize: 2 * 2048 * 2048) { (data, error) in
+        imageRef.getData(maxSize: 4 * 2048 * 2048) { (data, error) in
             guard error == nil else {
                 print("Error downloading images: \(String(describing: error?.localizedDescription))")
                 return

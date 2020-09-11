@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import Lottie
 
 class TestResultsViewController: UIViewController {
     
     @IBOutlet weak var resultsTableView: UITableView!
     @IBOutlet weak var closeButton: UIButton!
+    private var progressBarView = UIProgressView()
+    private var timer = Timer()
     
     var viewModel: GeneralTestResultsViewModel!
+    var loaderView = AnimationView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +37,95 @@ class TestResultsViewController: UIViewController {
         DesignService.designCloseButton(closeButton)
     }
     
+    func createBlurEffect() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.tag = 50
+        blurEffectView.backgroundColor = .white
+        view.addSubview(blurEffectView)
+    }
+    
+    func setAnimation() {
+        loaderView.animation = Animation.named("lf30_editor_cg3gHF")
+        loaderView.loopMode = .loop
+        view.addSubview(loaderView)
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loaderView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        loaderView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        loaderView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        view.bringSubviewToFront(loaderView)
+        loaderView.play()
+    }
+    
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] (_) in
+            guard let `self` = self else { return }
+            var completionNumber: Float = 0
+            if let realViewModel = self.viewModel as? TestsHistoryResultsViewModel {
+                completionNumber = realViewModel.getCompletion()
+            }
+            if completionNumber == 0, self.progressBarView.progress <= 0.1 {
+                self.progressBarView.progress += 0.01
+            }
+            if completionNumber != 0 {
+                self.progressBarView.progress = completionNumber
+            }
+        }
+    }
+    
+    func addProgressBarView() {
+        progressBarView.tintColor = .lightGray
+        progressBarView.progressTintColor = #colorLiteral(red: 0.1210386083, green: 0.5492164493, blue: 0.8137372136, alpha: 1)
+        view.addSubview(progressBarView)
+        progressBarView.translatesAutoresizingMaskIntoConstraints = false
+        progressBarView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        progressBarView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        progressBarView.topAnchor.constraint(equalTo: loaderView.bottomAnchor, constant: 10).isActive = true
+        view.bringSubviewToFront(progressBarView)
+    }
+    
+    func showLoadingScreen() {
+        createBlurEffect()
+        setAnimation()
+        if progressBarView.isHidden == false {
+            addProgressBarView()
+            startTimer()
+        }
+    }
+    
+    func hideLodingScreen() {
+        loaderView.isHidden = true
+        progressBarView.isHidden = true
+        view.viewWithTag(50)?.removeFromSuperview()
+    }
+    
+//    func addLoaderPhrase() {
+//        let phrase = UILabel()
+//        phrase.font = UIFont(name: "Montserrat-Medium", size: 18)
+//        phrase.textColor = .black
+//        phrase.textAlignment = .center
+//        phrase.numberOfLines = 0
+//        view.addSubview(phrase)
+//        phrase.tag = 30
+//        phrase.translatesAutoresizingMaskIntoConstraints = false
+//        phrase.minimumScaleFactor = 0.5
+//        phrase.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+//        phrase.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+//        phrase.topAnchor.constraint(equalTo: loaderView.bottomAnchor, constant: 10).isActive = true
+//        phrase.sizeToFit()
+//        phrase.text = "Вспомним, как это было 😉"
+//        view.bringSubviewToFront(phrase)
+//    }
+    
     func prepareData() {
+        showLoadingScreen()
         viewModel.checkUserAnswers { (isReady) in
             if isReady {
                 DispatchQueue.main.async {
+                    self.hideLodingScreen()
                     self.resultsTableView.reloadData()
                 }
             }
@@ -94,9 +183,11 @@ extension TestResultsViewController: UITableViewDelegate {
             tableView.beginUpdates()
             if viewModel.isCellOpened(index: indexPath.row) {
                 (tableView.cellForRow(at: indexPath) as! TestResultTaskTableViewCell).extendButton.setImage(#imageLiteral(resourceName: "multimedia"), for: .normal)
+                (tableView.cellForRow(at: indexPath) as! TestResultTaskTableViewCell).taskImageView.alpha = 0
                 viewModel.closeCell(for: indexPath.row)
             } else {
                 (tableView.cellForRow(at: indexPath) as! TestResultTaskTableViewCell).extendButton.setImage(#imageLiteral(resourceName: "up-arrow"), for: .normal)
+                (tableView.cellForRow(at: indexPath) as! TestResultTaskTableViewCell).taskImageView.alpha = 1
                 viewModel.openCell(for: indexPath.row)
             }
             tableView.endUpdates()
@@ -153,6 +244,7 @@ extension TestResultsViewController: UITableViewDataSource {
         let mainRatio = (taskImage?.size.height ?? 0) / (taskImage?.size.width ?? 1)
         let descriptionRatio = (descriptionImage?.size.height ?? 0) / (descriptionImage?.size.width ?? 1)
         cell.setImages(mainRatio: mainRatio, descriptionRatio: descriptionRatio)
+        cell.taskImageView.alpha = 0
         cell.userPointsLabel.text = viewModel.getUserPoints(for: index)
         let userAnswer = viewModel.getUsersAnswer(for: taskName)
         if userAnswer == "" {

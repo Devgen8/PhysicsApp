@@ -11,8 +11,8 @@ import UIKit
 class ThemeParser {
     private static let themesImages = ["Электродинамика" : #imageLiteral(resourceName: "technology"),
                         "Механика" : #imageLiteral(resourceName: "cogwheel"),
-                        "Мкт" : #imageLiteral(resourceName: "food-and-restaurant"),
-                        "Квантовая физика" : #imageLiteral(resourceName: "science")]
+                        "Молекулярная физика" : #imageLiteral(resourceName: "food-and-restaurant"),
+                        "Кванты и астрофизика" : #imageLiteral(resourceName: "science")]
     
     // convert theme string to theme array
     static func parseTaskThemes(_ themes: String) -> [String] {

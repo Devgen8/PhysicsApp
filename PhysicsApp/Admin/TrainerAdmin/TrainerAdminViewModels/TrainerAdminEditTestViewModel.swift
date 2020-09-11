@@ -22,7 +22,6 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     private var allTests = [String]()
     private var wrightAnswer = ""
     private var inverseState = false
-    private var stringState = false
     
     //MARK: Interface
     
@@ -64,10 +63,9 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
                 completion(nil)
                 return
             }
-            self.searchedTask.alternativeAnswer = document?.data()?["alternativeAnswer"] as? Double
+            self.searchedTask.alternativeAnswer = document?.data()?["alternativeAnswer"] as? Bool
             self.searchedTask.serialNumber = Int(self.taskNumber)
-            self.searchedTask.stringAnswer = document?.data()?["stringAnswer"] as? String
-            self.searchedTask.wrightAnswer = document?.data()?["wrightAnswer"] as? Double
+            self.searchedTask.wrightAnswer = document?.data()?["wrightAnswer"] as? String
             self.getTaskImage { (task) in
                 if task != nil {
                     self.doesTaskExist = true
@@ -79,7 +77,6 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     
     func uploadNewTaskToTest(_ testName: String, completion: @escaping (Bool) -> ()) {
         if doesTaskExist, isAbleToUpload() {
-            wrightAnswer = wrightAnswer.replacingOccurrences(of: ",", with: ".")
             wrightAnswer = wrightAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
             let newKeyValuePairs = self.getKeyValuesForTask()
             testReference.document(self.testName).collection("tasks").document("task\(taskNumber)").setData(newKeyValuePairs)
@@ -98,11 +95,9 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     func clearOldData() {
         taskNumber = ""
         inverseState = false
-        stringState = false
         searchedTask = TaskModel()
         doesTaskExist = false
         wrightAnswer = ""
-        testName = allTests.first ?? ""
     }
     
     func updateWrightAnswer(with text: String) {
@@ -114,7 +109,10 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     }
 
     func getTask(for index: Int) -> String {
-        return allTests[index]
+        if allTests.count > index {
+            return allTests[index]
+        }
+        return ""
     }
 
     func updatePhotoData(with data: Data) {
@@ -128,13 +126,17 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     func updateInverseState(to bool: Bool) {
         inverseState = bool
     }
-
-    func updateStringState(to bool: Bool) {
-        stringState = bool
-    }
     
     func updateSelectedTask(with index: Int) {
         testName = allTests[index]
+    }
+    
+    func setSearchedTask(_ newTask: TaskModel) {
+        searchedTask = newTask
+    }
+    
+    func updateTaskExistension(_ bool: Bool) {
+        doesTaskExist = bool
     }
     
     //MARK: Private section
@@ -150,14 +152,9 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     
     private func getKeyValuesForTask() -> [String : Any] {
         var taskData = [String : Any]()
-        if stringState == true {
-            taskData["stringAnswer"] = wrightAnswer
-        } else {
-            taskData["wrightAnswer"] = Double(wrightAnswer)
-            if inverseState == true {
-                let charactersArray = [Character](wrightAnswer)
-                taskData["alternativeAnswer"] = Double(String([charactersArray[1], charactersArray[0]]))
-            }
+        taskData["wrightAnswer"] = wrightAnswer
+        if inverseState == true {
+            taskData["alternativeAnswer"] = true
         }
         taskData["serialNumber"] = Int(taskNumber) ?? 1
         return taskData
@@ -167,7 +164,7 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     
     private func getTaskImage(completion: @escaping (TaskModel?) -> ()) {
         let imageRef = Storage.storage().reference().child("tests/\(testName)/task\(taskNumber).png")
-        imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
+        imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
             guard let `self` = self, error == nil else {
                 print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
                 completion(nil)
@@ -184,7 +181,7 @@ class TrainerAdminEditTestViewModel: TrainerAdminViewModel {
     
     private func getTaskDescription(completion: @escaping (TaskModel?) -> ()) {
         let imageRef = Storage.storage().reference().child("tests/\(testName)/task\(taskNumber)description.png")
-        imageRef.getData(maxSize: 2 * 2048 * 2048) { [weak self] data, error in
+        imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
             guard let `self` = self, error == nil else {
                 print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
                 completion(nil)

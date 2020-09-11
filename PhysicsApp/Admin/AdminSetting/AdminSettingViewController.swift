@@ -35,7 +35,7 @@ class AdminSettingViewController: UIViewController {
     }
     
     func setAnimation() {
-        loaderView.animation = Animation.named("17694-cube-grid")
+        loaderView.animation = Animation.named("lf30_editor_cg3gHF")
         loaderView.loopMode = .loop
         loaderView.isHidden = false
         view.bringSubviewToFront(loaderView)
@@ -48,6 +48,7 @@ class AdminSettingViewController: UIViewController {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.tag = 100
+        blurEffectView.backgroundColor = .white
         view.addSubview(blurEffectView)
     }
     
@@ -212,9 +213,10 @@ extension AdminSettingViewController: UITableViewDataSource {
         decorativeView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -5).isActive = true
         decorativeView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -5).isActive = true
         decorativeView.layer.cornerRadius = 15
-        decorativeView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        decorativeView.backgroundColor = .white
         cell.textLabel?.font = UIFont(name: "Montserrat-Bold", size: 20)
         cell.textLabel?.text = viewModel.getId(for: indexPath.row)
+        cell.textLabel?.textColor = .black
         
         return cell
     }

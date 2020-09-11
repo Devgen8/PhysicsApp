@@ -16,6 +16,10 @@ class FormSheetViewController: UIViewController {
     @IBOutlet weak var themeTextField: UITextField!
     @IBOutlet weak var closeButton: UIButton!
     
+    private var keyboardHeight: CGFloat!
+    private var isKeyboardHidden = true
+    private var isActiveTextField = false
+    
     var viewModel = FormSheetViewModel()
     
     override func viewDidLoad() {
@@ -23,6 +27,7 @@ class FormSheetViewController: UIViewController {
         designScreenElements()
         showMessageTheme()
         addTextViewObservers()
+        addKeyboardDismissGesture()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,24 +47,55 @@ class FormSheetViewController: UIViewController {
         center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    func addKeyboardDismissGesture() {
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(returnTextView(gesture:))))
+    }
+    
+    @objc func returnTextView(gesture: UIGestureRecognizer) {
+        themeTextField.resignFirstResponder()
+        mistakeTextView.resignFirstResponder()
+    }
+    
     @objc func keyboardDidShow(notification: Notification) {
-        let info = notification.userInfo! as NSDictionary
-        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        let keyboardY = view.frame.size.height - keyboardSize.height
-        let editingTextFieldY = mistakeTextView.frame.origin.y
-        if view.frame.origin.y >= 0 {
-            if editingTextFieldY > keyboardY - 120 {
-                UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
-                    self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editingTextFieldY - (keyboardY - 120)), width: self.view.bounds.width, height: self.view.bounds.height)
-                }, completion: nil)
-            }
+        
+        if isActiveTextField {
+            isActiveTextField = false
+            return
         }
+        
+        if !isKeyboardHidden {
+            return
+        }
+        
+        isKeyboardHidden = false
+        
+        if keyboardHeight == nil, let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+        }
+        
+        // move if keyboard hide input field
+        let distanceToBottom = self.view.frame.size.height - (mistakeTextView.frame.origin.y) - (mistakeTextView.frame.size.height)
+        let collapseSpace = keyboardHeight - distanceToBottom
+
+        if collapseSpace < 0 {
+            // no collapse
+            return
+        }
+
+        // set new offset for scroll view
+        UIView.animate(withDuration: 0.3, animations: {
+            // scroll to the position above keyboard 10 points
+            self.view.frame = CGRect(x: 0, y: 0 - (collapseSpace + 10), width: self.view.bounds.width, height: self.view.bounds.height)
+        })
     }
     
     @objc func keyboardWillHide(notification: Notification) {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
+        UIView.animate(withDuration: 0.3) {
+            self.isKeyboardHidden = true
+        }
     }
     
     func designScreenElements() {
@@ -96,6 +132,10 @@ extension FormSheetViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        isActiveTextField = true
     }
 }
 
