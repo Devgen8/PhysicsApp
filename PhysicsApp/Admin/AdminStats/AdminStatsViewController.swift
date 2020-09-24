@@ -73,7 +73,7 @@ class AdminStatsViewController: UIViewController {
     
     func designScreenElements() {
         DesignService.setAdminGradient(for: view)
-        DesignService.designBlueButton(priorityButton)
+        DesignService.designWhiteButton(priorityButton)
     }
     
     @IBAction func backTapped(_ sender: UIButton) {

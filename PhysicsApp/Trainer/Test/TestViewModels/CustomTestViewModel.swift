@@ -134,7 +134,7 @@ class CustomTestViewModel: TestViewModel {
     }
     
     func saveUsersProgress(with time: Int) {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -333,7 +333,7 @@ class CustomTestViewModel: TestViewModel {
     // Core Data
     
     private func saveNewTestInCoreData() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)

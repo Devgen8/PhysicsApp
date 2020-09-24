@@ -319,7 +319,7 @@ class TasksListViewModel {
     }
     
     private func saveToCoreDataUnsolvedTasksByTasks() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -353,7 +353,7 @@ class TasksListViewModel {
     }
     
     private func saveToCoreDataUnsolvedTasksByThemes() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)

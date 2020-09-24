@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseAuth
+import CoreData
 
 class UserStatsCounter {
     
@@ -52,6 +53,23 @@ class UserStatsCounter {
                     completion(solvedTasks, unsolvedTasks, EGEInfo.egeSystemTasks)
                 }
             }
+        } else if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            let userFetchRequest: NSFetchRequest<User> = User.fetchRequest()
+            do {
+                var unsolvedTasks = [String:[String]]()
+                var solvedTasks = [String:[String]]()
+                if let user = try context.fetch(userFetchRequest).first {
+                    let statusTasks = user.solvedTasks as! StatusTasks
+                    unsolvedTasks = statusTasks.unsolvedTasks
+                    solvedTasks = statusTasks.solvedTasks
+                }
+                completion(solvedTasks, unsolvedTasks, EGEInfo.egeSystemTasks)
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else {
+            completion([String:[String]](), [String:[String]](), EGEInfo.egeSystemTasks)
         }
     }
 }

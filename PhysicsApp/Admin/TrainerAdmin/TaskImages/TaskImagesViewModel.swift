@@ -131,7 +131,7 @@ class TaskImagesViewModel {
     
     func downloadTask(_ number: Int, completion: @escaping (Bool)->()) {
         if currentMode == TrainerAdminMode.editTask {
-            downloadTask(number) { (isReady) in
+            downloadTaskForTasks(number) { (isReady) in
                 completion(isReady)
             }
         }

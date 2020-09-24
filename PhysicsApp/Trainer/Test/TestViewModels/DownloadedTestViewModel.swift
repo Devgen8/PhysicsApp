@@ -307,7 +307,7 @@ class DownloadedTestViewModel: TestViewModel {
     }
     
     private func saveProgressToCoreData(with time: Int) {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)

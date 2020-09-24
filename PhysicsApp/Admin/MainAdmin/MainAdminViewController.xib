@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +11,7 @@
         <array key="BlackDiamond.ttf">
             <string>BlackDiamond</string>
         </array>
-        <array key="Montserrat-Medium.otf">
+        <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
         <array key="Montserrat-Regular.ttf">
@@ -37,7 +38,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KIU-nr-URR">
                     <rect key="frame" x="50" y="160" width="314" height="280"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZD-kh-SJ3">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZD-kh-SJ3">
                             <rect key="frame" x="3" y="0.0" width="308" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="VVV-mi-XXK"/>
@@ -50,7 +51,7 @@
                                 <action selector="trainerTapped:" destination="-1" eventType="touchUpInside" id="weO-Gr-bqU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="935-Sn-bMT">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="935-Sn-bMT">
                             <rect key="frame" x="3" y="60" width="308" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="GyM-aF-Ur2"/>
@@ -63,7 +64,7 @@
                                 <action selector="statsTapped:" destination="-1" eventType="touchUpInside" id="kd9-Ve-ahU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ZP-73-Jcd">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ZP-73-Jcd">
                             <rect key="frame" x="3" y="120" width="308" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="pP9-xK-uNc"/>
@@ -76,7 +77,7 @@
                                 <action selector="messagesTapped:" destination="-1" eventType="touchUpInside" id="YjY-TE-IR2"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bic-yQ-FK5">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bic-yQ-FK5">
                             <rect key="frame" x="0.0" y="180" width="314" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="eON-GS-xl5"/>
@@ -89,7 +90,7 @@
                                 <action selector="adminSettingTapped:" destination="-1" eventType="touchUpInside" id="F18-kS-3cz"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HtW-89-kae">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HtW-89-kae">
                             <rect key="frame" x="0.0" y="240" width="314" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="uZ9-DS-ZZq"/>
@@ -122,7 +123,7 @@
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1e-DF-6PU">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1e-DF-6PU">
                     <rect key="frame" x="50" y="480" width="314" height="70"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="dgT-lk-21W"/>
@@ -136,7 +137,8 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="KIU-nr-URR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="2Sz-w6-pE8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="W1e-DF-6PU" secondAttribute="trailing" constant="50" id="6ko-9E-VdG"/>
@@ -147,7 +149,6 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KIU-nr-URR" secondAttribute="trailing" constant="50" id="fmz-7y-LLx"/>
                 <constraint firstItem="W1e-DF-6PU" firstAttribute="top" secondItem="KIU-nr-URR" secondAttribute="bottom" constant="40" id="r66-Rc-oHO"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="140.57971014492756" y="116.51785714285714"/>
         </view>
     </objects>

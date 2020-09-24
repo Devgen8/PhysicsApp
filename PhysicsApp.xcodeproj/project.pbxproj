@@ -64,8 +64,6 @@
 		244ABB01242A9B1700066CB3 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAD1242A9B1500066CB3 /* ProfileViewController.xib */; };
 		244ABB02242A9B1700066CB3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAD2242A9B1500066CB3 /* ProfileViewModel.swift */; };
 		244ABB03242A9B1700066CB3 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAD3242A9B1500066CB3 /* ProfileModel.swift */; };
-		244ABB05242A9B1700066CB3 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAD6242A9B1500066CB3 /* WelcomeViewController.swift */; };
-		244ABB06242A9B1700066CB3 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAD7242A9B1500066CB3 /* WelcomeViewController.xib */; };
 		244ABB07242A9B1700066CB3 /* UnsolvedThemesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAD9242A9B1600066CB3 /* UnsolvedThemesViewController.xib */; };
 		244ABB09242A9B1700066CB3 /* UnsolvedThemesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABADB242A9B1600066CB3 /* UnsolvedThemesViewModel.swift */; };
 		244ABB0A242A9B1700066CB3 /* TrainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABADD242A9B1600066CB3 /* TrainerViewModel.swift */; };
@@ -95,8 +93,6 @@
 		244ABB7E2438D61D00066CB3 /* AdminStatsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB7C2438D61C00066CB3 /* AdminStatsTableViewCell.xib */; };
 		244ABB802438E29000066CB3 /* AdminStatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABB7F2438E29000066CB3 /* AdminStatsViewModel.swift */; };
 		4802C2E7243EEA8D0017B75B /* 17694-cube-grid.json in Resources */ = {isa = PBXBuildFile; fileRef = 4802C2E6243EEA8C0017B75B /* 17694-cube-grid.json */; };
-		48125997248CCFB600BB2A11 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48125996248CCFB600BB2A11 /* WelcomeViewModel.swift */; };
-		4812599924939FE900BB2A11 /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4812599824939FE900BB2A11 /* WelcomeModel.swift */; };
 		4812599B2493A01700BB2A11 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4812599A2493A01700BB2A11 /* NetworkService.swift */; };
 		4825D07924779B2300E938FF /* ChooseThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825D07724779B2300E938FF /* ChooseThemeViewController.swift */; };
 		4825D07A24779B2300E938FF /* ChooseThemeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4825D07824779B2300E938FF /* ChooseThemeViewController.xib */; };
@@ -178,6 +174,8 @@
 		4873405924FD319200C55144 /* AdminAdvertDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4873405824FD319200C55144 /* AdminAdvertDetailViewModel.swift */; };
 		4873405C24FD439F00C55144 /* AdminAdvertDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4873405B24FD439F00C55144 /* AdminAdvertDetailModel.swift */; };
 		4873405E24FD937A00C55144 /* lf30_editor_cg3gHF.json in Resources */ = {isa = PBXBuildFile; fileRef = 4873405D24FD937A00C55144 /* lf30_editor_cg3gHF.json */; };
+		4883C688250CE1C300D909DC /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4883C687250CE1C300D909DC /* UIDeviceExtension.swift */; };
+		4883C68B251485A800D909DC /* NetworkServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4883C68A251485A800D909DC /* NetworkServiceModel.swift */; };
 		48936406250220650055CC88 /* ChooseTestNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48936405250220650055CC88 /* ChooseTestNameViewModel.swift */; };
 		4893640E250221DA0055CC88 /* ChooseTestsNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4893640C250221DA0055CC88 /* ChooseTestsNameViewController.swift */; };
 		4893640F250221DA0055CC88 /* ChooseTestsNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4893640D250221DA0055CC88 /* ChooseTestsNameViewController.xib */; };
@@ -196,8 +194,6 @@
 		48C2412E24DA876A007522A2 /* TaskImagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48C2412C24DA876A007522A2 /* TaskImagesViewController.xib */; };
 		48C2413024DA8A67007522A2 /* TaskImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C2412F24DA8A67007522A2 /* TaskImagesViewModel.swift */; };
 		48EE7C6C24AF3C01002117FD /* NamesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE7C6B24AF3C01002117FD /* NamesParser.swift */; };
-		48FAE9E62486C39D00044859 /* AskAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FAE9E42486C39D00044859 /* AskAuthViewController.swift */; };
-		48FAE9E72486C39D00044859 /* AskAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48FAE9E52486C39D00044859 /* AskAuthViewController.xib */; };
 		48FAE9EB24877E0000044859 /* ShowAnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FAE9E924877E0000044859 /* ShowAnswerTableViewCell.swift */; };
 		48FAE9EC24877E0000044859 /* ShowAnswerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48FAE9EA24877E0000044859 /* ShowAnswerTableViewCell.xib */; };
 		6910FC61EACA1D262F52A3D2 /* Pods_PhysicsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */; };
@@ -263,8 +259,6 @@
 		244ABAD1242A9B1500066CB3 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		244ABAD2242A9B1500066CB3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		244ABAD3242A9B1500066CB3 /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
-		244ABAD6242A9B1500066CB3 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		244ABAD7242A9B1500066CB3 /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		244ABAD9242A9B1600066CB3 /* UnsolvedThemesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnsolvedThemesViewController.xib; sourceTree = "<group>"; };
 		244ABADB242A9B1600066CB3 /* UnsolvedThemesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsolvedThemesViewModel.swift; sourceTree = "<group>"; };
 		244ABADD242A9B1600066CB3 /* TrainerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerViewModel.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -295,8 +289,6 @@
 		244ABB7F2438E29000066CB3 /* AdminStatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminStatsViewModel.swift; sourceTree = "<group>"; };
 		2B6A0BDE016FA962DD8EBA1A /* Pods-PhysicsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhysicsApp.release.xcconfig"; path = "Target Support Files/Pods-PhysicsApp/Pods-PhysicsApp.release.xcconfig"; sourceTree = "<group>"; };
 		4802C2E6243EEA8C0017B75B /* 17694-cube-grid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "17694-cube-grid.json"; sourceTree = "<group>"; };
-		48125996248CCFB600BB2A11 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
-		4812599824939FE900BB2A11 /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
 		4812599A2493A01700BB2A11 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		4825D07724779B2300E938FF /* ChooseThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseThemeViewController.swift; sourceTree = "<group>"; };
 		4825D07824779B2300E938FF /* ChooseThemeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseThemeViewController.xib; sourceTree = "<group>"; };
@@ -378,6 +370,9 @@
 		4873405824FD319200C55144 /* AdminAdvertDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAdvertDetailViewModel.swift; sourceTree = "<group>"; };
 		4873405B24FD439F00C55144 /* AdminAdvertDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAdvertDetailModel.swift; sourceTree = "<group>"; };
 		4873405D24FD937A00C55144 /* lf30_editor_cg3gHF.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_cg3gHF.json; sourceTree = "<group>"; };
+		4883C687250CE1C300D909DC /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
+		4883C689250E054E00D909DC /* Техноскул.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Техноскул.entitlements"; sourceTree = "<group>"; };
+		4883C68A251485A800D909DC /* NetworkServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceModel.swift; sourceTree = "<group>"; };
 		48936405250220650055CC88 /* ChooseTestNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTestNameViewModel.swift; sourceTree = "<group>"; };
 		4893640C250221DA0055CC88 /* ChooseTestsNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTestsNameViewController.swift; sourceTree = "<group>"; };
 		4893640D250221DA0055CC88 /* ChooseTestsNameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseTestsNameViewController.xib; sourceTree = "<group>"; };
@@ -396,8 +391,6 @@
 		48C2412C24DA876A007522A2 /* TaskImagesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskImagesViewController.xib; sourceTree = "<group>"; };
 		48C2412F24DA8A67007522A2 /* TaskImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskImagesViewModel.swift; sourceTree = "<group>"; };
 		48EE7C6B24AF3C01002117FD /* NamesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamesParser.swift; sourceTree = "<group>"; };
-		48FAE9E42486C39D00044859 /* AskAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAuthViewController.swift; sourceTree = "<group>"; };
-		48FAE9E52486C39D00044859 /* AskAuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AskAuthViewController.xib; sourceTree = "<group>"; };
 		48FAE9E924877E0000044859 /* ShowAnswerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAnswerTableViewCell.swift; sourceTree = "<group>"; };
 		48FAE9EA24877E0000044859 /* ShowAnswerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowAnswerTableViewCell.xib; sourceTree = "<group>"; };
 		5FB8842587044667E02C1C95 /* Pods_PhysicsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhysicsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -437,6 +430,7 @@
 		244ABA31242A933B00066CB3 /* PhysicsApp */ = {
 			isa = PBXGroup;
 			children = (
+				4883C689250E054E00D909DC /* Техноскул.entitlements */,
 				244ABA32242A933B00066CB3 /* AppDelegate.swift */,
 				244ABA34242A933B00066CB3 /* SceneDelegate.swift */,
 				48C2412524D6B5AD007522A2 /* GoogleService-Info.plist */,
@@ -447,7 +441,6 @@
 				244ABAD0242A9B1500066CB3 /* Profile */,
 				244ABAF1242A9B1600066CB3 /* TabBarController */,
 				244ABAD8242A9B1600066CB3 /* Trainer */,
-				244ABAD5242A9B1500066CB3 /* WelcomeScreen */,
 				4873404524FD002D00C55144 /* ChooseSubject */,
 				4873404C24FD09A900C55144 /* AdvertDetail */,
 				244ABA7E242A9AF200066CB3 /* Fonts */,
@@ -556,17 +549,6 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		244ABAD5242A9B1500066CB3 /* WelcomeScreen */ = {
-			isa = PBXGroup;
-			children = (
-				244ABAD6242A9B1500066CB3 /* WelcomeViewController.swift */,
-				48125996248CCFB600BB2A11 /* WelcomeViewModel.swift */,
-				4812599824939FE900BB2A11 /* WelcomeModel.swift */,
-				244ABAD7242A9B1500066CB3 /* WelcomeViewController.xib */,
-			);
-			path = WelcomeScreen;
-			sourceTree = "<group>";
-		};
 		244ABAD8242A9B1600066CB3 /* Trainer */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,7 +605,6 @@
 				244ABAEC242A9B1600066CB3 /* TaskViewController.swift */,
 				244ABAED242A9B1600066CB3 /* TaskViewModel.swift */,
 				244ABAEA242A9B1600066CB3 /* TaskModel.swift */,
-				48FAE9E82486C3A400044859 /* AskAuth */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -757,8 +738,10 @@
 				244ABACF242A9B1500066CB3 /* UIViewExtension.swift */,
 				486644A9249BAA2500027A66 /* UISegmentedControlExtension.swift */,
 				4812599A2493A01700BB2A11 /* NetworkService.swift */,
+				4883C68A251485A800D909DC /* NetworkServiceModel.swift */,
 				483B8D5F24962CBC0014093A /* DateWorker.swift */,
 				48EE7C6B24AF3C01002117FD /* NamesParser.swift */,
+				4883C687250CE1C300D909DC /* UIDeviceExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1026,15 +1009,6 @@
 			path = TaskImages;
 			sourceTree = "<group>";
 		};
-		48FAE9E82486C3A400044859 /* AskAuth */ = {
-			isa = PBXGroup;
-			children = (
-				48FAE9E42486C39D00044859 /* AskAuthViewController.swift */,
-				48FAE9E52486C39D00044859 /* AskAuthViewController.xib */,
-			);
-			path = AskAuth;
-			sourceTree = "<group>";
-		};
 		C45A5A78C5B824455C8DA084 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1114,7 +1088,6 @@
 			files = (
 				244ABAC3242A9AF400066CB3 /* Montserrat-ExtraBold.otf in Resources */,
 				484293BE245B023100BE8CB6 /* TasksDetailViewController.xib in Resources */,
-				244ABB06242A9B1700066CB3 /* WelcomeViewController.xib in Resources */,
 				244ABAC4242A9AF400066CB3 /* Montserrat-ExtraLightItalic.otf in Resources */,
 				244ABAC2242A9AF400066CB3 /* Montserrat-Black.ttf in Resources */,
 				4842932B244C211F00BE8CB6 /* TestResultStatsTableViewCell.xib in Resources */,
@@ -1152,7 +1125,6 @@
 				244ABB5C242E249100066CB3 /* 7893-confetti-cannons.json in Resources */,
 				244ABAA8242A9AF400066CB3 /* Montserrat-LightItalic.ttf in Resources */,
 				244ABAB4242A9AF400066CB3 /* Montserrat-Thin.ttf in Resources */,
-				48FAE9E72486C39D00044859 /* AskAuthViewController.xib in Resources */,
 				244ABB0F242A9B1700066CB3 /* ImagePreviewViewController.xib in Resources */,
 				4873404024FC3CC100C55144 /* ChooseSubjectViewController.xib in Resources */,
 				48BB6AAF246D708C0010F27D /* TestsHistoryViewController.xib in Resources */,
@@ -1247,6 +1219,7 @@
 				4873404424FCBF0400C55144 /* ChooseSubjectViewModel.swift in Sources */,
 				48664497249BA89E00027A66 /* Trainer+CoreDataClass.swift in Sources */,
 				484293C1245B02A900BE8CB6 /* TasksDetailViewModel.swift in Sources */,
+				4883C68B251485A800D909DC /* NetworkServiceModel.swift in Sources */,
 				4893640E250221DA0055CC88 /* ChooseTestsNameViewController.swift in Sources */,
 				48936406250220650055CC88 /* ChooseTestNameViewModel.swift in Sources */,
 				4842931E2448C4BA00BE8CB6 /* MyAnswersViewController.swift in Sources */,
@@ -1282,7 +1255,6 @@
 				4873404F24FD0A0000C55144 /* AdvertsListViewController.swift in Sources */,
 				244ABB17242A9B1700066CB3 /* TaskViewModel.swift in Sources */,
 				484293CF245B423A00BE8CB6 /* AdminMessageModel.swift in Sources */,
-				48125997248CCFB600BB2A11 /* WelcomeViewModel.swift in Sources */,
 				244ABA74242A9AD700066CB3 /* ThemeTableViewCell.swift in Sources */,
 				244ABB792438D3E800066CB3 /* AdminStatsViewController.swift in Sources */,
 				48BB6AB1246D721D0010F27D /* TestsHistoryViewModel.swift in Sources */,
@@ -1307,6 +1279,7 @@
 				244ABB802438E29000066CB3 /* AdminStatsViewModel.swift in Sources */,
 				4866449C249BA89E00027A66 /* AdminStatTask+CoreDataProperties.swift in Sources */,
 				48271785243E0B2A003C6CF1 /* UserStatsCounter.swift in Sources */,
+				4883C688250CE1C300D909DC /* UIDeviceExtension.swift in Sources */,
 				486644A1249BA89E00027A66 /* User+CoreDataClass.swift in Sources */,
 				4873404224FCBE7500C55144 /* ChooseSubjectModel.swift in Sources */,
 				244ABB23242A9B1700066CB3 /* TrainerAdminAddViewModel.swift in Sources */,
@@ -1331,18 +1304,15 @@
 				484293CA245B402500BE8CB6 /* AdminMessagesViewController.swift in Sources */,
 				244ABB7024361F8800066CB3 /* ProgressBarView.swift in Sources */,
 				48BB6AA3246C4D8A0010F27D /* CustomTestResultViewModel.swift in Sources */,
-				244ABB05242A9B1700066CB3 /* WelcomeViewController.swift in Sources */,
 				483B8D5E2494D1A00014093A /* TrainerAdminEditTestViewModel.swift in Sources */,
 				244ABB0A242A9B1700066CB3 /* TrainerViewModel.swift in Sources */,
 				244ABB1C242A9B1700066CB3 /* TabBarViewController.swift in Sources */,
 				244ABA33242A933B00066CB3 /* AppDelegate.swift in Sources */,
-				48FAE9E62486C39D00044859 /* AskAuthViewController.swift in Sources */,
 				244ABA4F242A9A6E00066CB3 /* MainAdminViewController.swift in Sources */,
 				244ABB14242A9B1700066CB3 /* TaskModel.swift in Sources */,
 				48429327244C189000BE8CB6 /* TestResultsViewModel.swift in Sources */,
 				244ABA35242A933B00066CB3 /* SceneDelegate.swift in Sources */,
 				484293142448461100BE8CB6 /* TestTrainerViewModel.swift in Sources */,
-				4812599924939FE900BB2A11 /* WelcomeModel.swift in Sources */,
 				4873405C24FD439F00C55144 /* AdminAdvertDetailModel.swift in Sources */,
 				483B8D552494A4750014093A /* AdminSettingViewModel.swift in Sources */,
 				48EE7C6C24AF3C01002117FD /* NamesParser.swift in Sources */,
@@ -1431,6 +1401,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = "";
 			};
 			name = Debug;
 		};
@@ -1484,6 +1455,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1493,9 +1465,10 @@
 			baseConfigurationReference = B327A80248CB58F8603354D5 /* Pods-PhysicsApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "PhysicsApp/Техноскул.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = KDJVA6U78M;
 				INFOPLIST_FILE = PhysicsApp/Info.plist;
@@ -1518,9 +1491,10 @@
 			baseConfigurationReference = 2B6A0BDE016FA962DD8EBA1A /* Pods-PhysicsApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "PhysicsApp/Техноскул.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = KDJVA6U78M;
 				INFOPLIST_FILE = PhysicsApp/Info.plist;

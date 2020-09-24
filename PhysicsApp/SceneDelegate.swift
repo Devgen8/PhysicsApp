@@ -26,7 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window?.rootViewController = ChooseSubjectViewController()
             }
         } else {
-            window?.rootViewController = WelcomeViewController()
+            UserStatsCounter.shared.calculateSrEGE()
+            window?.rootViewController = ChooseSubjectViewController()
         }
         window?.makeKeyAndVisible()
     }

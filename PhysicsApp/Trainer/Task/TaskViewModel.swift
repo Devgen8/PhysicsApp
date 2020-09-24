@@ -130,7 +130,6 @@ class TaskViewModel {
                 isWright = wrightAnswer == userAnswer
             }
         }
-        updateKeyInfo()
         if isWright {
             isTaskUnsolved = false
             updateStatistics()
@@ -144,7 +143,7 @@ class TaskViewModel {
     
     func updateTaskStatus() {
         let (theme, _) = NamesParser.getTaskLocation(taskName: task?.name ?? "")
-        guard Auth.auth().currentUser?.uid != nil, let unsolvedTask = self.task?.name else {
+        guard let unsolvedTask = self.task?.name else {
             print("Couldn't write unsolved tasks")
             return
         }
@@ -330,12 +329,6 @@ class TaskViewModel {
     
     //MARK: Private section
     
-    private func updateKeyInfo() {
-        if UserDefaults.standard.value(forKey: "isUserInformedAboutAuth") as? Bool == nil {
-            UserDefaults.standard.set(true, forKey: "isUserInformedAboutAuth")
-        }
-    }
-    
     private func updateStatistics() {
         guard let theme = theme, let unsolvedTask = self.task?.name else {
             print("Couldn't write unsolved tasks")
@@ -361,9 +354,7 @@ class TaskViewModel {
     }
     
     private func putTaskUnsolved() {
-        if (Auth.auth().currentUser?.uid) != nil {
-            saveUnsolvedTasksToCoreData()
-        }
+        saveUnsolvedTasksToCoreData()
     }
     
     // Firestore
@@ -384,7 +375,7 @@ class TaskViewModel {
     // Core Data
     
     private func saveFirstTryTaskInCoreData() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -409,7 +400,7 @@ class TaskViewModel {
     }
     
     private func saveUnsolvedTasksToCoreData() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fechRequest)

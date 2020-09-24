@@ -54,13 +54,9 @@ class AdminStatsViewModel {
                 completion("", Data())
                 return
             }
-            if let wrightAnswer = document?.data()?["wrightAnswer"] as? Double {
+            if let wrightAnswer = document?.data()?["wrightAnswer"] as? String {
                 self.downloadTaskPhoto(for: self.cellLabels[index]) { (imageData) in
-                    completion("\(wrightAnswer)", imageData)
-                }
-            } else if let stringAnswer = document?.data()?["stringAnswer"] as? String {
-                self.downloadTaskPhoto(for: self.cellLabels[index]) { (imageData) in
-                    completion(stringAnswer, imageData)
+                    completion(wrightAnswer, imageData)
                 }
             }
         }

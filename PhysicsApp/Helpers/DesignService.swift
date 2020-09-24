@@ -24,7 +24,8 @@ class DesignService {
     }
     
     static func setAdminGradient(for view: UIView) {
-        view.setGradientBackground(firstColor: UIColor(displayP3Red: 0.0, green: 0.57, blue: 0.85, alpha: 0.66), secondColor: UIColor(displayP3Red: 0.0, green: 0.57, blue: 0.85, alpha: 1))
+        //view.setGradientBackground(firstColor: UIColor(displayP3Red: 0.0, green: 0.57, blue: 0.85, alpha: 0.66), secondColor: UIColor(displayP3Red: 0.0, green: 0.57, blue: 0.85, alpha: 1))
+        view.backgroundColor = #colorLiteral(red: 0.118398197, green: 0.5486055017, blue: 0.8138075471, alpha: 1)
     }
     
     //MARK: Buttons

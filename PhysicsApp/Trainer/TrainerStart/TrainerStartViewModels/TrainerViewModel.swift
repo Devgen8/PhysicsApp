@@ -174,12 +174,15 @@ class TrainerViewModel: TrainerViewModelProvider {
                 trainer?.egeTasks = egeTasks
                 
                 //filling user
-                if Auth.auth().currentUser?.uid != nil, isFirstTimeReading {
-                    let newUser = User(context: context)
+                if isFirstTimeReading {
+                    let userFechRequest: NSFetchRequest<User> = User.fetchRequest()
+                    let userResult = try context.fetch(userFechRequest)
+                    let newUser = userResult.first ?? User(context: context)
                     let statusTasks = StatusTasks(solvedTasks: solvedTasks,
                                                   unsolvedTasks: unsolvedTasks,
                                                   firstTryTasks: firstTryTasks)
-                    newUser.solvedTasks = statusTasks
+                    let newStatusTasks: NSObject = statusTasks
+                    newUser.solvedTasks = newStatusTasks
                 }
                 
                 try context.save()

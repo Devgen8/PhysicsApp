@@ -340,12 +340,6 @@ class TaskViewController: UIViewController {
     }
     
     @objc func answerTapped() {
-        // check anonimus enter
-        if Auth.auth().currentUser?.uid == nil, UserDefaults.standard.value(forKey: "isUserInformedAboutAuth") as? Bool == true {
-            let askAuthViewController = AskAuthViewController()
-            askAuthViewController.modalPresentationStyle = .fullScreen
-            present(askAuthViewController, animated: true)
-        }
         
         let greenColor = UIColor(displayP3Red: 0, green: 0.78, blue: 0.37, alpha: 0.99)
         let redColor = #colorLiteral(red: 0.7611784935, green: 0, blue: 0.06764990836, alpha: 1)

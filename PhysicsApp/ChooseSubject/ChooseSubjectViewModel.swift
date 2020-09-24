@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
+import CoreData
 
 class ChooseSubjectViewModel {
     
@@ -16,6 +18,8 @@ class ChooseSubjectViewModel {
     
     private var adverts = [Advert]()
     private let advertsReference = Firestore.firestore().collection("adverts")
+    private let usersReference = Firestore.firestore().collection("users")
+    private let devicesReference = Firestore.firestore().collection("usersDevices")
     
     // MARK: Interface
     
@@ -57,6 +61,68 @@ class ChooseSubjectViewModel {
     
     // MARK: Private section
     
+    // Firestore
+    
+    private func getLastUsersDevice(completion: @escaping (Bool) -> ()) {
+        if let userId = Auth.auth().currentUser?.uid {
+            devicesReference.document(userId).getDocument { (snapshot, error) in
+                guard error == nil else {
+                    print("Error reading unsolved tasks: \(String(describing: error?.localizedDescription))")
+                    completion(false)
+                    return
+                }
+                if let lastDevice = snapshot?.data()?["lastDevice"] as? String {
+                    if lastDevice != UIDevice.modelName {
+                        self.devicesReference.document(userId).updateData(["lastDevice" : UIDevice.modelName])
+                        self.updateUsersInfo { (isReady) in
+                            completion(isReady)
+                        }
+                    } else {
+                        completion(true)
+                    }
+                } else {
+                    self.devicesReference.document(userId).setData(["lastDevice" : UIDevice.modelName])
+                    completion(true)
+                }
+            }
+        } else {
+            completion(true)
+        }
+    }
+    
+    func updateUsersInfo(completion: @escaping (Bool) -> ()) {
+        if let userId = Auth.auth().currentUser?.uid {
+            usersReference.document(userId).getDocument { (document, error) in
+                guard error == nil, let document = document else {
+                    print("Error reading unsolved tasks: \(String(describing: error?.localizedDescription))")
+                    completion(false)
+                    return
+                }
+                let mistakeTasks = document.data()?["unsolvedTasks"] as? [String : [String]] ?? [String:[String]]()
+                let wrightTasks = document.data()?["solvedTasks"] as? [String : [String]] ?? [String:[String]]()
+                let firstTryTasks = document.data()?["firstTryTasks"] as? [String] ?? [String]()
+                if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                    do {
+                        //filling trainer
+                        let fechRequest: NSFetchRequest<User> = User.fetchRequest()
+                        let result = try context.fetch(fechRequest)
+                        let user = result.first ?? User(context: context)
+                        let statusTasks = StatusTasks(solvedTasks: wrightTasks,
+                                                      unsolvedTasks: mistakeTasks,
+                                                      firstTryTasks: firstTryTasks)
+                        user.solvedTasks = statusTasks
+                        try context.save()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+                completion(true)
+            }
+        } else {
+            completion(true)
+        }
+    }
+    
     // Storage
     
     private func downloadPhotos(completion: @escaping (Bool) -> ()) {
@@ -73,7 +139,9 @@ class ChooseSubjectViewModel {
                 }
                 count += 1
                 if count == self.adverts.count {
-                    completion(true)
+                    self.getLastUsersDevice { (isReady) in
+                        completion(true)
+                    }
                 }
             }
         }

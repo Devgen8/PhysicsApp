@@ -70,7 +70,7 @@ class TestTrainerViewModel: TrainerViewModelProvider {
     }
     
     func deleteTest(_ deletingTestName: String) {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
             
             do {

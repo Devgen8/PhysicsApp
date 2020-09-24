@@ -177,7 +177,7 @@ class AdminAdvertDetailViewController: UIViewController {
         DesignService.setAdminGradient(for: view)
         advertImageView.layer.cornerRadius = 15
         descriptionTextView.layer.cornerRadius = 15
-        DesignService.designBlueButton(uploadButton)
+        DesignService.designWhiteButton(uploadButton)
         DesignService.designRedButton(deleteButton)
         
         if isCreating {

@@ -62,9 +62,9 @@ class MainAdminViewController: UIViewController {
     
     @IBAction func quitTapped(_ sender: UIButton) {
         viewModel.logOut()
-        let welcomeViewController = WelcomeViewController()
-        welcomeViewController.modalPresentationStyle = .fullScreen
-        present(welcomeViewController, animated: true)
+        let chooseSubjectViewController = ChooseSubjectViewController()
+        chooseSubjectViewController.modalPresentationStyle = .fullScreen
+        present(chooseSubjectViewController, animated: true)
     }
     
     @IBAction func adminSettingTapped(_ sender: UIButton) {

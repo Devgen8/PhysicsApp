@@ -14,5 +14,4 @@ target 'PhysicsApp' do
   pod 'Firebase/Storage'
   pod 'lottie-ios'
   pod "VK-ios-sdk"
-  pod "Macaw"
 end

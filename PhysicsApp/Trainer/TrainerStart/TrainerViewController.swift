@@ -8,6 +8,7 @@
 
 import UIKit
 import Lottie
+import FirebaseAuth
 
 class TrainerViewController: UIViewController {
 
@@ -16,6 +17,7 @@ class TrainerViewController: UIViewController {
     @IBOutlet weak var notSolvedButton: UIButton!
     @IBOutlet weak var sortTypeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var badgeImageView: UIImageView!
     
     var viewModel: TrainerViewModelProvider = TrainerViewModel()
     
@@ -29,6 +31,9 @@ class TrainerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         prepareData()
+        if Auth.auth().currentUser?.uid != nil {
+            badgeImageView.isHidden = true
+        }
     }
     
     func prepareData() {

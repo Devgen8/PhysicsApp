@@ -119,7 +119,7 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
     }
     
     func updateTestDataAsDone() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
             
             do {
@@ -242,7 +242,7 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
     }
     
     private func updateTasksStatus() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<User> = User.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -326,6 +326,7 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
     // Firestore
     
     private func setTestDataInFirestore(solvedTasks: [String:[String]], unsolvedTasks: [String:[String]], firstTryTasks: [String]) {
+        saveTestResultsInCoreData()
         if let userId = Auth.auth().currentUser?.uid {
             usersReference.document(userId).updateData(["unsolvedTasks" : unsolvedTasks,
                                                      "solvedTasks" : solvedTasks,
@@ -338,7 +339,6 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
                 wrightAnswerStrings.append(getWrightAnswer(for: index + 1))
                 index += 1
             }
-            saveTestResultsInCoreData()
             usersReference.document(userId).collection("testsHistory").document(testName).setData(["name":testName,
                                                                                                    "wrightAnswerNumber":wrightAnswerNumber,
                                                                                                    "semiWrightAnswerNumber":semiWrightAnswerNumber,
@@ -356,7 +356,7 @@ class CustomTestResultViewModel: GeneralTestResultsViewModel {
     // Core Data
     
     private func saveTestResultsInCoreData() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
                 let result = try context.fetch(fechRequest)

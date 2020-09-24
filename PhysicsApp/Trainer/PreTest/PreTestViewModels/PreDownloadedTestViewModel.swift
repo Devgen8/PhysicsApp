@@ -47,8 +47,8 @@ class PreDownloadedTestViewModel: TestViewModel {
     }
     
     func saveUsersProgress(with time: Int) {
+        saveProgressToCoreData(with: time)
         if let userId = Auth.auth().currentUser?.uid, !NamesParser.isTestCustom(name) {
-            saveProgressToCoreData(with: time)
             userReference.document(userId).collection("tests").document(name).setData(["answers":testAnswers,
                                                                                        "time":time])
         }
@@ -295,7 +295,7 @@ class PreDownloadedTestViewModel: TestViewModel {
     }
     
     private func saveProgressToCoreData(with time: Int) {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)

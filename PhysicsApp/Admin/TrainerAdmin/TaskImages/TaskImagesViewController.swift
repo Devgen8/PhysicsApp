@@ -51,6 +51,7 @@ class TaskImagesViewController: UIViewController {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.tag = 50
+        blurEffectView.backgroundColor = .white
         view.addSubview(blurEffectView)
     }
     

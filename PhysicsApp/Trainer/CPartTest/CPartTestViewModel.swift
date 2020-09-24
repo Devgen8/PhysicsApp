@@ -102,7 +102,7 @@ class CPartTestViewModel {
     
     func saveTestCompletion() {
         var finishedTests = UserDefaults.standard.value(forKey: "finishedTests") as? [String] ?? []
-        if Auth.auth().currentUser?.uid != nil, !finishedTests.contains(name) {
+        if !finishedTests.contains(name) {
             finishedTests.append(name)
         }
         UserDefaults.standard.set(finishedTests, forKey: "finishedTests")

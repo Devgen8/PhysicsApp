@@ -261,6 +261,7 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
     // Firestore
     
     private func setTestDataInFirestore() {
+        saveTestResultsInCoreData()
         if let userId = Auth.auth().currentUser?.uid {
             var tasksNames = [String]()
             var wrightAnswerStrings = [String]()
@@ -268,7 +269,6 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
                 tasksNames.append("Задание №\(index)")
                 wrightAnswerStrings.append(getWrightAnswer(for: index))
             }
-            saveTestResultsInCoreData()
             usersReference.document(userId).collection("testsHistory").document(testName).setData(["name":testName,
                                                                                                    "wrightAnswerNumber":wrightAnswerNumber,
                                                                                                    "semiWrightAnswerNumber":semiWrightAnswerNumber,
@@ -286,7 +286,7 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
     // Core Data
     
     private func saveTestResultsInCoreData() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -333,7 +333,7 @@ class TestResultsViewModel: GeneralTestResultsViewModel {
     }
     
     private func updateTestDataInCoreData() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<Trainer> = Trainer.fetchRequest()
                 let result = try context.fetch(fechRequest)

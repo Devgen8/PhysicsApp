@@ -79,7 +79,6 @@ extension TestDescriptionTableViewCell: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerView.subviews[1].isHidden = true
-        pickerView.subviews[2].isHidden = true
         pickerLabel.font = UIFont(name: "Montserrat-Medium", size: 20)
         pickerLabel.textAlignment = .center
         pickerLabel.text = "\(row)"

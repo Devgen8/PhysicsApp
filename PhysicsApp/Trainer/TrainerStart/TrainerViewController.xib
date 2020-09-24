@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -7,13 +7,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Bold.otf">
+        <array key="Montserrat-Bold.ttf">
             <string>Montserrat-Bold</string>
         </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainerViewController" customModule="Техноскул" customModuleProvider="target">
             <connections>
+                <outlet property="badgeImageView" destination="4fg-E6-ghX" id="Ihp-Od-Mfz"/>
                 <outlet property="closeButton" destination="PyY-MU-gsq" id="Lvu-WP-aWm"/>
                 <outlet property="loadingAnimationView" destination="8Ve-lf-hZU" id="vHg-fY-Hgw"/>
                 <outlet property="notSolvedButton" destination="lTS-oq-R7L" id="8JP-8c-07J"/>
@@ -105,9 +106,17 @@
                         <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="cfF-ro-Itd"/>
                     </connections>
                 </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1200px-Notifications_alert_badge_mobile" translatesAutoresizingMaskIntoConstraints="NO" id="4fg-E6-ghX">
+                    <rect key="frame" x="209.5" y="52" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="RZ7-hY-rpp"/>
+                        <constraint firstAttribute="width" constant="25" id="eNA-XG-a00"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="4fg-E6-ghX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="15" id="0qS-9w-hUL"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PyY-MU-gsq" secondAttribute="trailing" constant="15" id="10X-2I-vp8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lTS-oq-R7L" secondAttribute="bottom" constant="20" id="20X-3e-2Yd"/>
                 <constraint firstItem="kkb-4d-wf3" firstAttribute="top" secondItem="bLi-Ru-Gha" secondAttribute="bottom" constant="15" id="2hY-zj-DzZ"/>
@@ -128,6 +137,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dJ3-xI-jIk" secondAttribute="trailing" constant="20" id="iFw-U2-BsK"/>
                 <constraint firstItem="roX-Zz-rQP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="m6l-Uv-SaA"/>
                 <constraint firstItem="8Ve-lf-hZU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oLe-O5-lcu"/>
+                <constraint firstItem="4fg-E6-ghX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="tPW-Hj-X42"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lTS-oq-R7L" secondAttribute="trailing" constant="20" id="w03-X9-pwy"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -135,6 +145,7 @@
         </view>
     </objects>
     <resources>
+        <image name="1200px-Notifications_alert_badge_mobile" width="1200" height="1200"/>
         <image name="account" width="512" height="512"/>
         <image name="крестик экран 2" width="140" height="135"/>
     </resources>

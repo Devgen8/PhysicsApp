@@ -178,7 +178,7 @@ class TestViewController: UIViewController {
         taskPicker.translatesAutoresizingMaskIntoConstraints = false
         taskPicker.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         taskPicker.heightAnchor.constraint(equalToConstant: taskPickerHeight).isActive = true
-        taskPicker.widthAnchor.constraint(equalToConstant: 145).isActive = true
+        taskPicker.widthAnchor.constraint(equalToConstant: 150).isActive = true
         taskPicker.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
     }
     
@@ -468,8 +468,7 @@ extension TestViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerView.subviews[1].isHidden = true
-        pickerView.subviews[2].isHidden = true
-        pickerLabel.font = UIFont(name: "Montserrat", size: 20)
+        pickerLabel.font = UIFont(name: "Montserrat", size: 19)
         pickerLabel.textAlignment = .center
         pickerLabel.text = "Задание №\(row + 1)"
         pickerLabel.textColor = .black

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +14,7 @@
         <array key="Montserrat-Medium.otf">
             <string>Montserrat-Medium</string>
         </array>
-        <array key="Montserrat-Regular.ttf">
+        <array key="Montserrat-Regular.otf">
             <string>Montserrat-Regular</string>
         </array>
     </customFonts>
@@ -21,7 +22,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainerAdminViewController" customModule="Техноскул" customModuleProvider="target">
             <connections>
                 <outlet property="chooseThemeButton" destination="ctE-3l-XTN" id="DZm-sB-7BK"/>
-                <outlet property="containerViewConstraint" destination="P8N-Ct-MUL" id="cWo-XV-mfe"/>
                 <outlet property="contentView" destination="rm6-mW-k8R" id="v8H-3A-n4c"/>
                 <outlet property="descriptionImageView" destination="slZ-9s-Fnk" id="Ofs-WX-7Nl"/>
                 <outlet property="dotOrNLabel" destination="qJv-cb-5l4" id="r4w-I9-nIt"/>
@@ -44,10 +44,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUo-GC-6CJ">
-                    <rect key="frame" x="0.0" y="44" width="414" height="907"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="985"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rm6-mW-k8R" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="1080"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="985"/>
                             <subviews>
                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rNX-rV-QVy">
                                     <rect key="frame" x="20" y="181" width="277" height="70"/>
@@ -69,6 +69,9 @@
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тренажер" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGs-j7-vz6">
                                     <rect key="frame" x="145.5" y="0.0" width="123.5" height="85.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="85.5" id="Apy-Zt-CKl"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="45"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -82,11 +85,14 @@
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выбери номер задания" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nrG-6J-OxP">
                                     <rect key="frame" x="20" y="136.5" width="324" height="24.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24.5" id="8M1-7N-0EM"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opi-5X-UdO">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opi-5X-UdO">
                                     <rect key="frame" x="117" y="985" width="180" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="180" id="KKE-sm-sO7"/>
@@ -102,12 +108,18 @@
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Прикрепи фото (max 8 МБ)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPQ-Mk-gL8">
                                     <rect key="frame" x="20" y="261" width="374" height="24.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24.5" id="m6U-qz-d0u"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Правильный ответ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkf-Zk-QFG">
                                     <rect key="frame" x="20" y="849.5" width="374" height="24.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24.5" id="dYe-gX-7oZ"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -123,6 +135,9 @@
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Прикрепи объяснение (max 8 МБ)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCQ-iQ-Tc8">
                                     <rect key="frame" x="20" y="508" width="374" height="24.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24.5" id="uHL-Cc-A61"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -134,7 +149,7 @@
                                         <constraint firstAttribute="width" secondItem="slZ-9s-Fnk" secondAttribute="height" multiplier="7:4" id="FLG-c4-v6h"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctE-3l-XTN">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctE-3l-XTN">
                                     <rect key="frame" x="107" y="769.5" width="200" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="200" id="9mY-oS-Unl"/>
@@ -150,6 +165,9 @@
                                 </button>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="r2K-DS-yqX">
                                     <rect key="frame" x="10" y="85.5" width="394" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="31" id="Y5Y-AJ-9mp"/>
+                                    </constraints>
                                     <segments>
                                         <segment title="Добавить"/>
                                         <segment title="Изм в тренажере"/>
@@ -191,7 +209,7 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="25"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhB-ri-oWn">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhB-ri-oWn">
                                     <rect key="frame" x="314" y="27" width="90" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -229,6 +247,7 @@
                                         <constraint firstAttribute="trailing" secondItem="dco-l5-yjo" secondAttribute="trailing" id="Aiz-Zn-KrQ"/>
                                         <constraint firstItem="IJL-rW-T5o" firstAttribute="leading" secondItem="DMo-Hk-8fb" secondAttribute="leading" id="EVY-Du-kyT"/>
                                         <constraint firstItem="dco-l5-yjo" firstAttribute="leading" secondItem="IJL-rW-T5o" secondAttribute="trailing" constant="5" id="bPQ-bn-zAs"/>
+                                        <constraint firstAttribute="height" constant="31" id="mhH-bH-c7h"/>
                                     </constraints>
                                 </stackView>
                             </subviews>
@@ -252,7 +271,6 @@
                                 <constraint firstItem="qJv-cb-5l4" firstAttribute="top" secondItem="nrG-6J-OxP" secondAttribute="bottom" constant="43" id="IIA-9R-daP"/>
                                 <constraint firstItem="sPQ-Mk-gL8" firstAttribute="top" secondItem="rNX-rV-QVy" secondAttribute="bottom" constant="10" id="OPW-WW-zNt"/>
                                 <constraint firstItem="nrG-6J-OxP" firstAttribute="top" secondItem="r2K-DS-yqX" secondAttribute="bottom" constant="20" id="P3f-Bh-gC7"/>
-                                <constraint firstAttribute="height" constant="1080" id="P8N-Ct-MUL"/>
                                 <constraint firstItem="L1q-CL-aRf" firstAttribute="leading" secondItem="rm6-mW-k8R" secondAttribute="leading" constant="30" id="QZ2-8J-8KH"/>
                                 <constraint firstAttribute="trailing" secondItem="slZ-9s-Fnk" secondAttribute="trailing" constant="30" id="RW6-bw-XVH"/>
                                 <constraint firstItem="2NL-on-Wuj" firstAttribute="top" secondItem="r2K-DS-yqX" secondAttribute="bottom" constant="7.5" id="Rpv-fk-890"/>
@@ -296,6 +314,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="sUo-GC-6CJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KcQ-Ec-6jq"/>
@@ -304,8 +323,7 @@
                 <constraint firstItem="sUo-GC-6CJ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="weS-py-fpL"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="137.68115942028987" y="146.31696428571428"/>
+            <point key="canvasLocation" x="137.109375" y="146.04685212298682"/>
         </view>
     </objects>
     <resources>

@@ -25,7 +25,6 @@ class TrainerAdminViewController: UIViewController {
     @IBOutlet weak var taskImagesButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var containerViewConstraint: NSLayoutConstraint!
     
     private var lastOffset: CGPoint!
     private var keyboardHeight: CGFloat!
@@ -56,6 +55,11 @@ class TrainerAdminViewController: UIViewController {
         UserDefaults.standard.set(nil, forKey: "adminTests")
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func getScreenHeight() -> CGFloat {
+        let imageHeight = (UIScreen.main.bounds.width - 60) * 4.0 / 7.0
+        return 85 + 32 + 20 + 25 + 20 + 70 + 10 + 25 + 10 + 2.0 * imageHeight + 10 + 25 + 10 + 25 + 60 + 20 + 25 + 10 + 50 + 10 + 31 + 10 + 60 + 50
     }
     
     func addTextFieldsObservers() {
@@ -117,8 +121,10 @@ class TrainerAdminViewController: UIViewController {
     
     func prepareData() {
         changeScreenElementsConfiguration()
+        showLoadingScreen()
         viewModel.getTrainerData { [weak self] (isReady) in
             if isReady {
+                self?.hideLodingScreen()
                 DispatchQueue.main.async {
                     self?.taskPickerView.reloadAllComponents()
                 }
@@ -138,6 +144,7 @@ class TrainerAdminViewController: UIViewController {
         createLoaderView()
         wrightAnswerTextField.delegate = self
         taskNumberTextField.delegate = self
+        contentView.heightAnchor.constraint(equalToConstant: getScreenHeight()).isActive = true
     }
     
     func createLoaderView() {

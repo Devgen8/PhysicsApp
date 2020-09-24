@@ -38,7 +38,10 @@ class ChooseSubjectViewController: UIViewController {
     
     @objc func changeAdvert() {
         currentPageNumber %= viewModel.getAdvertsNumber()
-        let customIndexPath = IndexPath.init(row: currentPageNumber, section: 0)
+        var customIndexPath = IndexPath.init(row: currentPageNumber, section: 0)
+        if let hjh = advertsCollectionView.cellForItem(at: customIndexPath) {
+            customIndexPath = advertsCollectionView.indexPath(for: hjh) ?? IndexPath()
+        }
         advertsCollectionView.scrollToItem(at: customIndexPath, at: .centeredHorizontally, animated: true)
         pageControl.currentPage = currentPageNumber
         currentPageNumber += 1
@@ -56,9 +59,9 @@ class ChooseSubjectViewController: UIViewController {
         showLoadingScreen()
         viewModel.getAdverts { (isReady) in
             if isReady {
-                DispatchQueue.main.async {
-                    self.timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(self.changeAdvert), userInfo: nil, repeats: true)
-                }
+//                DispatchQueue.main.async {
+//                    self.timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(self.changeAdvert), userInfo: nil, repeats: true)
+//                }
                 // page control
                 self.pageControl.numberOfPages = self.viewModel.getAdvertsNumber()
                 self.pageControl.currentPage = 0

@@ -100,14 +100,16 @@ class TestsHistoryViewModel {
                 completion(true)
             }
         } else {
-            completion(true)
+            getHistoryFromCoreData { (isReady) in
+                completion(isReady)
+            }
         }
     }
     
     // Core Data
     
     private func saveTestsHistoryInCoreData() {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
                 let result = try context.fetch(fechRequest)
@@ -137,7 +139,7 @@ class TestsHistoryViewModel {
     }
     
     private func getHistoryFromCoreData(completion: @escaping (Bool) -> ()) {
-        if Auth.auth().currentUser?.uid != nil, let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             do {
                 let fechRequest: NSFetchRequest<TestsHistory> = TestsHistory.fetchRequest()
                 let result = try context.fetch(fechRequest)
