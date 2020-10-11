@@ -34,6 +34,7 @@ class TaskViewController: UIViewController {
     private var keyboardHeight: CGFloat!
     private var contentSizeHeight: CGFloat!
     private var isKeyboardHidden = true
+    private var deviceOrientation = UIDevice.current.orientation
     
     var viewModel = TaskViewModel()
     
@@ -53,6 +54,27 @@ class TaskViewController: UIViewController {
         viewModel.updateParentUnsolvedTasks()
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if deviceOrientation != UIDevice.current.orientation {
+            super.viewDidLayoutSubviews()
+            deviceOrientation = UIDevice.current.orientation
+            adaptScreenSize()
+        }
+    }
+    
+    func adaptScreenSize() {
+        self.findScreenHeight()
+        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: screenHeight)
+        containerView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: screenHeight)
+        self.backButton.isHidden = self.viewModel.getTaskNumber() == 1 ? true : false
+        self.nextButton.isHidden = self.viewModel.getTaskNumber() == self.viewModel.getAllTasksNumber() ? true : false
+        self.themeLabel.text = self.viewModel.getTheme()
+        self.taskNumberLabel.text = "Задача \(self.viewModel.getTaskNumber() ?? 1) из \(self.viewModel.getNumberOfTasks() ?? 10)"
+        self.designScreenElements()
+        self.taskImage.image = self.viewModel.getTask()?.image
+        self.descriptionImageView.image = self.viewModel.getTask()?.taskDescription
     }
     
     // Keyboard lift methods
@@ -120,13 +142,7 @@ class TaskViewController: UIViewController {
         showLoadingScreen()
         viewModel.checkImagesExist { (isReady) in
             if isReady {
-                self.backButton.isHidden = self.viewModel.getTaskNumber() == 1 ? true : false
-                self.nextButton.isHidden = self.viewModel.getTaskNumber() == self.viewModel.getAllTasksNumber() ? true : false
-                self.themeLabel.text = self.viewModel.getTheme()
-                self.taskNumberLabel.text = "Задача \(self.viewModel.getTaskNumber() ?? 1) из \(self.viewModel.getNumberOfTasks() ?? 10)"
-                self.designScreenElements()
-                self.taskImage.image = self.viewModel.getTask()?.image
-                self.descriptionImageView.image = self.viewModel.getTask()?.taskDescription
+                self.adaptScreenSize()
                 self.hideLodingScreen()
             }
         }
@@ -253,6 +269,7 @@ class TaskViewController: UIViewController {
         viewModel.changeTaskNumber(on: -1)
         viewModel.changeCurrentTask()
         getCurrentTask()
+        //adaptScreenSize()
     }
     
     @objc func nextTapped(_ sender: UIButton) {
@@ -263,6 +280,7 @@ class TaskViewController: UIViewController {
         viewModel.changeTaskNumber(on: 1)
         viewModel.changeCurrentTask()
         getCurrentTask()
+        //adaptScreenSize()
     }
     
     func clearOldData() {

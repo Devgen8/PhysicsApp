@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,7 +32,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qze-6k-JeW">
-                    <rect key="frame" x="0.0" y="151" width="414" height="711"/>
+                    <rect key="frame" x="10" y="151" width="394" height="711"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfR-xJ-SnA">
@@ -46,19 +47,19 @@
                     </connections>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VfR-xJ-SnA" secondAttribute="trailing" constant="30" id="A5U-la-XgQ"/>
                 <constraint firstItem="qze-6k-JeW" firstAttribute="top" secondItem="0Lj-bp-Znz" secondAttribute="bottom" constant="40" id="Gn3-F9-rqY"/>
-                <constraint firstItem="qze-6k-JeW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="GqR-rX-xSS"/>
+                <constraint firstItem="qze-6k-JeW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="GqR-rX-xSS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qze-6k-JeW" secondAttribute="bottom" id="MBf-D8-efI"/>
                 <constraint firstItem="0Lj-bp-Znz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="bEF-bR-5ua"/>
                 <constraint firstItem="VfR-xJ-SnA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="gt2-4V-69f"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qze-6k-JeW" secondAttribute="trailing" id="une-aq-Aag"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qze-6k-JeW" secondAttribute="trailing" constant="10" id="une-aq-Aag"/>
                 <constraint firstItem="0Lj-bp-Znz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="xmA-Ar-PL7"/>
                 <constraint firstItem="VfR-xJ-SnA" firstAttribute="leading" secondItem="0Lj-bp-Znz" secondAttribute="trailing" constant="5" id="ypd-Su-gee"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="116"/>
         </view>
     </objects>

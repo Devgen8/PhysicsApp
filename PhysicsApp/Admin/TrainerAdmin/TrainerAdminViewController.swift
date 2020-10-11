@@ -30,6 +30,7 @@ class TrainerAdminViewController: UIViewController {
     private var keyboardHeight: CGFloat!
     private var contentSizeHeight: CGFloat!
     private var isKeyboardHidden = true
+    private var currentHeightConstraint = NSLayoutConstraint()
     
     var loaderView: AnimationView!
     var viewModel: TrainerAdminViewModel = TrainerAdminAddViewModel()
@@ -49,6 +50,12 @@ class TrainerAdminViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         addTextFieldsObservers()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        currentHeightConstraint.isActive = false
+        currentHeightConstraint = contentView.heightAnchor.constraint(equalToConstant: getScreenHeight())
+        currentHeightConstraint.isActive = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -144,7 +151,8 @@ class TrainerAdminViewController: UIViewController {
         createLoaderView()
         wrightAnswerTextField.delegate = self
         taskNumberTextField.delegate = self
-        contentView.heightAnchor.constraint(equalToConstant: getScreenHeight()).isActive = true
+        currentHeightConstraint = contentView.heightAnchor.constraint(equalToConstant: getScreenHeight())
+        currentHeightConstraint.isActive = true
     }
     
     func createLoaderView() {

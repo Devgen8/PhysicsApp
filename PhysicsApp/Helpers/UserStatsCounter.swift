@@ -13,8 +13,8 @@ import CoreData
 
 class UserStatsCounter {
     
-    let userReference = Firestore.firestore().collection("users")
-    let trainerReference = Firestore.firestore().collection("trainer")
+    private let userReference = Firestore.firestore().collection("users")
+    private let trainerReference = Firestore.firestore().collection("trainer")
     var srEGE = 0
     var nextValue = 0
     static let shared = UserStatsCounter()

@@ -11,8 +11,12 @@ import FirebaseFirestore
 
 class ChooseTestNameViewModel {
     
-    var testNames = [String]()
-    let testsReference = Firestore.firestore().collection("tests")
+    // MARK: Fields
+    
+    private var testNames = [String]()
+    private let testsReference = Firestore.firestore().collection("tests")
+    
+    // MARK: Interface
     
     func getTestNames(completion: @escaping (Bool) -> ()) {
         testsReference.getDocuments { [weak self] (snapshot, error) in

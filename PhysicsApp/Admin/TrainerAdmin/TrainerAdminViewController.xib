@@ -11,10 +11,10 @@
         <array key="BlackDiamond.ttf">
             <string>BlackDiamond</string>
         </array>
-        <array key="Montserrat-Medium.otf">
+        <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
-        <array key="Montserrat-Regular.otf">
+        <array key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
         </array>
     </customFonts>
@@ -126,6 +126,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ayU-Uy-Hsi">
                                     <rect key="frame" x="20" y="884" width="374" height="50"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="QzF-zJ-6tP"/>
                                     </constraints>
@@ -201,6 +202,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="124-UT-4Qq">
                                     <rect key="frame" x="329" y="191" width="65" height="50"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="5cd-I2-5pJ"/>
                                         <constraint firstAttribute="width" constant="65" id="pbP-r0-RLb"/>

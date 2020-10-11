@@ -38,6 +38,7 @@ class TestViewController: UIViewController {
     private let timeDifference = 1.0
     private var timer = Timer()
     private var activeTextField = UITextField()
+    private var deviceOrientation = UIDevice.current.orientation
     
     private var lastOffset: CGPoint!
     private var keyboardHeight: CGFloat!
@@ -90,6 +91,21 @@ class TestViewController: UIViewController {
         viewModel.saveUsersProgress(with: Int(currentDuration))
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if deviceOrientation != UIDevice.current.orientation {
+            super.viewDidLayoutSubviews()
+            deviceOrientation = UIDevice.current.orientation
+            self.findScreenHeight(maxRatio: self.viewModel.getMaxRatio())
+            scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: screenHeight)
+            containerView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: screenHeight)
+            self.designScreenElements()
+            let firstImage = self.viewModel.getPhotoForTask(taskPicker.selectedRow(inComponent: 0))
+            let ratio = firstImage.size.height / firstImage.size.width
+            self.designImageView(with: ratio)
+            self.taskImageView.image = firstImage
+        }
     }
     
     // Keyboard lift methods
@@ -168,7 +184,6 @@ class TestViewController: UIViewController {
         designMyAnswersButton()
         designFinishButton()
         
-        //DesignService.setWhiteBackground(for: containerView)
         view.backgroundColor = .white
         answerTextField.delegate = self
     }

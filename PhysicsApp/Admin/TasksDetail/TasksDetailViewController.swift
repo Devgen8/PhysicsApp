@@ -37,7 +37,7 @@ class TasksDetailViewController: UIViewController {
     
     func designScreenElements() {
         DesignService.setAdminGradient(for: view)
-        DesignService.designBlueButton(priorityButton)
+        DesignService.designWhiteButton(priorityButton)
     }
     
     func createBlurEffect() {

@@ -82,7 +82,6 @@
 		244ABB18242A9B1700066CB3 /* FormSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244ABAEE242A9B1600066CB3 /* FormSheetViewController.xib */; };
 		244ABB19242A9B1700066CB3 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAEF242A9B1600066CB3 /* ImageScrollView.swift */; };
 		244ABB1A242A9B1700066CB3 /* UnsolvedThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF0242A9B1600066CB3 /* UnsolvedThemesViewController.swift */; };
-		244ABB1C242A9B1700066CB3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAF3242A9B1600066CB3 /* TabBarViewController.swift */; };
 		244ABB23242A9B1700066CB3 /* TrainerAdminAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244ABAFC242A9B1700066CB3 /* TrainerAdminAddViewModel.swift */; };
 		244ABB5C242E249100066CB3 /* 7893-confetti-cannons.json in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB5B242E249100066CB3 /* 7893-confetti-cannons.json */; };
 		244ABB5E242E2A1700066CB3 /* 1708-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 244ABB5D242E2A1500066CB3 /* 1708-success.json */; };
@@ -136,6 +135,7 @@
 		484E7FF024606B37002C5A76 /* CPartTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484E7FEF24606B37002C5A76 /* CPartTestViewModel.swift */; };
 		484E7FF324606CA5002C5A76 /* TestDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484E7FF124606CA5002C5A76 /* TestDescriptionTableViewCell.swift */; };
 		484E7FF424606CA5002C5A76 /* TestDescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484E7FF224606CA5002C5A76 /* TestDescriptionTableViewCell.xib */; };
+		485DC6A325275ED000B2FEB1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 485DC6A225275ED000B2FEB1 /* GoogleService-Info.plist */; };
 		48664497249BA89E00027A66 /* Trainer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48664483249BA89E00027A66 /* Trainer+CoreDataClass.swift */; };
 		48664498249BA89E00027A66 /* Trainer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48664484249BA89E00027A66 /* Trainer+CoreDataProperties.swift */; };
 		48664499249BA89E00027A66 /* TestsResults+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48664485249BA89E00027A66 /* TestsResults+CoreDataClass.swift */; };
@@ -187,7 +187,6 @@
 		48BB6AB1246D721D0010F27D /* TestsHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AB0246D721D0010F27D /* TestsHistoryViewModel.swift */; };
 		48BB6AB4246D84A80010F27D /* TestsHistoryResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AB3246D84A80010F27D /* TestsHistoryResultsViewModel.swift */; };
 		48BB6AC5247576870010F27D /* ThemeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BB6AC4247576870010F27D /* ThemeParser.swift */; };
-		48C2412624D6B5AD007522A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48C2412524D6B5AD007522A2 /* GoogleService-Info.plist */; };
 		48C2412924D9D4FE007522A2 /* TaskData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C2412724D9D4FE007522A2 /* TaskData+CoreDataClass.swift */; };
 		48C2412A24D9D4FE007522A2 /* TaskData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C2412824D9D4FE007522A2 /* TaskData+CoreDataProperties.swift */; };
 		48C2412D24DA876A007522A2 /* TaskImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C2412B24DA876A007522A2 /* TaskImagesViewController.swift */; };
@@ -277,7 +276,6 @@
 		244ABAEE242A9B1600066CB3 /* FormSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormSheetViewController.xib; sourceTree = "<group>"; };
 		244ABAEF242A9B1600066CB3 /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		244ABAF0242A9B1600066CB3 /* UnsolvedThemesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsolvedThemesViewController.swift; sourceTree = "<group>"; };
-		244ABAF3242A9B1600066CB3 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		244ABAFC242A9B1700066CB3 /* TrainerAdminAddViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainerAdminAddViewModel.swift; sourceTree = "<group>"; };
 		244ABB5B242E249100066CB3 /* 7893-confetti-cannons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "7893-confetti-cannons.json"; sourceTree = "<group>"; };
 		244ABB5D242E2A1500066CB3 /* 1708-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "1708-success.json"; sourceTree = "<group>"; };
@@ -332,6 +330,7 @@
 		484E7FEF24606B37002C5A76 /* CPartTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPartTestViewModel.swift; sourceTree = "<group>"; };
 		484E7FF124606CA5002C5A76 /* TestDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		484E7FF224606CA5002C5A76 /* TestDescriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestDescriptionTableViewCell.xib; sourceTree = "<group>"; };
+		485DC6A225275ED000B2FEB1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		48664483249BA89E00027A66 /* Trainer+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trainer+CoreDataClass.swift"; sourceTree = "<group>"; };
 		48664484249BA89E00027A66 /* Trainer+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trainer+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		48664485249BA89E00027A66 /* TestsResults+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestsResults+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -384,7 +383,6 @@
 		48BB6AB0246D721D0010F27D /* TestsHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsHistoryViewModel.swift; sourceTree = "<group>"; };
 		48BB6AB3246D84A80010F27D /* TestsHistoryResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsHistoryResultsViewModel.swift; sourceTree = "<group>"; };
 		48BB6AC4247576870010F27D /* ThemeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeParser.swift; sourceTree = "<group>"; };
-		48C2412524D6B5AD007522A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Птенциальный мусор/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		48C2412724D9D4FE007522A2 /* TaskData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		48C2412824D9D4FE007522A2 /* TaskData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		48C2412B24DA876A007522A2 /* TaskImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskImagesViewController.swift; sourceTree = "<group>"; };
@@ -433,13 +431,12 @@
 				4883C689250E054E00D909DC /* Техноскул.entitlements */,
 				244ABA32242A933B00066CB3 /* AppDelegate.swift */,
 				244ABA34242A933B00066CB3 /* SceneDelegate.swift */,
-				48C2412524D6B5AD007522A2 /* GoogleService-Info.plist */,
+				485DC6A225275ED000B2FEB1 /* GoogleService-Info.plist */,
 				48664480249BA85400027A66 /* CoreDataModels */,
 				484293A3245AB74800BE8CB6 /* Animations */,
 				484293A4245AB79200BE8CB6 /* Helpers */,
 				48664476249BA6B200027A66 /* CustomViews */,
 				244ABAD0242A9B1500066CB3 /* Profile */,
-				244ABAF1242A9B1600066CB3 /* TabBarController */,
 				244ABAD8242A9B1600066CB3 /* Trainer */,
 				4873404524FD002D00C55144 /* ChooseSubject */,
 				4873404C24FD09A900C55144 /* AdvertDetail */,
@@ -607,14 +604,6 @@
 				244ABAEA242A9B1600066CB3 /* TaskModel.swift */,
 			);
 			path = Task;
-			sourceTree = "<group>";
-		};
-		244ABAF1242A9B1600066CB3 /* TabBarController */ = {
-			isa = PBXGroup;
-			children = (
-				244ABAF3242A9B1600066CB3 /* TabBarViewController.swift */,
-			);
-			path = TabBarController;
 			sourceTree = "<group>";
 		};
 		483B8D562494AC880014093A /* AdminSetting */ = {
@@ -1088,6 +1077,7 @@
 			files = (
 				244ABAC3242A9AF400066CB3 /* Montserrat-ExtraBold.otf in Resources */,
 				484293BE245B023100BE8CB6 /* TasksDetailViewController.xib in Resources */,
+				485DC6A325275ED000B2FEB1 /* GoogleService-Info.plist in Resources */,
 				244ABAC4242A9AF400066CB3 /* Montserrat-ExtraLightItalic.otf in Resources */,
 				244ABAC2242A9AF400066CB3 /* Montserrat-Black.ttf in Resources */,
 				4842932B244C211F00BE8CB6 /* TestResultStatsTableViewCell.xib in Resources */,
@@ -1157,7 +1147,6 @@
 				244ABABF242A9AF400066CB3 /* Montserrat-Italic.otf in Resources */,
 				484293C7245B3CF300BE8CB6 /* MessageTableViewCell.xib in Resources */,
 				244ABAA6242A9AF400066CB3 /* Montserrat-Bold.otf in Resources */,
-				48C2412624D6B5AD007522A2 /* GoogleService-Info.plist in Resources */,
 				244ABAAC242A9AF400066CB3 /* Montserrat-Light.otf in Resources */,
 				244ABABA242A9AF400066CB3 /* Montserrat-SemiBold.ttf in Resources */,
 				244ABAB9242A9AF400066CB3 /* Montserrat-Medium.otf in Resources */,
@@ -1306,7 +1295,6 @@
 				48BB6AA3246C4D8A0010F27D /* CustomTestResultViewModel.swift in Sources */,
 				483B8D5E2494D1A00014093A /* TrainerAdminEditTestViewModel.swift in Sources */,
 				244ABB0A242A9B1700066CB3 /* TrainerViewModel.swift in Sources */,
-				244ABB1C242A9B1700066CB3 /* TabBarViewController.swift in Sources */,
 				244ABA33242A933B00066CB3 /* AppDelegate.swift in Sources */,
 				244ABA4F242A9A6E00066CB3 /* MainAdminViewController.swift in Sources */,
 				244ABB14242A9B1700066CB3 /* TaskModel.swift in Sources */,
@@ -1468,7 +1456,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PhysicsApp/Техноскул.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = KDJVA6U78M;
 				INFOPLIST_FILE = PhysicsApp/Info.plist;
@@ -1494,7 +1482,7 @@
 				CODE_SIGN_ENTITLEMENTS = "PhysicsApp/Техноскул.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = KDJVA6U78M;
 				INFOPLIST_FILE = PhysicsApp/Info.plist;

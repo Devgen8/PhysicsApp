@@ -36,6 +36,10 @@ class TrainerViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        themesTableView.reloadData()
+    }
+    
     func prepareData() {
         themesTableView.isHidden = true
         setAnimation()
@@ -56,7 +60,6 @@ class TrainerViewController: UIViewController {
     }
     
     func designScreenElements() {
-        //DesignService.setWhiteBackground(for: view)
         notSolvedButton.layer.cornerRadius = 10
         DesignService.designCloseButton(closeButton)
         

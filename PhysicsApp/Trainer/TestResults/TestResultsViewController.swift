@@ -15,6 +15,9 @@ class TestResultsViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     private var progressBarView = UIProgressView()
     private var timer = Timer()
+    var viewHasAppeared = false
+    var wentToImageViewController = false
+    var currentOrientation = UIDevice.current.orientation
     
     var viewModel: GeneralTestResultsViewModel!
     var loaderView = AnimationView()
@@ -28,8 +31,22 @@ class TestResultsViewController: UIViewController {
         prepareData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        viewHasAppeared = true
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
-        viewModel.updateTestDataAsDone()
+        if !wentToImageViewController {
+            viewModel.updateTestDataAsDone()
+        }
+        wentToImageViewController = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if viewHasAppeared, currentOrientation != UIDevice.current.orientation {
+            currentOrientation = UIDevice.current.orientation
+            resultsTableView.reloadData()
+        }
     }
     
     func designScreenElements() {
@@ -101,24 +118,6 @@ class TestResultsViewController: UIViewController {
         progressBarView.isHidden = true
         view.viewWithTag(50)?.removeFromSuperview()
     }
-    
-//    func addLoaderPhrase() {
-//        let phrase = UILabel()
-//        phrase.font = UIFont(name: "Montserrat-Medium", size: 18)
-//        phrase.textColor = .black
-//        phrase.textAlignment = .center
-//        phrase.numberOfLines = 0
-//        view.addSubview(phrase)
-//        phrase.tag = 30
-//        phrase.translatesAutoresizingMaskIntoConstraints = false
-//        phrase.minimumScaleFactor = 0.5
-//        phrase.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-//        phrase.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-//        phrase.topAnchor.constraint(equalTo: loaderView.bottomAnchor, constant: 10).isActive = true
-//        phrase.sizeToFit()
-//        phrase.text = "Вспомним, как это было 😉"
-//        view.bringSubviewToFront(phrase)
-//    }
     
     func prepareData() {
         showLoadingScreen()
@@ -244,7 +243,7 @@ extension TestResultsViewController: UITableViewDataSource {
         let mainRatio = (taskImage?.size.height ?? 0) / (taskImage?.size.width ?? 1)
         let descriptionRatio = (descriptionImage?.size.height ?? 0) / (descriptionImage?.size.width ?? 1)
         cell.setImages(mainRatio: mainRatio, descriptionRatio: descriptionRatio)
-        cell.taskImageView.alpha = 0
+        cell.taskImageView.alpha = viewModel.isCellOpened(index: index) ? 1 : 0
         cell.userPointsLabel.text = viewModel.getUserPoints(for: index)
         let userAnswer = viewModel.getUsersAnswer(for: taskName)
         if userAnswer == "" {

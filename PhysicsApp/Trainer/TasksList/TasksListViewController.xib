@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,16 +40,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Механика" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="meM-vW-vFO">
-                    <rect key="frame" x="50" y="74" width="254" height="37"/>
+                    <rect key="frame" x="50" y="74" width="254" height="35"/>
                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQ6-8l-WXi">
-                    <rect key="frame" x="57" y="190.5" width="100" height="100"/>
+                    <rect key="frame" x="57" y="187.5" width="100" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOt-jH-Orj">
-                            <rect key="frame" x="27" y="39.5" width="46.5" height="21"/>
+                            <rect key="frame" x="29" y="40" width="42" height="20"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -63,10 +64,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="heO-s6-YN5">
-                    <rect key="frame" x="157" y="190.5" width="100" height="100"/>
+                    <rect key="frame" x="157" y="187.5" width="100" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfT-ez-G2h">
-                            <rect key="frame" x="27" y="39.5" width="46.5" height="21"/>
+                            <rect key="frame" x="29" y="40" width="42" height="20"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -89,10 +90,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybI-IQ-Eey">
-                    <rect key="frame" x="257" y="190.5" width="100" height="100"/>
+                    <rect key="frame" x="257" y="187.5" width="100" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jrl-zV-oia">
-                            <rect key="frame" x="27" y="39.5" width="46.5" height="21"/>
+                            <rect key="frame" x="29" y="40" width="42" height="20"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -107,7 +108,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Задачи с первого раза" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6b-9r-Qob">
-                    <rect key="frame" x="167" y="290.5" width="80" height="55"/>
+                    <rect key="frame" x="167" y="287.5" width="80" height="55"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="rDi-7x-lir"/>
                         <constraint firstAttribute="width" constant="80" id="vbu-pO-mPe"/>
@@ -117,7 +118,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Верно решенные задачи" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ht-tu-qVg">
-                    <rect key="frame" x="252" y="290.5" width="110" height="55"/>
+                    <rect key="frame" x="252" y="287.5" width="110" height="55"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="nmO-IB-Ghm"/>
                         <constraint firstAttribute="height" constant="55" id="xQV-2D-OoT"/>
@@ -138,13 +139,13 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="СТАТИСТИКА" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8L-nq-PPF">
-                    <rect key="frame" x="50" y="146" width="364" height="24.5"/>
+                    <rect key="frame" x="50" y="144" width="364" height="23.5"/>
                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                     <color key="textColor" red="0.2654772997" green="0.54055893420000001" blue="0.7921907306" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Прохождение темы" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3a-AC-pvc">
-                    <rect key="frame" x="52" y="290.5" width="110" height="40"/>
+                    <rect key="frame" x="52" y="287.5" width="110" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="c6T-oT-ErV"/>
                         <constraint firstAttribute="width" constant="110" id="n2Z-sI-6yK"/>
@@ -154,6 +155,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="meM-vW-vFO" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="0Dl-PS-7l8"/>
@@ -179,10 +181,12 @@
                 <constraint firstItem="x6b-9r-Qob" firstAttribute="leading" secondItem="h3a-AC-pvc" secondAttribute="trailing" constant="5" id="x0a-Kt-uUh"/>
                 <constraint firstItem="4DT-XQ-8Od" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="yNO-yH-CWy"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
         </view>
     </objects>
+    <designables>
+        <designable name="4DT-XQ-8Od"/>
+    </designables>
     <resources>
         <image name="крестик экран 2" width="140" height="135"/>
     </resources>

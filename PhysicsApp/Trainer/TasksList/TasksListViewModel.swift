@@ -610,9 +610,6 @@ class TasksListViewModel {
                         }
                     }
                     completion(true)
-//                    self.downloadPhotos { (isReady) in
-//                        completion(isReady)
-//                    }
                 }
             }
         }
@@ -661,70 +658,9 @@ class TasksListViewModel {
                     }
                 }
                 completion(true)
-                // self.downloadPhotos { (isReady) in
-                //     completion(isReady)
-                // }
             }
         }
     }
-    
-//    private func downloadPhotos(completion: @escaping (Bool) -> ()) {
-//        var count = 0
-//        for index in stride(from: 0, to: tasks.count, by: 1) {
-//            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: tasks[index].name ?? "")
-//            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber).png")
-//            imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
-//                guard let `self` = self, error == nil else {
-//                    print("Error downloading images: \(String(describing: error?.localizedDescription))")
-//                    return
-//                }
-//                if let data = data, let image = UIImage(data: data) {
-//                    self.tasks[index].image = image
-//                    count += 1
-//                }
-//                if count == self.tasks.count {
-//                    self.downloadDescription { (isReady) in
-//                        completion(isReady)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    private func downloadDescription(completion: @escaping (Bool) -> ()) {
-//        var count = 0
-//        for index in stride(from: 0, to: tasks.count, by: 1) {
-//            let (themeName, taskNumber) = NamesParser.getTaskLocation(taskName: tasks[index].name ?? "")
-//            let imageRef = Storage.storage().reference().child("trainer/\(themeName)/task\(taskNumber)description.png")
-//            imageRef.getData(maxSize: 4 * 2048 * 2048) { [weak self] data, error in
-//                guard let `self` = self, error == nil else {
-//                    print("Error downloading descriptions: \(String(describing: error?.localizedDescription))")
-//                    return
-//                }
-//                if let data = data, let image = UIImage(data: data) {
-//                    self.tasks[index].taskDescription = image
-//                    count += 1
-//                }
-//                if count == self.tasks.count {
-//                    if self.lookingForUnsolvedTasks != true {
-//                        self.updateKeysInfoForSolved()
-//                        self.saveTasksToCoreDataForSolved()
-//                    } else {
-//                        self.updateAreUnsolvedTasksUpdatedKey()
-//                        if let sort = self.sortType {
-//                            if sort == .tasks {
-//                                self.saveToCoreDataUnsolvedTasksByTasks()
-//                            }
-//                            if sort == .themes {
-//                                self.saveToCoreDataUnsolvedTasksByThemes()
-//                            }
-//                        }
-//                    }
-//                    completion(true)
-//                }
-//            }
-//        }
-//    }
 }
 
 extension TasksListViewModel: UnsolvedTaskUpdater {

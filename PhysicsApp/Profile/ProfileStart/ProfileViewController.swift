@@ -173,6 +173,9 @@ import Lottie
             appleRegistartionButton.layer.borderWidth = 1
             appleRegistartionButton.layer.borderColor = UIColor.black.cgColor
             appleRegistartionButton.layer.cornerRadius = 15
+            
+            userImage.image = #imageLiteral(resourceName: "photo-placeholder")
+            nameLabel.text = ""
         } else {
             DesignService.designRedButton(logOutButton)
             logOutButton.setTitle("ВЫЙТИ", for: .normal)
@@ -193,35 +196,6 @@ import Lottie
             signInAskingStackView.isHidden = true
         }
     }
-    
-//    func createDescriptionForUnAuth() {
-//        hideSomeScreenElements()
-//
-//        // Description
-//        let textView = UITextView()
-//        textView.isEditable = false
-//        textView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(textView)
-//        textView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 30).isActive = true
-//        textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-//        textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
-//        textView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-//        textView.backgroundColor = .white
-//        textView.textColor = .black
-//        textView.font = UIFont(name: "Montserrat-Regular", size: 18)
-//        textView.text = "Привет! Зарегистрированным пользователям здесь доступна информация о своем профиле, а также история пробников!\n\nЗарегистрируйся через ВКонтакте и получи много крутых фишек, таких как cохранение прогресса, cтатистика по задачам, доступ к разделу задач с ошибками, сохранение ответов и времени в пробнике после выхода из приложения!"
-//
-//        // Button text changing
-//        logOutButton.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
-//    }
-//
-//    func hideSomeScreenElements() {
-//        userImage.isHidden = true
-//        ringViewAroundPhoto.isHidden = true
-//        nameLabel.isHidden = true
-//        ratingLabel.isHidden = true
-//        testsHistoryButton.isHidden = true
-//    }
     
     @IBAction func logOutTapped(_ sender: UIButton) {
         if logOutButton.titleLabel?.text == "ВЫЙТИ" {
@@ -304,7 +278,7 @@ import Lottie
         present(alertController, animated: true)
     }
     
-    func createBlurEffect() {
+    private func createBlurEffect() {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
@@ -314,7 +288,7 @@ import Lottie
         view.addSubview(blurEffectView)
     }
     
-    func setAnimation() {
+    private func setAnimation() {
         loaderView.animation = Animation.named("lf30_editor_cg3gHF")
         loaderView.loopMode = .loop
         loaderView.isHidden = false
@@ -328,12 +302,12 @@ import Lottie
         loaderView.play()
     }
     
-    func showLoadingScreen() {
+    private func showLoadingScreen() {
         createBlurEffect()
         setAnimation()
     }
     
-    func hideLodingScreen() {
+    private func hideLodingScreen() {
         loaderView.isHidden = true
         view.viewWithTag(50)?.removeFromSuperview()
         designScreenElements()
@@ -411,9 +385,9 @@ extension ProfileViewController: ASAuthorizationControllerDelegate {
             }
             let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
             Auth.auth().signIn(with: credential) { [weak self] (authDataResult, error) in
-                if let `self` = self, let user = authDataResult?.user {
+                if let `self` = self {
                     self.showLoadingScreen()
-                    self.viewModel.saveUsersName(user.displayName ?? "") { (isReady) in
+                    self.viewModel.saveUsersName(appleIDCredential.fullName?.givenName ?? "") { (isReady) in
                         self.hideLodingScreen()
                         self.prepareData()
                     }

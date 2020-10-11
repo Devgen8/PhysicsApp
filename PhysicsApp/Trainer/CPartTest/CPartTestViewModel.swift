@@ -67,6 +67,10 @@ class CPartTestViewModel {
         return name
     }
     
+    func getPoints(for task: Int) -> Int {
+        return tasksPoints[task]
+    }
+    
     func getDescriptionImage(for index: Int) -> UIImage {
         return tasks.first(where: {
             if NamesParser.isTestCustom(name) {

@@ -22,6 +22,7 @@ class ChooseSubjectViewController: UIViewController {
     var viewModel = ChooseSubjectViewModel()
     var timer = Timer()
     var currentPageNumber = 0
+    var isRotated = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,21 +31,23 @@ class ChooseSubjectViewController: UIViewController {
         advertsCollectionView.dataSource = self
         advertsCollectionView.delegate = self
         advertsCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "advertCell")
-        advertsCollectionView.collectionViewLayout = getCellsLayout()
         
         designScreenElements()
         prepareData()
+        pageControl.isUserInteractionEnabled = false
     }
     
-    @objc func changeAdvert() {
-        currentPageNumber %= viewModel.getAdvertsNumber()
-        var customIndexPath = IndexPath.init(row: currentPageNumber, section: 0)
-        if let hjh = advertsCollectionView.cellForItem(at: customIndexPath) {
-            customIndexPath = advertsCollectionView.indexPath(for: hjh) ?? IndexPath()
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        advertsCollectionView.reloadData()
+        isRotated = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if isRotated {
+            advertsCollectionView.collectionViewLayout = getCellsLayout()
+            isRotated = false
         }
-        advertsCollectionView.scrollToItem(at: customIndexPath, at: .centeredHorizontally, animated: true)
-        pageControl.currentPage = currentPageNumber
-        currentPageNumber += 1
     }
     
     func designScreenElements() {
@@ -59,9 +62,6 @@ class ChooseSubjectViewController: UIViewController {
         showLoadingScreen()
         viewModel.getAdverts { (isReady) in
             if isReady {
-//                DispatchQueue.main.async {
-//                    self.timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(self.changeAdvert), userInfo: nil, repeats: true)
-//                }
                 // page control
                 self.pageControl.numberOfPages = self.viewModel.getAdvertsNumber()
                 self.pageControl.currentPage = 0
@@ -105,7 +105,7 @@ class ChooseSubjectViewController: UIViewController {
     }
     
     func getCellsLayout() -> UICollectionViewFlowLayout {
-        let itemWidth = UIScreen.main.bounds.width - 20
+        let itemWidth = advertsCollectionView.frame.width
         let itemHeight = itemWidth * 200 / 340
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: itemWidth, height: itemHeight)

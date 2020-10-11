@@ -49,18 +49,28 @@
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Реклама" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieS-Fb-VtC">
                     <rect key="frame" x="50" y="54" width="314" height="66.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="66.5" id="F3H-5B-7pk"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="BlackDiamond" family="Black Diamond" pointSize="35"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Заголовок" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z6P-GY-KQV">
                     <rect key="frame" x="15" y="127.5" width="384" height="34"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="RNX-5B-2eT"/>
+                    </constraints>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Изображение (max 10 МБ)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1Q-t3-pGN">
                     <rect key="frame" x="15" y="176.5" width="384" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="sZd-hz-rnm"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -69,10 +79,15 @@
                     <rect key="frame" x="15" y="207.5" width="384" height="219.5"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="dw3-bP-wZz" secondAttribute="height" multiplier="350:200" id="Yq3-3L-KrU"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="vwv-Wx-8Fd"/>
                     </constraints>
                 </imageView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ссылка на ресурс" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kRc-di-3zj">
                     <rect key="frame" x="15" y="753" width="384" height="34"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="rka-mi-b1u"/>
+                    </constraints>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                     <textInputTraits key="textInputTraits"/>
@@ -131,9 +146,10 @@
                 <constraint firstItem="z6P-GY-KQV" firstAttribute="top" secondItem="ieS-Fb-VtC" secondAttribute="bottom" constant="7" id="KGt-aF-19g"/>
                 <constraint firstItem="8WE-Kp-in2" firstAttribute="top" secondItem="dw3-bP-wZz" secondAttribute="bottom" constant="15" id="UA5-EZ-YrU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8WE-Kp-in2" secondAttribute="trailing" constant="15" id="WN5-Fe-F9k"/>
-                <constraint firstItem="dw3-bP-wZz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Wxm-f1-msH"/>
+                <constraint firstItem="dw3-bP-wZz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Wxm-f1-msH"/>
                 <constraint firstItem="Rta-FS-v1a" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="Z4n-Lo-7u6"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dw3-bP-wZz" secondAttribute="trailing" constant="15" id="ecP-T3-1LD"/>
+                <constraint firstItem="dw3-bP-wZz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eDj-jR-Sjt"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dw3-bP-wZz" secondAttribute="trailing" constant="15" id="ecP-T3-1LD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kRc-di-3zj" secondAttribute="trailing" constant="15" id="jOc-Q4-Wvo"/>
                 <constraint firstItem="STv-2A-2Eq" firstAttribute="top" secondItem="kRc-di-3zj" secondAttribute="bottom" constant="15" id="kDi-AQ-duc"/>
                 <constraint firstItem="dw3-bP-wZz" firstAttribute="top" secondItem="K1Q-t3-pGN" secondAttribute="bottom" constant="10" id="kE5-Ct-n0g"/>

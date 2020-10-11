@@ -12,6 +12,8 @@ import FirebaseStorage
 
 class TaskImagesViewModel {
     
+    // MARK: Fields
+    
     private var taskName = ""
     private var numberOfTasks = 0
     private var taskImages = [Int:UIImage]()
@@ -21,6 +23,8 @@ class TaskImagesViewModel {
     private var themes = [String]()
     private var currentMode: TrainerAdminMode!
     private var testTasks = [TaskModel]()
+    
+    // MARK: Interface
     
     func getTasksQuantity(completion: @escaping (Bool)->()) {
         if currentMode == TrainerAdminMode.editTask {
@@ -34,6 +38,56 @@ class TaskImagesViewModel {
             }
         }
     }
+    
+    func getTaskName() -> String {
+        return taskName
+    }
+    
+    func setTaskName(_ name: String) {
+        taskName = name
+    }
+    
+    func getNumberOfTasks() -> Int {
+        return numberOfTasks
+    }
+    
+    func getImage(for index: Int) -> UIImage {
+        if currentMode == TrainerAdminMode.editTest {
+            return testTasks[index - 1].image ?? UIImage()
+        }
+        return taskImages[index] ?? UIImage()
+    }
+    
+    func getSerialNumber(for index: Int) -> Int {
+        return testTasks[index].serialNumber ?? 0
+    }
+    
+    func getCurrentMode() -> TrainerAdminMode {
+        return currentMode
+    }
+    
+    func setTaskDownloader(_ loader: TaskDownloader) {
+        taskDownloader = loader
+    }
+    
+    func setCurrentMode(_ newMode: TrainerAdminMode) {
+        currentMode = newMode
+    }
+    
+    func downloadTask(_ number: Int, completion: @escaping (Bool)->()) {
+        if currentMode == TrainerAdminMode.editTask {
+            downloadTaskForTasks(number) { (isReady) in
+                completion(isReady)
+            }
+        }
+        if currentMode == TrainerAdminMode.editTest {
+            downloadTaskForTests(number) { (isReady) in
+                completion(isReady)
+            }
+        }
+    }
+    
+    // MARK: Private section
     
     private func getTasksNumberForTask(completion: @escaping (Bool)->()) {
         Firestore.firestore().collection("trainer").document(taskName).getDocument { [weak self] (document, error) in
@@ -90,54 +144,6 @@ class TaskImagesViewModel {
                         completion(true)
                     }
                 }
-            }
-        }
-    }
-    
-    func getTaskName() -> String {
-        return taskName
-    }
-    
-    func setTaskName(_ name: String) {
-        taskName = name
-    }
-    
-    func getNumberOfTasks() -> Int {
-        return numberOfTasks
-    }
-    
-    func getImage(for index: Int) -> UIImage {
-        if currentMode == TrainerAdminMode.editTest {
-            return testTasks[index - 1].image ?? UIImage()
-        }
-        return taskImages[index] ?? UIImage()
-    }
-    
-    func getSerialNumber(for index: Int) -> Int {
-        return testTasks[index].serialNumber ?? 0
-    }
-    
-    func getCurrentMode() -> TrainerAdminMode {
-        return currentMode
-    }
-    
-    func setTaskDownloader(_ loader: TaskDownloader) {
-        taskDownloader = loader
-    }
-    
-    func setCurrentMode(_ newMode: TrainerAdminMode) {
-        currentMode = newMode
-    }
-    
-    func downloadTask(_ number: Int, completion: @escaping (Bool)->()) {
-        if currentMode == TrainerAdminMode.editTask {
-            downloadTaskForTasks(number) { (isReady) in
-                completion(isReady)
-            }
-        }
-        if currentMode == TrainerAdminMode.editTest {
-            downloadTaskForTests(number) { (isReady) in
-                completion(isReady)
             }
         }
     }

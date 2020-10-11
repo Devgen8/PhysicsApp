@@ -10,7 +10,11 @@ import UIKit
 
 class AdvertDetailViewModel {
     
+    // MARK: Fields
+    
     private var advert = Advert()
+    
+    // MARK: Interface
     
     func setAdvert(_ newAdvert: Advert) {
         advert = newAdvert

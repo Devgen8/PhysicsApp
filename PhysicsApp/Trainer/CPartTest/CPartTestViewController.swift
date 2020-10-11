@@ -24,6 +24,11 @@ class CPartTestViewController: UIViewController {
         saveCurrentState()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        descriptionsTableView.reloadData()
+    }
+    
     func designScreenElements() {
         DesignService.setWhiteBackground(for: view)
         nextButton.layer.cornerRadius = 15
@@ -72,6 +77,7 @@ extension CPartTestViewController: UITableViewDataSource {
         cell.pointsUpdater = viewModel
         cell.cellIndex = indexPath.row
         cell.imageOpener = self
+        cell.pointsPickerView.selectRow(viewModel.getPoints(for: indexPath.row), inComponent: 0, animated: false)
         
         return cell
     }

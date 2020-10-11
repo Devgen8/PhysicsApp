@@ -31,16 +31,6 @@ class DownloadedTestViewModel: TestViewModel {
     
     func getTestTasks(completion: @escaping (Bool) -> ()) {
         completion(true)
-//        if let notUpdatedTests = UserDefaults.standard.value(forKey: "notUpdatedTests") as? [String],
-//            notUpdatedTests.contains(name) {
-//            getTasksFromFirestore { (_) in
-//                completion(!self.isTestFinished())
-//            }
-//        } else {
-//            getTasksFromCoreData { (_) in
-//                completion(!self.isTestFinished())
-//            }
-//        }
     }
     
     func isTestFinished() -> Bool {

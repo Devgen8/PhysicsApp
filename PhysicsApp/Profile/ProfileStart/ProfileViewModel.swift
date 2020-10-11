@@ -109,14 +109,21 @@ class ProfileViewModel {
     
     func saveUsersName(_ newName: String, completion: @escaping (Bool) -> ()) {
         if let userId = Auth.auth().currentUser?.uid {
-            if newName != "" {
-                Firestore.firestore().collection("users").document(userId).setData(["name":newName])
-                setUsersDataAfterRegistrationInFirestore { (isReady) in
+            Firestore.firestore().collection("usersDevices").document(userId).getDocument { (document, error) in
+                guard error == nil else {
+                    print(error?.localizedDescription as Any)
+                    completion(true)
+                    return
+                }
+                if document?.data()?["lastDevice"] == nil, newName != "" {
+                    Firestore.firestore().collection("users").document(userId).setData(["name":newName])
+                    self.setUsersDataAfterRegistrationInFirestore { (isReady) in
+                        completion(true)
+                    }
+                } else {
+                    UserDefaults.standard.set(nil, forKey: "taskTypeUpdateDate")
                     completion(true)
                 }
-            } else {
-                UserDefaults.standard.set(nil, forKey: "taskTypeUpdateDate")
-                completion(true)
             }
         }
     }
@@ -286,6 +293,9 @@ class ProfileViewModel {
                                                 "wrightAnswers":wrightAnswers
                     ])
                 }
+                
+                Firestore.firestore().collection("usersDevices").document(userId).setData(["lastDevice":UIDevice.modelName])
+                
                 completion(true)
             } catch {
                 print(error.localizedDescription)
@@ -337,37 +347,8 @@ class ProfileViewModel {
             if error != nil {
                 completion("Проверьте свое интернет соединение")
             } else {
-                self.updateTextFile()
                 completion(nil)
             }
-        }
-    }
-    
-    private func updateTextFile() {
-        if Auth.auth().currentUser?.uid != nil {
-            let docRef = Storage.storage().reference().child("vkIds.txt")
-            docRef.getData(maxSize: 4 * 2048 * 2048) { data, error in
-                guard error == nil else {
-                    if let errorDescription = error?.localizedDescription,
-                        errorDescription == "Object vkIds.txt does not exist." {
-                        self.uploadEditedFile(with: "")
-                    }
-                    return
-                }
-                if let data = data {
-                    self.uploadEditedFile(with: String(data: data, encoding: .utf8) ?? "")
-                }
-            }
-        }
-    }
-    
-    private func uploadEditedFile(with previousInfo: String) {
-        let userId = VKSdk.accessToken()?.userId ?? ""
-        if previousInfo == "" {
-            Storage.storage().reference().child("vkIds.txt").putData(userId.data(using: .utf8) ?? Data())
-        } else {
-            let newInfo = previousInfo + "\n\(userId)"
-            Storage.storage().reference().child("vkIds.txt").putData(newInfo.data(using: .utf8) ?? Data())
         }
     }
     
